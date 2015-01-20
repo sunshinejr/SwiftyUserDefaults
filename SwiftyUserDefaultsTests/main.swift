@@ -66,13 +66,9 @@ Defaults["dict1"] = dict
 assert(Defaults["dict1"].dictionary == dict)
 
 // Check if exist
-assert(!Defaults.exists("none"))
-assert(!Defaults["none"].exists)
-
-assert(Defaults.exists("string1"))
-assert(Defaults.exists("bool1"))
-assert(Defaults["string1"].exists)
-assert(Defaults["bool1"].exists)
+assert(!Defaults.hasKey("none"))
+assert(Defaults.hasKey("string1"))
+assert(Defaults.hasKey("bool1"))
 
 // Conditional assignment
 Defaults["string1"] ?= "bar"
@@ -85,12 +81,9 @@ assert(Defaults["string2"].string == "bar")
 
 // Removing
 Defaults.remove("string1")
-assert(!Defaults["string1"].exists)
+assert(!Defaults.hasKey("string1"))
 
-Defaults["string2"].remove()
-assert(!Defaults["string2"].exists)
-
-Defaults["array1"] = nil
-assert(!Defaults["array1"].exists)
+Defaults["string2"] = nil
+assert(!Defaults.hasKey("string2"))
 
 println("All tests passed")

@@ -10,18 +10,6 @@ extension NSUserDefaults {
             self.key = key
         }
         
-        /// Returns `true` if key exists
-        
-        var exists: Bool {
-            return defaults.exists(key)
-        }
-        
-        /// Removes key
-        
-        func remove() {
-            defaults.removeObjectForKey(key)
-        }
-        
         // MARK: Getters
         
         var object: NSObject? {
@@ -96,7 +84,7 @@ extension NSUserDefaults {
     
     /// Returns `true` if `key` exists
     
-    func exists(key: String) -> Bool {
+    func hasKey(key: String) -> Bool {
         return objectForKey(key) != nil
     }
     
@@ -110,7 +98,6 @@ extension NSUserDefaults {
 infix operator ?= {
     associativity right
     precedence 90
-    assignment
 }
 
 /// If key doesn't exist, sets its value to `expr`
@@ -118,7 +105,7 @@ infix operator ?= {
 /// Note: If key already exists, the expression after ?= isn't evaluated
 
 func ?= (proxy: NSUserDefaults.Proxy, expr: @autoclosure () -> Any) {
-    if !proxy.exists {
+    if !proxy.defaults.hasKey(proxy.key) {
         proxy.defaults[proxy.key] = expr()
     }
 }
