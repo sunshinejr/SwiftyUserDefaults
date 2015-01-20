@@ -8,12 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		6EA6C5AF1A6D66B100AFC950 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EA6C5AE1A6D66B100AFC950 /* main.swift */; };
+		6EA6C5B11A6E739600AFC950 /* SwiftyUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EA6C5B01A6E739600AFC950 /* SwiftyUserDefaults.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		6EA6C58E1A6D66A100AFC950 /* userdefaults.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = userdefaults.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		6EA6C58E1A6D66A100AFC950 /* SwiftyUserDefaultsTests.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftyUserDefaultsTests.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6EA6C5921A6D66A100AFC950 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6EA6C5AE1A6D66B100AFC950 /* main.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		6EA6C5B01A6E739600AFC950 /* SwiftyUserDefaults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyUserDefaults.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -30,6 +32,7 @@
 		6EA6C5851A6D66A100AFC950 = {
 			isa = PBXGroup;
 			children = (
+				6EA6C5B01A6E739600AFC950 /* SwiftyUserDefaults.swift */,
 				6EA6C5901A6D66A100AFC950 /* userdefaults */,
 				6EA6C58F1A6D66A100AFC950 /* Products */,
 			);
@@ -38,7 +41,7 @@
 		6EA6C58F1A6D66A100AFC950 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				6EA6C58E1A6D66A100AFC950 /* userdefaults.app */,
+				6EA6C58E1A6D66A100AFC950 /* SwiftyUserDefaultsTests.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -49,7 +52,8 @@
 				6EA6C5911A6D66A100AFC950 /* Supporting Files */,
 				6EA6C5AE1A6D66B100AFC950 /* main.swift */,
 			);
-			path = userdefaults;
+			name = userdefaults;
+			path = SwiftyUserDefaultsTests;
 			sourceTree = "<group>";
 		};
 		6EA6C5911A6D66A100AFC950 /* Supporting Files */ = {
@@ -63,9 +67,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		6EA6C58D1A6D66A100AFC950 /* userdefaults */ = {
+		6EA6C58D1A6D66A100AFC950 /* SwiftyUserDefaultsTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 6EA6C5A81A6D66A200AFC950 /* Build configuration list for PBXNativeTarget "userdefaults" */;
+			buildConfigurationList = 6EA6C5A81A6D66A200AFC950 /* Build configuration list for PBXNativeTarget "SwiftyUserDefaultsTests" */;
 			buildPhases = (
 				6EA6C58A1A6D66A100AFC950 /* Sources */,
 				6EA6C58B1A6D66A100AFC950 /* Frameworks */,
@@ -75,9 +79,9 @@
 			);
 			dependencies = (
 			);
-			name = userdefaults;
+			name = SwiftyUserDefaultsTests;
 			productName = userdefaults;
-			productReference = 6EA6C58E1A6D66A100AFC950 /* userdefaults.app */;
+			productReference = 6EA6C58E1A6D66A100AFC950 /* SwiftyUserDefaultsTests.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -94,7 +98,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 6EA6C5891A6D66A100AFC950 /* Build configuration list for PBXProject "userdefaults" */;
+			buildConfigurationList = 6EA6C5891A6D66A100AFC950 /* Build configuration list for PBXProject "SwiftyUserDefaultsTests" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -107,7 +111,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				6EA6C58D1A6D66A100AFC950 /* userdefaults */,
+				6EA6C58D1A6D66A100AFC950 /* SwiftyUserDefaultsTests */,
 			);
 		};
 /* End PBXProject section */
@@ -127,6 +131,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6EA6C5B11A6E739600AFC950 /* SwiftyUserDefaults.swift in Sources */,
 				6EA6C5AF1A6D66B100AFC950 /* main.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -216,9 +221,9 @@
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				COMBINE_HIDPI_IMAGES = YES;
-				INFOPLIST_FILE = userdefaults/Info.plist;
+				INFOPLIST_FILE = SwiftyUserDefaultsTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = SwiftyUserDefaultsTests;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
@@ -228,16 +233,16 @@
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				COMBINE_HIDPI_IMAGES = YES;
-				INFOPLIST_FILE = userdefaults/Info.plist;
+				INFOPLIST_FILE = SwiftyUserDefaultsTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = SwiftyUserDefaultsTests;
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		6EA6C5891A6D66A100AFC950 /* Build configuration list for PBXProject "userdefaults" */ = {
+		6EA6C5891A6D66A100AFC950 /* Build configuration list for PBXProject "SwiftyUserDefaultsTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				6EA6C5A61A6D66A200AFC950 /* Debug */,
@@ -246,13 +251,14 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		6EA6C5A81A6D66A200AFC950 /* Build configuration list for PBXNativeTarget "userdefaults" */ = {
+		6EA6C5A81A6D66A200AFC950 /* Build configuration list for PBXNativeTarget "SwiftyUserDefaultsTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				6EA6C5A91A6D66A200AFC950 /* Debug */,
 				6EA6C5AA1A6D66A200AFC950 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
