@@ -110,6 +110,19 @@ func ?= (proxy: NSUserDefaults.Proxy, expr: @autoclosure () -> Any) {
     }
 }
 
+/// Adds `b` to the key (and saves it as an integer)
+/// If key doesn't exist or isn't a number, sets value to `b`
+
+func += (proxy: NSUserDefaults.Proxy, b: Int) {
+    let a = proxy.defaults[proxy.key].int ?? 0
+    proxy.defaults[proxy.key] = a + b
+}
+
+func += (proxy: NSUserDefaults.Proxy, b: Double) {
+    let a = proxy.defaults[proxy.key].double ?? 0
+    proxy.defaults[proxy.key] = a + b
+}
+
 /// Global shortcut for NSUserDefaults.standardUserDefaults()
 
 let Defaults = NSUserDefaults.standardUserDefaults()

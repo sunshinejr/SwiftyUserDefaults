@@ -65,6 +65,25 @@ let dict = ["foo": 1, "bar": [1, 2, 3]]
 Defaults["dict1"] = dict
 assert(Defaults["dict1"].dictionary == dict)
 
+// +=
+Defaults["int2"] = 5
+Defaults["int2"] += 2
+assert(Defaults["int2"].int == 7)
+
+Defaults["int3"] += 2
+assert(Defaults["int3"].int == 2)
+
+Defaults["int4"] = "NaN"
+Defaults["int4"] += 2
+assert(Defaults["int4"].int == 2)
+
+Defaults["double1"] += 1.5
+assert(Int(Defaults["double1"].double! * 100.0) == 464)
+
+Defaults["double2"] = 3.14
+Defaults["double2"] += 1
+assert(Defaults["double2"].double == 4.0)
+
 // Check if exist
 assert(!Defaults.hasKey("none"))
 assert(Defaults.hasKey("string1"))
