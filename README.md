@@ -59,13 +59,17 @@ if !Defaults.hasKey("hotkey") {
 
 You can use the `hasKey` method to check for key's existence in the user defaults. `remove()` is an alias for `removeObjectForKey()`.
 
-### Author, license and credits
+### Author and license
 
 Radek Pietruszewski
 
-* http://github.com/radex
-* http://twitter.com/radexp
-* http://radex.io
+* [github.com/radex](http://github.com/radex)
+* [twitter.com/radexp](http://twitter.com/radexp)
+* [radex.io](http://radex.io)
 * this.is@radex.io
 
 SwiftyUserDefaults is available under the MIT license. See the LICENSE file for more info.
+
+### Contributing
+
+If you have comments, complaints or ideas for improvements, feel free to open an issue or a pull request.
