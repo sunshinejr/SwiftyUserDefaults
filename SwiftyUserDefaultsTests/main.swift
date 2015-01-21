@@ -84,6 +84,14 @@ Defaults["double2"] = 3.14
 Defaults["double2"] += 1
 assert(Defaults["double2"].double == 4.0)
 
+// ++
+Defaults["int2"]++
+Defaults["int2"]++
+assert(Defaults["int2"].int == 9)
+
+Defaults["int5"]++
+assert(Defaults["int5"].int == 1)
+
 // Check if exist
 assert(!Defaults.hasKey("none"))
 assert(Defaults.hasKey("string1"))

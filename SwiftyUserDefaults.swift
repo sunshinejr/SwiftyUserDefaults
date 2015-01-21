@@ -123,6 +123,13 @@ func += (proxy: NSUserDefaults.Proxy, b: Double) {
     proxy.defaults[proxy.key] = a + b
 }
 
+/// Icrements key by one (and saves it as an integer)
+/// If key doesn't exist or isn't a number, sets value to 1
+
+postfix func ++ (proxy: NSUserDefaults.Proxy) {
+    proxy += 1
+}
+
 /// Global shortcut for NSUserDefaults.standardUserDefaults()
 
 let Defaults = NSUserDefaults.standardUserDefaults()
