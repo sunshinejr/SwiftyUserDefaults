@@ -38,7 +38,7 @@ Defaults["color"] ?= "white" // => "white"
 Defaults["color"] ?= "red"   // => "white"
 ```
 
-Works like `||=` in other languages — sets value only if the left-hand side value is a `nil`.
+Works like `||=` in other languages — sets value only if the left-hand side value is `nil`.
 
 ### Arithmetic
 
