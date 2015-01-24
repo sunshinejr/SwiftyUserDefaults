@@ -7,15 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		504D0DD61A74334900353BAC /* SwiftyUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 504D0DD51A74334900353BAC /* SwiftyUserDefaults.swift */; };
 		6EA6C5AF1A6D66B100AFC950 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EA6C5AE1A6D66B100AFC950 /* main.swift */; };
-		6EA6C5B11A6E739600AFC950 /* SwiftyUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EA6C5B01A6E739600AFC950 /* SwiftyUserDefaults.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		504D0DD51A74334900353BAC /* SwiftyUserDefaults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyUserDefaults.swift; sourceTree = "<group>"; };
 		6EA6C58E1A6D66A100AFC950 /* SwiftyUserDefaultsTests.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftyUserDefaultsTests.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6EA6C5921A6D66A100AFC950 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6EA6C5AE1A6D66B100AFC950 /* main.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
-		6EA6C5B01A6E739600AFC950 /* SwiftyUserDefaults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyUserDefaults.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,11 +29,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		504D0DD41A74334900353BAC /* Src */ = {
+			isa = PBXGroup;
+			children = (
+				504D0DD51A74334900353BAC /* SwiftyUserDefaults.swift */,
+			);
+			name = Src;
+			path = ../Src;
+			sourceTree = "<group>";
+		};
 		6EA6C5851A6D66A100AFC950 = {
 			isa = PBXGroup;
 			children = (
-				6EA6C5B01A6E739600AFC950 /* SwiftyUserDefaults.swift */,
-				6EA6C5901A6D66A100AFC950 /* userdefaults */,
+				504D0DD41A74334900353BAC /* Src */,
+				6EA6C5901A6D66A100AFC950 /* Tests */,
 				6EA6C58F1A6D66A100AFC950 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -46,13 +55,13 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		6EA6C5901A6D66A100AFC950 /* userdefaults */ = {
+		6EA6C5901A6D66A100AFC950 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
-				6EA6C5911A6D66A100AFC950 /* Supporting Files */,
 				6EA6C5AE1A6D66B100AFC950 /* main.swift */,
+				6EA6C5911A6D66A100AFC950 /* Supporting Files */,
 			);
-			name = userdefaults;
+			name = Tests;
 			path = SwiftyUserDefaultsTests;
 			sourceTree = "<group>";
 		};
@@ -131,7 +140,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6EA6C5B11A6E739600AFC950 /* SwiftyUserDefaults.swift in Sources */,
+				504D0DD61A74334900353BAC /* SwiftyUserDefaults.swift in Sources */,
 				6EA6C5AF1A6D66B100AFC950 /* main.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -223,6 +232,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = SwiftyUserDefaultsTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				PRODUCT_NAME = SwiftyUserDefaultsTests;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -235,6 +245,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = SwiftyUserDefaultsTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				PRODUCT_NAME = SwiftyUserDefaultsTests;
 			};
 			name = Release;
