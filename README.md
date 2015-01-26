@@ -73,3 +73,19 @@ SwiftyUserDefaults is available under the MIT license. See the LICENSE file for 
 ### Contributing
 
 If you have comments, complaints or ideas for improvements, feel free to open an issue or a pull request.
+
+### How to install
+
+The recommended way is to install this library via CocoaPods as a private pod. Just add this line to your 'Podfile':
+
+```ruby
+pod 'SwiftyUserDefaults', :git => "https://github.com/radex/SwiftyUserDefaults.git"
+```
+
+### How to link to your project
+
+Just import module "SwiftyUserDefaults" like this:
+
+```swift
+import SwiftyUserDefaults
+```
