@@ -36,43 +36,43 @@ public extension NSUserDefaults {
         
         // MARK: Getters
         
-        var object: NSObject? {
+        public var object: NSObject? {
             return defaults.objectForKey(key) as NSObject?
         }
         
-        var string: String? {
+        public var string: String? {
             return defaults.stringForKey(key)
         }
         
-        var array: NSArray? {
+        public var array: NSArray? {
             return defaults.arrayForKey(key)
         }
         
-        var dictionary: NSDictionary? {
+        public var dictionary: NSDictionary? {
             return defaults.dictionaryForKey(key)
         }
         
-        var data: NSData? {
+        public var data: NSData? {
             return defaults.dataForKey(key)
         }
         
-        var date: NSDate? {
+        public var date: NSDate? {
             return object as? NSDate
         }
         
-        var number: NSNumber? {
+        public var number: NSNumber? {
             return object as? NSNumber
         }
         
-        var int: Int? {
+        public var int: Int? {
             return number?.integerValue
         }
         
-        var double: Double? {
+        public var double: Double? {
             return number?.doubleValue
         }
         
-        var bool: Bool? {
+        public var bool: Bool? {
             return number?.boolValue
         }
     }
