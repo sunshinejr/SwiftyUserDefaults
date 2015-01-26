@@ -59,6 +59,30 @@ if !Defaults.hasKey("hotkey") {
 
 You can use the `hasKey` method to check for key's existence in the user defaults. `remove()` is an alias for `removeObjectForKey()`.
 
+### Installation
+
+The simplest way to install this library is to copy `Src/SwiftyUserDefaults.swift` to your project. There's no step two!
+
+#### CocoaPods
+
+You can also install this library using CocoaPods. Just add this line to your Podfile:
+
+```ruby
+pod 'SwiftyUserDefaults'
+```
+
+Then import library module like so:
+
+```swift
+import SwiftyUserDefaults
+```
+
+Note that this requires CocoaPods 0.36 as well as iOS 8 or OS X 10.9+
+
+### Contributing
+
+If you have comments, complaints or ideas for improvements, feel free to open an issue or a pull request.
+
 ### Author and license
 
 Radek Pietruszewski
@@ -69,23 +93,3 @@ Radek Pietruszewski
 * this.is@radex.io
 
 SwiftyUserDefaults is available under the MIT license. See the LICENSE file for more info.
-
-### Contributing
-
-If you have comments, complaints or ideas for improvements, feel free to open an issue or a pull request.
-
-### How to install
-
-The recommended way is to install this library via CocoaPods as a private pod. Just add this line to your 'Podfile':
-
-```ruby
-pod 'SwiftyUserDefaults', :git => "https://github.com/radex/SwiftyUserDefaults.git"
-```
-
-### How to link to your project
-
-Just import module "SwiftyUserDefaults" like this:
-
-```swift
-import SwiftyUserDefaults
-```
