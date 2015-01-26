@@ -24,7 +24,7 @@
 
 import Foundation
 
-extension NSUserDefaults {
+public extension NSUserDefaults {
     class Proxy {
         private let defaults: NSUserDefaults
         private let key: String
@@ -36,56 +36,56 @@ extension NSUserDefaults {
         
         // MARK: Getters
         
-        var object: NSObject? {
+        public var object: NSObject? {
             return defaults.objectForKey(key) as NSObject?
         }
         
-        var string: String? {
+        public var string: String? {
             return defaults.stringForKey(key)
         }
         
-        var array: NSArray? {
+        public var array: NSArray? {
             return defaults.arrayForKey(key)
         }
         
-        var dictionary: NSDictionary? {
+        public var dictionary: NSDictionary? {
             return defaults.dictionaryForKey(key)
         }
         
-        var data: NSData? {
+        public var data: NSData? {
             return defaults.dataForKey(key)
         }
         
-        var date: NSDate? {
+        public var date: NSDate? {
             return object as? NSDate
         }
         
-        var number: NSNumber? {
+        public var number: NSNumber? {
             return object as? NSNumber
         }
         
-        var int: Int? {
+        public var int: Int? {
             return number?.integerValue
         }
         
-        var double: Double? {
+        public var double: Double? {
             return number?.doubleValue
         }
         
-        var bool: Bool? {
+        public var bool: Bool? {
             return number?.boolValue
         }
     }
     
     /// Returns getter proxy for `key`
     
-    subscript(key: String) -> Proxy {
+    public subscript(key: String) -> Proxy {
         return Proxy(self, key)
     }
     
     /// Sets value for `key`
     
-    subscript(key: String) -> Any? {
+    public subscript(key: String) -> Any? {
         get {
             return self[key]
         }
@@ -108,13 +108,13 @@ extension NSUserDefaults {
     
     /// Returns `true` if `key` exists
     
-    func hasKey(key: String) -> Bool {
+    public func hasKey(key: String) -> Bool {
         return objectForKey(key) != nil
     }
     
     /// Removes value for `key`
     
-    func remove(key: String) {
+    public func remove(key: String) {
         removeObjectForKey(key)
     }
 }
@@ -128,7 +128,7 @@ infix operator ?= {
 /// Note: This isn't the same as `Defaults.registerDefaults`. This method saves the new value to disk, whereas `registerDefaults` only modifies the defaults in memory.
 /// Note: If key already exists, the expression after ?= isn't evaluated
 
-func ?= (proxy: NSUserDefaults.Proxy, expr: @autoclosure () -> Any) {
+public func ?= (proxy: NSUserDefaults.Proxy, expr: @autoclosure () -> Any) {
     if !proxy.defaults.hasKey(proxy.key) {
         proxy.defaults[proxy.key] = expr()
     }
@@ -137,12 +137,12 @@ func ?= (proxy: NSUserDefaults.Proxy, expr: @autoclosure () -> Any) {
 /// Adds `b` to the key (and saves it as an integer)
 /// If key doesn't exist or isn't a number, sets value to `b`
 
-func += (proxy: NSUserDefaults.Proxy, b: Int) {
+public func += (proxy: NSUserDefaults.Proxy, b: Int) {
     let a = proxy.defaults[proxy.key].int ?? 0
     proxy.defaults[proxy.key] = a + b
 }
 
-func += (proxy: NSUserDefaults.Proxy, b: Double) {
+public func += (proxy: NSUserDefaults.Proxy, b: Double) {
     let a = proxy.defaults[proxy.key].double ?? 0
     proxy.defaults[proxy.key] = a + b
 }
@@ -150,10 +150,10 @@ func += (proxy: NSUserDefaults.Proxy, b: Double) {
 /// Icrements key by one (and saves it as an integer)
 /// If key doesn't exist or isn't a number, sets value to 1
 
-postfix func ++ (proxy: NSUserDefaults.Proxy) {
+public postfix func ++ (proxy: NSUserDefaults.Proxy) {
     proxy += 1
 }
 
 /// Global shortcut for NSUserDefaults.standardUserDefaults()
 
-let Defaults = NSUserDefaults.standardUserDefaults()
+public let Defaults = NSUserDefaults.standardUserDefaults()
