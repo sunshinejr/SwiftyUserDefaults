@@ -23,6 +23,44 @@ assert(Defaults["string1"].int == nil)
 assert(Defaults["string1"].double == nil)
 assert(Defaults["string1"].bool == true)
 
+Defaults["string2"] = "true"
+assert(Defaults["string2"].string == "true")
+assert(Defaults["string2"].int == nil)
+assert(Defaults["string2"].double == nil)
+assert(Defaults["string2"].bool == true)
+
+Defaults["string3"] = "false"
+assert(Defaults["string3"].string == "false")
+assert(Defaults["string3"].int == nil)
+assert(Defaults["string3"].double == nil)
+assert(Defaults["string3"].bool == false)
+
+Defaults["string4"] = ""
+assert(Defaults["string4"].string == "")
+assert(Defaults["string4"].int == nil)
+assert(Defaults["string4"].double == nil)
+assert(Defaults["string4"].bool == false)
+
+Defaults["string5"] = "maybe"
+assert(Defaults["string5"].string == "maybe")
+assert(Defaults["string5"].int == nil)
+assert(Defaults["string5"].double == nil)
+assert(Defaults["string5"].bool == true)
+
+Defaults["string6"] = "negatory"
+assert(Defaults["string6"].string == "negatory")
+assert(Defaults["string6"].int == nil)
+assert(Defaults["string6"].double == nil)
+assert(Defaults["string6"].bool == true)
+
+Defaults.boolFalseStrings += ["negatory"]
+
+Defaults["string7"] = "negatory"
+assert(Defaults["string7"].string == "negatory")
+assert(Defaults["string7"].int == nil)
+assert(Defaults["string7"].double == nil)
+assert(Defaults["string7"].bool == false)
+
 Defaults["int1"] = 100
 assert(Defaults["int1"].string == "100")
 assert(Defaults["int1"].int == 100)
@@ -101,10 +139,10 @@ assert(Defaults.hasKey("bool1"))
 Defaults["string1"] ?= "bar"
 assert(Defaults["string1"].string == "foo")
 
-Defaults["string2"] ?= "bar"
-assert(Defaults["string2"].string == "bar")
-Defaults["string2"] ?= "baz"
-assert(Defaults["string2"].string == "bar")
+Defaults["string10"] ?= "bar"
+assert(Defaults["string10"].string == "bar")
+Defaults["string10"] ?= "baz"
+assert(Defaults["string10"].string == "bar")
 
 // Removing
 Defaults.remove("string1")
