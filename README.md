@@ -63,14 +63,14 @@ You can use the `hasKey` method to check for key's existence in the user default
 
 ```swift
 Defaults["enabled"] = "true"
-Defaults["enabled"].bool     // return true
+Defaults["enabled"].bool     // returns true
 Defaults["enabled"] = "no"
-Defaults["enabled"].bool     // return false
+Defaults["enabled"].bool     // returns false
 
 Defaults.boolFalseStrings += ["negatory"]
 
 Defaults["enabled"] = "negatory"
-Defaults["enabled"].bool     // return false
+Defaults["enabled"].bool     // returns false
 ```
 
 ### Installation
