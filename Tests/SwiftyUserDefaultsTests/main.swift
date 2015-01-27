@@ -21,7 +21,7 @@ Defaults["string1"] = "foo"
 assert(Defaults["string1"].string == "foo")
 assert(Defaults["string1"].int == nil)
 assert(Defaults["string1"].double == nil)
-assert(Defaults["string1"].bool == nil)
+assert(Defaults["string1"].bool == true)
 
 Defaults["int1"] = 100
 assert(Defaults["int1"].string == "100")
