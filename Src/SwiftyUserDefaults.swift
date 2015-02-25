@@ -37,7 +37,7 @@ public extension NSUserDefaults {
         // MARK: Getters
         
         public var object: NSObject? {
-            return defaults.objectForKey(key).map { $0 as! NSObject }
+            return defaults.objectForKey(key) as? NSObject 
         }
         
         public var string: String? {
