@@ -63,6 +63,8 @@ You can use the `hasKey` method to check for key's existence in the user default
 
 The simplest way to install this library is to copy `Src/SwiftyUserDefaults.swift` to your project. There's no step two!
 
+_Note: Using Xcode 6.3 beta? You'll find a Swift 1.2-compatible version on the [`swift-1.2` branch](https://github.com/radex/SwiftyUserDefaults/tree/swift-1.2)_
+
 #### CocoaPods
 
 You can also install this library using CocoaPods. Just add this line to your Podfile:
