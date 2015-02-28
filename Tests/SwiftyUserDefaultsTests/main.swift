@@ -7,7 +7,7 @@ import Foundation
 // Clear defaults before testing
 
 for (key, _) in Defaults.dictionaryRepresentation() {
-    Defaults.removeObjectForKey(key as! String)
+    Defaults.removeObjectForKey(key as String)
 }
 
 // Return nil if doesn't exist
@@ -59,7 +59,7 @@ assert(Defaults["date1"].date == date)
 let array = [1, 2, "foo", true]
 Defaults["array1"] = array
 assert(Defaults["array1"].array == array)
-assert(Defaults["array1"].array![2] as! String == "foo")
+assert(Defaults["array1"].array![2] as String == "foo")
 
 let dict = ["foo": 1, "bar": [1, 2, 3]]
 Defaults["dict1"] = dict
