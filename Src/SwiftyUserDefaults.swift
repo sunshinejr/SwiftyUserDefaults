@@ -34,6 +34,36 @@ public extension NSUserDefaults {
             self.key = key
         }
         
+        /// Returns getter proxy for `key`
+        
+        public subscript(key: String) -> Proxy {
+            return Proxy(self.defaults, self.key + DefaultsKeySeparator + key)
+        }
+        
+        /// Sets value for `key`
+        
+        public subscript(key: String) -> Any? {
+            get {
+                return self[key]
+            }
+            set {
+                let k = self.key + DefaultsKeySeparator + key
+                if let v = newValue as? Int {
+                    defaults.setInteger(v, forKey: k)
+                } else if let v = newValue as? Double {
+                    defaults.setDouble(v, forKey: k)
+                } else if let v = newValue as? Bool {
+                    defaults.setBool(v, forKey: k)
+                } else if let v = newValue as? NSObject {
+                    defaults.setObject(v, forKey: k)
+                } else if newValue == nil {
+                    defaults.removeObjectForKey(k)
+                } else {
+                    assertionFailure("Invalid value type")
+                }
+            }
+        }
+
         // MARK: Getters
         
         public var object: NSObject? {
@@ -157,3 +187,4 @@ public postfix func ++ (proxy: NSUserDefaults.Proxy) {
 /// Global shortcut for NSUserDefaults.standardUserDefaults()
 
 public let Defaults = NSUserDefaults.standardUserDefaults()
+public var DefaultsKeySeparator = "."

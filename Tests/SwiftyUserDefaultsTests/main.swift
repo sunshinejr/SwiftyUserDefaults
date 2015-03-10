@@ -47,6 +47,19 @@ assert(Defaults["bool1"].int == 0)
 assert(Defaults["bool1"].double == 0.0)
 assert(Defaults["bool1"].bool == false)
 
+Defaults["proxy"]["int1"] = 100
+assert(Defaults["proxy"]["int1"].string == "100")
+assert(Defaults["proxy"]["int1"].int == 100)
+assert(Defaults["proxy"]["int1"].double == 100)
+assert(Defaults["proxy"]["int1"].bool == true)
+assert(Defaults["proxy"]["int1"].int == Defaults["proxy" + DefaultsKeySeparator + "int1"].int)
+
+Defaults["proxy"]["sub"]["double1"] = 3.14
+assert(Defaults["proxy"]["sub"]["double1"].string == "3.14")
+assert(Defaults["proxy"]["sub"]["double1"].int == 3)
+assert(Defaults["proxy"]["sub"]["double1"].double == 3.14)
+assert(Defaults["proxy"]["sub"]["double1"].bool == true)
+
 // Object types
 let data = "foo".dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)!
 Defaults["data1"] = data
