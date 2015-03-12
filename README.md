@@ -36,11 +36,11 @@ SwiftyUserDefaults infers the right type when setting values.
 Defaults["category"]["launchCount"].int         // same as Defaults["category.launchCount”].int
 Defaults["category"]["launchCount"] = 0        // same as Defaults["category.launchCount"] = 0
 
-let categoryDefault = Defaults["category"]
+let categoryDefault = Defaults["category"] as NSUserDefaults.Proxy
 categoryDefault["launchCount"].int         // same as Defaults["category.launchCount”].int
 categoryDefault["launchCount"] = 0        // same as Defaults["category.launchCount"] = 0
 
-let subDefault = categoryDefault["sub"]
+let subDefault = categoryDefault["sub"] as NSUserDefaults.Proxy
 subDefault["launchCount"].int         // same as Defaults["category.sub.launchCount”].int
 subDefault["launchCount"] = 0        // same as Defaults["category.sub.launchCount"] = 0
 ```

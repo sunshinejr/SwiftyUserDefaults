@@ -59,6 +59,13 @@ assert(Defaults["proxy"]["sub"]["double1"].string == "3.14")
 assert(Defaults["proxy"]["sub"]["double1"].int == 3)
 assert(Defaults["proxy"]["sub"]["double1"].double == 3.14)
 assert(Defaults["proxy"]["sub"]["double1"].bool == true)
+let proxyDefaults = Defaults["proxy"] as NSUserDefaults.Proxy
+let subDefaults : NSUserDefaults.Proxy = proxyDefaults["sub"]
+assert(subDefaults["double1"].string == "3.14")
+assert(subDefaults["double1"].int == 3)
+assert(subDefaults["double1"].double == 3.14)
+assert(subDefaults["double1"].bool == true)
+
 
 // Object types
 let data = "foo".dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)!
