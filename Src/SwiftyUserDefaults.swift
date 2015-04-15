@@ -73,6 +73,9 @@ public extension NSUserDefaults {
         }
         
         public var bool: Bool? {
+            if let s = string {
+                return !contains(defaults.boolFalseStrings, s)
+            }
             return number?.boolValue
         }
     }
@@ -117,7 +120,22 @@ public extension NSUserDefaults {
     public func remove(key: String) {
         removeObjectForKey(key)
     }
+    
+    public var boolFalseStrings: Array<String> {
+        get {
+            if(Defaults.hasKey(boolFalseStringsKey)) {
+                return Defaults.objectForKey(boolFalseStringsKey) as Array<String>
+            } else {
+                return ["", "false", "no", "0"]
+            }
+        }
+        set(newValue) {
+            Defaults.setObject(newValue, forKey: boolFalseStringsKey)
+        }
+    }
 }
+
+private let boolFalseStringsKey = "__boolFalseStringsKey"
 
 infix operator ?= {
     associativity right

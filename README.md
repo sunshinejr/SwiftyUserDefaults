@@ -59,6 +59,20 @@ if !Defaults.hasKey("hotkey") {
 
 You can use the `hasKey` method to check for key's existence in the user defaults. `remove()` is an alias for `removeObjectForKey()`.
 
+### String to bool interpretation
+
+```swift
+Defaults["enabled"] = "true"
+Defaults["enabled"].bool     // returns true
+Defaults["enabled"] = "no"
+Defaults["enabled"].bool     // returns false
+
+Defaults.boolFalseStrings += ["negatory"]
+
+Defaults["enabled"] = "negatory"
+Defaults["enabled"].bool     // returns false
+```
+
 ### Installation
 
 The simplest way to install this library is to copy `Src/SwiftyUserDefaults.swift` to your project. There's no step two!
