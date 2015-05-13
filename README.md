@@ -59,7 +59,7 @@ if !Defaults.hasKey("hotkey") {
 
 You can use the `hasKey` method to check for key's existence in the user defaults. `remove()` is an alias for `removeObjectForKey()`.
 
-### Installation
+## Installation
 
 The simplest way to install this library is to copy `Src/SwiftyUserDefaults.swift` to your project. There's no step two!
 
@@ -79,7 +79,16 @@ Then import library module like so:
 import SwiftyUserDefaults
 ```
 
-Note that this requires CocoaPods 0.36 as well as iOS 8 or OS X 10.9+
+Note that this requires CocoaPods 0.36+ as well as iOS 8 or OS X 10.9+
+
+## More like this
+
+If you like SwiftyUserDefaults, check out [SwiftyTimer](https://github.com/radex/SwiftyTimer), which applies the same swifty approach to `NSTimer`.
+
+You might also be interested in my blog posts which explain the design process behind those libraries:
+- [Swifty APIs: NSUserDefaults](http://radex.io/swift/nsuserdefaults/)
+- [Swifty APIs: NSTimer](http://radex.io/swift/nstimer/)
+- [Swifty methods](http://radex.io/swift/methods/)
 
 ### Contributing
 
