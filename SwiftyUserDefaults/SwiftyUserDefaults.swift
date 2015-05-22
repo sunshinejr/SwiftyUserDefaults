@@ -37,7 +37,7 @@ public extension NSUserDefaults {
         // MARK: Getters
         
         public var object: NSObject? {
-            return defaults.objectForKey(key) as? NSObject 
+            return defaults.objectForKey(key) as? NSObject
         }
         
         public var string: String? {
@@ -120,8 +120,8 @@ public extension NSUserDefaults {
 }
 
 infix operator ?= {
-    associativity right
-    precedence 90
+associativity right
+precedence 90
 }
 
 /// If key doesn't exist, sets its value to `expr`
