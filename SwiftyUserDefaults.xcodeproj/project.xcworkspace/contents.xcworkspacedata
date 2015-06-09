@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:SwiftyUserDefaultsTests.xcodeproj">
+      location = "self:SwiftyUserDefaults.xcodeproj">
    </FileRef>
 </Workspace>
