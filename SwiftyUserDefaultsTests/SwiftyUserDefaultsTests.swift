@@ -2,140 +2,164 @@
 //  SwiftyUserDefaultsTests.swift
 //  SwiftyUserDefaultsTests
 //
-//  Created by Alexey Poimtsev on 21/05/15.
-//
+//  Created by Xavi Matos on 6/11/15.
 //
 
-import UIKit
 import XCTest
 import SwiftyUserDefaults
 
 class SwiftyUserDefaultsTests: XCTestCase {
     
-    override func setUp() {
-        super.setUp()
+    func testNone() {
+        let key = "none"
+        XCTAssertNil(Defaults[key].string)
+        XCTAssertNil(Defaults[key].int)
+        XCTAssertNil(Defaults[key].double)
+        XCTAssertNil(Defaults[key].bool)
+        XCTAssertFalse(Defaults.hasKey(key))
+    }
+    
+    func testString() {
+        // set and read
+        let key = "string"
+        Defaults[key] = "foo"
+        XCTAssertEqual(Defaults[key].string!, "foo")
+        XCTAssertNil(Defaults[key].int)
+        XCTAssertNil(Defaults[key].double)
+        XCTAssertNil(Defaults[key].bool)
         
-        // Clear defaults before testing
+        // existance
+        XCTAssertTrue(Defaults.hasKey(key))
         
-        for (key, _) in Defaults.dictionaryRepresentation() {
-            Defaults.removeObjectForKey(key as! String)
-        }
+        // ?=
+        Defaults[key] ?= "bar"
+        XCTAssertEqual(Defaults[key].string!, "foo")
         
+        let key2 = "string2"
+        Defaults[key2] ?= "bar"
+        XCTAssertEqual(Defaults[key2].string!, "bar")
+        Defaults[key2] ?= "baz"
+        XCTAssertEqual(Defaults[key2].string!, "bar")
+        
+        // removing
+        Defaults.remove(key)
+        XCTAssertFalse(Defaults.hasKey(key))
+        Defaults[key2] = nil
+        XCTAssertFalse(Defaults.hasKey(key2))
+    }
+    
+    func testInt() {
+        // set and read
+        let key = "int"
+        Defaults[key] = 100
+        XCTAssertEqual(Defaults[key].string!, "100")
+        XCTAssertEqual(Defaults[key].int!,     100)
+        XCTAssertEqual(Defaults[key].double!,  100)
+        XCTAssertTrue(Defaults[key].bool!)
+        
+        // +=
+        let key2 = "int2"
+        Defaults[key2] = 5
+        Defaults[key2] += 2
+        XCTAssertEqual(Defaults[key2].int!, 7)
+        
+        let key3 = "int3"
+        Defaults[key3] += 2
+        XCTAssertEqual(Defaults[key3].int!, 2)
+        
+        let key4 = "int4"
+        Defaults[key4] = "NaN"
+        Defaults[key4] += 2
+        XCTAssertEqual(Defaults[key4].int!, 2)
+        
+        // ++
+        Defaults[key2]++
+        Defaults[key2]++
+        XCTAssertEqual(Defaults[key2].int!, 9)
+        
+        let key5 = "int5"
+        Defaults[key5]++
+        XCTAssertEqual(Defaults[key5].int!, 1)
+    }
+    
+    func testDouble() {
+        // set and read
+        let key = "double"
+        Defaults[key] = 3.14
+        XCTAssertEqual(Defaults[key].string!, "3.14")
+        XCTAssertEqual(Defaults[key].int!,     3)
+        XCTAssertEqual(Defaults[key].double!,  3.14)
+        XCTAssertTrue(Defaults[key].bool!)
+        
+        // +=
+        
+        Defaults[key] += 1.5
+        XCTAssertEqual(Int(Defaults[key].double! *  100.0), 464)
+
+        let key2 = "double2"
+        Defaults[key2] = 3.14
+        Defaults[key2] += 1
+        XCTAssertEqual(Defaults[key2].double!, 4.0)
+        
+        let key3 = "double3"
+        Defaults[key3] += 5.3
+        XCTAssertEqual(Defaults[key3].double!, 5.3)
+    }
+    
+    func testBool() {
+        // set and read
+        let key = "bool"
+        Defaults[key] = true
+        XCTAssertEqual(Defaults[key].string!, "1")
+        XCTAssertEqual(Defaults[key].int!,     1)
+        XCTAssertEqual(Defaults[key].double!,  1.0)
+        XCTAssertTrue(Defaults[key].bool!)
+        
+        Defaults[key] = false
+        XCTAssertEqual(Defaults[key].string!, "0")
+        XCTAssertEqual(Defaults[key].int!,     0)
+        XCTAssertEqual(Defaults[key].double!,  0.0)
+        XCTAssertFalse(Defaults[key].bool!)
+        
+        // existance
+        XCTAssertTrue(Defaults.hasKey(key))
+    }
+    
+    func testData() {
+        let key = "data"
+        let data = "foo".dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)!
+        Defaults[key] = data
+        XCTAssertEqual(Defaults[key].data!, data)
+        XCTAssertNil(Defaults[key].string)
+        XCTAssertNil(Defaults[key].int)
+    }
+    
+    func testDate() {
+        let key = "date"
+        let date = NSDate()
+        Defaults[key] = date
+        XCTAssertEqual(Defaults[key].date!, date)
+    }
+    
+    func testArray() {
+        let key = "array"
+        let array = [1, 2, "foo", true]
+        Defaults[key] = array
+        XCTAssertEqual(Defaults[key].array!, array)
+        XCTAssertEqual(Defaults[key].array![2] as! String, "foo")
+    }
+    
+    func testDict() {
+        let key = "dict"
+        let dict = ["foo": 1, "bar": [1, 2, 3]]
+        Defaults[key] = dict
+        XCTAssertEqual(Defaults[key].dictionary!, dict)
     }
     
     override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+        for (key, _) in Defaults.dictionaryRepresentation() {
+            Defaults.removeObjectForKey(key as! String)
+        }
         super.tearDown()
     }
-    
-    func testFramework() {
-
-        // Return nil if doesn't exist
-        assert(Defaults["none"].string == nil)
-        assert(Defaults["none"].int == nil)
-        assert(Defaults["none"].double == nil)
-        assert(Defaults["none"].bool == nil)
-        
-        // Setting and reading
-        Defaults["string1"] = "foo"
-        assert(Defaults["string1"].string == "foo")
-        assert(Defaults["string1"].int == nil)
-        assert(Defaults["string1"].double == nil)
-        assert(Defaults["string1"].bool == nil)
-        
-        Defaults["int1"] = 100
-        assert(Defaults["int1"].string == "100")
-        assert(Defaults["int1"].int == 100)
-        assert(Defaults["int1"].double == 100)
-        assert(Defaults["int1"].bool == true)
-        
-        Defaults["double1"] = 3.14
-        assert(Defaults["double1"].string == "3.14")
-        assert(Defaults["double1"].int == 3)
-        assert(Defaults["double1"].double == 3.14)
-        assert(Defaults["double1"].bool == true)
-        
-        Defaults["bool1"] = true
-        assert(Defaults["bool1"].string == "1")
-        assert(Defaults["bool1"].int == 1)
-        assert(Defaults["bool1"].double == 1.0)
-        assert(Defaults["bool1"].bool == true)
-        
-        Defaults["bool1"] = false
-        assert(Defaults["bool1"].string == "0")
-        assert(Defaults["bool1"].int == 0)
-        assert(Defaults["bool1"].double == 0.0)
-        assert(Defaults["bool1"].bool == false)
-        
-        // Object types
-        let data = "foo".dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)!
-        Defaults["data1"] = data
-        assert(Defaults["data1"].data == data)
-        
-        let date = NSDate()
-        Defaults["date1"] = date
-        assert(Defaults["date1"].date == date)
-        
-        let array = [1, 2, "foo", true]
-        Defaults["array1"] = array
-        assert(Defaults["array1"].array == array)
-        assert(Defaults["array1"].array![2] as! String == "foo")
-        
-        let dict = ["foo": 1, "bar": [1, 2, 3]]
-        Defaults["dict1"] = dict
-        assert(Defaults["dict1"].dictionary == dict)
-        
-        // +=
-        Defaults["int2"] = 5
-        Defaults["int2"] += 2
-        assert(Defaults["int2"].int == 7)
-        
-        Defaults["int3"] += 2
-        assert(Defaults["int3"].int == 2)
-        
-        Defaults["int4"] = "NaN"
-        Defaults["int4"] += 2
-        assert(Defaults["int4"].int == 2)
-        
-        Defaults["double1"] += 1.5
-        assert(Int(Defaults["double1"].double! * 100.0) == 464)
-        
-        Defaults["double2"] = 3.14
-        Defaults["double2"] += 1
-        assert(Defaults["double2"].double == 4.0)
-        
-        // ++
-        Defaults["int2"]++
-        Defaults["int2"]++
-        assert(Defaults["int2"].int == 9)
-        
-        Defaults["int5"]++
-        assert(Defaults["int5"].int == 1)
-        
-        // Check if exist
-        assert(!Defaults.hasKey("none"))
-        assert(Defaults.hasKey("string1"))
-        assert(Defaults.hasKey("bool1"))
-        
-        // Conditional assignment
-        Defaults["string1"] ?= "bar"
-        assert(Defaults["string1"].string == "foo")
-        
-        Defaults["string2"] ?= "bar"
-        assert(Defaults["string2"].string == "bar")
-        Defaults["string2"] ?= "baz"
-        assert(Defaults["string2"].string == "bar")
-        
-        // Removing
-        Defaults.remove("string1")
-        assert(!Defaults.hasKey("string1"))
-        
-        Defaults["string2"] = nil
-        assert(!Defaults.hasKey("string2"))
-        
-        println("All tests passed")
-        
-    }
-
-    
 }
