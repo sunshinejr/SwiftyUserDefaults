@@ -5,7 +5,7 @@ Pod::Spec.new do |s|
   s.summary = 'Swifty API for NSUserDefaults'
   s.homepage = 'https://github.com/radex/SwiftyUserDefaults'
   s.authors = { 'Radek Pietruszewski' => 'this.is@radex.io' }
-  s.source = { :git => 'https://github.com/radex/SwiftyUserDefaults.git', :tag => '1.1.0' }
+  s.source = { :git => 'https://github.com/radex/SwiftyUserDefaults.git', :tag => s.version }
   
   s.requires_arc = true
   s.ios.deployment_target = '8.0'
