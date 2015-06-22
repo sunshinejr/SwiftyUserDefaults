@@ -99,7 +99,7 @@ public extension NSUserDefaults {
         }
         
         public var dateValue: NSDate {
-            return object as? NSDate ?? NSDate()
+            return object as? NSDate ?? NSDate(timeIntervalSince1970: 0)
         }
         
         public var numberValue: NSNumber {
