@@ -76,14 +76,21 @@ class SwiftyUserDefaultsTests: XCTestCase {
         Defaults["date1"] = date
         assert(Defaults["date1"].date == date)
         
-        let array = [1, 2, "foo", true]
+        let array:[AnyObject] = [1, 3.14, "foo", true]
         Defaults["array1"] = array
-        assert(Defaults["array1"].array == array)
+        assert(Defaults["array1"].array![0] as! Int == 1)
+        assert(Defaults["array1"].array![1] as! Double == 3.14)
         assert(Defaults["array1"].array![2] as! String == "foo")
+        assert(Defaults["array1"].array![3] as! Bool == true)
         
-        let dict = ["foo": 1, "bar": [1, 2, 3]]
+        let dict = ["foo": 1, "bar": array]
         Defaults["dict1"] = dict
-        assert(Defaults["dict1"].dictionary == dict)
+        assert(Defaults["dict1"].dictionary!["foo"] as! Int == 1)
+        let barArray = Defaults["dict1"].dictionary!["bar"] as! [AnyObject]
+        assert(barArray[0] as! Int == 1)
+        assert(barArray[1] as! Double == 3.14)
+        assert(barArray[2] as! String == "foo")
+        assert(barArray[3] as! Bool == true)
         
         // +=
         Defaults["int2"] = 5
