@@ -21,6 +21,20 @@ Defaults["anything"].number         // returns NSNumber?
 
 SwiftyUserDefaults always returns `nil` for non-existing values, also for numbers and booleans.
 
+### Default values
+
+When you don't want to deal with the `nil` case, you can use these helpers that return a default value for non-existing defaults:
+
+```swift
+Defaults["color"].stringValue            // defaults to ""
+Defaults["launchCount"].intValue         // defaults to 0
+Defaults["chimeVolume"].doubleValue      // defaults to 0.0
+Defaults["loggingEnabled"].boolValue     // defaults to false
+Defaults["lastPaths"].arrayValue         // defaults to []
+Defaults["credentials"].dictionaryValue  // defaults to [:]
+Defaults["hotkey"].dataValue             // defaults to NSData()
+```
+
 ### Setting data
 
 ```swift
