@@ -36,6 +36,12 @@ class SwiftyUserDefaultsTests: XCTestCase {
         assert(Defaults["none"].double == nil)
         assert(Defaults["none"].bool == nil)
         
+        //Return default value if doesn't exist
+        assert(Defaults["none"].stringValue == "")
+        assert(Defaults["none"].intValue == 0)
+        assert(Defaults["none"].doubleValue == 0)
+        assert(Defaults["none"].boolValue == false)
+        
         // Setting and reading
         Defaults["string1"] = "foo"
         assert(Defaults["string1"].string == "foo")
