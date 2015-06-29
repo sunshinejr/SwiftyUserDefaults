@@ -78,10 +78,6 @@ public extension NSUserDefaults {
         
         // MARK: Non-Optional Getters
         
-        public var objectValue: NSObject {
-            return defaults.objectForKey(key) as? NSObject ?? NSObject()
-        }
-        
         public var stringValue: String {
             return defaults.stringForKey(key) ?? ""
         }
@@ -96,10 +92,6 @@ public extension NSUserDefaults {
         
         public var dataValue: NSData {
             return defaults.dataForKey(key) ?? NSData()
-        }
-        
-        public var dateValue: NSDate {
-            return object as? NSDate ?? NSDate(timeIntervalSince1970: 0)
         }
         
         public var numberValue: NSNumber {
