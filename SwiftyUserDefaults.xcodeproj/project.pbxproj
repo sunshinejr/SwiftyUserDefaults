@@ -78,18 +78,10 @@
 			isa = PBXGroup;
 			children = (
 				70264EA31B0DF85200B32B18 /* SwiftyUserDefaults.h */,
-				70264EA11B0DF85200B32B18 /* Supporting Files */,
 				70264EBA1B0DF8B900B32B18 /* SwiftyUserDefaults.swift */,
-			);
-			path = SwiftyUserDefaults;
-			sourceTree = "<group>";
-		};
-		70264EA11B0DF85200B32B18 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
 				70264EA21B0DF85200B32B18 /* Info.plist */,
 			);
-			name = "Supporting Files";
+			path = SwiftyUserDefaults;
 			sourceTree = "<group>";
 		};
 		70264EAD1B0DF85300B32B18 /* SwiftyUserDefaultsTests */ = {
@@ -165,6 +157,7 @@
 		70264E951B0DF85200B32B18 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 0700;
 				LastUpgradeCheck = 0630;
 				TargetAttributes = {
 					70264E9D1B0DF85200B32B18 = {
@@ -409,6 +402,7 @@
 				70264EB61B0DF85300B32B18 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		70264EB71B0DF85300B32B18 /* Build configuration list for PBXNativeTarget "SwiftyUserDefaultsTests" */ = {
 			isa = XCConfigurationList;
@@ -417,6 +411,7 @@
 				70264EB91B0DF85300B32B18 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
