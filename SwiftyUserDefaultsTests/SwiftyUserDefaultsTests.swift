@@ -3,6 +3,14 @@ import SwiftyUserDefaults
 
 class SwiftyUserDefaultsTests: XCTestCase {
     
+    override func setUp() {
+        // clear defaults before testing
+        for (key, _) in Defaults.dictionaryRepresentation() {
+            Defaults.removeObjectForKey(key as! String)
+        }
+        super.tearDown()
+    }
+
     func testNone() {
         let key = "none"
         XCTAssertNil(Defaults[key].string)
@@ -159,12 +167,5 @@ class SwiftyUserDefaultsTests: XCTestCase {
         let dict = ["foo": 1, "bar": [1, 2, 3]]
         Defaults[key] = dict
         XCTAssertEqual(Defaults[key].dictionary!, dict)
-    }
-    
-    override func tearDown() {
-        for (key, _) in Defaults.dictionaryRepresentation() {
-            Defaults.removeObjectForKey(key as! String)
-        }
-        super.tearDown()
     }
 }
