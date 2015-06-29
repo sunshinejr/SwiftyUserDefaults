@@ -75,6 +75,40 @@ public extension NSUserDefaults {
         public var bool: Bool? {
             return number?.boolValue
         }
+        
+        // MARK: Non-Optional Getters
+        
+        public var stringValue: String {
+            return defaults.stringForKey(key) ?? ""
+        }
+        
+        public var arrayValue: NSArray {
+            return defaults.arrayForKey(key) ?? []
+        }
+        
+        public var dictionaryValue: NSDictionary {
+            return defaults.dictionaryForKey(key) ?? NSDictionary()
+        }
+        
+        public var dataValue: NSData {
+            return defaults.dataForKey(key) ?? NSData()
+        }
+        
+        public var numberValue: NSNumber {
+            return object as? NSNumber ?? 0
+        }
+        
+        public var intValue: Int {
+            return number?.integerValue ?? 0
+        }
+        
+        public var doubleValue: Double {
+            return number?.doubleValue ?? 0
+        }
+        
+        public var boolValue: Bool {
+            return number?.boolValue ?? false
+        }
     }
     
     /// Returns getter proxy for `key`
@@ -120,8 +154,8 @@ public extension NSUserDefaults {
 }
 
 infix operator ?= {
-associativity right
-precedence 90
+    associativity right
+    precedence 90
 }
 
 /// If key doesn't exist, sets its value to `expr`

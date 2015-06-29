@@ -36,6 +36,15 @@ class SwiftyUserDefaultsTests: XCTestCase {
         assert(Defaults["none"].double == nil)
         assert(Defaults["none"].bool == nil)
         
+        //Return default value if doesn't exist
+        assert(Defaults["none"].stringValue == "")
+        assert(Defaults["none"].intValue == 0)
+        assert(Defaults["none"].doubleValue == 0)
+        assert(Defaults["none"].boolValue == false)
+        assert(Defaults["none"].arrayValue == [])
+        assert(Defaults["none"].dictionaryValue == [:])
+        assert(Defaults["none"].dataValue == NSData())
+        
         // Setting and reading
         Defaults["string1"] = "foo"
         assert(Defaults["string1"].string == "foo")
@@ -66,6 +75,13 @@ class SwiftyUserDefaultsTests: XCTestCase {
         assert(Defaults["bool1"].int == 0)
         assert(Defaults["bool1"].double == 0.0)
         assert(Defaults["bool1"].bool == false)
+        
+        // Non-optional getters behave correctly
+        
+        assert(Defaults["double1"].stringValue == "3.14")
+        assert(Defaults["double1"].intValue == 3)
+        assert(Defaults["double1"].doubleValue == 3.14)
+        assert(Defaults["double1"].boolValue == true)
         
         // Object types
         let data = "foo".dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)!
