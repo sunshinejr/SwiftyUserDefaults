@@ -154,8 +154,8 @@ public extension NSUserDefaults {
 }
 
 infix operator ?= {
-associativity right
-precedence 90
+    associativity right
+    precedence 90
 }
 
 /// If key doesn't exist, sets its value to `expr`
