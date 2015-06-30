@@ -79,35 +79,35 @@ public extension NSUserDefaults {
         // MARK: Non-Optional Getters
         
         public var stringValue: String {
-            return defaults.stringForKey(key) ?? ""
+            return string ?? ""
         }
         
         public var arrayValue: NSArray {
-            return defaults.arrayForKey(key) ?? []
+            return array ?? []
         }
         
         public var dictionaryValue: NSDictionary {
-            return defaults.dictionaryForKey(key) ?? NSDictionary()
+            return dictionary ?? NSDictionary()
         }
         
         public var dataValue: NSData {
-            return defaults.dataForKey(key) ?? NSData()
+            return data ?? NSData()
         }
         
         public var numberValue: NSNumber {
-            return object as? NSNumber ?? 0
+            return number ?? 0
         }
         
         public var intValue: Int {
-            return number?.integerValue ?? 0
+            return int ?? 0
         }
         
         public var doubleValue: Double {
-            return number?.doubleValue ?? 0
+            return double ?? 0
         }
         
         public var boolValue: Bool {
-            return number?.boolValue ?? false
+            return bool ?? false
         }
     }
     
