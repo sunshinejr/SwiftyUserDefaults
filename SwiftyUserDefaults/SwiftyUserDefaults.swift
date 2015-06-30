@@ -167,12 +167,12 @@ public func ?= (proxy: NSUserDefaults.Proxy, @autoclosure expr: () -> Any) {
 /// If key doesn't exist or isn't a number, sets value to `b`
 
 public func += (proxy: NSUserDefaults.Proxy, b: Int) {
-    let a = proxy.defaults[proxy.key].int ?? 0
+    let a = proxy.defaults[proxy.key].intValue
     proxy.defaults[proxy.key] = a + b
 }
 
 public func += (proxy: NSUserDefaults.Proxy, b: Double) {
-    let a = proxy.defaults[proxy.key].double ?? 0
+    let a = proxy.defaults[proxy.key].doubleValue
     proxy.defaults[proxy.key] = a + b
 }
 
