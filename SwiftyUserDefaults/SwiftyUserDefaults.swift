@@ -124,18 +124,13 @@ public extension NSUserDefaults {
             return self[key]
         }
         set {
-            if let v = newValue as? Int {
-                setInteger(v, forKey: key)
-            } else if let v = newValue as? Double {
-                setDouble(v, forKey: key)
-            } else if let v = newValue as? Bool {
-                setBool(v, forKey: key)
-            } else if let v = newValue as? NSObject {
-                setObject(v, forKey: key)
-            } else if newValue == nil {
-                removeObjectForKey(key)
-            } else {
-                assertionFailure("Invalid value type")
+            switch newValue {
+            case let v as Int: setInteger(v, forKey: key)
+            case let v as Double: setDouble(v, forKey: key)
+            case let v as Bool: setBool(v, forKey: key)
+            case let v as NSObject: setObject(v, forKey: key)
+            case nil: removeObjectForKey(key)
+            default: assertionFailure("Invalid value type")
             }
         }
     }
