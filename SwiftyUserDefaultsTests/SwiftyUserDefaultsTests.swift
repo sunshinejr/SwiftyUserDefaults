@@ -90,7 +90,32 @@ class SwiftyUserDefaultsTests: XCTestCase {
         let key5 = "int5"
         Defaults[key5]++
         XCTAssertEqual(Defaults[key5].int!, 1)
-    }
+
+    
+        // -=
+        let key6 = "int6"
+        Defaults[key6] = 5
+        Defaults[key6] -= 2
+        XCTAssertEqual(Defaults[key6].int!, 3)
+        
+        let key7 = "int7"
+        Defaults[key7] -= 2
+        XCTAssertEqual(Defaults[key7].int!, -2)
+        
+        let key8 = "int8"
+        Defaults[key8] = "NaN"
+        Defaults[key8] -= 2
+        XCTAssertEqual(Defaults[key8].int!, -2)
+        
+        // --
+        Defaults[key6]--
+        Defaults[key6]--
+        XCTAssertEqual(Defaults[key6].int!, 1)
+        
+        let key9 = "int9"
+        Defaults[key9]--
+        XCTAssertEqual(Defaults[key9].int!, -1)
+}
     
     func testDouble() {
         // set and read

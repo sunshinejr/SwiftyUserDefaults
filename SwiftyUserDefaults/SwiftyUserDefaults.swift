@@ -188,6 +188,26 @@ public postfix func ++ (proxy: NSUserDefaults.Proxy) {
     proxy += 1
 }
 
+/// Subtracts `b` from the key (and saves it as an integer)
+/// If key doesn't exist or isn't a number, sets value to `-b`
+
+public func -= (proxy: NSUserDefaults.Proxy, b: Int) {
+    let a = proxy.defaults[proxy.key].int ?? 0
+    proxy.defaults[proxy.key] = a - b
+}
+
+public func -= (proxy: NSUserDefaults.Proxy, b: Double) {
+    let a = proxy.defaults[proxy.key].double ?? 0
+    proxy.defaults[proxy.key] = a - b
+}
+
+/// Decrements key by one (and saves it as an integer)
+/// If key doesn't exist or isn't a number, sets value to -1
+
+public postfix func -- (proxy: NSUserDefaults.Proxy) {
+    proxy -= 1
+}
+
 /// Global shortcut for NSUserDefaults.standardUserDefaults()
 
 public let Defaults = NSUserDefaults.standardUserDefaults()
