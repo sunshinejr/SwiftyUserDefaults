@@ -76,6 +76,10 @@ public extension NSUserDefaults {
             return number?.boolValue
         }
         
+        public var URL: NSURL? {
+            return defaults.URLForKey(key)
+        }
+        
         // MARK: Non-Optional Getters
         
         public var stringValue: String {
@@ -130,6 +134,8 @@ public extension NSUserDefaults {
                 setDouble(v, forKey: key)
             } else if let v = newValue as? Bool {
                 setBool(v, forKey: key)
+            } else if let v = newValue as? NSURL {
+                setURL(v, forKey: key)
             } else if let v = newValue as? NSObject {
                 setObject(v, forKey: key)
             } else if newValue == nil {
@@ -162,7 +168,7 @@ infix operator ?= {
 /// Note: This isn't the same as `Defaults.registerDefaults`. This method saves the new value to disk, whereas `registerDefaults` only modifies the defaults in memory.
 /// Note: If key already exists, the expression after ?= isn't evaluated
 
-public func ?= (proxy: NSUserDefaults.Proxy, @autoclosure expr: () -> Any) {
+public func ?= (proxy: NSUserDefaults.Proxy, @autoclosure expr: () -> Any?) {
     if !proxy.defaults.hasKey(proxy.key) {
         proxy.defaults[proxy.key] = expr()
     }
