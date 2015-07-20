@@ -79,35 +79,35 @@ public extension NSUserDefaults {
         // MARK: Non-Optional Getters
         
         public var stringValue: String {
-            return defaults.stringForKey(key) ?? ""
+            return string ?? ""
         }
         
         public var arrayValue: NSArray {
-            return defaults.arrayForKey(key) ?? []
+            return array ?? []
         }
         
         public var dictionaryValue: NSDictionary {
-            return defaults.dictionaryForKey(key) ?? NSDictionary()
+            return dictionary ?? NSDictionary()
         }
         
         public var dataValue: NSData {
-            return defaults.dataForKey(key) ?? NSData()
+            return data ?? NSData()
         }
         
         public var numberValue: NSNumber {
-            return object as? NSNumber ?? 0
+            return number ?? 0
         }
         
         public var intValue: Int {
-            return number?.integerValue ?? 0
+            return int ?? 0
         }
         
         public var doubleValue: Double {
-            return number?.doubleValue ?? 0
+            return double ?? 0
         }
         
         public var boolValue: Bool {
-            return number?.boolValue ?? false
+            return bool ?? false
         }
     }
     
@@ -124,18 +124,13 @@ public extension NSUserDefaults {
             return self[key]
         }
         set {
-            if let v = newValue as? Int {
-                setInteger(v, forKey: key)
-            } else if let v = newValue as? Double {
-                setDouble(v, forKey: key)
-            } else if let v = newValue as? Bool {
-                setBool(v, forKey: key)
-            } else if let v = newValue as? NSObject {
-                setObject(v, forKey: key)
-            } else if newValue == nil {
-                removeObjectForKey(key)
-            } else {
-                assertionFailure("Invalid value type")
+            switch newValue {
+            case let v as Int: setInteger(v, forKey: key)
+            case let v as Double: setDouble(v, forKey: key)
+            case let v as Bool: setBool(v, forKey: key)
+            case let v as NSObject: setObject(v, forKey: key)
+            case nil: removeObjectForKey(key)
+            default: assertionFailure("Invalid value type")
             }
         }
     }
@@ -172,12 +167,12 @@ public func ?= (proxy: NSUserDefaults.Proxy, @autoclosure expr: () -> Any) {
 /// If key doesn't exist or isn't a number, sets value to `b`
 
 public func += (proxy: NSUserDefaults.Proxy, b: Int) {
-    let a = proxy.defaults[proxy.key].int ?? 0
+    let a = proxy.defaults[proxy.key].intValue
     proxy.defaults[proxy.key] = a + b
 }
 
 public func += (proxy: NSUserDefaults.Proxy, b: Double) {
-    let a = proxy.defaults[proxy.key].double ?? 0
+    let a = proxy.defaults[proxy.key].doubleValue
     proxy.defaults[proxy.key] = a + b
 }
 
