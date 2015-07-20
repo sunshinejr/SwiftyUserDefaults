@@ -148,6 +148,12 @@ public extension NSUserDefaults {
     }
 }
 
+/// Global shortcut for NSUserDefaults.standardUserDefaults()
+
+public let Defaults = NSUserDefaults.standardUserDefaults()
+
+// MARK: - Deprecations
+
 infix operator ?= {
     associativity right
     precedence 90
@@ -157,6 +163,7 @@ infix operator ?= {
 /// Note: This isn't the same as `Defaults.registerDefaults`. This method saves the new value to disk, whereas `registerDefaults` only modifies the defaults in memory.
 /// Note: If key already exists, the expression after ?= isn't evaluated
 
+@available(*, deprecated=1)
 public func ?= (proxy: NSUserDefaults.Proxy, @autoclosure expr: () -> Any) {
     if !proxy.defaults.hasKey(proxy.key) {
         proxy.defaults[proxy.key] = expr()
@@ -166,11 +173,13 @@ public func ?= (proxy: NSUserDefaults.Proxy, @autoclosure expr: () -> Any) {
 /// Adds `b` to the key (and saves it as an integer)
 /// If key doesn't exist or isn't a number, sets value to `b`
 
+@available(*, deprecated=1, message="Please migrate to static keys to use this.")
 public func += (proxy: NSUserDefaults.Proxy, b: Int) {
     let a = proxy.defaults[proxy.key].intValue
     proxy.defaults[proxy.key] = a + b
 }
 
+@available(*, deprecated=1, message="Please migrate to static keys to use this.")
 public func += (proxy: NSUserDefaults.Proxy, b: Double) {
     let a = proxy.defaults[proxy.key].doubleValue
     proxy.defaults[proxy.key] = a + b
@@ -179,10 +188,7 @@ public func += (proxy: NSUserDefaults.Proxy, b: Double) {
 /// Icrements key by one (and saves it as an integer)
 /// If key doesn't exist or isn't a number, sets value to 1
 
+@available(*, deprecated=1, message="Please migrate to static keys to use this.")
 public postfix func ++ (proxy: NSUserDefaults.Proxy) {
     proxy += 1
 }
-
-/// Global shortcut for NSUserDefaults.standardUserDefaults()
-
-public let Defaults = NSUserDefaults.standardUserDefaults()
