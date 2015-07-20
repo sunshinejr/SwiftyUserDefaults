@@ -12,6 +12,10 @@
 		70264EB11B0DF85300B32B18 /* SwiftyUserDefaultsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70264EB01B0DF85300B32B18 /* SwiftyUserDefaultsTests.swift */; };
 		70264EBB1B0DF8B900B32B18 /* SwiftyUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70264EBA1B0DF8B900B32B18 /* SwiftyUserDefaults.swift */; };
 		70264EBE1B0E2FB400B32B18 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 70264EBD1B0E2FB400B32B18 /* Foundation.framework */; };
+		D9D2CFB41B54AAF700D6ABCE /* SwiftyUserDefaults.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9D2CFAA1B54AAF600D6ABCE /* SwiftyUserDefaults.framework */; };
+		D9D2CFC11B54AB2F00D6ABCE /* SwiftyUserDefaults.h in Headers */ = {isa = PBXBuildFile; fileRef = 70264EA31B0DF85200B32B18 /* SwiftyUserDefaults.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D9D2CFC21B54AB3500D6ABCE /* SwiftyUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70264EBA1B0DF8B900B32B18 /* SwiftyUserDefaults.swift */; };
+		D9D2CFC31B54AB3B00D6ABCE /* SwiftyUserDefaultsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70264EB01B0DF85300B32B18 /* SwiftyUserDefaultsTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -21,6 +25,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = 70264E9D1B0DF85200B32B18;
 			remoteInfo = SwiftyUserDefaults;
+		};
+		D9D2CFB51B54AAF700D6ABCE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 70264E951B0DF85200B32B18 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D9D2CFA91B54AAF600D6ABCE;
+			remoteInfo = "SwiftyUserDefaults Mac";
 		};
 /* End PBXContainerItemProxy section */
 
@@ -33,6 +44,8 @@
 		70264EB01B0DF85300B32B18 /* SwiftyUserDefaultsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftyUserDefaultsTests.swift; sourceTree = "<group>"; };
 		70264EBA1B0DF8B900B32B18 /* SwiftyUserDefaults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyUserDefaults.swift; sourceTree = "<group>"; };
 		70264EBD1B0E2FB400B32B18 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		D9D2CFAA1B54AAF600D6ABCE /* SwiftyUserDefaults.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftyUserDefaults.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D9D2CFB31B54AAF600D6ABCE /* SwiftyUserDefaultsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwiftyUserDefaultsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -49,6 +62,21 @@
 			buildActionMask = 2147483647;
 			files = (
 				70264EAA1B0DF85300B32B18 /* SwiftyUserDefaults.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D9D2CFA61B54AAF600D6ABCE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D9D2CFB01B54AAF600D6ABCE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D9D2CFB41B54AAF700D6ABCE /* SwiftyUserDefaults.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -70,6 +98,8 @@
 			children = (
 				70264E9E1B0DF85200B32B18 /* SwiftyUserDefaults.framework */,
 				70264EA91B0DF85300B32B18 /* SwiftyUserDefaultsTests.xctest */,
+				D9D2CFAA1B54AAF600D6ABCE /* SwiftyUserDefaults.framework */,
+				D9D2CFB31B54AAF600D6ABCE /* SwiftyUserDefaultsTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -112,6 +142,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		D9D2CFA71B54AAF600D6ABCE /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D9D2CFC11B54AB2F00D6ABCE /* SwiftyUserDefaults.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
@@ -151,6 +189,42 @@
 			productReference = 70264EA91B0DF85300B32B18 /* SwiftyUserDefaultsTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		D9D2CFA91B54AAF600D6ABCE /* SwiftyUserDefaults Mac */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D9D2CFBF1B54AAF700D6ABCE /* Build configuration list for PBXNativeTarget "SwiftyUserDefaults Mac" */;
+			buildPhases = (
+				D9D2CFA51B54AAF600D6ABCE /* Sources */,
+				D9D2CFA61B54AAF600D6ABCE /* Frameworks */,
+				D9D2CFA71B54AAF600D6ABCE /* Headers */,
+				D9D2CFA81B54AAF600D6ABCE /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "SwiftyUserDefaults Mac";
+			productName = "SwiftyUserDefaults Mac";
+			productReference = D9D2CFAA1B54AAF600D6ABCE /* SwiftyUserDefaults.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		D9D2CFB21B54AAF600D6ABCE /* SwiftyUserDefaults MacTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D9D2CFC01B54AAF700D6ABCE /* Build configuration list for PBXNativeTarget "SwiftyUserDefaults MacTests" */;
+			buildPhases = (
+				D9D2CFAF1B54AAF600D6ABCE /* Sources */,
+				D9D2CFB01B54AAF600D6ABCE /* Frameworks */,
+				D9D2CFB11B54AAF600D6ABCE /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D9D2CFB61B54AAF700D6ABCE /* PBXTargetDependency */,
+			);
+			name = "SwiftyUserDefaults MacTests";
+			productName = "SwiftyUserDefaults MacTests";
+			productReference = D9D2CFB31B54AAF600D6ABCE /* SwiftyUserDefaultsTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -165,6 +239,12 @@
 					};
 					70264EA81B0DF85300B32B18 = {
 						CreatedOnToolsVersion = 6.3.2;
+					};
+					D9D2CFA91B54AAF600D6ABCE = {
+						CreatedOnToolsVersion = 7.0;
+					};
+					D9D2CFB21B54AAF600D6ABCE = {
+						CreatedOnToolsVersion = 7.0;
 					};
 				};
 			};
@@ -182,6 +262,8 @@
 			targets = (
 				70264E9D1B0DF85200B32B18 /* SwiftyUserDefaults */,
 				70264EA81B0DF85300B32B18 /* SwiftyUserDefaultsTests */,
+				D9D2CFA91B54AAF600D6ABCE /* SwiftyUserDefaults Mac */,
+				D9D2CFB21B54AAF600D6ABCE /* SwiftyUserDefaults MacTests */,
 			);
 		};
 /* End PBXProject section */
@@ -195,6 +277,20 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		70264EA71B0DF85300B32B18 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D9D2CFA81B54AAF600D6ABCE /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D9D2CFB11B54AAF600D6ABCE /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -220,6 +316,22 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		D9D2CFA51B54AAF600D6ABCE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D9D2CFC21B54AB3500D6ABCE /* SwiftyUserDefaults.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D9D2CFAF1B54AAF600D6ABCE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D9D2CFC31B54AB3B00D6ABCE /* SwiftyUserDefaultsTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -227,6 +339,11 @@
 			isa = PBXTargetDependency;
 			target = 70264E9D1B0DF85200B32B18 /* SwiftyUserDefaults */;
 			targetProxy = 70264EAB1B0DF85300B32B18 /* PBXContainerItemProxy */;
+		};
+		D9D2CFB61B54AAF700D6ABCE /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D9D2CFA91B54AAF600D6ABCE /* SwiftyUserDefaults Mac */;
+			targetProxy = D9D2CFB51B54AAF700D6ABCE /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -383,6 +500,76 @@
 			};
 			name = Release;
 		};
+		D9D2CFBB1B54AAF700D6ABCE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_TESTABILITY = YES;
+				FRAMEWORK_VERSION = A;
+				INFOPLIST_FILE = SwiftyUserDefaults/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				PRODUCT_BUNDLE_IDENTIFIER = com.purpleforest.SwiftyUserDefaults;
+				PRODUCT_NAME = SwiftyUserDefaults;
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		D9D2CFBC1B54AAF700D6ABCE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_VERSION = A;
+				INFOPLIST_FILE = SwiftyUserDefaults/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				PRODUCT_BUNDLE_IDENTIFIER = com.purpleforest.SwiftyUserDefaults;
+				PRODUCT_NAME = SwiftyUserDefaults;
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		D9D2CFBD1B54AAF700D6ABCE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_TESTABILITY = YES;
+				INFOPLIST_FILE = SwiftyUserDefaultsTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				PRODUCT_BUNDLE_IDENTIFIER = com.purpleforest.SwiftyUserDefaultsTests;
+				PRODUCT_NAME = SwiftyUserDefaultsTests;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		D9D2CFBE1B54AAF700D6ABCE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = SwiftyUserDefaultsTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				PRODUCT_BUNDLE_IDENTIFIER = com.purpleforest.SwiftyUserDefaultsTests;
+				PRODUCT_NAME = SwiftyUserDefaultsTests;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -412,6 +599,22 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		D9D2CFBF1B54AAF700D6ABCE /* Build configuration list for PBXNativeTarget "SwiftyUserDefaults Mac" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D9D2CFBB1B54AAF700D6ABCE /* Debug */,
+				D9D2CFBC1B54AAF700D6ABCE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		D9D2CFC01B54AAF700D6ABCE /* Build configuration list for PBXNativeTarget "SwiftyUserDefaults MacTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D9D2CFBD1B54AAF700D6ABCE /* Debug */,
+				D9D2CFBE1B54AAF700D6ABCE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
 	};
