@@ -168,4 +168,119 @@ class SwiftyUserDefaultsTests: XCTestCase {
         Defaults[key] = dict
         XCTAssertEqual(Defaults[key].dictionary! as NSDictionary, dict)
     }
+    
+    // --
+    
+    func testStaticStringOptional() {
+        let key = DefaultsKey<String?>("string")
+        XCTAssert(!Defaults.hasKey("string"))
+        XCTAssert(Defaults[key] == nil)
+        Defaults[key] = "foo"
+        XCTAssert(Defaults[key] == "foo")
+        XCTAssert(Defaults.hasKey("string"))
+    }
+    
+    func testStaticString() {
+        let key = DefaultsKey<String>("string")
+        XCTAssert(Defaults[key] == "")
+        Defaults[key] = "foo"
+        Defaults[key] += "bar"
+        XCTAssert(Defaults[key] == "foobar")
+    }
+    
+    func testStaticIntOptional() {
+        let key = DefaultsKey<Int?>("int")
+        XCTAssert(Defaults[key] == nil)
+        Defaults[key] = 10
+        XCTAssert(Defaults[key] == 10)
+    }
+    
+    func testStaticInt() {
+        let key = DefaultsKey<Int>("int")
+        XCTAssert(Defaults[key] == 0)
+        Defaults[key] += 10
+        XCTAssert(Defaults[key] == 10)
+    }
+    
+    func testStaticDoubleOptional() {
+        let key = DefaultsKey<Double?>("double")
+        XCTAssert(Defaults[key] == nil)
+        Defaults[key] = 10
+        XCTAssert(Defaults[key] == 10.0)
+    }
+    
+    func testStaticDouble() {
+        let key = DefaultsKey<Double>("double")
+        XCTAssert(Defaults[key] == 0)
+        Defaults[key] = 2.14
+        Defaults[key] += 1
+        XCTAssert(Defaults[key] == 3.14)
+    }
+    
+    func testStaticBoolOptional() {
+        let key = DefaultsKey<Bool?>("bool")
+        XCTAssert(Defaults[key] == nil)
+        Defaults[key] = true
+        XCTAssert(Defaults[key] == true)
+        Defaults[key] = false
+        XCTAssert(Defaults[key] == false)
+    }
+    
+    func testStaticBool() {
+        let key = DefaultsKey<Bool>("bool")
+        XCTAssert(!Defaults.hasKey("bool"))
+        XCTAssert(Defaults[key] == false)
+        Defaults[key] = true
+        XCTAssert(Defaults[key] == true)
+        Defaults[key] = false
+        XCTAssert(Defaults[key] == false)
+    }
+    
+    func testStaticAnyObject() {
+        let key = DefaultsKey<AnyObject?>("object")
+        XCTAssert(Defaults[key] == nil)
+        Defaults[key] = "foo"
+        XCTAssert(Defaults[key] as? String == "foo")
+        Defaults[key] = 10
+        XCTAssert(Defaults[key] as? Int == 10)
+        Defaults[key] = NSDate.distantPast()
+        XCTAssert(Defaults[key] as? NSDate == NSDate.distantPast())
+    }
+    
+    func testStaticNSObject() {
+        let key = DefaultsKey<NSObject?>("object")
+        XCTAssert(Defaults[key] == nil)
+        Defaults[key] = "foo"
+        XCTAssert(Defaults[key] as? NSString == "foo")
+        Defaults[key] = NSDate.distantPast()
+        XCTAssert(Defaults[key] as? NSDate == NSDate.distantPast())
+    }
+    
+    func testStaticDataOptional() {
+        let key = DefaultsKey<NSData?>("data")
+        XCTAssert(Defaults[key] == nil)
+        let data = "foobar".dataUsingEncoding(NSUTF8StringEncoding)!
+        Defaults[key] = data
+        XCTAssert(Defaults[key] == data)
+    }
+    
+    func testStaticData() {
+        let key = DefaultsKey<NSData>("data")
+        XCTAssert(Defaults[key] == NSData())
+        let data = "foobar".dataUsingEncoding(NSUTF8StringEncoding)!
+        Defaults[key] = data
+        XCTAssert(Defaults[key] == data)
+    }
+    
+    func testStaticDate() {
+        let key = DefaultsKey<NSDate?>("date")
+        XCTAssert(Defaults[key] == nil)
+        Defaults[key] = NSDate.distantPast()
+        XCTAssert(Defaults[key] == NSDate.distantPast())
+        let now = NSDate()
+        Defaults[key] = now
+        XCTAssert(Defaults[key] == now)
+    }
+    
+    
 }
