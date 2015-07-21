@@ -61,7 +61,7 @@ public extension NSUserDefaults {
         }
         
         public var number: NSNumber? {
-            return object as? NSNumber
+            return defaults.numberForKey(key)
         }
         
         public var int: Int? {
@@ -109,6 +109,12 @@ public extension NSUserDefaults {
         public var boolValue: Bool {
             return bool ?? false
         }
+    }
+    
+    /// `NSNumber` representation of a user default
+    
+    func numberForKey(key: String) -> NSNumber? {
+        return objectForKey(key) as? NSNumber
     }
     
     /// Returns getter proxy for `key`
