@@ -158,6 +158,101 @@ public extension NSUserDefaults {
 
 public let Defaults = NSUserDefaults.standardUserDefaults()
 
+// MARK: - Static keys
+
+/// Extend this class and add your user defaults keys as static constants
+/// so you can use the shortcut dot notation (e.g. `Defaults[.yourKey]`)
+
+public class DefaultsKeys {
+    private init() {}
+}
+
+/// Base class for static user defaults keys. Specialize with value type type
+/// and pass key name to the initializer to create a key.
+
+public class DefaultsKey<ValueType>: DefaultsKeys {
+    public let _key: String
+    
+    public init(_ key: String) {
+        self._key = key
+    }
+}
+
+extension NSUserDefaults {
+    func set<T>(key: DefaultsKey<T>, _ value: Any?) {
+        self[key._key] = value
+    }
+}
+
+// MARK: Subscripts for standard types
+
+extension NSUserDefaults {
+    public subscript(key: DefaultsKey<String?>) -> String? {
+        get { return stringForKey(key._key) }
+        set { set(key, newValue) }
+    }
+    
+    public subscript(key: DefaultsKey<String>) -> String {
+        get { return stringForKey(key._key) ?? "" }
+        set { set(key, newValue) }
+    }
+    
+    public subscript(key: DefaultsKey<Int?>) -> Int? {
+        get { return numberForKey(key._key)?.integerValue }
+        set { set(key, newValue) }
+    }
+    
+    public subscript(key: DefaultsKey<Int>) -> Int {
+        get { return numberForKey(key._key)?.integerValue ?? 0 }
+        set { set(key, newValue) }
+    }
+    
+    public subscript(key: DefaultsKey<Double?>) -> Double? {
+        get { return numberForKey(key._key)?.doubleValue }
+        set { set(key, newValue) }
+    }
+    
+    public subscript(key: DefaultsKey<Double>) -> Double {
+        get { return numberForKey(key._key)?.doubleValue ?? 0.0 }
+        set { set(key, newValue) }
+    }
+    
+    public subscript(key: DefaultsKey<Bool?>) -> Bool? {
+        get { return numberForKey(key._key)?.boolValue }
+        set { set(key, newValue) }
+    }
+    
+    public subscript(key: DefaultsKey<Bool>) -> Bool {
+        get { return numberForKey(key._key)?.boolValue ?? false }
+        set { set(key, newValue) }
+    }
+    
+    public subscript(key: DefaultsKey<AnyObject?>) -> AnyObject? {
+        get { return objectForKey(key._key) }
+        set { set(key, newValue) }
+    }
+    
+    public subscript(key: DefaultsKey<NSObject?>) -> NSObject? {
+        get { return objectForKey(key._key) as? NSObject }
+        set { set(key, newValue) }
+    }
+    
+    public subscript(key: DefaultsKey<NSData?>) -> NSData? {
+        get { return dataForKey(key._key) }
+        set { set(key, newValue) }
+    }
+    
+    public subscript(key: DefaultsKey<NSData>) -> NSData {
+        get { return dataForKey(key._key) ?? NSData() }
+        set { set(key, newValue) }
+    }
+    
+    public subscript(key: DefaultsKey<NSDate?>) -> NSDate? {
+        get { return objectForKey(key._key) as? NSDate }
+        set { set(key, newValue) }
+    }
+}
+
 // MARK: - Deprecations
 
 infix operator ?= {
