@@ -184,7 +184,7 @@ extension NSUserDefaults {
     }
 }
 
-// MARK: Subscripts for standard types
+// MARK: Static subscripts for standard types
 
 extension NSUserDefaults {
     public subscript(key: DefaultsKey<String?>) -> String? {
@@ -253,6 +253,29 @@ extension NSUserDefaults {
     }
 }
 
+// MARK: Static subscripts for array types
+
+extension NSUserDefaults {
+    public subscript(key: DefaultsKey<NSArray?>) -> NSArray? {
+        get { return arrayForKey(key._key) }
+        set { set(key, newValue) }
+    }
+    
+    public subscript(key: DefaultsKey<NSArray>) -> NSArray {
+        get { return arrayForKey(key._key) ?? [] }
+        set { set(key, newValue) }
+    }
+
+    public subscript(key: DefaultsKey<[AnyObject]?>) -> [AnyObject]? {
+        get { return arrayForKey(key._key) }
+        set { set(key, newValue) }
+    }
+    
+    public subscript(key: DefaultsKey<[AnyObject]>) -> [AnyObject] {
+        get { return arrayForKey(key._key) ?? [] }
+        set { set(key, newValue) }
+    }
+}
 // MARK: - Deprecations
 
 infix operator ?= {
