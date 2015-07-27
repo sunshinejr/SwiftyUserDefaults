@@ -282,6 +282,25 @@ class SwiftyUserDefaultsTests: XCTestCase {
         XCTAssert(Defaults[key] == now)
     }
     
+    func testStaticDictionaryOptional() {
+        let key = DefaultsKey<[String: AnyObject]?>("dictionary")
+        XCTAssert(Defaults[key] == nil)
+        Defaults[key] = ["foo": "bar", "bar": 123, "baz": NSData()]
+        XCTAssert(Defaults[key]! as NSDictionary == ["foo": "bar", "bar": 123, "baz": NSData()])
+    }
+    
+    func testStaticDictionary() {
+        let key = DefaultsKey<[String: AnyObject]>("dictionary")
+        XCTAssert(Defaults[key] as NSDictionary == [:])
+        Defaults[key] = ["foo": "bar", "bar": 123, "baz": NSData()]
+        XCTAssert(Defaults[key] as NSDictionary == ["foo": "bar", "bar": 123, "baz": NSData()])
+        Defaults[key]["lol"] = NSDate.distantFuture()
+        XCTAssert(Defaults[key]["lol"] as! NSDate == NSDate.distantFuture())
+        Defaults[key]["lol"] = nil
+        Defaults[key]["baz"] = nil
+        XCTAssert(Defaults[key] as NSDictionary == ["foo": "bar", "bar": 123])
+    }
+    
     // --
     
     func testStaticNSArrayOptional() {

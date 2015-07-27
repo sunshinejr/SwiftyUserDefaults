@@ -251,6 +251,16 @@ extension NSUserDefaults {
         get { return objectForKey(key._key) as? NSDate }
         set { set(key, newValue) }
     }
+    
+    public subscript(key: DefaultsKey<[String: AnyObject]?>) -> [String: AnyObject]? {
+        get { return dictionaryForKey(key._key) }
+        set { set(key, newValue) }
+    }
+    
+    public subscript(key: DefaultsKey<[String: AnyObject]>) -> [String: AnyObject] {
+        get { return dictionaryForKey(key._key) ?? [:] }
+        set { set(key, newValue) }
+    }
 }
 
 // MARK: Static subscripts for array types
