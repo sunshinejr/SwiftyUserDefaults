@@ -2,7 +2,6 @@ import XCTest
 import SwiftyUserDefaults
 
 class SwiftyUserDefaultsTests: XCTestCase {
-    
     override func setUp() {
         // clear defaults before testing
         for (key, _) in Defaults.dictionaryRepresentation() {
@@ -434,5 +433,42 @@ class SwiftyUserDefaultsTests: XCTestCase {
         XCTAssert(Defaults[key] == [])
         Defaults[key] = [NSDate.distantFuture()]
         XCTAssert(Defaults[key] == [NSDate.distantFuture()])
+    }
+}
+
+extension DefaultsKeys {
+    static let strings = DefaultsKey<[String]>("strings")
+    static let optStrings = DefaultsKey<[String]?>("strings")
+}
+
+extension SwiftyUserDefaultsTests {
+    func testShortcutsAndExistence() {
+        XCTAssert(Defaults[.strings] == [])
+        XCTAssert(!Defaults.hasKey(.strings))
+        
+        Defaults[.strings] = []
+        
+        XCTAssert(Defaults[.strings] == [])
+        XCTAssert(Defaults.hasKey(.strings))
+        
+        Defaults.remove(.strings)
+        
+        XCTAssert(Defaults[.strings] == [])
+        XCTAssert(!Defaults.hasKey(.strings))
+    }
+    
+    func testShortcutsAndExistence2() {
+        XCTAssert(Defaults[.optStrings] == nil)
+        XCTAssert(!Defaults.hasKey(.optStrings))
+        
+        Defaults[.optStrings] = []
+        
+        XCTAssert(Defaults[.optStrings]! == [])
+        XCTAssert(Defaults.hasKey(.optStrings))
+        
+        Defaults[.optStrings] = nil
+        
+        XCTAssert(Defaults[.optStrings] == nil)
+        XCTAssert(!Defaults.hasKey(.optStrings))
     }
 }

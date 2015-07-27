@@ -184,6 +184,21 @@ extension NSUserDefaults {
     }
 }
 
+extension NSUserDefaults {
+    
+    /// Returns `true` if `key` exists
+    
+    public func hasKey<T>(key: DefaultsKey<T>) -> Bool {
+        return objectForKey(key._key) != nil
+    }
+    
+    /// Removes value for `key`
+    
+    public func remove<T>(key: DefaultsKey<T>) {
+        removeObjectForKey(key._key)
+    }
+}
+
 // MARK: Static subscripts for standard types
 
 extension NSUserDefaults {
