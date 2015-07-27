@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6E903A8C1B66338C004CDFC4 /* TestHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E903A8B1B66338C004CDFC4 /* TestHelper.swift */; };
+		6E903A8D1B66338C004CDFC4 /* TestHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E903A8B1B66338C004CDFC4 /* TestHelper.swift */; };
 		70264EA41B0DF85200B32B18 /* SwiftyUserDefaults.h in Headers */ = {isa = PBXBuildFile; fileRef = 70264EA31B0DF85200B32B18 /* SwiftyUserDefaults.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		70264EAA1B0DF85300B32B18 /* SwiftyUserDefaults.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 70264E9E1B0DF85200B32B18 /* SwiftyUserDefaults.framework */; };
 		70264EB11B0DF85300B32B18 /* SwiftyUserDefaultsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70264EB01B0DF85300B32B18 /* SwiftyUserDefaultsTests.swift */; };
@@ -36,6 +38,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		6E903A8B1B66338C004CDFC4 /* TestHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestHelper.swift; sourceTree = "<group>"; };
 		70264E9E1B0DF85200B32B18 /* SwiftyUserDefaults.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftyUserDefaults.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		70264EA21B0DF85200B32B18 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		70264EA31B0DF85200B32B18 /* SwiftyUserDefaults.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SwiftyUserDefaults.h; sourceTree = "<group>"; };
@@ -118,6 +121,7 @@
 			isa = PBXGroup;
 			children = (
 				70264EB01B0DF85300B32B18 /* SwiftyUserDefaultsTests.swift */,
+				6E903A8B1B66338C004CDFC4 /* TestHelper.swift */,
 				70264EAE1B0DF85300B32B18 /* Supporting Files */,
 			);
 			path = SwiftyUserDefaultsTests;
@@ -313,6 +317,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				70264EB11B0DF85300B32B18 /* SwiftyUserDefaultsTests.swift in Sources */,
+				6E903A8C1B66338C004CDFC4 /* TestHelper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -329,6 +334,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D9D2CFC31B54AB3B00D6ABCE /* SwiftyUserDefaultsTests.swift in Sources */,
+				6E903A8D1B66338C004CDFC4 /* TestHelper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
