@@ -276,6 +276,93 @@ extension NSUserDefaults {
         set { set(key, newValue) }
     }
 }
+
+// We need the <T: AnyObject> and <T: _ObjectiveCBridgeable> variants to
+// suppress compiler warnings about NSArray not being convertible to [T]
+// AnyObject is for NSData and NSDate, _ObjectiveCBridgeable is for value
+// types bridge-able to Foundation types (String, Int, ...)
+
+extension NSUserDefaults {
+    public func getArray<T: _ObjectiveCBridgeable>(key: DefaultsKey<[T]>) -> [T] {
+        return arrayForKey(key._key) as NSArray? as? [T] ?? []
+    }
+    
+    public func getArray<T: _ObjectiveCBridgeable>(key: DefaultsKey<[T]?>) -> [T]? {
+        return arrayForKey(key._key) as NSArray? as? [T]
+    }
+    
+    func getArray<T: AnyObject>(key: DefaultsKey<[T]>) -> [T] {
+        return arrayForKey(key._key) as NSArray? as? [T] ?? []
+    }
+    
+    func getArray<T: AnyObject>(key: DefaultsKey<[T]?>) -> [T]? {
+        return arrayForKey(key._key) as NSArray? as? [T]
+    }
+}
+
+extension NSUserDefaults {
+    public subscript(key: DefaultsKey<[String]?>) -> [String]? {
+        get { return getArray(key) }
+        set { set(key, newValue) }
+    }
+    
+    public subscript(key: DefaultsKey<[String]>) -> [String] {
+        get { return getArray(key) }
+        set { set(key, newValue) }
+    }
+    
+    public subscript(key: DefaultsKey<[Int]?>) -> [Int]? {
+        get { return getArray(key) }
+        set { set(key, newValue) }
+    }
+    
+    public subscript(key: DefaultsKey<[Int]>) -> [Int] {
+        get { return getArray(key) }
+        set { set(key, newValue) }
+    }
+    
+    public subscript(key: DefaultsKey<[Double]?>) -> [Double]? {
+        get { return getArray(key) }
+        set { set(key, newValue) }
+    }
+    
+    public subscript(key: DefaultsKey<[Double]>) -> [Double] {
+        get { return getArray(key) }
+        set { set(key, newValue) }
+    }
+    
+    public subscript(key: DefaultsKey<[Bool]?>) -> [Bool]? {
+        get { return getArray(key) }
+        set { set(key, newValue) }
+    }
+    
+    public subscript(key: DefaultsKey<[Bool]>) -> [Bool] {
+        get { return getArray(key) }
+        set { set(key, newValue) }
+    }
+    
+    public subscript(key: DefaultsKey<[NSData]?>) -> [NSData]? {
+        get { return getArray(key) }
+        set { set(key, newValue) }
+    }
+    
+    public subscript(key: DefaultsKey<[NSData]>) -> [NSData] {
+        get { return getArray(key) }
+        set { set(key, newValue) }
+    }
+    
+    public subscript(key: DefaultsKey<[NSDate]?>) -> [NSDate]? {
+        get { return getArray(key) }
+        set { set(key, newValue) }
+    }
+    
+    public subscript(key: DefaultsKey<[NSDate]>) -> [NSDate] {
+        get { return getArray(key) }
+        set { set(key, newValue) }
+    }
+
+}
+
 // MARK: - Deprecations
 
 infix operator ?= {

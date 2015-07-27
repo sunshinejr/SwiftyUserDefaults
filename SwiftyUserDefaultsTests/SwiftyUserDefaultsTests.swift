@@ -318,4 +318,102 @@ class SwiftyUserDefaultsTests: XCTestCase {
         Defaults[key].append(NSData())
         XCTAssert(Defaults[key] as NSArray == [1, "foo", false, NSData()])
     }
+    
+    // --
+    
+    func testStaticStringArrayOptional() {
+        let key = DefaultsKey<[String]?>("strings")
+        XCTAssert(Defaults[key] == nil)
+        Defaults[key] = ["foo", "bar"]
+        Defaults[key]?.append("baz")
+        XCTAssert(Defaults[key]! == ["foo", "bar", "baz"])
+        
+        // bad types
+        Defaults["strings"] = [1, 2, false, "foo"]
+        XCTAssert(Defaults[key] == nil)
+    }
+    
+    func testStaticStringArray() {
+        let key = DefaultsKey<[String]>("strings")
+        XCTAssert(Defaults[key] == [])
+        Defaults[key] = ["foo", "bar"]
+        Defaults[key].append("baz")
+        XCTAssert(Defaults[key] == ["foo", "bar", "baz"])
+        
+        // bad types
+        Defaults["strings"] = [1, 2, false, "foo"]
+        XCTAssert(Defaults[key] == [])
+    }
+    
+    func testStaticIntArrayOptional() {
+        let key = DefaultsKey<[Int]?>("ints")
+        XCTAssert(Defaults[key] == nil)
+        Defaults[key] = [1, 2, 3]
+        XCTAssert(Defaults[key]! == [1, 2, 3])
+    }
+    
+    func testStaticIntArray() {
+        let key = DefaultsKey<[Int]>("ints")
+        XCTAssert(Defaults[key] == [])
+        Defaults[key] = [3, 2, 1]
+        Defaults[key].sortInPlace()
+        XCTAssert(Defaults[key] == [1, 2, 3])
+    }
+    
+    func testStaticDoubleArrayOptional() {
+        let key = DefaultsKey<[Double]?>("doubles")
+        XCTAssert(Defaults[key] == nil)
+        Defaults[key] = [1.1, 2.2, 3.3]
+        XCTAssert(Defaults[key]! == [1.1, 2.2, 3.3])
+    }
+    
+    func testStaticDoubleArray() {
+        let key = DefaultsKey<[Double]>("doubles")
+        XCTAssert(Defaults[key] == [])
+        Defaults[key] = [1.1, 2.2, 3.3]
+        XCTAssert(Defaults[key] == [1.1, 2.2, 3.3])
+    }
+    
+    func testStaticBoolArrayOptional() {
+        let key = DefaultsKey<[Bool]?>("bools")
+        XCTAssert(Defaults[key] == nil)
+        Defaults[key] = [true, false, true]
+        XCTAssert(Defaults[key]! == [true, false, true])
+    }
+    
+    func testStaticBoolArray() {
+        let key = DefaultsKey<[Bool]>("bools")
+        XCTAssert(Defaults[key] == [])
+        Defaults[key] = [true, false, true]
+        XCTAssert(Defaults[key] == [true, false, true])
+    }
+    
+    func testStaticDataArrayOptional() {
+        let key = DefaultsKey<[NSData]?>("datas")
+        XCTAssert(Defaults[key] == nil)
+        let data = "foobar".dataUsingEncoding(NSUTF8StringEncoding)!
+        Defaults[key] = [data, NSData()]
+        XCTAssert(Defaults[key]! == [data, NSData()])
+    }
+    
+    func testStaticDataArray() {
+        let key = DefaultsKey<[NSData]>("datas")
+        XCTAssert(Defaults[key] == [])
+        Defaults[key] = [NSData()]
+        XCTAssert(Defaults[key] == [NSData()])
+    }
+    
+    func testStaticDateArrayOptional() {
+        let key = DefaultsKey<[NSDate]?>("dates")
+        XCTAssert(Defaults[key] == nil)
+        Defaults[key] = [NSDate.distantFuture()]
+        XCTAssert(Defaults[key]! == [NSDate.distantFuture()])
+    }
+    
+    func testStaticDateArray() {
+        let key = DefaultsKey<[NSDate]>("dates")
+        XCTAssert(Defaults[key] == [])
+        Defaults[key] = [NSDate.distantFuture()]
+        XCTAssert(Defaults[key] == [NSDate.distantFuture()])
+    }
 }
