@@ -385,7 +385,36 @@ extension NSUserDefaults {
         get { return getArray(key) }
         set { set(key, newValue) }
     }
+}
 
+// MARK: Archiving complex types
+
+extension NSUserDefaults {
+    public func archive<T>(key: DefaultsKey<T>, _ value: T) {
+        if let value: AnyObject = value as? AnyObject {
+            set(key, NSKeyedArchiver.archivedDataWithRootObject(value))
+        } else {
+            assertionFailure("Invalid value type")
+        }
+    }
+    
+    public func archive<T>(key: DefaultsKey<T?>, _ value: T?) {
+        if let value: AnyObject = value as? AnyObject {
+            set(key, NSKeyedArchiver.archivedDataWithRootObject(value))
+        } else if value == nil {
+            remove(key)
+        } else {
+            assertionFailure("Invalid value type")
+        }
+    }
+    
+    public func unarchive<T>(key: DefaultsKey<T?>) -> T? {
+        return dataForKey(key._key).flatMap { NSKeyedUnarchiver.unarchiveObjectWithData($0) } as? T
+    }
+    
+    public func unarchive<T>(key: DefaultsKey<T>) -> T? {
+        return dataForKey(key._key).flatMap { NSKeyedUnarchiver.unarchiveObjectWithData($0) } as? T
+    }
 }
 
 // MARK: - Deprecations

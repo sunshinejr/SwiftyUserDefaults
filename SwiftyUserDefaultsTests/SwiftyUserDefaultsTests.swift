@@ -434,14 +434,7 @@ class SwiftyUserDefaultsTests: XCTestCase {
         Defaults[key] = [NSDate.distantFuture()]
         XCTAssert(Defaults[key] == [NSDate.distantFuture()])
     }
-}
-
-extension DefaultsKeys {
-    static let strings = DefaultsKey<[String]>("strings")
-    static let optStrings = DefaultsKey<[String]?>("strings")
-}
-
-extension SwiftyUserDefaultsTests {
+    
     func testShortcutsAndExistence() {
         XCTAssert(Defaults[.strings] == [])
         XCTAssert(!Defaults.hasKey(.strings))
@@ -470,5 +463,53 @@ extension SwiftyUserDefaultsTests {
         
         XCTAssert(Defaults[.optStrings] == nil)
         XCTAssert(!Defaults.hasKey(.optStrings))
+    }
+    
+    func testArchiving() {
+        let key = DefaultsKey<NSColor?>("color")
+        XCTAssert(Defaults[key] == nil)
+        Defaults[key] = .whiteColor()
+        XCTAssert(Defaults[key]! == NSColor.whiteColor())
+        Defaults[key] = nil
+        XCTAssert(Defaults[key] == nil)
+    }
+    
+    func testArchiving2() {
+        let key = DefaultsKey<NSColor>("color")
+        XCTAssert(!Defaults.hasKey(key))
+        XCTAssert(Defaults[key] == NSColor.whiteColor())
+        Defaults[key] = .blackColor()
+        XCTAssert(Defaults[key] == NSColor.blackColor())
+    }
+    
+    func testArchiving3() {
+        let key = DefaultsKey<[NSColor]>("colors")
+        XCTAssert(Defaults[key] == [])
+        Defaults[key] = [.blackColor()]
+        Defaults[key].append(.whiteColor())
+        Defaults[key].append(.redColor())
+        XCTAssert(Defaults[key] == [.blackColor(), .whiteColor(), .redColor()])
+    }
+}
+
+extension DefaultsKeys {
+    static let strings = DefaultsKey<[String]>("strings")
+    static let optStrings = DefaultsKey<[String]?>("strings")
+}
+
+extension NSUserDefaults {
+    subscript(key: DefaultsKey<NSColor?>) -> NSColor? {
+        get { return unarchive(key) }
+        set { archive(key, newValue) }
+    }
+    
+    subscript(key: DefaultsKey<NSColor>) -> NSColor {
+        get { return unarchive(key) ?? .whiteColor() }
+        set { archive(key, newValue) }
+    }
+    
+    subscript(key: DefaultsKey<[NSColor]>) -> [NSColor] {
+        get { return unarchive(key) ?? [] }
+        set { archive(key, newValue) }
     }
 }
