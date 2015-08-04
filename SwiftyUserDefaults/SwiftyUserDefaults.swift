@@ -185,7 +185,6 @@ extension NSUserDefaults {
 }
 
 extension NSUserDefaults {
-    
     /// Returns `true` if `key` exists
     
     public func hasKey<T>(key: DefaultsKey<T>) -> Bool {
@@ -316,11 +315,11 @@ extension NSUserDefaults {
         return arrayForKey(key._key) as NSArray? as? [T]
     }
     
-    func getArray<T: AnyObject>(key: DefaultsKey<[T]>) -> [T] {
+    public func getArray<T: AnyObject>(key: DefaultsKey<[T]>) -> [T] {
         return arrayForKey(key._key) as NSArray? as? [T] ?? []
     }
     
-    func getArray<T: AnyObject>(key: DefaultsKey<[T]?>) -> [T]? {
+    public func getArray<T: AnyObject>(key: DefaultsKey<[T]?>) -> [T]? {
         return arrayForKey(key._key) as NSArray? as? [T]
     }
 }
