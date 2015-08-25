@@ -21,6 +21,20 @@ Defaults["anything"].number         // returns NSNumber?
 
 SwiftyUserDefaults always returns `nil` for non-existing values, also for numbers and booleans.
 
+### Default values
+
+When you don't want to deal with the `nil` case, you can use these helpers that return a default value for non-existing defaults:
+
+```swift
+Defaults["color"].stringValue            // defaults to ""
+Defaults["launchCount"].intValue         // defaults to 0
+Defaults["chimeVolume"].doubleValue      // defaults to 0.0
+Defaults["loggingEnabled"].boolValue     // defaults to false
+Defaults["lastPaths"].arrayValue         // defaults to []
+Defaults["credentials"].dictionaryValue  // defaults to [:]
+Defaults["hotkey"].dataValue             // defaults to NSData()
+```
+
 ### Setting data
 
 ```swift
@@ -59,9 +73,9 @@ if !Defaults.hasKey("hotkey") {
 
 You can use the `hasKey` method to check for key's existence in the user defaults. `remove()` is an alias for `removeObjectForKey()`.
 
-### Installation
+## Installation
 
-The simplest way to install this library is to copy `Src/SwiftyUserDefaults.swift` to your project. There's no step two!
+The simplest way to install this library is to copy `SwiftyUserDefaults/SwiftyUserDefaults.swift` to your project. There's no step two!
 
 #### CocoaPods
 
@@ -77,7 +91,24 @@ Then import library module like so:
 import SwiftyUserDefaults
 ```
 
-Note that this requires CocoaPods 0.36 as well as iOS 8 or OS X 10.9+
+Note that this requires CocoaPods 0.36+ as well as iOS 8 or OS X 10.9+
+
+#### Carthage
+
+Just add to your Cartfile:
+
+```ruby
+github "radex/SwiftyUserDefaults"
+```
+
+## More like this
+
+If you like SwiftyUserDefaults, check out [SwiftyTimer](https://github.com/radex/SwiftyTimer), which applies the same swifty approach to `NSTimer`.
+
+You might also be interested in my blog posts which explain the design process behind those libraries:
+- [Swifty APIs: NSUserDefaults](http://radex.io/swift/nsuserdefaults/)
+- [Swifty APIs: NSTimer](http://radex.io/swift/nstimer/)
+- [Swifty methods](http://radex.io/swift/methods/)
 
 ### Contributing
 
