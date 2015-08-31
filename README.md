@@ -1,5 +1,7 @@
 # SwiftyUserDefaults
 
+**Note: What you see below is the old stringly-typed API. If you're using Swift 2, check out the [next](https://github.com/radex/SwiftyUserDefaults/tree/next) branch to see what's coming soon.**
+
 SwiftyUserDefaults is a set of extensions to make the `NSUserDefaults` API cleaner, nicer, and at home with Swift's syntax.
 
 Read [Swifty APIs: NSUserDefaults](http://radex.io/swift/nsuserdefaults/) for more information about this project.
