@@ -173,7 +173,7 @@ The simplest way to install this library is to copy `SwiftyUserDefaults/SwiftyUs
 You can also install this library using CocoaPods. Just add this line to your Podfile:
 
 ```ruby
-pod 'SwiftyUserDefaults'
+pod 'SwiftyUserDefaults', git: 'https://github.com/radex/SwiftyUserDefaults', branch: 'next'
 ```
 
 Then import library module like so:
@@ -187,7 +187,7 @@ import SwiftyUserDefaults
 Just add to your Cartfile:
 
 ```ruby
-github "radex/SwiftyUserDefaults"
+github "radex/SwiftyUserDefaults" "next"
 ```
 
 ## More like this
