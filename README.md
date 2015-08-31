@@ -18,7 +18,7 @@ You can now use the global `Defaults` object:
 
 ```swift
 Defaults[colorKey] = "red"
-Defaults[colorKey] // => "red", typed as String?
+Defaults[colorKey] // => "red", typed as String
 ```
 
 The compiler won't let you set a wrong value type, and fetching conveniently returns `String` — no need for manual casting or special accessors.
