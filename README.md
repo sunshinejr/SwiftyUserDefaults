@@ -75,9 +75,9 @@ Here's a full table:
 | `NSData?`              | `NSData`              | `NSDate()`    |
 | `[AnyObject]?`         | `[AnyObject]`         | `[]`          |
 | `[String: AnyObject]?` | `[String: AnyObject]` | `[:]`         |
-| `NSDate?`              |                       |               |
-| `NSURL?`               |                       |               |
-| `AnyObject?`           |                       |               |
+| `NSDate?`              | n/a                   | n/a           |
+| `NSURL?`               | n/a                   | n/a           |
+| `AnyObject?`           | n/a                   | n/a           |
 | `NSString?`            | `NSString`            | `""`          |
 | `NSArray?`             | `NSArray`             | `[]`          |
 | `NSDictionary?`        | `NSDictionary`        | `[:]`         |
