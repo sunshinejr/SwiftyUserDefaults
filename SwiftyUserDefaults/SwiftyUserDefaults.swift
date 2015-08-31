@@ -36,19 +36,19 @@ public extension NSUserDefaults {
         
         // MARK: Getters
         
-        public var object: AnyObject? {
-            return defaults.objectForKey(key)
+        public var object: NSObject? {
+            return defaults.objectForKey(key) as? NSObject
         }
         
         public var string: String? {
             return defaults.stringForKey(key)
         }
         
-        public var array: [AnyObject]? {
+        public var array: NSArray? {
             return defaults.arrayForKey(key)
         }
         
-        public var dictionary: [String: AnyObject]? {
+        public var dictionary: NSDictionary? {
             return defaults.dictionaryForKey(key)
         }
         

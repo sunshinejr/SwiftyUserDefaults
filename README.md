@@ -11,8 +11,8 @@ Defaults["color"].string            // returns String?
 Defaults["launchCount"].int         // returns Int?
 Defaults["chimeVolume"].double      // returns Double?
 Defaults["loggingEnabled"].bool     // returns Bool?
-Defaults["lastPaths"].array         // returns [AnyObject]?
-Defaults["credentials"].dictionary  // returns [String: AnyObject]?
+Defaults["lastPaths"].array         // returns NSArray?
+Defaults["credentials"].dictionary  // returns NSDictionary?
 Defaults["hotkey"].data             // returns NSData?
 Defaults["firstLaunchAt"].date      // returns NSDate?
 Defaults["anything"].object         // returns NSObject?

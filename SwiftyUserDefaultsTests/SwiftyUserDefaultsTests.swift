@@ -5,7 +5,7 @@ class SwiftyUserDefaultsTests: XCTestCase {
     override func setUp() {
         // clear defaults before testing
         for (key, _) in Defaults.dictionaryRepresentation() {
-            Defaults.removeObjectForKey(key as String)
+            Defaults.removeObjectForKey(key as! String)
         }
         super.tearDown()
     }
@@ -155,9 +155,9 @@ class SwiftyUserDefaultsTests: XCTestCase {
     
     func testArray() {
         let key = "array"
-        let array = [1, 3.14, "foo", true]
+        let array = [1, 2, "foo", true]
         Defaults[key] = array
-        XCTAssertEqual(Defaults[key].array! as NSArray, array)
+        XCTAssertEqual(Defaults[key].array!, array)
         XCTAssertEqual(Defaults[key].array![2] as! String, "foo")
     }
     
@@ -165,7 +165,7 @@ class SwiftyUserDefaultsTests: XCTestCase {
         let key = "dict"
         let dict = ["foo": 1, "bar": [1, 2, 3]]
         Defaults[key] = dict
-        XCTAssertEqual(Defaults[key].dictionary! as NSDictionary, dict)
+        XCTAssertEqual(Defaults[key].dictionary!, dict)
     }
     
     // --
