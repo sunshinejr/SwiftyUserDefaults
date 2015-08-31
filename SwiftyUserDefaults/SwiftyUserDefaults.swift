@@ -134,6 +134,7 @@ public extension NSUserDefaults {
             case let v as Int: setInteger(v, forKey: key)
             case let v as Double: setDouble(v, forKey: key)
             case let v as Bool: setBool(v, forKey: key)
+            case let v as NSURL: setURL(v, forKey: key)
             case let v as NSObject: setObject(v, forKey: key)
             case nil: removeObjectForKey(key)
             default: assertionFailure("Invalid value type")
@@ -266,6 +267,11 @@ extension NSUserDefaults {
     
     public subscript(key: DefaultsKey<NSDate?>) -> NSDate? {
         get { return objectForKey(key._key) as? NSDate }
+        set { set(key, newValue) }
+    }
+    
+    public subscript(key: DefaultsKey<NSURL?>) -> NSURL? {
+        get { return URLForKey(key._key) }
         set { set(key, newValue) }
     }
     

@@ -281,6 +281,16 @@ class SwiftyUserDefaultsTests: XCTestCase {
         XCTAssert(Defaults[key] == now)
     }
     
+    func testStaticURL() {
+        let key = DefaultsKey<NSURL?>("url")
+        XCTAssert(Defaults[key] == nil)
+        Defaults[key] = NSURL(string: "https://github.com")
+        XCTAssert(Defaults[key]! == NSURL(string: "https://github.com"))
+        
+        Defaults["url"] = "~/Desktop"
+        XCTAssert(Defaults[key]! == NSURL(fileURLWithPath: ("~/Desktop" as NSString).stringByExpandingTildeInPath))
+    }
+    
     func testStaticDictionaryOptional() {
         let key = DefaultsKey<[String: AnyObject]?>("dictionary")
         XCTAssert(Defaults[key] == nil)
