@@ -168,4 +168,34 @@ class SwiftyUserDefaultsTests: XCTestCase {
         Defaults[key] = dict
         XCTAssertEqual(Defaults[key].dictionary!, dict)
     }
+    
+    func testURL() {
+        // set and read
+        let key = "url"
+        Defaults[key] = NSURL(string: "https://github.com")
+        XCTAssertEqual(Defaults[key].URL!, NSURL(string: "https://github.com")!)
+        XCTAssertNil(Defaults[key].string)
+        XCTAssertNil(Defaults[key].int)
+        XCTAssertNil(Defaults[key].double)
+        XCTAssertNil(Defaults[key].bool)
+        
+        // existance
+        XCTAssertTrue(Defaults.hasKey(key))
+        
+        // ?=
+        Defaults[key] ?= NSURL(string: "https://google.com")
+        XCTAssertEqual(Defaults[key].URL!, NSURL(string: "https://github.com")!)
+        
+        let key2 = "url2"
+        Defaults[key2] ?= NSURL(string: "https://google.com")
+        XCTAssertEqual(Defaults[key2].URL!, NSURL(string: "https://google.com")!)
+        Defaults[key2] ?= NSURL(string: "https://facebook.com")
+        XCTAssertEqual(Defaults[key2].URL!, NSURL(string: "https://google.com")!)
+        
+        // removing
+        Defaults.remove(key)
+        XCTAssertFalse(Defaults.hasKey(key))
+        Defaults[key2] = nil
+        XCTAssertFalse(Defaults.hasKey(key2))
+    }
 }
