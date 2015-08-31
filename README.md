@@ -1,4 +1,4 @@
-# SwiftyUserDefaults
+# SwiftyUserDefaults 2.0
 
 **SwiftyUserDefaults** makes `NSUserDefaults` cleaner, nicer and easier to use in Swift. Its statically-typed API gives you extra safety and convenient compile-time checks for free.
 
@@ -9,7 +9,7 @@ Read [Swifty APIs: NSUserDefaults](http://radex.io/swift/nsuserdefaults/) and [S
 To get the most out of SwiftyUserDefaults, we recommend defining your user defaults keys ahead of time:
 
 ```swift
-let colorKey = DefaultsKey<String?>("color")
+let colorKey = DefaultsKey<String>("color")
 ```
 
 Just create a `DefaultsKey` object, put the value type in square bracket and the key name in parentheses and you're good to go.
@@ -21,7 +21,7 @@ Defaults[colorKey] = "red"
 Defaults[colorKey] // => "red", typed as String?
 ```
 
-The compiler won't let you set a wrong value type, and fetching conveniently returns `String?` — no need for manual casting or special accessors.
+The compiler won't let you set a wrong value type, and fetching conveniently returns `String` — no need for manual casting or special accessors.
 
 ### Take shortcuts
 
@@ -66,21 +66,21 @@ SwiftyUserDefaults supports all of the standard `NSUserDefaults` types, like str
 
 Here's a full table:
 
-| Optional variant     | Non-optional variant | Default value |
-|----------------------|----------------------|---------------|
-| String?              | String               | ""            |
-| Int?                 | Int                  | 0             |
-| Double?              | Double               | 0.0           |
-| Bool?                | Bool                 | false         |
-| NSData?              | NSData               | NSDate()      |
-| [AnyObject]?         | [AnyObject]          | []            |
-| [String: AnyObject]? | [String: AnyObject]  | [:]           |
-| NSDate?              |                      |               |
-| NSURL?               |                      |               |
-| AnyObject?           |                      |               |
-| NSString?            | NSString             | ""            |
-| NSArray?             | NSArray              | []            |
-| NSDictionary?        | NSDictionary         | [:]           |
+| Optional variant       | Non-optional variant  | Default value |
+|------------------------|-----------------------|---------------|
+| `String?`              | `String`              | `""`          |
+| `Int?`                 | `Int`                 | `0`           |
+| `Double?`              | `Double`              | `0.0`         |
+| `Bool?`                | `Bool`                | `false`       |
+| `NSData?`              | `NSData`              | `NSDate()`    |
+| `[AnyObject]?`         | `[AnyObject]`         | `[]`          |
+| `[String: AnyObject]?` | `[String: AnyObject]` | `[:]`         |
+| `NSDate?`              |                       |               |
+| `NSURL?`               |                       |               |
+| `AnyObject?`           |                       |               |
+| `NSString?`            | `NSString`            | `""`          |
+| `NSArray?`             | `NSArray`             | `[]`          |
+| `NSDictionary?`        | `NSDictionary`        | `[:]`         |
 
 You can mark a type as optional to get `nil` if the key doesn't exist. Otherwise, you'll get a default value that makes sense for a given type.
 
@@ -88,14 +88,14 @@ You can mark a type as optional to get `nil` if the key doesn't exist. Otherwise
 
 Additionally, typed arrays are available for these types:
 
-| Array type |           |
-|------------|-----------|
-| [String]   | [String]? |
-| [Int]      | [Int]?    |
-| [Double]   | [Double]? |
-| [Bool]     | [Bool]?   |
-| [NSData]   | [NSData]? |
-| [NSDate]   | [NSDate]? |
+| Array type | Optional variant |
+|------------|------------------|
+| `[String]` | `[String]?`      |
+| `[Int]`    | `[Int]?`         |
+| `[Double]` | `[Double]?`      |
+| `[Bool]`   | `[Bool]?`        |
+| `[NSData]` | `[NSData]?`      |
+| `[NSDate]` | `[NSDate]?`      |
 
 ### Custom types
 
@@ -202,7 +202,7 @@ You might also be interested in my blog posts which explain the design process b
 
 ### Contributing
 
-If you have comments, complaints or ideas for improvements, feel free to open an issue or a pull request.
+If you have comments, complaints or ideas for improvements, feel free to open an issue or a pull request. Or [ping me on Twitter](http://twitter.com/radexp).
 
 ### Author and license
 
