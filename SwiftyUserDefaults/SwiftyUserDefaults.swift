@@ -214,6 +214,15 @@ extension NSUserDefaults {
         get { return stringForKey(key._key) ?? "" }
         set { set(key, newValue) }
     }
+    public subscript(key: DefaultsKey<NSString?>) -> NSString? {
+        get { return stringForKey(key._key) }
+        set { set(key, newValue) }
+    }
+    
+    public subscript(key: DefaultsKey<NSString>) -> NSString {
+        get { return stringForKey(key._key) ?? "" }
+        set { set(key, newValue) }
+    }
     
     public subscript(key: DefaultsKey<Int?>) -> Int? {
         get { return numberForKey(key._key)?.integerValue }
@@ -283,6 +292,16 @@ extension NSUserDefaults {
     }
     
     public subscript(key: DefaultsKey<[String: AnyObject]>) -> [String: AnyObject] {
+        get { return dictionaryForKey(key._key) ?? [:] }
+        set { set(key, newValue) }
+    }
+    
+    public subscript(key: DefaultsKey<NSDictionary?>) -> NSDictionary? {
+        get { return dictionaryForKey(key._key) }
+        set { set(key, newValue) }
+    }
+    
+    public subscript(key: DefaultsKey<NSDictionary>) -> NSDictionary {
         get { return dictionaryForKey(key._key) ?? [:] }
         set { set(key, newValue) }
     }
