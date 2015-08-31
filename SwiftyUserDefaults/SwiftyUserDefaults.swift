@@ -427,7 +427,7 @@ infix operator ?= {
 /// Note: This isn't the same as `Defaults.registerDefaults`. This method saves the new value to disk, whereas `registerDefaults` only modifies the defaults in memory.
 /// Note: If key already exists, the expression after ?= isn't evaluated
 
-@available(*, deprecated=1)
+@available(*, deprecated=1, message="Please migrate to static keys and use this gist: https://gist.github.com/radex/68de9340b0da61d43e60")
 public func ?= (proxy: NSUserDefaults.Proxy, @autoclosure expr: () -> Any) {
     if !proxy.defaults.hasKey(proxy.key) {
         proxy.defaults[proxy.key] = expr()
