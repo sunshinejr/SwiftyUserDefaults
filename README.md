@@ -1,10 +1,143 @@
 # SwiftyUserDefaults
 
-SwiftyUserDefaults is a set of extensions to make the `NSUserDefaults` API cleaner, nicer, and at home with Swift's syntax.
+**SwiftyUserDefaults** makes `NSUserDefaults` cleaner, nicer and easier to use in Swift. Its statically-typed API gives you extra safety and convenient compile-time checks for free.
 
-Read [Swifty APIs: NSUserDefaults](http://radex.io/swift/nsuserdefaults/) for more information about this project.
+Read [Swifty APIs: NSUserDefaults](http://radex.io/swift/nsuserdefaults/) and [Statically-typed NSUserDefaults](http://radex.io/swift/nsuserdefaults/static) for more information about this project.
 
-### Fetching data
+### Define your keys
+
+To get the most out of SwiftyUserDefaults, we recommend defining your user defaults keys ahead of time:
+
+```swift
+let colorKey = DefaultsKey<String?>("color")
+```
+
+Just create a `DefaultsKey` object, put the value type in square bracket and the key name in parentheses and you're good to go.
+
+You can now use the global `Defaults` object:
+
+```swift
+Defaults[colorKey] = "red"
+Defaults[colorKey] // => "red", typed as String?
+```
+
+The compiler won't let you set a wrong value type, and fetching conveniently returns `String?` — no need for manual casting or special accessors.
+
+### Take shortcuts
+
+For extra convenience, define your keys by extending `DefaultsKeys` and adding static properties:
+
+```swift
+extension DefaultsKeys {
+    static let username = DefaultsKey<String?>("username")
+    static let launchCount = DefaultsKey<Int>("launchCount")
+}
+```
+
+And use the shortcut dot syntax:
+
+```swift
+Defaults[.username] = "joe"
+Defaults[.launchCount]
+```
+
+### Just use it!
+
+You can easily modify value types (strings, numbers, array) in place, without extra steps or magic operators, as if you were working with a plain old dictionary:
+
+```swift
+// Modify value types in place
+Defaults[.launchCount]++
+Defaults[.volume] += 0.1
+Defaults[.strings] += "… can easily be extended!"
+
+// Use and modify typed arrays
+Defaults[.libraries].append("SwiftyUserDefaults")
+Defaults[.libraries][0] += " 2.0"
+
+// Easily work with custom serialized types
+Defaults[.color] = NSColor.whiteColor()
+Defaults[.color]?.whiteComponent // => 1.0
+```
+
+### Supported types
+
+SwiftyUserDefaults supports all of the standard `NSUserDefaults` types, like strings, numbers, booleans, arrays and dictionaries.
+
+Here's a full table:
+
+| Optional variant     | Non-optional variant | Default value |
+|----------------------|----------------------|---------------|
+| String?              | String               | ""            |
+| Int?                 | Int                  | 0             |
+| Double?              | Double               | 0.0           |
+| Bool?                | Bool                 | false         |
+| NSData?              | NSData               | NSDate()      |
+| [AnyObject]?         | [AnyObject]          | []            |
+| [String: AnyObject]? | [String: AnyObject]  | [:]           |
+| NSDate?              |                      |               |
+| NSURL?               |                      |               |
+| AnyObject?           |                      |               |
+| NSString?            | NSString             | ""            |
+| NSArray?             | NSArray              | []            |
+| NSDictionary?        | NSDictionary         | [:]           |
+
+You can mark a type as optional to get `nil` if the key doesn't exist. Otherwise, you'll get a default value that makes sense for a given type.
+
+#### Typed arrays
+
+Additionally, typed arrays are available for these types:
+
+| Array type |           |
+|------------|-----------|
+| [String]   | [String]? |
+| [Int]      | [Int]?    |
+| [Double]   | [Double]? |
+| [Bool]     | [Bool]?   |
+| [NSData]   | [NSData]? |
+| [NSDate]   | [NSDate]? |
+
+### Custom types
+
+You can easily store custom `NSCoding`-compliant types by extending `NSUserDefaults` with this stub subscript:
+
+```swift
+extension NSUserDefaults {
+    subscript(key: DefaultsKey<NSColor?>) -> NSColor? {
+        get { return unarchive(key) }
+        set { archive(key, newValue) }
+    }
+}
+```
+
+Just copy&paste this and change `NSColor` to your class name. If you want, you can also remove `?` marks and coalesce nils: `unarchive(key) ?? yourDefaultValue`.
+
+Here's an example use:
+
+```swift
+extension DefaultsKeys {
+    static let color = DefaultsKey<NSColor?>("color")
+}
+
+Defaults[.color] // => nil
+Defaults[.color] = NSColor.whiteColor()
+Defaults[.color] // => w 1.0, a 1.0
+Defaults[.color]?.whiteComponent // => 1.0
+```
+
+### Existence
+
+```swift
+if !Defaults.hasKey(.hotkey) {
+    Defaults.remove(.hotkeyOptions)
+}
+```
+
+You can use the `hasKey` method to check for key's existence in the user defaults. `remove()` is an alias for `removeObjectForKey()`, that also works with `DefaultsKeys` shortcuts.
+
+## Legacy stringly-typed API
+
+There's also a more traditional string-based API available. This will be deprecated and removed in future versions of this library — it's recommended you use the new static keys API.
 
 ```swift
 Defaults["color"].string            // returns String?
@@ -19,10 +152,6 @@ Defaults["anything"].object         // returns NSObject?
 Defaults["anything"].number         // returns NSNumber?
 ```
 
-SwiftyUserDefaults always returns `nil` for non-existing values, also for numbers and booleans.
-
-### Default values
-
 When you don't want to deal with the `nil` case, you can use these helpers that return a default value for non-existing defaults:
 
 ```swift
@@ -34,44 +163,6 @@ Defaults["lastPaths"].arrayValue         // defaults to []
 Defaults["credentials"].dictionaryValue  // defaults to [:]
 Defaults["hotkey"].dataValue             // defaults to NSData()
 ```
-
-### Setting data
-
-```swift
-Defaults["color"] = "red"
-Defaults["launchCount"] = 0
-```
-
-SwiftyUserDefaults infers the right type when setting values.
-
-### Optional assignment
-
-```swift
-Defaults["color"]            // => nil
-Defaults["color"] ?= "white" // => "white"
-Defaults["color"] ?= "red"   // => "white"
-```
-
-Works like `||=` in other languages — sets value only if the left-hand side value is `nil`.
-
-### Arithmetic
-
-```swift
-Defaults["launchCount"] += 1
-Defaults["launchCount"]++
-```
-
-You can use the `+=` and `++` operators to easily work on integer values in the user defaults. If the key didn't exist before operation, the operators assume it was `0`.
-
-### Existence
-
-```swift
-if !Defaults.hasKey("hotkey") {
-    Defaults.remove("hotkeyOptions")
-}
-```
-
-You can use the `hasKey` method to check for key's existence in the user defaults. `remove()` is an alias for `removeObjectForKey()`.
 
 ## Installation
 
@@ -91,8 +182,6 @@ Then import library module like so:
 import SwiftyUserDefaults
 ```
 
-Note that this requires CocoaPods 0.36+ as well as iOS 8 or OS X 10.9+
-
 #### Carthage
 
 Just add to your Cartfile:
@@ -107,6 +196,7 @@ If you like SwiftyUserDefaults, check out [SwiftyTimer](https://github.com/radex
 
 You might also be interested in my blog posts which explain the design process behind those libraries:
 - [Swifty APIs: NSUserDefaults](http://radex.io/swift/nsuserdefaults/)
+- [Statically-typed NSUserDefaults](http://radex.io/swift/nsuserdefaults/static)
 - [Swifty APIs: NSTimer](http://radex.io/swift/nstimer/)
 - [Swifty methods](http://radex.io/swift/methods/)
 
