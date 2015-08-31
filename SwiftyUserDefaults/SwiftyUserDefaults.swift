@@ -171,6 +171,7 @@ public class DefaultsKeys {
 /// and pass key name to the initializer to create a key.
 
 public class DefaultsKey<ValueType>: DefaultsKeys {
+    // TODO: Can we use protocols to ensure ValueType is a compatible type?
     public let _key: String
     
     public init(_ key: String) {
@@ -199,6 +200,8 @@ extension NSUserDefaults {
 }
 
 // MARK: Static subscripts for standard types
+
+// TODO: Use generic subscripts when they become available
 
 extension NSUserDefaults {
     public subscript(key: DefaultsKey<String?>) -> String? {
@@ -265,6 +268,8 @@ extension NSUserDefaults {
         get { return objectForKey(key._key) as? NSDate }
         set { set(key, newValue) }
     }
+    
+    // TODO: It would probably make sense to have support for statically typed dictionaries (e.g. [String: String])
     
     public subscript(key: DefaultsKey<[String: AnyObject]?>) -> [String: AnyObject]? {
         get { return dictionaryForKey(key._key) }
@@ -389,6 +394,8 @@ extension NSUserDefaults {
 // MARK: Archiving complex types
 
 extension NSUserDefaults {
+    // TODO: Can we simplify this and ensure that T is NSCoding compliant?
+    
     public func archive<T>(key: DefaultsKey<T>, _ value: T) {
         if let value: AnyObject = value as? AnyObject {
             set(key, NSKeyedArchiver.archivedDataWithRootObject(value))
