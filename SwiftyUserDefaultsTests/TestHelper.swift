@@ -1,4 +1,10 @@
-import Cocoa
+#if os(iOS)
+    import UIKit
+    typealias NSColor = UIColor
+#elseif os(OSX)
+    import Cocoa
+#endif
+
 import SwiftyUserDefaults
 
 extension NSUserDefaults {
