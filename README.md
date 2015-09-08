@@ -72,7 +72,7 @@ Here's a full table:
 | `Int?`                 | `Int`                 | `0`           |
 | `Double?`              | `Double`              | `0.0`         |
 | `Bool?`                | `Bool`                | `false`       |
-| `NSData?`              | `NSData`              | `NSDate()`    |
+| `NSData?`              | `NSData`              | `NSData()`    |
 | `[AnyObject]?`         | `[AnyObject]`         | `[]`          |
 | `[String: AnyObject]?` | `[String: AnyObject]` | `[:]`         |
 | `NSDate?`              | n/a                   | n/a           |
