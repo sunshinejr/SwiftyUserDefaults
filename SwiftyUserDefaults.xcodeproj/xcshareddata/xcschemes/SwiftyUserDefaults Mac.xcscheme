@@ -14,23 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "70264E9D1B0DF85200B32B18"
+               BlueprintIdentifier = "D9D2CFA91B54AAF600D6ABCE"
                BuildableName = "SwiftyUserDefaults.framework"
-               BlueprintName = "SwiftyUserDefaults"
-               ReferencedContainer = "container:SwiftyUserDefaults.xcodeproj">
-            </BuildableReference>
-         </BuildActionEntry>
-         <BuildActionEntry
-            buildForTesting = "YES"
-            buildForRunning = "YES"
-            buildForProfiling = "NO"
-            buildForArchiving = "NO"
-            buildForAnalyzing = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "70264EA81B0DF85300B32B18"
-               BuildableName = "SwiftyUserDefaultsTests.xctest"
-               BlueprintName = "SwiftyUserDefaultsTests"
+               BlueprintName = "SwiftyUserDefaults Mac"
                ReferencedContainer = "container:SwiftyUserDefaults.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -46,9 +32,9 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "70264EA81B0DF85300B32B18"
+               BlueprintIdentifier = "D9D2CFB21B54AAF600D6ABCE"
                BuildableName = "SwiftyUserDefaultsTests.xctest"
-               BlueprintName = "SwiftyUserDefaultsTests"
+               BlueprintName = "SwiftyUserDefaults MacTests"
                ReferencedContainer = "container:SwiftyUserDefaults.xcodeproj">
             </BuildableReference>
          </TestableReference>
@@ -56,9 +42,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "70264E9D1B0DF85200B32B18"
+            BlueprintIdentifier = "D9D2CFA91B54AAF600D6ABCE"
             BuildableName = "SwiftyUserDefaults.framework"
-            BlueprintName = "SwiftyUserDefaults"
+            BlueprintName = "SwiftyUserDefaults Mac"
             ReferencedContainer = "container:SwiftyUserDefaults.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -78,9 +64,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "70264E9D1B0DF85200B32B18"
+            BlueprintIdentifier = "D9D2CFA91B54AAF600D6ABCE"
             BuildableName = "SwiftyUserDefaults.framework"
-            BlueprintName = "SwiftyUserDefaults"
+            BlueprintName = "SwiftyUserDefaults Mac"
             ReferencedContainer = "container:SwiftyUserDefaults.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -96,9 +82,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "70264E9D1B0DF85200B32B18"
+            BlueprintIdentifier = "D9D2CFA91B54AAF600D6ABCE"
             BuildableName = "SwiftyUserDefaults.framework"
-            BlueprintName = "SwiftyUserDefaults"
+            BlueprintName = "SwiftyUserDefaults Mac"
             ReferencedContainer = "container:SwiftyUserDefaults.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
