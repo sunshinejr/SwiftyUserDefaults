@@ -12,7 +12,7 @@ To get the most out of SwiftyUserDefaults, we recommend defining your user defau
 let colorKey = DefaultsKey<String>("color")
 ```
 
-Just create a `DefaultsKey` object, put the value type in square bracket and the key name in parentheses and you're good to go.
+Just create a `DefaultsKey` object, put the value type in angled brackets and the key name in parentheses and you're good to go.
 
 You can now use the global `Defaults` object:
 
