@@ -153,6 +153,14 @@ public extension NSUserDefaults {
     public func remove(key: String) {
         removeObjectForKey(key)
     }
+    
+    /// Resets the values for all keys, use with caution!
+    
+    public func resetAllKeys() {
+        for (key, _) in Defaults.dictionaryRepresentation() {
+            Defaults.removeObjectForKey(key)
+        }
+    }
 }
 
 /// Global shortcut for NSUserDefaults.standardUserDefaults()
