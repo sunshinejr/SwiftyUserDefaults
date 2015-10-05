@@ -67,6 +67,10 @@ public extension NSUserDefaults {
         public var int: Int? {
             return number?.integerValue
         }
+                
+        public var float: Float? {
+            return number?.floatValue
+        }
         
         public var double: Double? {
             return number?.doubleValue
@@ -102,6 +106,10 @@ public extension NSUserDefaults {
             return int ?? 0
         }
         
+        public var floatValue: Float {
+            return float ?? 0
+        }
+        
         public var doubleValue: Double {
             return double ?? 0
         }
@@ -132,6 +140,7 @@ public extension NSUserDefaults {
         set {
             switch newValue {
             case let v as Int: setInteger(v, forKey: key)
+            case let v as Float: setFloat(v, forKey: key)
             case let v as Double: setDouble(v, forKey: key)
             case let v as Bool: setBool(v, forKey: key)
             case let v as NSURL: setURL(v, forKey: key)
@@ -231,6 +240,16 @@ extension NSUserDefaults {
     
     public subscript(key: DefaultsKey<Int>) -> Int {
         get { return numberForKey(key._key)?.integerValue ?? 0 }
+        set { set(key, newValue) }
+    }
+    
+    public subscript(key: DefaultsKey<Float?>) -> Float? {
+        get { return numberForKey(key._key)?.floatValue }
+        set { set(key, newValue) }
+    }
+    
+    public subscript(key: DefaultsKey<Float>) -> Float {
+        get { return numberForKey(key._key)?.floatValue ?? 0.0 }
         set { set(key, newValue) }
     }
     
@@ -371,6 +390,16 @@ extension NSUserDefaults {
     }
     
     public subscript(key: DefaultsKey<[Int]>) -> [Int] {
+        get { return getArray(key) }
+        set { set(key, newValue) }
+    }
+    
+    public subscript(key: DefaultsKey<[Float]?>) -> [Float]? {
+        get { return getArray(key) }
+        set { set(key, newValue) }
+    }
+    
+    public subscript(key: DefaultsKey<[Float]>) -> [Float] {
         get { return getArray(key) }
         set { set(key, newValue) }
     }
