@@ -14,6 +14,7 @@ class SwiftyUserDefaultsTests: XCTestCase {
         let key = "none"
         XCTAssertNil(Defaults[key].string)
         XCTAssertNil(Defaults[key].int)
+        XCTAssertNil(Defaults[key].float)
         XCTAssertNil(Defaults[key].double)
         XCTAssertNil(Defaults[key].bool)
         XCTAssertFalse(Defaults.hasKey(key))
@@ -21,6 +22,7 @@ class SwiftyUserDefaultsTests: XCTestCase {
         //Return default value if doesn't exist
         XCTAssertEqual(Defaults[key].stringValue, "")
         XCTAssertEqual(Defaults[key].intValue, 0)
+        XCTAssertEqual(Defaults[key].floatValue, 0)
         XCTAssertEqual(Defaults[key].doubleValue, 0)
         XCTAssertEqual(Defaults[key].boolValue, false)
         XCTAssertEqual(Defaults[key].arrayValue, [])
@@ -34,6 +36,7 @@ class SwiftyUserDefaultsTests: XCTestCase {
         Defaults[key] = "foo"
         XCTAssertEqual(Defaults[key].string!, "foo")
         XCTAssertNil(Defaults[key].int)
+        XCTAssertNil(Defaults[key].float)
         XCTAssertNil(Defaults[key].double)
         XCTAssertNil(Defaults[key].bool)
         
@@ -63,6 +66,7 @@ class SwiftyUserDefaultsTests: XCTestCase {
         Defaults[key] = 100
         XCTAssertEqual(Defaults[key].string!, "100")
         XCTAssertEqual(Defaults[key].int!,     100)
+        XCTAssertEqual(Defaults[key].float!,   100)
         XCTAssertEqual(Defaults[key].double!,  100)
         XCTAssertTrue(Defaults[key].bool!)
         
@@ -89,6 +93,33 @@ class SwiftyUserDefaultsTests: XCTestCase {
         let key5 = "int5"
         Defaults[key5]++
         XCTAssertEqual(Defaults[key5].int!, 1)
+    }
+    
+    func testFloat() {
+        // set and read
+        let key = "float"
+        Defaults[key] = Float(3.14)
+        XCTAssertEqual(Defaults[key].string!, "3.14")
+        XCTAssertEqual(Defaults[key].int!,     3)
+        XCTAssertEqual(Defaults[key].float!,   3.14)
+        XCTAssertTrue(Defaults[key].bool!)
+        
+        XCTAssertEqual(Defaults[key].stringValue, "3.14")
+        XCTAssertEqual(Defaults[key].intValue, 3)
+        XCTAssertEqual(Defaults[key].floatValue, 3.14)
+        XCTAssertEqual(Defaults[key].boolValue, true)
+        
+        Defaults[key] += 1.5
+        XCTAssertEqual(Int(Defaults[key].float! *  100.0), 464)
+        
+        let key2 = "float2"
+        Defaults[key2] = Float(3.14)
+        Defaults[key2] += 1
+        XCTAssertEqual(Defaults[key2].float!, 4.0)
+        
+        let key3 = "float3"
+        Defaults[key3] += 5.3
+        XCTAssertEqual(Defaults[key3].float!, 5.3)
     }
     
     func testDouble() {
@@ -124,12 +155,14 @@ class SwiftyUserDefaultsTests: XCTestCase {
         Defaults[key] = true
         XCTAssertEqual(Defaults[key].string!, "1")
         XCTAssertEqual(Defaults[key].int!,     1)
+        XCTAssertEqual(Defaults[key].float!,   1.0)
         XCTAssertEqual(Defaults[key].double!,  1.0)
         XCTAssertTrue(Defaults[key].bool!)
         
         Defaults[key] = false
         XCTAssertEqual(Defaults[key].string!, "0")
         XCTAssertEqual(Defaults[key].int!,     0)
+        XCTAssertEqual(Defaults[key].float!,   0.0)
         XCTAssertEqual(Defaults[key].double!,  0.0)
         XCTAssertFalse(Defaults[key].bool!)
         
@@ -199,6 +232,21 @@ class SwiftyUserDefaultsTests: XCTestCase {
         XCTAssert(Defaults[key] == 0)
         Defaults[key] += 10
         XCTAssert(Defaults[key] == 10)
+    }
+    
+    func testStaticFloatOptional() {
+        let key = DefaultsKey<Float?>("float")
+        XCTAssert(Defaults[key] == nil)
+        Defaults[key] = 10
+        XCTAssert(Defaults[key] == Float(10.0))
+    }
+    
+    func testStaticFloat() {
+        let key = DefaultsKey<Float>("float")
+        XCTAssert(Defaults[key] == 0)
+        Defaults[key] = 2.14
+        Defaults[key] += 1
+        XCTAssert(Defaults[key] == Float(3.14))
     }
     
     func testStaticDoubleOptional() {
@@ -386,6 +434,20 @@ class SwiftyUserDefaultsTests: XCTestCase {
         Defaults[key] = [3, 2, 1]
         Defaults[key].sortInPlace()
         XCTAssert(Defaults[key] == [1, 2, 3])
+    }
+    
+    func testStaticFloatArrayOptional() {
+        let key = DefaultsKey<[Float]?>("floats")
+        XCTAssert(Defaults[key] == nil)
+        Defaults[key] = [1.1, 2.2, 3.3]
+        XCTAssert(Defaults[key]! == [Float(1.1), Float(2.2), Float(3.3)])
+    }
+    
+    func testStaticFloatArray() {
+        let key = DefaultsKey<[Float]>("floats")
+        XCTAssert(Defaults[key] == [])
+        Defaults[key] = [1.1, 2.2, 3.3]
+        XCTAssert(Defaults[key] == [Float(1.1), Float(2.2), Float(3.3)])
     }
     
     func testStaticDoubleArrayOptional() {
