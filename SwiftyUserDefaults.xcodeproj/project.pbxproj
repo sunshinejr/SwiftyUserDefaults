@@ -12,6 +12,8 @@
 		52368EE21BE79B350082969A /* SwiftyUserDefaults.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52368ECF1BE79A9B0082969A /* SwiftyUserDefaults.framework */; };
 		52368EE81BE79B530082969A /* SwiftyUserDefaultsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70264EB01B0DF85300B32B18 /* SwiftyUserDefaultsTests.swift */; };
 		52368EE91BE79B560082969A /* TestHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E903A8B1B66338C004CDFC4 /* TestHelper.swift */; };
+		52E1694D1BE808B200116EA1 /* SwiftyUserDefaults.h in Headers */ = {isa = PBXBuildFile; fileRef = 70264EA31B0DF85200B32B18 /* SwiftyUserDefaults.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		52E1694E1BE808B900116EA1 /* SwiftyUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70264EBA1B0DF8B900B32B18 /* SwiftyUserDefaults.swift */; };
 		6E903A8C1B66338C004CDFC4 /* TestHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E903A8B1B66338C004CDFC4 /* TestHelper.swift */; };
 		6E903A8D1B66338C004CDFC4 /* TestHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E903A8B1B66338C004CDFC4 /* TestHelper.swift */; };
 		70264EA41B0DF85200B32B18 /* SwiftyUserDefaults.h in Headers */ = {isa = PBXBuildFile; fileRef = 70264EA31B0DF85200B32B18 /* SwiftyUserDefaults.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -52,6 +54,7 @@
 /* Begin PBXFileReference section */
 		52368ECF1BE79A9B0082969A /* SwiftyUserDefaults.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftyUserDefaults.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		52368EDD1BE79B350082969A /* SwiftyUserDefaults tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "SwiftyUserDefaults tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		52E169451BE8089000116EA1 /* SwiftyUserDefaults.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftyUserDefaults.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6E903A8B1B66338C004CDFC4 /* TestHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestHelper.swift; sourceTree = "<group>"; };
 		70264E9E1B0DF85200B32B18 /* SwiftyUserDefaults.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftyUserDefaults.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		70264EA21B0DF85200B32B18 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -78,6 +81,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				52368EE21BE79B350082969A /* SwiftyUserDefaults.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		52E169411BE8089000116EA1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -134,6 +144,7 @@
 				D9D2CFB31B54AAF600D6ABCE /* SwiftyUserDefaultsTests.xctest */,
 				52368ECF1BE79A9B0082969A /* SwiftyUserDefaults.framework */,
 				52368EDD1BE79B350082969A /* SwiftyUserDefaults tvOSTests.xctest */,
+				52E169451BE8089000116EA1 /* SwiftyUserDefaults.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -174,6 +185,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				52368ED71BE79AA60082969A /* SwiftyUserDefaults.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		52E169421BE8089000116EA1 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				52E1694D1BE808B200116EA1 /* SwiftyUserDefaults.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -231,6 +250,24 @@
 			productName = "SwiftyUserDefaults tvOSTests";
 			productReference = 52368EDD1BE79B350082969A /* SwiftyUserDefaults tvOSTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		52E169441BE8089000116EA1 /* SwiftyUserDefaults watchOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 52E1694C1BE8089000116EA1 /* Build configuration list for PBXNativeTarget "SwiftyUserDefaults watchOS" */;
+			buildPhases = (
+				52E169401BE8089000116EA1 /* Sources */,
+				52E169411BE8089000116EA1 /* Frameworks */,
+				52E169421BE8089000116EA1 /* Headers */,
+				52E169431BE8089000116EA1 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "SwiftyUserDefaults watchOS";
+			productName = "SwiftyUserDefaults watchOS";
+			productReference = 52E169451BE8089000116EA1 /* SwiftyUserDefaults.framework */;
+			productType = "com.apple.product-type.framework";
 		};
 		70264E9D1B0DF85200B32B18 /* SwiftyUserDefaults */ = {
 			isa = PBXNativeTarget;
@@ -319,6 +356,9 @@
 					52368EDC1BE79B350082969A = {
 						CreatedOnToolsVersion = 7.1;
 					};
+					52E169441BE8089000116EA1 = {
+						CreatedOnToolsVersion = 7.1;
+					};
 					70264E9D1B0DF85200B32B18 = {
 						CreatedOnToolsVersion = 6.3.2;
 					};
@@ -351,6 +391,7 @@
 				D9D2CFB21B54AAF600D6ABCE /* SwiftyUserDefaults MacTests */,
 				52368ECE1BE79A9B0082969A /* SwiftyUserDefaults tvOS */,
 				52368EDC1BE79B350082969A /* SwiftyUserDefaults tvOSTests */,
+				52E169441BE8089000116EA1 /* SwiftyUserDefaults watchOS */,
 			);
 		};
 /* End PBXProject section */
@@ -364,6 +405,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		52368EDB1BE79B350082969A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		52E169431BE8089000116EA1 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -415,6 +463,14 @@
 			files = (
 				52368EE81BE79B530082969A /* SwiftyUserDefaultsTests.swift in Sources */,
 				52368EE91BE79B560082969A /* TestHelper.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		52E169401BE8089000116EA1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				52E1694E1BE808B900116EA1 /* SwiftyUserDefaults.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -536,6 +592,47 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;
 				TVOS_DEPLOYMENT_TARGET = 9.0;
+			};
+			name = Release;
+		};
+		52E1694A1BE8089000116EA1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = SwiftyUserDefaults/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = radex.SwiftyUserDefaults;
+				PRODUCT_NAME = SwiftyUserDefaults;
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 2.0;
+			};
+			name = Debug;
+		};
+		52E1694B1BE8089000116EA1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = SwiftyUserDefaults/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = radex.SwiftyUserDefaults;
+				PRODUCT_NAME = SwiftyUserDefaults;
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 2.0;
 			};
 			name = Release;
 		};
@@ -780,12 +877,22 @@
 				52368ED51BE79A9B0082969A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		52368EE51BE79B350082969A /* Build configuration list for PBXNativeTarget "SwiftyUserDefaults tvOSTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				52368EE61BE79B350082969A /* Debug */,
 				52368EE71BE79B350082969A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		52E1694C1BE8089000116EA1 /* Build configuration list for PBXNativeTarget "SwiftyUserDefaults watchOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				52E1694A1BE8089000116EA1 /* Debug */,
+				52E1694B1BE8089000116EA1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 		};
