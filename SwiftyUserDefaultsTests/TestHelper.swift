@@ -1,8 +1,8 @@
-#if os(iOS)
+#if os(OSX)
+    import Cocoa
+#else
     import UIKit
     typealias NSColor = UIColor
-#elseif os(OSX)
-    import Cocoa
 #endif
 
 import SwiftyUserDefaults
