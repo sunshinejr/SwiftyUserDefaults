@@ -475,6 +475,7 @@ class SwiftyUserDefaultsTests: XCTestCase {
         XCTAssert(!Defaults.hasKey(.optStrings))
     }
     
+    #if !os(tvOS)
     func testArchiving() {
         let key = DefaultsKey<NSColor?>("color")
         XCTAssert(Defaults[key] == nil)
@@ -500,6 +501,7 @@ class SwiftyUserDefaultsTests: XCTestCase {
         Defaults[key].append(.redColor())
         XCTAssert(Defaults[key] == [.blackColor(), .whiteColor(), .redColor()])
     }
+    #endif
 }
 
 extension DefaultsKeys {
