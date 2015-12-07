@@ -171,12 +171,25 @@ public class DefaultsKeys {
 /// Base class for static user defaults keys. Specialize with value type type
 /// and pass key name to the initializer to create a key.
 
+private protocol OptionalType {}
+extension Optional: OptionalType {}
+
 public class DefaultsKey<ValueType>: DefaultsKeys {
     // TODO: Can we use protocols to ensure ValueType is a compatible type?
     public let _key: String
     public let _default: ValueType?
     
-    public init(_ key: String, _ defaultValue: ValueType? = nil) {
+    public convenience init(_ key: String) {
+        self.init(key: key, defaultValue: nil)
+    }
+    
+    public convenience init(_ key: String, _ defaultValue: ValueType) {
+        precondition(!(defaultValue is OptionalType), "A default cannot be specified for an optional value type.")
+        
+        self.init(key: key, defaultValue: defaultValue)
+    }
+    
+    private init(key: String, defaultValue: ValueType?) {
         self._key = key
         self._default = defaultValue
     }
