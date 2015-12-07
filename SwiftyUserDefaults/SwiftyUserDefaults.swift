@@ -174,9 +174,11 @@ public class DefaultsKeys {
 public class DefaultsKey<ValueType>: DefaultsKeys {
     // TODO: Can we use protocols to ensure ValueType is a compatible type?
     public let _key: String
+    public let _default: ValueType?
     
-    public init(_ key: String) {
+    public init(_ key: String, _ defaultValue: ValueType? = nil) {
         self._key = key
+        self._default = defaultValue
     }
 }
 
@@ -211,7 +213,7 @@ extension NSUserDefaults {
     }
     
     public subscript(key: DefaultsKey<String>) -> String {
-        get { return stringForKey(key._key) ?? "" }
+        get { return stringForKey(key._key) ?? key._default ?? "" }
         set { set(key, newValue) }
     }
     public subscript(key: DefaultsKey<NSString?>) -> NSString? {
@@ -220,7 +222,7 @@ extension NSUserDefaults {
     }
     
     public subscript(key: DefaultsKey<NSString>) -> NSString {
-        get { return stringForKey(key._key) ?? "" }
+        get { return stringForKey(key._key) ?? key._default ?? "" }
         set { set(key, newValue) }
     }
     
@@ -230,7 +232,7 @@ extension NSUserDefaults {
     }
     
     public subscript(key: DefaultsKey<Int>) -> Int {
-        get { return numberForKey(key._key)?.integerValue ?? 0 }
+        get { return numberForKey(key._key)?.integerValue ?? key._default ?? 0 }
         set { set(key, newValue) }
     }
     
@@ -240,7 +242,7 @@ extension NSUserDefaults {
     }
     
     public subscript(key: DefaultsKey<Double>) -> Double {
-        get { return numberForKey(key._key)?.doubleValue ?? 0.0 }
+        get { return numberForKey(key._key)?.doubleValue ?? key._default ?? 0.0 }
         set { set(key, newValue) }
     }
     
@@ -250,7 +252,7 @@ extension NSUserDefaults {
     }
     
     public subscript(key: DefaultsKey<Bool>) -> Bool {
-        get { return numberForKey(key._key)?.boolValue ?? false }
+        get { return numberForKey(key._key)?.boolValue ?? key._default ?? false }
         set { set(key, newValue) }
     }
     
@@ -270,7 +272,7 @@ extension NSUserDefaults {
     }
     
     public subscript(key: DefaultsKey<NSData>) -> NSData {
-        get { return dataForKey(key._key) ?? NSData() }
+        get { return dataForKey(key._key) ?? key._default ?? NSData() }
         set { set(key, newValue) }
     }
     
@@ -292,7 +294,7 @@ extension NSUserDefaults {
     }
     
     public subscript(key: DefaultsKey<[String: AnyObject]>) -> [String: AnyObject] {
-        get { return dictionaryForKey(key._key) ?? [:] }
+        get { return dictionaryForKey(key._key) ?? key._default ?? [:] }
         set { set(key, newValue) }
     }
     
@@ -302,7 +304,7 @@ extension NSUserDefaults {
     }
     
     public subscript(key: DefaultsKey<NSDictionary>) -> NSDictionary {
-        get { return dictionaryForKey(key._key) ?? [:] }
+        get { return dictionaryForKey(key._key) ?? key._default ?? [:] }
         set { set(key, newValue) }
     }
 }
@@ -316,7 +318,7 @@ extension NSUserDefaults {
     }
     
     public subscript(key: DefaultsKey<NSArray>) -> NSArray {
-        get { return arrayForKey(key._key) ?? [] }
+        get { return arrayForKey(key._key) ?? key._default ?? [] }
         set { set(key, newValue) }
     }
 
@@ -326,7 +328,7 @@ extension NSUserDefaults {
     }
     
     public subscript(key: DefaultsKey<[AnyObject]>) -> [AnyObject] {
-        get { return arrayForKey(key._key) ?? [] }
+        get { return arrayForKey(key._key) ?? key._default ?? [] }
         set { set(key, newValue) }
     }
 }
@@ -338,7 +340,7 @@ extension NSUserDefaults {
 
 extension NSUserDefaults {
     public func getArray<T: _ObjectiveCBridgeable>(key: DefaultsKey<[T]>) -> [T] {
-        return arrayForKey(key._key) as NSArray? as? [T] ?? []
+        return arrayForKey(key._key) as NSArray? as? [T] ?? key._default ?? []
     }
     
     public func getArray<T: _ObjectiveCBridgeable>(key: DefaultsKey<[T]?>) -> [T]? {
@@ -346,7 +348,7 @@ extension NSUserDefaults {
     }
     
     public func getArray<T: AnyObject>(key: DefaultsKey<[T]>) -> [T] {
-        return arrayForKey(key._key) as NSArray? as? [T] ?? []
+        return arrayForKey(key._key) as NSArray? as? [T] ?? key._default ?? []
     }
     
     public func getArray<T: AnyObject>(key: DefaultsKey<[T]?>) -> [T]? {

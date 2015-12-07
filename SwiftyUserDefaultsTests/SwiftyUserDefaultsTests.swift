@@ -187,6 +187,11 @@ class SwiftyUserDefaultsTests: XCTestCase {
         XCTAssert(Defaults[key] == "foobar")
     }
     
+    func testStaticDefaultString() {
+        let key = DefaultsKey<String>("none", "default")
+        XCTAssert(Defaults[key] == "default")
+    }
+    
     func testStaticIntOptional() {
         let key = DefaultsKey<Int?>("int")
         XCTAssert(Defaults[key] == nil)
@@ -199,6 +204,11 @@ class SwiftyUserDefaultsTests: XCTestCase {
         XCTAssert(Defaults[key] == 0)
         Defaults[key] += 10
         XCTAssert(Defaults[key] == 10)
+    }
+    
+    func testStaticDefaultInt() {
+        let key = DefaultsKey<Int>("none", 42)
+        XCTAssert(Defaults[key] == 42)
     }
     
     func testStaticDoubleOptional() {
@@ -214,6 +224,11 @@ class SwiftyUserDefaultsTests: XCTestCase {
         Defaults[key] = 2.14
         Defaults[key] += 1
         XCTAssert(Defaults[key] == 3.14)
+    }
+    
+    func testStaticDefaultDouble() {
+        let key = DefaultsKey<Double>("none", 42.0)
+        XCTAssert(Defaults[key] == 42.0)
     }
     
     func testStaticBoolOptional() {
@@ -233,6 +248,11 @@ class SwiftyUserDefaultsTests: XCTestCase {
         XCTAssert(Defaults[key] == true)
         Defaults[key] = false
         XCTAssert(Defaults[key] == false)
+    }
+    
+    func testStaticDefaultBool() {
+        let key = DefaultsKey<Bool>("none", true)
+        XCTAssert(Defaults[key] == true)
     }
     
     func testStaticAnyObject() {
