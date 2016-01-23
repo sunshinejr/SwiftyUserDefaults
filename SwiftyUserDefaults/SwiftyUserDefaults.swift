@@ -425,7 +425,7 @@ extension NSUserDefaults {
         if let value: AnyObject = value as? AnyObject {
             set(key, NSKeyedArchiver.archivedDataWithRootObject(value))
         } else {
-            assertionFailure("Invalid value type")
+            assertionFailure("Invalid value type, needs to be a NSCoding-compliant type")
         }
     }
     
@@ -435,7 +435,7 @@ extension NSUserDefaults {
         } else if value == nil {
             remove(key)
         } else {
-            assertionFailure("Invalid value type")
+            assertionFailure("Invalid value type, needs to be a NSCoding-compliant type")
         }
     }
     
