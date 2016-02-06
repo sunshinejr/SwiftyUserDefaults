@@ -430,6 +430,53 @@ extension NSUserDefaults {
     }
 }
 
+// MARK: Key Value Observing
+
+public typealias KVOEventHandler = NSUserDefaults.Proxy -> Void
+internal let SwiftyUserDefaultsKVOContext = UnsafeMutablePointer<Void>()
+
+private var kvoKeyAndHandlers = [String: [KVOEventHandler]]()
+
+extension NSUserDefaults {
+
+    public func observe(key: String,
+        options: NSKeyValueObservingOptions = [.New],
+        handler: KVOEventHandler)
+    {
+        let key = DefaultsKey<String>(key)
+        observe(key, handler: handler)
+    }
+
+    public func observe<T>(key: DefaultsKey<T>,
+        options: NSKeyValueObservingOptions = [.New],
+        handler: KVOEventHandler)
+    {
+        if let _ = kvoKeyAndHandlers[key._key] {
+            kvoKeyAndHandlers[key._key]!.append(handler)
+        } else {
+            kvoKeyAndHandlers[key._key] = [handler]
+        }
+        self.addObserver(self, forKeyPath: key._key,
+            options: options, context: SwiftyUserDefaultsKVOContext)
+    }
+
+    public override func observeValueForKeyPath(
+        keyPath: String?,
+        ofObject object: AnyObject?,
+        change: [String : AnyObject]?,
+        context: UnsafeMutablePointer<Void>)
+    {
+        if let keyPath = keyPath, handlers = kvoKeyAndHandlers[keyPath]
+            where context == SwiftyUserDefaultsKVOContext
+        {
+            if let value: Proxy = Defaults[keyPath] {
+                handlers.forEach{$0(value)}
+            }
+        }
+    }
+
+}
+
 // MARK: Archiving complex types
 
 extension NSUserDefaults {

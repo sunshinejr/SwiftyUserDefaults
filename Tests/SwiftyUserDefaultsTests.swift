@@ -525,6 +525,20 @@ class SwiftyUserDefaultsTests: XCTestCase {
     }
 }
 
+extension SwiftyUserDefaultsTests {
+    func testKVO() {
+        Defaults["count"] = 0
+        let ex = expectationWithDescription("`count` should be increased.")
+        Defaults.observe("count") { value in
+            if let int = value.int where int == 1 {
+                ex.fulfill()
+            }
+        }
+        Defaults["count"] = 1
+        waitForExpectationsWithTimeout(0.1, handler: nil)
+    }
+}
+
 extension DefaultsKeys {
     static let strings = DefaultsKey<[String]>("strings")
     static let optStrings = DefaultsKey<[String]?>("strings")
