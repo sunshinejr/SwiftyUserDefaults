@@ -461,17 +461,19 @@ public final class BlockDisposable: Disposable {
         self.key = key
         self.handler = handler
     }
+
     public func dispose() {
-        if let _ = kvoKeyAndHandlers[key] {
-            var handlers = kvoKeyAndHandlers[key]!
-            if let idx = handlers.indexOf({ e in
-                return e.token == self.token
-            }) {
-                handlers.removeAtIndex(idx)
-            }
-            Defaults.removeObserver(Defaults, forKeyPath: key)
-            handler = nil
+        guard let _ = kvoKeyAndHandlers[key] else {
+            return
         }
+        var handlers = kvoKeyAndHandlers[key]!
+        if let idx = handlers.indexOf({ e in
+            return e.token == self.token
+        }) {
+            handlers.removeAtIndex(idx)
+        }
+        Defaults.removeObserver(Defaults, forKeyPath: key)
+        handler = nil
     }
 }
 
