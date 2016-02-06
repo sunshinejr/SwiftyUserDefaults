@@ -433,7 +433,7 @@ extension NSUserDefaults {
 // MARK: Key Value Observing
 
 public typealias KVOEventHandler = NSUserDefaults.Proxy -> Void
-internal let SwiftyUserDefaultsKVOContext = UnsafeMutablePointer<Void>()
+internal let SwiftyUserDefaultsKVOContext: UnsafeMutablePointer<Void> = nil
 
 private var kvoKeyAndHandlers = [String: [KVOEventHandler]]()
 
