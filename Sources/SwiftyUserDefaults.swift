@@ -450,9 +450,9 @@ protocol Disposable {
 }
 
 public final class BlockDisposable: Disposable {
-    public let key: String
+    let key: String
     private let token: Int
-    public var handler: EventHandler?
+    var handler: EventHandler?
     init(key: String, handler: EventHandler) {
         self.token = nextToken
         lock.lock()

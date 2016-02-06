@@ -1,4 +1,5 @@
 import XCTest
+import SwiftyUserDefaults
 @testable import SwiftyUserDefaults
 
 class SwiftyUserDefaultsTests: XCTestCase {
