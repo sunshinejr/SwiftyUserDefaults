@@ -436,7 +436,8 @@ public typealias EventHandler = NSUserDefaults.Proxy -> Void
 internal let SwiftyUserDefaultsKVOContext: UnsafeMutablePointer<Void> = nil
 
 private var kvoKeyAndHandlers = [String: [BlockDisposable]]()
-private var nextToken = 0
+typealias Token = Int64
+private var nextToken: Token = 0
 internal class RecursiveLock: NSRecursiveLock {
     init(name: String) {
         super.init()
@@ -451,7 +452,7 @@ protocol Disposable {
 
 public final class BlockDisposable: Disposable {
     let key: String
-    private let token: Int
+    private let token: Token
     var handler: EventHandler?
     init(key: String, handler: EventHandler) {
         self.token = nextToken
