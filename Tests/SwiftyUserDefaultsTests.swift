@@ -526,16 +526,52 @@ class SwiftyUserDefaultsTests: XCTestCase {
 }
 
 extension SwiftyUserDefaultsTests {
-    func testKVO() {
+    func testKVO1() {
         Defaults["count"] = 0
         let ex = expectationWithDescription("`count` should be increased.")
-        Defaults.observe("count") { value in
-            if let int = value.int where int == 1 {
+        let disposable = Defaults.observe("count") { proxy in
+            if let int = proxy.int where int == 1 {
                 ex.fulfill()
+            } else {
+                XCTFail()
             }
         }
         Defaults["count"] = 1
         waitForExpectationsWithTimeout(0.1, handler: nil)
+        disposable.dispose()
+        Defaults.remove("count")
+    }
+
+    func testKVO2DisposableHandler() {
+        Defaults["count"] = 0
+        let disposable = Defaults.observe("count") { proxy in
+            XCTFail()
+        }
+        disposable.dispose()
+        Defaults["count"] = 1
+        XCTAssert(disposable.handler == nil)
+    }
+
+    func testKVO3DisposableHandler() {
+        Defaults["count"] = 0
+        let disposable = Defaults.observe("count") { proxy in
+            XCTFail()
+        }
+        let ex = expectationWithDescription("`count` should be increased.")
+        let disposable2 = Defaults.observe("count") { proxy in
+            if let int = proxy.int where int == 1 {
+                ex.fulfill()
+            } else {
+                XCTFail()
+            }
+        }
+        disposable.dispose()
+        Defaults["count"] = 1
+        XCTAssert(disposable.handler == nil)
+        XCTAssert(disposable2.handler != nil)
+        waitForExpectationsWithTimeout(0.1, handler: nil)
+        disposable2.dispose()
+        XCTAssert(disposable2.handler == nil)
     }
 }
 

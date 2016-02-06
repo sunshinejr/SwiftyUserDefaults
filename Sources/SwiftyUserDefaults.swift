@@ -432,32 +432,72 @@ extension NSUserDefaults {
 
 // MARK: Key Value Observing
 
-public typealias KVOEventHandler = NSUserDefaults.Proxy -> Void
+public typealias EventHandler = NSUserDefaults.Proxy -> Void
 internal let SwiftyUserDefaultsKVOContext: UnsafeMutablePointer<Void> = nil
 
-private var kvoKeyAndHandlers = [String: [KVOEventHandler]]()
+private var kvoKeyAndHandlers = [String: [BlockDisposable]]()
+private var nextToken = 0
+internal class RecursiveLock: NSRecursiveLock {
+    init(name: String) {
+        super.init()
+        self.name = name
+    }
+}
+private let lock = RecursiveLock(name: "com.ReactiveKit.ReactiveKit.ActiveStream")
+
+protocol Disposable {
+    func dispose()
+}
+
+public final class BlockDisposable: Disposable {
+    public let key: String
+    private let token: Int
+    public var handler: EventHandler?
+    init(key: String, handler: EventHandler) {
+        self.token = nextToken
+        lock.lock()
+        nextToken += 1
+        lock.unlock()
+        self.key = key
+        self.handler = handler
+    }
+    public func dispose() {
+        if let _ = kvoKeyAndHandlers[key] {
+            var handlers = kvoKeyAndHandlers[key]!
+            if let idx = handlers.indexOf({ e in
+                return e.token == self.token
+            }) {
+                handlers.removeAtIndex(idx)
+            }
+            Defaults.removeObserver(Defaults, forKeyPath: key)
+            handler = nil
+        }
+    }
+}
 
 extension NSUserDefaults {
 
     public func observe(key: String,
         options: NSKeyValueObservingOptions = [.New],
-        handler: KVOEventHandler)
+        handler: EventHandler) -> BlockDisposable
     {
         let key = DefaultsKey<String>(key)
-        observe(key, handler: handler)
+        return observe(key, handler: handler)
     }
 
     public func observe<T>(key: DefaultsKey<T>,
         options: NSKeyValueObservingOptions = [.New],
-        handler: KVOEventHandler)
+        handler: EventHandler) -> BlockDisposable
     {
+        let block = BlockDisposable(key: key._key, handler: handler)
         if let _ = kvoKeyAndHandlers[key._key] {
-            kvoKeyAndHandlers[key._key]!.append(handler)
+            kvoKeyAndHandlers[key._key]!.append(block)
         } else {
-            kvoKeyAndHandlers[key._key] = [handler]
+            kvoKeyAndHandlers[key._key] = [block]
         }
         self.addObserver(self, forKeyPath: key._key,
             options: options, context: SwiftyUserDefaultsKVOContext)
+        return block
     }
 
     public override func observeValueForKeyPath(
@@ -470,7 +510,7 @@ extension NSUserDefaults {
             where context == SwiftyUserDefaultsKVOContext
         {
             if let value: Proxy = Defaults[keyPath] {
-                handlers.forEach{$0(value)}
+                handlers.forEach{$0.handler?(value)}
             }
         }
     }
