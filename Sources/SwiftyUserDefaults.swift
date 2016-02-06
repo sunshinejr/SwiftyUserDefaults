@@ -443,7 +443,7 @@ internal class RecursiveLock: NSRecursiveLock {
         self.name = name
     }
 }
-private let lock = RecursiveLock(name: "com.ReactiveKit.ReactiveKit.ActiveStream")
+private let lock = RecursiveLock(name: "radex.SwiftyUserDefaults")
 
 protocol Disposable {
     func dispose()
