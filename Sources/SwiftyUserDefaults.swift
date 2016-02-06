@@ -430,14 +430,16 @@ extension NSUserDefaults {
     }
 }
 
-// MARK: Key Value Observing
+// MARK: Key-Value Observing
 
 public typealias EventHandler = NSUserDefaults.Proxy -> Void
-internal let SwiftyUserDefaultsKVOContext: UnsafeMutablePointer<Void> = nil
+typealias Token = Int64
+private let SwiftyUserDefaultsKVOContext: UnsafeMutablePointer<Void> = nil
 
 private var kvoKeyAndHandlers = [String: [BlockDisposable]]()
-typealias Token = Int64
 private var nextToken: Token = 0
+
+/// Lock
 internal class RecursiveLock: NSRecursiveLock {
     init(name: String) {
         super.init()
@@ -446,6 +448,7 @@ internal class RecursiveLock: NSRecursiveLock {
 }
 private let lock = RecursiveLock(name: "radex.SwiftyUserDefaults")
 
+/// Disposable
 protocol Disposable {
     func dispose()
 }
@@ -478,6 +481,7 @@ public final class BlockDisposable: Disposable {
     }
 }
 
+/// Key-Value Observing
 extension NSUserDefaults {
 
     public func observe(key: String,
