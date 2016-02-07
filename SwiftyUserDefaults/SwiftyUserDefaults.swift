@@ -345,6 +345,14 @@ extension NSUserDefaults {
         return arrayForKey(key._key) as NSArray? as? [T]
     }
     
+    public func getMultiDimensionalArray<T: _ObjectiveCBridgeable>(key: DefaultsKey<[[T]]>) -> [[T]] {
+        return arrayForKey(key._key) as NSArray? as? [[T]] ?? [[]]
+    }
+
+    public func getMultiDimensionalArray<T: _ObjectiveCBridgeable>(key: DefaultsKey<[[T]]?>) -> [[T]]? {
+        return arrayForKey(key._key) as NSArray? as? [[T]]
+    }
+
     public func getArray<T: AnyObject>(key: DefaultsKey<[T]>) -> [T] {
         return arrayForKey(key._key) as NSArray? as? [T] ?? []
     }
@@ -392,6 +400,16 @@ extension NSUserDefaults {
     
     public subscript(key: DefaultsKey<[Bool]>) -> [Bool] {
         get { return getArray(key) }
+        set { set(key, newValue) }
+    }
+    
+    public subscript(key: DefaultsKey<[[Bool]]?>) -> [[Bool]]? {
+        get { return getMultiDimensionalArray(key) }
+        set { set(key, newValue) }
+    }
+    
+    public subscript(key: DefaultsKey<[[Bool]]>) -> [[Bool]] {
+        get { return getMultiDimensionalArray(key) }
         set { set(key, newValue) }
     }
     
