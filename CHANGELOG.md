@@ -23,6 +23,8 @@
 
 - `+=`, `++`, `?=` operators are now deprecated in favor of statically-typed keys
 
+* * *
+
 ### 1.3.0 (29 June 2015)
 
 - Added non-optional `Proxy` getters
