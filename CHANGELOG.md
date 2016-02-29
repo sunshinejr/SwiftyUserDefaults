@@ -1,9 +1,8 @@
 ### master
 
+- Added `removeAll()`
+- Added tvOS and watchOS support
 - Fixed error when linking SwiftyUserDefaults with app extension targets
-- [Carthage] Added tvOS support
-- [Carthage] Added watchOS support
-- [CocoaPods] Added tvOS support
 - Minor tweaks and fixes
 
 ### 2.0.0 (18 September 2015)
