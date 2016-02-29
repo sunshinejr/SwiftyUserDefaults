@@ -251,7 +251,7 @@ github "radex/SwiftyUserDefaults"
 
 #### Manually
 
-Simply copy `SwiftyUserDefaults/SwiftyUserDefaults.swift` to your Xcode project.
+Simply copy `Sources/SwiftyUserDefaults.swift` to your Xcode project.
 
 ## More like this
 
