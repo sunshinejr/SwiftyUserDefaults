@@ -10,6 +10,44 @@
 
 Read [Statically-typed NSUserDefaults](http://radex.io/swift/nsuserdefaults/static) for more information about this project.
 
+* * *
+
+**There's only two steps to using SwiftyUserDefaults:**
+
+Step 1: Define your keys
+
+```swift
+extension DefaultsKeys {
+    static let username = DefaultsKey<String?>("username")
+    static let launchCount = DefaultsKey<Int>("launchCount")
+}
+```
+
+Step 2: Just use it!
+
+```swift
+// Get and set user defaults easily
+let username = Defaults[.username]
+Defaults[.hotkeyEnabled] = true
+
+// Modify value types in place
+Defaults[.launchCount]++
+Defaults[.volume] += 0.1
+Defaults[.strings] += "… can easily be extended!"
+
+// Use and modify typed arrays
+Defaults[.libraries].append("SwiftyUserDefaults")
+Defaults[.libraries][0] += " 2.0"
+
+// Easily work with custom serialized types
+Defaults[.color] = NSColor.whiteColor()
+Defaults[.color]?.whiteComponent // => 1.0
+```
+
+The convenient dot syntax is only available if you define your keys by extending magic `DefaultsKeys` class. You can also just pass the `DefaultsKey` value in square brackets, or use a more traditional string-based API. How? Keep reading.
+
+## Usage
+
 ### Define your keys
 
 To get the most out of SwiftyUserDefaults, we recommend defining your user defaults keys ahead of time:
