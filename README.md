@@ -140,9 +140,9 @@ if !Defaults.hasKey(.hotkey) {
 
 You can use the `hasKey` method to check for key's existence in the user defaults. `remove()` is an alias for `removeObjectForKey()`, that also works with `DefaultsKeys` shortcuts.
 
-## Legacy stringly-typed API
+## Traditional API
 
-There's also a more traditional string-based API available. This will be deprecated and removed in future versions of this library — it's recommended you use the new static keys API.
+There's also a more traditional string-based API available. This is considered legacy API, and it's recommended that you use statically defined keys instead.
 
 ```swift
 Defaults["color"].string            // returns String?
@@ -171,17 +171,21 @@ Defaults["hotkey"].dataValue             // defaults to NSData()
 
 ## Installation
 
-The simplest way to install this library is to copy `SwiftyUserDefaults/SwiftyUserDefaults.swift` to your project. There's no step two!
-
 #### CocoaPods
 
-You can also install this library using CocoaPods. Just add this line to your Podfile:
+If you're using CocoaPods, just add this line to your Podfile:
 
 ```ruby
 pod 'SwiftyUserDefaults'
 ```
 
-Then import library module like so:
+Install by running this command in your terminal:
+
+```sh
+pod install
+```
+
+Then import the library in all files where you use it:
 
 ```swift
 import SwiftyUserDefaults
@@ -194,6 +198,10 @@ Just add to your Cartfile:
 ```ruby
 github "radex/SwiftyUserDefaults"
 ```
+
+#### Manually
+
+Simply copy `SwiftyUserDefaults/SwiftyUserDefaults.swift` to your Xcode project.
 
 ## More like this
 
