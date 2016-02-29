@@ -1,4 +1,9 @@
-# SwiftyUserDefaults 2.1.0
+![Version](https://img.shields.io/badge/version-2.1-brightgreen.svg)
+![Platforms](https://img.shields.io/badge/platforms-ios%20%7C%20osx%20%7C%20watchos%20%7C%20tvos-lightgrey.svg)
+[![CocoaPods](http://img.shields.io/cocoapods/v/SwiftyUserDefaults.svg)](https://cocoapods.org/pods/SwiftyUserDefaults)
+[![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
+
+# SwiftyUserDefaults
 
 **SwiftyUserDefaults** makes `NSUserDefaults` cleaner, nicer and easier to use in Swift. Its statically-typed API gives you extra safety and convenient compile-time checks for free.
 
