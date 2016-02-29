@@ -170,6 +170,20 @@ class SwiftyUserDefaultsTests: XCTestCase {
     
     // --
     
+    func testRemoveAll() {
+        Defaults["a"] = "test"
+        Defaults["b"] = "test2"
+        let count = Defaults.dictionaryRepresentation().count
+        XCTAssert(!Defaults.dictionaryRepresentation().isEmpty)
+        Defaults.removeAll()
+        XCTAssert(!Defaults.hasKey("a"))
+        XCTAssert(!Defaults.hasKey("b"))
+        // We'll still have the system keys present, but our two keys should be gone
+        XCTAssert(Defaults.dictionaryRepresentation().count == count - 2)
+    }
+    
+    // --
+    
     func testStaticStringOptional() {
         let key = DefaultsKey<String?>("string")
         XCTAssert(!Defaults.hasKey("string"))

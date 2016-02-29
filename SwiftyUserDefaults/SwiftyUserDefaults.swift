@@ -153,6 +153,17 @@ public extension NSUserDefaults {
     public func remove(key: String) {
         removeObjectForKey(key)
     }
+    
+    /// Removes all keys and values from user defaults
+    /// Use with caution!
+    /// - Note: This method only removes keys on the receiver `NSUserDefaults` object.
+    ///         System-defined keys will still be present afterwards.
+    
+    public func removeAll() {
+        for (key, _) in dictionaryRepresentation() {
+            removeObjectForKey(key)
+        }
+    }
 }
 
 /// Global shortcut for NSUserDefaults.standardUserDefaults()
