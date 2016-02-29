@@ -541,7 +541,7 @@
 				INFOPLIST_FILE = SwiftyUserDefaults/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = radex.SwiftyUserDefaults;
+				PRODUCT_BUNDLE_IDENTIFIER = io.radex.SwiftyUserDefaults;
 				PRODUCT_NAME = SwiftyUserDefaults;
 				SDKROOT = appletvos;
 				SKIP_INSTALL = YES;
@@ -561,7 +561,7 @@
 				INFOPLIST_FILE = SwiftyUserDefaults/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = radex.SwiftyUserDefaults;
+				PRODUCT_BUNDLE_IDENTIFIER = io.radex.SwiftyUserDefaults;
 				PRODUCT_NAME = SwiftyUserDefaults;
 				SDKROOT = appletvos;
 				SKIP_INSTALL = YES;
@@ -576,7 +576,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				INFOPLIST_FILE = SwiftyUserDefaultsTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "radex.SwiftyUserDefaults-tvOSTests";
+				PRODUCT_BUNDLE_IDENTIFIER = io.radex.SwiftyUserDefaults.tests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;
 				TVOS_DEPLOYMENT_TARGET = 9.0;
@@ -588,7 +588,7 @@
 			buildSettings = {
 				INFOPLIST_FILE = SwiftyUserDefaultsTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "radex.SwiftyUserDefaults-tvOSTests";
+				PRODUCT_BUNDLE_IDENTIFIER = io.radex.SwiftyUserDefaults.tests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;
 				TVOS_DEPLOYMENT_TARGET = 9.0;
@@ -607,7 +607,7 @@
 				INFOPLIST_FILE = SwiftyUserDefaults/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = radex.SwiftyUserDefaults;
+				PRODUCT_BUNDLE_IDENTIFIER = io.radex.SwiftyUserDefaults;
 				PRODUCT_NAME = SwiftyUserDefaults;
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
@@ -627,7 +627,7 @@
 				INFOPLIST_FILE = SwiftyUserDefaults/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = radex.SwiftyUserDefaults;
+				PRODUCT_BUNDLE_IDENTIFIER = io.radex.SwiftyUserDefaults;
 				PRODUCT_NAME = SwiftyUserDefaults;
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
@@ -740,7 +740,7 @@
 				INFOPLIST_FILE = SwiftyUserDefaults/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "radex.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = io.radex.SwiftyUserDefaults;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -759,7 +759,7 @@
 				INFOPLIST_FILE = SwiftyUserDefaults/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "radex.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = io.radex.SwiftyUserDefaults;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 			};
@@ -778,7 +778,7 @@
 				);
 				INFOPLIST_FILE = SwiftyUserDefaultsTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "radex.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = io.radex.SwiftyUserDefaults.tests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -792,7 +792,7 @@
 				);
 				INFOPLIST_FILE = SwiftyUserDefaultsTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "radex.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = io.radex.SwiftyUserDefaults.tests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -813,7 +813,7 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
-				PRODUCT_BUNDLE_IDENTIFIER = com.purpleforest.SwiftyUserDefaults;
+				PRODUCT_BUNDLE_IDENTIFIER = io.radex.SwiftyUserDefaults;
 				PRODUCT_NAME = SwiftyUserDefaults;
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
@@ -834,7 +834,7 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
-				PRODUCT_BUNDLE_IDENTIFIER = com.purpleforest.SwiftyUserDefaults;
+				PRODUCT_BUNDLE_IDENTIFIER = io.radex.SwiftyUserDefaults;
 				PRODUCT_NAME = SwiftyUserDefaults;
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
@@ -850,7 +850,7 @@
 				INFOPLIST_FILE = SwiftyUserDefaultsTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
-				PRODUCT_BUNDLE_IDENTIFIER = com.purpleforest.SwiftyUserDefaultsTests;
+				PRODUCT_BUNDLE_IDENTIFIER = io.radex.SwiftyUserDefaults.tests;
 				PRODUCT_NAME = SwiftyUserDefaultsTests;
 				SDKROOT = macosx;
 			};
@@ -863,7 +863,7 @@
 				INFOPLIST_FILE = SwiftyUserDefaultsTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
-				PRODUCT_BUNDLE_IDENTIFIER = com.purpleforest.SwiftyUserDefaultsTests;
+				PRODUCT_BUNDLE_IDENTIFIER = io.radex.SwiftyUserDefaults.tests;
 				PRODUCT_NAME = SwiftyUserDefaultsTests;
 				SDKROOT = macosx;
 			};
