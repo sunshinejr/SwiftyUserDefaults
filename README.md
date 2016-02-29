@@ -1,4 +1,4 @@
-# SwiftyUserDefaults 2.0
+# SwiftyUserDefaults 2.1.0
 
 **SwiftyUserDefaults** makes `NSUserDefaults` cleaner, nicer and easier to use in Swift. Its statically-typed API gives you extra safety and convenient compile-time checks for free.
 
