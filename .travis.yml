@@ -19,3 +19,4 @@ script:
 - set -o pipefail && xctool test -project SwiftyUserDefaults.xcodeproj -scheme 'SwiftyUserDefaults Mac' ONLY_ACTIVE_ARCH=NO | xcpretty
 
 - pod lib lint
+
