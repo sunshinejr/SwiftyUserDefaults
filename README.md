@@ -10,7 +10,18 @@
 
 Read [Statically-typed NSUserDefaults](http://radex.io/swift/nsuserdefaults/static) for more information about this project.
 
-* * *
+-------
+<p align="center">
+    <a href="#features">Features</a> &bull;
+    <a href="#usage">Usage</a> &bull;
+    <a href="#custom-types">Custom types</a> &bull;
+    <a href="#traditional-api">Traditional API</a> &bull; 
+    <a href="#installation">Installation</a> &bull; 
+    <a href="#more-like-this">More info</a>
+</p>
+-------
+
+## Features
 
 **There's only two steps to using SwiftyUserDefaults:**
 
