@@ -127,7 +127,10 @@ public extension NSUserDefaults {
     
     public subscript(key: String) -> Any? {
         get {
-            return self[key]
+            // return untyped Proxy
+            // (make sure we don't fall into infinite loop)
+            let proxy: Proxy = self[key]
+            return proxy
         }
         set {
             switch newValue {

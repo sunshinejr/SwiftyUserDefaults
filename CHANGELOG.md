@@ -1,3 +1,7 @@
+### master
+
+- Fixed infinite loop bug
+
 ### 2.1.1 (29 February 2016)
 
 - Documentation improvements
