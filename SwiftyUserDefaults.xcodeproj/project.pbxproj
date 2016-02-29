@@ -130,7 +130,7 @@
 			children = (
 				70264EBD1B0E2FB400B32B18 /* Foundation.framework */,
 				70264EA01B0DF85200B32B18 /* SwiftyUserDefaults */,
-				70264EAD1B0DF85300B32B18 /* SwiftyUserDefaultsTests */,
+				70264EAD1B0DF85300B32B18 /* Tests */,
 				70264E9F1B0DF85200B32B18 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -156,17 +156,18 @@
 				70264EBA1B0DF8B900B32B18 /* SwiftyUserDefaults.swift */,
 				70264EA21B0DF85200B32B18 /* Info.plist */,
 			);
-			path = SwiftyUserDefaults;
+			name = SwiftyUserDefaults;
+			path = Sources;
 			sourceTree = "<group>";
 		};
-		70264EAD1B0DF85300B32B18 /* SwiftyUserDefaultsTests */ = {
+		70264EAD1B0DF85300B32B18 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
 				70264EB01B0DF85300B32B18 /* SwiftyUserDefaultsTests.swift */,
 				6E903A8B1B66338C004CDFC4 /* TestHelper.swift */,
 				70264EAE1B0DF85300B32B18 /* Supporting Files */,
 			);
-			path = SwiftyUserDefaultsTests;
+			path = Tests;
 			sourceTree = "<group>";
 		};
 		70264EAE1B0DF85300B32B18 /* Supporting Files */ = {
@@ -538,7 +539,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = SwiftyUserDefaults/Info.plist;
+				INFOPLIST_FILE = Sources/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = io.radex.SwiftyUserDefaults;
@@ -558,7 +559,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = SwiftyUserDefaults/Info.plist;
+				INFOPLIST_FILE = Sources/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = io.radex.SwiftyUserDefaults;
@@ -574,7 +575,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				INFOPLIST_FILE = SwiftyUserDefaultsTests/Info.plist;
+				INFOPLIST_FILE = Tests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = io.radex.SwiftyUserDefaults.tests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -586,7 +587,7 @@
 		52368EE71BE79B350082969A /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				INFOPLIST_FILE = SwiftyUserDefaultsTests/Info.plist;
+				INFOPLIST_FILE = Tests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = io.radex.SwiftyUserDefaults.tests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -604,7 +605,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = SwiftyUserDefaults/Info.plist;
+				INFOPLIST_FILE = Sources/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = io.radex.SwiftyUserDefaults;
@@ -624,7 +625,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = SwiftyUserDefaults/Info.plist;
+				INFOPLIST_FILE = Sources/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = io.radex.SwiftyUserDefaults;
@@ -737,7 +738,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = SwiftyUserDefaults/Info.plist;
+				INFOPLIST_FILE = Sources/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = io.radex.SwiftyUserDefaults;
@@ -756,7 +757,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = SwiftyUserDefaults/Info.plist;
+				INFOPLIST_FILE = Sources/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = io.radex.SwiftyUserDefaults;
@@ -776,7 +777,7 @@
 					"DEBUG=1",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = SwiftyUserDefaultsTests/Info.plist;
+				INFOPLIST_FILE = Tests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = io.radex.SwiftyUserDefaults.tests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -790,7 +791,7 @@
 					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = SwiftyUserDefaultsTests/Info.plist;
+				INFOPLIST_FILE = Tests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = io.radex.SwiftyUserDefaults.tests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -809,7 +810,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				ENABLE_TESTABILITY = YES;
 				FRAMEWORK_VERSION = A;
-				INFOPLIST_FILE = SwiftyUserDefaults/Info.plist;
+				INFOPLIST_FILE = Sources/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
@@ -830,7 +831,7 @@
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				FRAMEWORK_VERSION = A;
-				INFOPLIST_FILE = SwiftyUserDefaults/Info.plist;
+				INFOPLIST_FILE = Sources/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
@@ -847,7 +848,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_TESTABILITY = YES;
-				INFOPLIST_FILE = SwiftyUserDefaultsTests/Info.plist;
+				INFOPLIST_FILE = Tests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				PRODUCT_BUNDLE_IDENTIFIER = io.radex.SwiftyUserDefaults.tests;
@@ -860,7 +861,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
-				INFOPLIST_FILE = SwiftyUserDefaultsTests/Info.plist;
+				INFOPLIST_FILE = Tests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				PRODUCT_BUNDLE_IDENTIFIER = io.radex.SwiftyUserDefaults.tests;
