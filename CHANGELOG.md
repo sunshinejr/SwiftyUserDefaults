@@ -1,3 +1,7 @@
+### 2.1.1 (29 February 2016)
+
+- Documentation improvements
+
 ### 2.1.0 (29 February 2016)
 
 - Added `removeAll()`
