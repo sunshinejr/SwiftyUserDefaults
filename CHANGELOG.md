@@ -1,4 +1,4 @@
-### master
+### 2.1.0 (29 February 2016)
 
 - Added `removeAll()`
 - Added tvOS and watchOS support
