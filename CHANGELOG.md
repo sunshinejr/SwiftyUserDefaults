@@ -1,6 +1,8 @@
-### master
+### 2.1.2 (1 March 2016)
 
 - Fixed infinite loop bug
+- Added Travis CI integration
+- Added Swift Package Manager support
 
 ### 2.1.1 (29 February 2016)
 
