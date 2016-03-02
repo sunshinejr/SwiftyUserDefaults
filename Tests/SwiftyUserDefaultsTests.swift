@@ -574,6 +574,17 @@ extension SwiftyUserDefaultsTests {
         disposable2.dispose()
         XCTAssert(disposable2.handler == nil)
     }
+
+    func testKVO4WithPlainFoundation() {
+        NSUserDefaults.standardUserDefaults().setInteger(0, forKey: "count")
+        let ex = expectationWithDescription("`count` should be increased.")
+        let disposable = Defaults.observe("count") { proxy in
+            ex.fulfill()
+        }
+        NSUserDefaults.standardUserDefaults().setInteger(1, forKey: "count")
+        waitForExpectationsWithTimeout(0.1, handler: nil)
+        disposable.dispose()
+    }
 }
 
 extension DefaultsKeys {
