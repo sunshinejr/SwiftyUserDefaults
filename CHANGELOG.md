@@ -1,3 +1,8 @@
+### 2.1.3 (2016-03-02)
+
+- Fix Carthage build
+- Suppress deprecation warnings in tests
+
 ### 2.1.2 (2016-03-01)
 
 - Fixed infinite loop bug
