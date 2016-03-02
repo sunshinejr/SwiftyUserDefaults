@@ -1,21 +1,21 @@
-### 2.1.2 (1 March 2016)
+### 2.1.2 (2016-03-01)
 
 - Fixed infinite loop bug
 - Added Travis CI integration
 - Added Swift Package Manager support
 
-### 2.1.1 (29 February 2016)
+### 2.1.1 (2016-02-29)
 
 - Documentation improvements
 
-### 2.1.0 (29 February 2016)
+### 2.1.0 (2016-02-29)
 
 - Added `removeAll()`
 - Added tvOS and watchOS support
 - Fixed error when linking SwiftyUserDefaults with app extension targets
 - Minor tweaks and fixes
 
-### 2.0.0 (18 September 2015)
+### 2.0.0 (2015-09-18)
 
 - Introducing statically-typed keys
     * Define keys using `DefaultsKey`
@@ -34,7 +34,7 @@
 
 * * *
 
-### 1.3.0 (29 June 2015)
+### 1.3.0 (2015-06-29)
 
 - Added non-optional `Proxy` getters
     * string -> stringValue, etc.
@@ -42,16 +42,16 @@
 - Fixed Carthage (Set iOS Deployment target to 8.0)
 - Converted tests to XCTest
 
-### 1.2.0 (15 June 2015)
+### 1.2.0 (2015-06-15)
 
 - Carthage support
 
-### 1.1.0 (13 April 2015)
+### 1.1.0 (2015-04-13)
 
 - Swift 1.2 compatibility
 - Fixed podspec
 
-### 1.0.0 (26 January 2015)
+### 1.0.0 (2015-01-26)
 
 - Initial release
 - `Proxy` getters:
