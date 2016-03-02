@@ -31,6 +31,7 @@ class SwiftyUserDefaultsTests: XCTestCase {
     func testString() {
         // set and read
         let key = "string"
+        let key2 = "string2"
         Defaults[key] = "foo"
         XCTAssertEqual(Defaults[key].string!, "foo")
         XCTAssertNil(Defaults[key].int)
@@ -39,16 +40,6 @@ class SwiftyUserDefaultsTests: XCTestCase {
         
         // existance
         XCTAssertTrue(Defaults.hasKey(key))
-        
-        // ?=
-        Defaults[key] ?= "bar"
-        XCTAssertEqual(Defaults[key].string!, "foo")
-        
-        let key2 = "string2"
-        Defaults[key2] ?= "bar"
-        XCTAssertEqual(Defaults[key2].string!, "bar")
-        Defaults[key2] ?= "baz"
-        XCTAssertEqual(Defaults[key2].string!, "bar")
         
         // removing
         Defaults.remove(key)
@@ -65,30 +56,6 @@ class SwiftyUserDefaultsTests: XCTestCase {
         XCTAssertEqual(Defaults[key].int!,     100)
         XCTAssertEqual(Defaults[key].double!,  100)
         XCTAssertTrue(Defaults[key].bool!)
-        
-        // +=
-        let key2 = "int2"
-        Defaults[key2] = 5
-        Defaults[key2] += 2
-        XCTAssertEqual(Defaults[key2].int!, 7)
-        
-        let key3 = "int3"
-        Defaults[key3] += 2
-        XCTAssertEqual(Defaults[key3].int!, 2)
-        
-        let key4 = "int4"
-        Defaults[key4] = "NaN"
-        Defaults[key4] += 2
-        XCTAssertEqual(Defaults[key4].int!, 2)
-        
-        // ++
-        Defaults[key2]++
-        Defaults[key2]++
-        XCTAssertEqual(Defaults[key2].int!, 9)
-        
-        let key5 = "int5"
-        Defaults[key5]++
-        XCTAssertEqual(Defaults[key5].int!, 1)
     }
     
     func testDouble() {
@@ -104,18 +71,6 @@ class SwiftyUserDefaultsTests: XCTestCase {
         XCTAssertEqual(Defaults[key].intValue, 3)
         XCTAssertEqual(Defaults[key].doubleValue, 3.14)
         XCTAssertEqual(Defaults[key].boolValue, true)
-        
-        Defaults[key] += 1.5
-        XCTAssertEqual(Int(Defaults[key].double! *  100.0), 464)
-
-        let key2 = "double2"
-        Defaults[key2] = 3.14
-        Defaults[key2] += 1
-        XCTAssertEqual(Defaults[key2].double!, 4.0)
-        
-        let key3 = "double3"
-        Defaults[key3] += 5.3
-        XCTAssertEqual(Defaults[key3].double!, 5.3)
     }
     
     func testBool() {
@@ -166,6 +121,69 @@ class SwiftyUserDefaultsTests: XCTestCase {
         let dict = ["foo": 1, "bar": [1, 2, 3]]
         Defaults[key] = dict
         XCTAssertEqual(Defaults[key].dictionary!, dict)
+    }
+    
+    // --
+    
+    @available(*, deprecated=1)
+    func testOperatorsInt() {
+        // +=
+        let key2 = "int2"
+        Defaults[key2] = 5
+        Defaults[key2] += 2
+        XCTAssertEqual(Defaults[key2].int!, 7)
+        
+        let key3 = "int3"
+        Defaults[key3] += 2
+        XCTAssertEqual(Defaults[key3].int!, 2)
+        
+        let key4 = "int4"
+        Defaults[key4] = "NaN"
+        Defaults[key4] += 2
+        XCTAssertEqual(Defaults[key4].int!, 2)
+        
+        // ++
+        Defaults[key2]++
+        Defaults[key2]++
+        XCTAssertEqual(Defaults[key2].int!, 9)
+        
+        let key5 = "int5"
+        Defaults[key5]++
+        XCTAssertEqual(Defaults[key5].int!, 1)
+    }
+    
+    @available(*, deprecated=1)
+    func testOperatorsDouble() {
+        let key = "double"
+        Defaults[key] = 3.14
+        Defaults[key] += 1.5
+        XCTAssertEqual(Int(Defaults[key].double! *  100.0), 464)
+        
+        let key2 = "double2"
+        Defaults[key2] = 3.14
+        Defaults[key2] += 1
+        XCTAssertEqual(Defaults[key2].double!, 4.0)
+        
+        let key3 = "double3"
+        Defaults[key3] += 5.3
+        XCTAssertEqual(Defaults[key3].double!, 5.3)
+    }
+    
+    @available(*, deprecated=1)
+    func testHuhEquals() {
+        // set and read
+        let key = "string"
+        Defaults[key] = "foo"
+        
+        // ?=
+        Defaults[key] ?= "bar"
+        XCTAssertEqual(Defaults[key].string!, "foo")
+        
+        let key2 = "string2"
+        Defaults[key2] ?= "bar"
+        XCTAssertEqual(Defaults[key2].string!, "bar")
+        Defaults[key2] ?= "baz"
+        XCTAssertEqual(Defaults[key2].string!, "bar")
     }
     
     // --
