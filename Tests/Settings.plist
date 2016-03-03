@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>MyString1</key>
+	<string>My string value 1.</string>
+	<key>MyString2</key>
+	<string>My string value 2.</string>
+	<key>MyString3</key>
+	<string>My string value 3.</string>
+	<key>MyNumber1</key>
+	<integer>123</integer>
+	<key>MyNumber2</key>
+	<integer>456</integer>
+	<key>MyNumber3</key>
+	<integer>789</integer>
+	<key>MyBool1</key>
+	<false/>
+	<key>MyBool2</key>
+	<true/>
+	<key>MyBool3</key>
+	<false/>
+	<key>MyDate1</key>
+	<date>2016-03-03T14:50:00Z</date>
+	<key>MyDate2</key>
+	<date>2015-04-09T21:05:03Z</date>
+	<key>MyDate3</key>
+	<date>2013-12-19T13:00:00Z</date>
+	<key>MyArray1</key>
+	<array>
+		<string>My string for array value.</string>
+		<integer>999</integer>
+		<true/>
+	</array>
+	<key>MyDictionary1</key>
+	<dict>
+		<key>id</key>
+		<integer>7</integer>
+		<key>title</key>
+		<string>Garden</string>
+		<key>active</key>
+		<true/>
+	</dict>
+</dict>
+</plist>

@@ -21,6 +21,12 @@
 		70264EB11B0DF85300B32B18 /* SwiftyUserDefaultsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70264EB01B0DF85300B32B18 /* SwiftyUserDefaultsTests.swift */; };
 		70264EBB1B0DF8B900B32B18 /* SwiftyUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70264EBA1B0DF8B900B32B18 /* SwiftyUserDefaults.swift */; };
 		70264EBE1B0E2FB400B32B18 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 70264EBD1B0E2FB400B32B18 /* Foundation.framework */; };
+		8BE985281C88A0F500D7340D /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 8BE985271C88A0F500D7340D /* Settings.bundle */; };
+		8BE985331C88C1E700D7340D /* Settings.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8BE985321C88C1E700D7340D /* Settings.plist */; };
+		8BE985361C88DA1500D7340D /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 8BE985271C88A0F500D7340D /* Settings.bundle */; };
+		8BE985371C88DA1600D7340D /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 8BE985271C88A0F500D7340D /* Settings.bundle */; };
+		8BE985381C88DA1A00D7340D /* Settings.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8BE985321C88C1E700D7340D /* Settings.plist */; };
+		8BE985391C88DA1B00D7340D /* Settings.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8BE985321C88C1E700D7340D /* Settings.plist */; };
 		D9D2CFB41B54AAF700D6ABCE /* SwiftyUserDefaults.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9D2CFAA1B54AAF600D6ABCE /* SwiftyUserDefaults.framework */; };
 		D9D2CFC11B54AB2F00D6ABCE /* SwiftyUserDefaults.h in Headers */ = {isa = PBXBuildFile; fileRef = 70264EA31B0DF85200B32B18 /* SwiftyUserDefaults.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D9D2CFC21B54AB3500D6ABCE /* SwiftyUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70264EBA1B0DF8B900B32B18 /* SwiftyUserDefaults.swift */; };
@@ -64,6 +70,8 @@
 		70264EB01B0DF85300B32B18 /* SwiftyUserDefaultsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftyUserDefaultsTests.swift; sourceTree = "<group>"; };
 		70264EBA1B0DF8B900B32B18 /* SwiftyUserDefaults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyUserDefaults.swift; sourceTree = "<group>"; };
 		70264EBD1B0E2FB400B32B18 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		8BE985271C88A0F500D7340D /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
+		8BE985321C88C1E700D7340D /* Settings.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Settings.plist; sourceTree = "<group>"; };
 		D9D2CFAA1B54AAF600D6ABCE /* SwiftyUserDefaults.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftyUserDefaults.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D9D2CFB31B54AAF600D6ABCE /* SwiftyUserDefaultsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwiftyUserDefaultsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -173,6 +181,8 @@
 		70264EAE1B0DF85300B32B18 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				8BE985271C88A0F500D7340D /* Settings.bundle */,
+				8BE985321C88C1E700D7340D /* Settings.plist */,
 				70264EAF1B0DF85300B32B18 /* Info.plist */,
 			);
 			name = "Supporting Files";
@@ -409,6 +419,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8BE985371C88DA1600D7340D /* Settings.bundle in Resources */,
+				8BE985391C88DA1B00D7340D /* Settings.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -430,6 +442,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8BE985281C88A0F500D7340D /* Settings.bundle in Resources */,
+				8BE985331C88C1E700D7340D /* Settings.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -444,6 +458,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8BE985361C88DA1500D7340D /* Settings.bundle in Resources */,
+				8BE985381C88DA1A00D7340D /* Settings.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

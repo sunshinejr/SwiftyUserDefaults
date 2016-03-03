@@ -462,6 +462,111 @@ extension NSUserDefaults {
     }
 }
 
+// MARK: Register defaults from bundle or plist file
+
+extension NSUserDefaults {
+    
+    private static let APP_GROUP_CONTAINER_KEY = "ApplicationGroupContainerIdentifier"
+    
+    /**
+     Gets the standard or app group user defaults.
+     
+     - parameter suiteName: app group container for the user defaults
+     
+     - returns: initialized NSUserDefaults
+     */
+    private static func getUserDefaults(suiteName: String? = nil) -> NSUserDefaults {
+        if let name = suiteName where name != "" {
+            return NSUserDefaults(suiteName: name)!
+        }
+        
+        return NSUserDefaults.standardUserDefaults()
+    }
+    
+    /**
+     Adds the contents of the specified plist file to the registration domain.
+     
+     - parameter plistName: property list where defaults are declared
+     - parameter suiteName: app group container for the user defaults (will override ApplicationGroupContainerIdentifier entry if it exists)
+     - parameter bundle: bundle where defaults reside
+     
+     - returns: initialized NSUserDefaults with defaults applied
+     */
+    public static func registerDefaults(plistName: String, suiteName: String? = nil, bundle: NSBundle? = nil) -> NSUserDefaults {
+        let fileParts = plistName.componentsSeparatedByString(".")
+        
+        guard fileParts.count == 2,
+            let resourcePath = (bundle ?? NSBundle.mainBundle()).pathForResource(fileParts[0], ofType: fileParts[1]),
+            let registrationDictionary = NSDictionary(contentsOfFile: resourcePath) as? [String : AnyObject]
+            else { return getUserDefaults(suiteName) }
+        
+        let defaults = getUserDefaults(suiteName
+            ?? registrationDictionary[APP_GROUP_CONTAINER_KEY] as? String)
+        
+        defaults.registerDefaults(registrationDictionary)
+        defaults.synchronize()
+        
+        return defaults
+    }
+    
+    /**
+     Adds the contents of the specified bundle URL to the registration domain.
+     
+     - parameter bundleURL: bundle URL where defaults reside
+     - parameter plistName: property list where defaults are declared
+     
+     - returns: initialized NSUserDefaults with defaults applied
+     */
+    public static func registerDefaults(bundleURL bundleURL: NSURL, plistName: String = "Root.plist") -> NSUserDefaults {
+        // Extract plist file from bundle
+        guard let registrationDictionary = NSDictionary(contentsOfURL: bundleURL.URLByAppendingPathComponent(plistName))
+            else { return NSUserDefaults.standardUserDefaults() }
+        
+        let defaults = getUserDefaults(registrationDictionary.valueForKey(APP_GROUP_CONTAINER_KEY) as? String)
+        
+        // Collect default values
+        guard let preferences = registrationDictionary.valueForKey("PreferenceSpecifiers") as? [String: AnyObject]
+            else { return defaults }
+        
+        defaults.registerDefaults(preferences)
+        defaults.synchronize()
+        
+        return defaults
+    }
+    
+    /**
+     Adds the contents of the specified bundle name to the registration domain.
+     
+     - parameter bundleName: bundle name where defaults reside
+     - parameter plistName: property list where defaults are declared
+     
+     - returns: initialized NSUserDefaults with defaults applied
+     */
+    public static func registerDefaults(bundleName bundleName: String, plistName: String = "Root.plist") -> NSUserDefaults {
+        guard let bundleURL = NSBundle.mainBundle().URLForResource(bundleName, withExtension: "bundle")
+            else { return NSUserDefaults.standardUserDefaults() }
+        
+        return registerDefaults(bundleURL: bundleURL, plistName: plistName)
+    }
+    
+    /**
+     Adds the contents of the specified bundle to the registration domain.
+     
+     - parameter bundle: bundle where defaults reside
+     - parameter bundleName: bundle name where defaults reside
+     - parameter plistName: property list where defaults are declared
+     
+     - returns: initialized NSUserDefaults with defaults applied
+     */
+    public static func registerDefaults(bundle bundle: NSBundle, bundleName: String = "Settings", plistName: String = "Root.plist") -> NSUserDefaults {
+        guard let bundleURL = bundle.URLForResource(bundleName, withExtension: "bundle")
+            else { return NSUserDefaults.standardUserDefaults() }
+        
+        return registerDefaults(bundleURL: bundleURL, plistName: plistName)
+    }
+    
+}
+
 // MARK: - Deprecations
 
 infix operator ?= {

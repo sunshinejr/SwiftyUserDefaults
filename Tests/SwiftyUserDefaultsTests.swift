@@ -541,6 +541,142 @@ class SwiftyUserDefaultsTests: XCTestCase {
         Defaults[key].append(.redColor())
         XCTAssert(Defaults[key] == [.blackColor(), .whiteColor(), .redColor()])
     }
+    
+    // --
+    
+    func testRegisterDefaults() {
+        let Defaults = NSUserDefaults.registerDefaults("Settings.plist", bundle: NSBundle(forClass: self.dynamicType))
+        let key1 = DefaultsKey<String>("MyString1")
+        let key2 = DefaultsKey<Int>("MyNumber1")
+        let key3 = DefaultsKey<Bool>("MyBool1")
+        let key4 = DefaultsKey<NSDate?>("MyDate1")
+        
+        XCTAssert(Defaults[key1] == "My string value 1.")
+        XCTAssert(Defaults[key2] == 123)
+        XCTAssert(Defaults[key3] == false)
+        
+        // Calculate date and account for machine time zone
+        // 2016-03-03 14:50:00 UTC
+        let expectedDate = NSDate(timeIntervalSince1970:
+            NSTimeInterval(1456998600 - Int(NSTimeZone.localTimeZone().secondsFromGMT)))
+        
+        XCTAssert(Defaults[key4] == expectedDate)
+    }
+    
+    func testRegisterDefaultsAndWrite() {
+        var Defaults = NSUserDefaults.registerDefaults("Settings.plist", bundle: NSBundle(forClass: self.dynamicType))
+        let key1 = DefaultsKey<String>("MyString2")
+        let key2 = DefaultsKey<Int>("MyNumber2")
+        let key3 = DefaultsKey<Bool>("MyBool2")
+        
+        // Overwrite defaults
+        Defaults[key1] = "My string value 2 NEW."
+        Defaults[key2] = 555
+        Defaults[key3] = false
+        
+        // Re-run register defaults
+        Defaults = NSUserDefaults.registerDefaults("Settings.plist", bundle: NSBundle(forClass: self.dynamicType))
+        
+        // Ensure defaults do not overwrite previously set values
+        XCTAssert(Defaults[key1] == "My string value 2 NEW.")
+        XCTAssert(Defaults[key2] == 555)
+        XCTAssert(Defaults[key3] == false)
+    }
+    
+    func testRegisterDefaultsArray() {
+        let Defaults = NSUserDefaults.registerDefaults("Settings.plist", bundle: NSBundle(forClass: self.dynamicType))
+        let key = DefaultsKey<[AnyObject]>("MyArray1")
+        let expected: [AnyObject] = [
+            "My string for array value.",
+            999,
+            true
+        ]
+        
+        XCTAssert(Defaults[key][0] as! String == expected[0] as! String)
+        XCTAssert(Defaults[key][1] as! Int == expected[1] as! Int)
+        XCTAssert(Defaults[key][2] as! Bool == expected[2] as! Bool)
+    }
+    
+    func testRegisterDefaultsDict() {
+        let Defaults = NSUserDefaults.registerDefaults("Settings.plist", bundle: NSBundle(forClass: self.dynamicType))
+        let key = DefaultsKey<[String: AnyObject]>("MyDictionary1")
+        let expected: [String: AnyObject] = [
+            "id": 7,
+            "title": "Garden",
+            "active": true
+        ]
+        
+        XCTAssert(Defaults[key]["id"] as! Int == expected["id"] as! Int)
+        XCTAssert(Defaults[key]["title"] as! String == expected["title"] as! String)
+        XCTAssert(Defaults[key]["active"] as! Bool == expected["active"] as! Bool)
+    }
+    
+    func testRegisterDefaultsFromBundle() {
+        let Defaults = NSUserDefaults.registerDefaults(bundle: NSBundle(forClass: self.dynamicType))
+        let key1 = DefaultsKey<String>("SomeString1")
+        let key2 = DefaultsKey<Int>("SomeNumber1")
+        let key3 = DefaultsKey<Bool>("SomeBool1")
+        let key4 = DefaultsKey<NSDate?>("SomeDate1")
+        
+        XCTAssert(Defaults[key1] == "My string value 1.")
+        XCTAssert(Defaults[key2] == 123)
+        XCTAssert(Defaults[key3] == false)
+        
+        // Calculate date and account for machine time zone
+        // 2016-03-03 14:50:00 UTC
+        let expectedDate = NSDate(timeIntervalSince1970:
+            NSTimeInterval(1456998600 - Int(NSTimeZone.localTimeZone().secondsFromGMT)))
+        
+        XCTAssert(Defaults[key4] == expectedDate)
+    }
+    
+    func testRegisterDefaultsFromBundleAndWrite() {
+        var Defaults = NSUserDefaults.registerDefaults(bundle: NSBundle(forClass: self.dynamicType))
+        let key1 = DefaultsKey<String>("SomeString2")
+        let key2 = DefaultsKey<Int>("SomeNumber2")
+        let key3 = DefaultsKey<Bool>("SomeBool2")
+        
+        // Overwrite defaults
+        Defaults[key1] = "My string value 2 NEW."
+        Defaults[key2] = 555
+        Defaults[key3] = false
+        
+        // Re-run register defaults
+        Defaults = NSUserDefaults.registerDefaults(bundle: NSBundle(forClass: self.dynamicType))
+        
+        // Ensure defaults do not overwrite previously set values
+        XCTAssert(Defaults[key1] == "My string value 2 NEW.")
+        XCTAssert(Defaults[key2] == 555)
+        XCTAssert(Defaults[key3] == false)
+    }
+    
+    func testRegisterDefaultsArrayFromBundle() {
+        let Defaults = NSUserDefaults.registerDefaults(bundle: NSBundle(forClass: self.dynamicType))
+        let key = DefaultsKey<[AnyObject]>("SomeArray1")
+        let expected: [AnyObject] = [
+            "My string for array value.",
+            999,
+            true
+        ]
+        
+        XCTAssert(Defaults[key][0] as! String == expected[0] as! String)
+        XCTAssert(Defaults[key][1] as! Int == expected[1] as! Int)
+        XCTAssert(Defaults[key][2] as! Bool == expected[2] as! Bool)
+    }
+    
+    func testRegisterDefaultsDictFromBundle() {
+        let Defaults = NSUserDefaults.registerDefaults(bundle: NSBundle(forClass: self.dynamicType))
+        let key = DefaultsKey<[String: AnyObject]>("SomeDictionary1")
+        let expected: [String: AnyObject] = [
+            "id": 7,
+            "title": "Garden",
+            "active": true
+        ]
+        
+        XCTAssert(Defaults[key]["id"] as! Int == expected["id"] as! Int)
+        XCTAssert(Defaults[key]["title"] as! String == expected["title"] as! String)
+        XCTAssert(Defaults[key]["active"] as! Bool == expected["active"] as! Bool)
+    }
 }
 
 extension DefaultsKeys {
