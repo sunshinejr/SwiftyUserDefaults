@@ -194,7 +194,7 @@ You can use the `hasKey` method to check for key's existence in the user default
 
 ## Register defaults
 
-The native `NSUserDefaults` class has a function called [registerDefaults](https://developer.apple.com/library/mac/documentation/Cocoa/Reference/Foundation/Classes/NSUserDefaults_Class/#//apple_ref/occ/instm/NSUserDefaults/registerDefaults:) that adds the contents of the specified dictionary to the registration domain. For extra convenience, you can use the extended version of `registerDefaults` to populate defaults values from your `Settings.bundle` or any `plist` file in your project.
+The `NSUserDefaults` class has a native function called [registerDefaults](https://developer.apple.com/library/mac/documentation/Cocoa/Reference/Foundation/Classes/NSUserDefaults_Class/#//apple_ref/occ/instm/NSUserDefaults/registerDefaults:) that adds the contents of the specified dictionary to the registration domain. For extra convenience, you can use the extended version of `registerDefaults` to populate defaults values from your `Settings.bundle` or any `plist` file in your project.
 
 ```swift
 NSUserDefaults.registerDefaults("Settings.plist")
