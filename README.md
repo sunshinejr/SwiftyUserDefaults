@@ -16,8 +16,8 @@ Read [Statically-typed NSUserDefaults](http://radex.io/swift/nsuserdefaults/stat
     <a href="#features">Features</a> &bull;
     <a href="#usage">Usage</a> &bull;
     <a href="#custom-types">Custom types</a> &bull;
-    <a href="#traditional-api">Traditional API</a> &bull;
     <a href="#register-defaults">Register defaults</a> &bull;
+    <a href="#traditional-api">Traditional API</a> &bull;
     <a href="#installation">Installation</a> &bull;
     <a href="#more-like-this">More info</a>
 </p>
@@ -192,6 +192,18 @@ if !Defaults.hasKey(.hotkey) {
 
 You can use the `hasKey` method to check for key's existence in the user defaults. `remove()` is an alias for `removeObjectForKey()`, that also works with `DefaultsKeys` shortcuts.
 
+## Register defaults
+
+The native `NSUserDefaults` class has a function called [registerDefaults](https://developer.apple.com/library/mac/documentation/Cocoa/Reference/Foundation/Classes/NSUserDefaults_Class/#//apple_ref/occ/instm/NSUserDefaults/registerDefaults:) that adds the contents of the specified dictionary to the registration domain. For extra convenience, you can use the extended version of `registerDefaults` to populate defaults values from your `Settings.bundle` or any `plist` file in your project.
+
+```swift
+NSUserDefaults.registerDefaults("Settings.plist")
+NSUserDefaults.registerDefaults("Settings.plist", suiteName: "io.radex.SwiftyUserDefaults")
+NSUserDefaults.registerDefaults(bundleName: "Settings")
+NSUserDefaults.registerDefaults(bundle: NSBundle(forClass: self.dynamicType)) // used for unit testing
+```
+To use an app group container for your `NSUserDefault` instance, use the optional `suiteName` parameter, or add a string entry called `ApplicationGroupContainerIdentifier` in your `plist` file.
+
 ## Traditional API
 
 There's also a more traditional string-based API available. This is considered legacy API, and it's recommended that you use statically defined keys instead.
@@ -220,18 +232,6 @@ Defaults["lastPaths"].arrayValue         // defaults to []
 Defaults["credentials"].dictionaryValue  // defaults to [:]
 Defaults["hotkey"].dataValue             // defaults to NSData()
 ```
-
-## Register defaults
-
-The native `NSUserDefaults` class has a function called [registerDefaults](https://developer.apple.com/library/mac/documentation/Cocoa/Reference/Foundation/Classes/NSUserDefaults_Class/#//apple_ref/occ/instm/NSUserDefaults/registerDefaults:) that adds the contents of the specified dictionary to the registration domain. For extra convenience, you can use the extended version of `registerDefaults` to populate defaults values from your `Settings.bundle` or any `plist` file in your project.
-
-```swift
-NSUserDefaults.registerDefaults("Settings.plist")
-NSUserDefaults.registerDefaults("Settings.plist", suiteName: "io.radex.SwiftyUserDefaults")
-NSUserDefaults.registerDefaults(bundleName: "Settings")
-NSUserDefaults.registerDefaults(bundle: NSBundle(forClass: self.dynamicType)) // used for unit testing
-```
-To use an app group container for your `NSUserDefault` instance, use the optional `suiteName` parameter, or add a string entry called `ApplicationGroupContainerIdentifier` in your `plist` file.
 
 ## Installation
 
