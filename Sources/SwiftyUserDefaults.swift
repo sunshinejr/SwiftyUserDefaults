@@ -182,7 +182,7 @@ public class DefaultsKeys {
     private init() {}
 }
 
-/// Base class for static user defaults keys. Specialize with value type type
+/// Base class for static user defaults keys. Specialize with value type
 /// and pass key name to the initializer to create a key.
 
 public class DefaultsKey<ValueType>: DefaultsKeys {
