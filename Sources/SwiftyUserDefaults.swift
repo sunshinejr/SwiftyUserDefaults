@@ -214,7 +214,7 @@ extension NSUserDefaults {
     }
 }
 
-// MARK: Static subscripts for standard types
+// MARK: Subscripts for specific standard types
 
 // TODO: Use generic subscripts when they become available
 
