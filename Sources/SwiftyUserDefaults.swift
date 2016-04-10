@@ -436,7 +436,34 @@ extension NSUserDefaults {
     }
 }
 
-// MARK: Archiving complex types
+// MARK: - Archiving custom types
+
+// MARK: RawRepresentable
+
+extension NSUserDefaults {
+    // TODO: Ensure that T.RawValue is compatible
+    public func archive<T: RawRepresentable>(key: DefaultsKey<T>, _ value: T) {
+        set(key, value.rawValue)
+    }
+    
+    public func archive<T: RawRepresentable>(key: DefaultsKey<T?>, _ value: T?) {
+        if let value = value {
+            set(key, value.rawValue)
+        } else {
+            remove(key)
+        }
+    }
+    
+    public func unarchive<T: RawRepresentable>(key: DefaultsKey<T?>) -> T? {
+        return objectForKey(key._key).flatMap { T(rawValue: $0 as! T.RawValue) }
+    }
+    
+    public func unarchive<T: RawRepresentable>(key: DefaultsKey<T>) -> T? {
+        return objectForKey(key._key).flatMap { T(rawValue: $0 as! T.RawValue) }
+    }
+}
+
+// MARK: NSCoding
 
 extension NSUserDefaults {
     // TODO: Can we simplify this and ensure that T is NSCoding compliant?

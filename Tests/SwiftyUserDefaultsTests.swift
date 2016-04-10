@@ -516,6 +516,8 @@ class SwiftyUserDefaultsTests: XCTestCase {
         XCTAssert(!Defaults.hasKey(.optStrings))
     }
     
+    // --
+    
     func testArchiving() {
         let key = DefaultsKey<NSColor?>("color")
         XCTAssert(Defaults[key] == nil)
@@ -540,6 +542,41 @@ class SwiftyUserDefaultsTests: XCTestCase {
         Defaults[key].append(.whiteColor())
         Defaults[key].append(.redColor())
         XCTAssert(Defaults[key] == [.blackColor(), .whiteColor(), .redColor()])
+    }
+    
+    // --
+    
+    func testEnumArchiving() {
+        let key = DefaultsKey<TestEnum?>("enum")
+        XCTAssert(Defaults[key] == nil)
+        Defaults[key] = .A
+        XCTAssert(Defaults[key]! == .A)
+        Defaults[key] = .C
+        XCTAssert(Defaults[key]! == .C)
+        Defaults[key] = nil
+        XCTAssert(Defaults[key] == nil)
+    }
+    
+    func testEnumArchiving2() {
+        let key = DefaultsKey<TestEnum>("enum")
+        XCTAssert(!Defaults.hasKey(key))
+        XCTAssert(Defaults[key] == .A)
+        Defaults[key] = .C
+        XCTAssert(Defaults[key] == .C)
+        Defaults.remove(key)
+        XCTAssert(!Defaults.hasKey(key))
+        XCTAssert(Defaults[key] == .A)
+    }
+    
+    func testEnumArchiving3() {
+        let key = DefaultsKey<TestEnum2?>("enum")
+        XCTAssert(Defaults[key] == nil)
+        Defaults[key] = .Ten
+        XCTAssert(Defaults[key]! == .Ten)
+        Defaults[key] = .Thirty
+        XCTAssert(Defaults[key]! == .Thirty)
+        Defaults[key] = nil
+        XCTAssert(Defaults[key] == nil)
     }
 }
 
