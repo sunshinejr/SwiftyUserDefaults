@@ -62,26 +62,26 @@ The convenient dot syntax is only available if you define your keys by extending
 
 ### Define your keys
 
-To get the most out of SwiftyUserDefaults, we recommend defining your user defaults keys ahead of time:
+To get the most out of SwiftyUserDefaults, define your user defaults keys ahead of time:
 
 ```swift
 let colorKey = DefaultsKey<String>("color")
 ```
 
-Just create a `DefaultsKey` object, put the value type in angled brackets and the key name in parentheses and you're good to go.
+Just create a `DefaultsKey` object, put the type of the value you want to store in angle brackets, the key name in parentheses, and you're good to go.
 
-You can now use the global `Defaults` object:
+You can now use the `Defaults` shortcut to access those values:
 
 ```swift
 Defaults[colorKey] = "red"
 Defaults[colorKey] // => "red", typed as String
 ```
 
-The compiler won't let you set a wrong value type, and fetching conveniently returns `String` — no need for manual casting or special accessors.
+The compiler won't let you set a wrong value type, and fetching conveniently returns `String`.
 
 ### Take shortcuts
 
-For extra convenience, define your keys by extending `DefaultsKeys` and adding static properties:
+For extra convenience, define your keys by extending magic `DefaultsKeys` class and adding static properties:
 
 ```swift
 extension DefaultsKeys {
@@ -99,7 +99,7 @@ Defaults[.launchCount]
 
 ### Just use it!
 
-You can easily modify value types (strings, numbers, array) in place, without extra steps or magic operators, as if you were working with a plain old dictionary:
+You can easily modify value types (strings, numbers, array) in place, as if you were working with a plain old dictionary:
 
 ```swift
 // Modify value types in place
@@ -166,9 +166,9 @@ extension NSUserDefaults {
 }
 ```
 
-Just copy&paste this and change `NSColor` to your class name. If you want, you can also remove `?` marks and coalesce nils: `unarchive(key) ?? yourDefaultValue`.
+Just copy&paste this and change `NSColor` to your class name.
 
-Here's an example use:
+Here's a usage example:
 
 ```swift
 extension DefaultsKeys {
@@ -179,6 +179,19 @@ Defaults[.color] // => nil
 Defaults[.color] = NSColor.whiteColor()
 Defaults[.color] // => w 1.0, a 1.0
 Defaults[.color]?.whiteComponent // => 1.0
+```
+
+#### Custom types with default values
+
+If you don't want to deal with `nil` when fetching a user default value, you can remove `?` marks and supply the default value, like so:
+
+```swift
+extension NSUserDefaults {
+    subscript(key: DefaultsKey<NSColor>) -> NSColor {
+        get { return unarchive(key) ?? NSColor.clearColor() }
+        set { archive(key, newValue) }
+    }
+}
 ```
 
 ### Existence
