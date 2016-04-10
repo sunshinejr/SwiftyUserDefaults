@@ -194,6 +194,25 @@ extension NSUserDefaults {
 }
 ```
 
+#### Enums
+
+In addition to `NSCoding`, you can store `enum` values the same way:
+
+```swift
+enum MyEnum: String {
+    case A, B, C
+}
+
+extension NSUserDefaults {
+    subscript(key: DefaultsKey<MyEnum?>) -> MyEnum? {
+        get { return unarchive(key) }
+        set { archive(key, newValue) }
+    }
+}
+```
+
+The only requirement is that the enum has to be `RawRepresentable` by a simple type like `String` or `Int`.
+
 ### Existence
 
 ```swift
@@ -203,6 +222,14 @@ if !Defaults.hasKey(.hotkey) {
 ```
 
 You can use the `hasKey` method to check for key's existence in the user defaults. `remove()` is an alias for `removeObjectForKey()`, that also works with `DefaultsKeys` shortcuts.
+
+### Shared user defaults
+
+If you're sharing your user defaults between different apps or an app and its extensions, you can use SwiftyUserDefaults by overriding the `Defaults` shortcut with your own. Just add in your app:
+
+```swift
+var Defaults = NSUserDefaults(suiteName: "com.my.app")!
+```
 
 ## Traditional API
 
