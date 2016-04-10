@@ -1,6 +1,7 @@
-### master
+### 2.2.0 (2016-04-10)
 
 - Support for `archive()` and `unarchive()` on `RawRepresentable` types
+- Improved documentation
 
 ### 2.1.3 (2016-03-02)
 
