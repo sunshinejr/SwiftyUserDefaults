@@ -169,7 +169,13 @@ public extension NSUserDefaults {
     }
 }
 
-/// Global shortcut for NSUserDefaults.standardUserDefaults()
+/// Global shortcut for `NSUserDefaults.standardUserDefaults()`
+///
+/// **Pro-Tip:** If you want to use shared user defaults, just
+///  redefine this global shortcut in your app target, like so:
+///  ~~~
+///  var Defaults = NSUserDefaults(suiteName: "com.my.app")!
+///  ~~~
 
 public let Defaults = NSUserDefaults.standardUserDefaults()
 
