@@ -201,7 +201,7 @@ public class DefaultsKey<ValueType>: DefaultsKeys {
 }
 
 extension NSUserDefaults {
-    func set<T>(key: DefaultsKey<T>, _ value: Any?) {
+    public func set<T>(key: DefaultsKey<T>, _ value: Any?) {
         self[key._key] = value
     }
 }
