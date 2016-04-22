@@ -201,6 +201,7 @@ public class DefaultsKey<ValueType>: DefaultsKeys {
 }
 
 extension NSUserDefaults {
+    /// This function allows you to create your own custom Defaults subscript. Example: [Int: String]
     public func set<T>(key: DefaultsKey<T>, _ value: Any?) {
         self[key._key] = value
     }
