@@ -144,14 +144,15 @@ You can mark a type as optional to get `nil` if the key doesn't exist. Otherwise
 
 Additionally, typed arrays are available for these types:
 
-| Array type | Optional variant |
-|------------|------------------|
-| `[String]` | `[String]?`      |
-| `[Int]`    | `[Int]?`         |
-| `[Double]` | `[Double]?`      |
-| `[Bool]`   | `[Bool]?`        |
-| `[NSData]` | `[NSData]?`      |
-| `[NSDate]` | `[NSDate]?`      |
+|      Array type       | Optional variant |
+|-----------------------|------------------|
+| `[String]`            | `[String]?`      |
+| `[Int]`               | `[Int]?`         |
+| `[Double]`            | `[Double]?`      |
+| `[Bool]`              | `[Bool]?`        |
+| `[NSData]`            | `[NSData]?`      |
+| `[NSDate]`            | `[NSDate]?`      |
+| `[String: AnyObject]` |                  |
 
 ### Custom types
 
