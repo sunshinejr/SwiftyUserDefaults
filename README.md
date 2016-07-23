@@ -4,7 +4,7 @@
 [![CI Status](https://api.travis-ci.org/radex/SwiftyUserDefaults.svg?branch=master)](https://travis-ci.org/radex/SwiftyUserDefaults)
 [![CocoaPods](http://img.shields.io/cocoapods/v/SwiftyUserDefaults.svg)](https://cocoapods.org/pods/SwiftyUserDefaults)
 [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](#carthage)
-![Swift version](https://img.shields.io/badge/swift-2.2%20|%202.3-orange.svg)
+![Swift version](https://img.shields.io/badge/swift-3.0-orange.svg)
 
 #### Modern Swift API for `NSUserDefaults`
 ###### SwiftyUserDefaults makes user defaults enjoyable to use by combining expressive Swifty API with the benefits of static typing. Define your keys in one place, use value types easily, and get extra safety and convenient compile-time checks for free.
@@ -275,7 +275,7 @@ Defaults["hotkey"].dataValue             // defaults to NSData()
 If you're using CocoaPods, just add this line to your Podfile:
 
 ```ruby
-pod 'SwiftyUserDefaults'
+pod 'SwiftyUserDefaults', git: 'https://github.com/radex/SwiftyUserDefaults.git', branch: 'swift3'
 ```
 
 Install by running this command in your terminal:
@@ -295,7 +295,7 @@ import SwiftyUserDefaults
 Just add to your Cartfile:
 
 ```ruby
-github "radex/SwiftyUserDefaults"
+github "radex/SwiftyUserDefaults" "swift3"
 ```
 
 #### Manually

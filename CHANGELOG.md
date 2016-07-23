@@ -1,3 +1,7 @@
+### swift3
+
+- Updated for Swift 3 and Xcode 8 compatibility #91 @askari01
+
 ### 2.2.0 (2016-04-10)
 
 - Support for `archive()` and `unarchive()` on `RawRepresentable` types
