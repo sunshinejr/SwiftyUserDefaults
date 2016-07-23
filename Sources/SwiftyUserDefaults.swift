@@ -177,7 +177,7 @@ public extension UserDefaults {
 ///  var Defaults = NSUserDefaults(suiteName: "com.my.app")!
 ///  ~~~
 
-public let Defaults = UserDefaults.standard()
+public let Defaults = UserDefaults.standard
 
 // MARK: - Static keys
 
