@@ -94,7 +94,7 @@ class SwiftyUserDefaultsTests: XCTestCase {
     
     func testData() {
         let key = "data"
-        let data = "foo".data(using: String.Encoding.utf8, allowLossyConversion: false)!
+        let data = "foo".data(using: .utf8, allowLossyConversion: false)!
         Defaults[key] = data
         XCTAssertEqual(Defaults[key].data!, data)
         XCTAssertNil(Defaults[key].string)
@@ -284,7 +284,7 @@ class SwiftyUserDefaultsTests: XCTestCase {
         Defaults[key] = 10
         XCTAssert(Defaults[key] as? Int == 10)
         Defaults[key] = Date.distantPast
-        XCTAssert(Defaults[key] as? Date == Date.distantPast)
+        XCTAssert(Defaults[key] as? Date == .distantPast)
     }
     
     func testStaticNSObject() {
@@ -293,13 +293,13 @@ class SwiftyUserDefaultsTests: XCTestCase {
         Defaults[key] = "foo"
         XCTAssert(Defaults[key] as? NSString == "foo")
         Defaults[key] = Date.distantPast
-        XCTAssert(Defaults[key] as? Date == Date.distantPast)
+        XCTAssert(Defaults[key] as? Date == .distantPast)
     }
     
     func testStaticDataOptional() {
         let key = DefaultsKey<Data?>("data")
         XCTAssert(Defaults[key] == nil)
-        let data = "foobar".data(using: String.Encoding.utf8)!
+        let data = "foobar".data(using: .utf8)!
         Defaults[key] = data
         XCTAssert(Defaults[key] == data)
     }
@@ -307,7 +307,7 @@ class SwiftyUserDefaultsTests: XCTestCase {
     func testStaticData() {
         let key = DefaultsKey<Data>("data")
         XCTAssert(Defaults[key] == Data())
-        let data = "foobar".data(using: String.Encoding.utf8)!
+        let data = "foobar".data(using: .utf8)!
         Defaults[key] = data
         XCTAssert(Defaults[key] == data)
     }
@@ -315,8 +315,8 @@ class SwiftyUserDefaultsTests: XCTestCase {
     func testStaticDate() {
         let key = DefaultsKey<Date?>("date")
         XCTAssert(Defaults[key] == nil)
-        Defaults[key] = Date.distantPast
-        XCTAssert(Defaults[key] == Date.distantPast)
+        Defaults[key] = .distantPast
+        XCTAssert(Defaults[key] == .distantPast)
         let now = Date()
         Defaults[key] = now
         XCTAssert(Defaults[key] == now)
@@ -345,7 +345,7 @@ class SwiftyUserDefaultsTests: XCTestCase {
         Defaults[key] = ["foo": "bar", "bar": 123, "baz": Data()]
         XCTAssert(Defaults[key] as NSDictionary == ["foo": "bar", "bar": 123, "baz": Data()])
         Defaults[key]["lol"] = Date.distantFuture
-        XCTAssert(Defaults[key]["lol"] as! Date == Date.distantFuture)
+        XCTAssert(Defaults[key]["lol"] as! Date == .distantFuture)
         Defaults[key]["lol"] = nil
         Defaults[key]["baz"] = nil
         XCTAssert(Defaults[key] as NSDictionary == ["foo": "bar", "bar": 123])
@@ -460,7 +460,7 @@ class SwiftyUserDefaultsTests: XCTestCase {
     func testStaticDataArrayOptional() {
         let key = DefaultsKey<[Data]?>("datas")
         XCTAssert(Defaults[key] == nil)
-        let data = "foobar".data(using: String.Encoding.utf8)!
+        let data = "foobar".data(using: .utf8)!
         Defaults[key] = [data, Data()]
         XCTAssert(Defaults[key]! == [data, Data()])
     }
@@ -475,15 +475,15 @@ class SwiftyUserDefaultsTests: XCTestCase {
     func testStaticDateArrayOptional() {
         let key = DefaultsKey<[Date]?>("dates")
         XCTAssert(Defaults[key] == nil)
-        Defaults[key] = [Date.distantFuture]
-        XCTAssert(Defaults[key]! == [Date.distantFuture])
+        Defaults[key] = [.distantFuture]
+        XCTAssert(Defaults[key]! == [.distantFuture])
     }
     
     func testStaticDateArray() {
         let key = DefaultsKey<[Date]>("dates")
         XCTAssert(Defaults[key] == [])
-        Defaults[key] = [Date.distantFuture]
-        XCTAssert(Defaults[key] == [Date.distantFuture])
+        Defaults[key] = [.distantFuture]
+        XCTAssert(Defaults[key] == [.distantFuture])
     }
     
     func testShortcutsAndExistence() {
