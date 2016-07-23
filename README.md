@@ -223,6 +223,14 @@ if !Defaults.hasKey(.hotkey) {
 
 You can use the `hasKey` method to check for key's existence in the user defaults. `remove()` is an alias for `removeObjectForKey()`, that also works with `DefaultsKeys` shortcuts.
 
+### Remove all keys
+
+To reset user defaults, use `removeAll` method.
+
+```swift
+Defaults.removeAll()
+```
+
 ### Shared user defaults
 
 If you're sharing your user defaults between different apps or an app and its extensions, you can use SwiftyUserDefaults by overriding the `Defaults` shortcut with your own. Just add in your app:
