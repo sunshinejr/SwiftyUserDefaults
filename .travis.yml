@@ -9,12 +9,12 @@ before_install:
 
 script:
 - set -o pipefail && xctool build -project SwiftyUserDefaults.xcodeproj -scheme 'SwiftyUserDefaults' -destination 'name=iPhone 6,OS=9.2' ONLY_ACTIVE_ARCH=NO | xcpretty
-- set -o pipefail && xctool build -project SwiftyUserDefaults.xcodeproj -scheme 'SwiftyUserDefaults tvOS' -sdk appletvsimulator9.2 -destination 'name=Apple TV 1080p' ONLY_ACTIVE_ARCH=NO | xcpretty
+- set -o pipefail && xctool build -project SwiftyUserDefaults.xcodeproj -scheme 'SwiftyUserDefaults tvOS' -sdk appletvos -destination 'name=Apple TV 1080p' ONLY_ACTIVE_ARCH=NO | xcpretty
 - set -o pipefail && xctool build -project SwiftyUserDefaults.xcodeproj -scheme 'SwiftyUserDefaults watchOS' -sdk iphonesimulator -destination 'name=Apple Watch - 42mm' ONLY_ACTIVE_ARCH=NO | xcpretty
 - set -o pipefail && xctool build -project SwiftyUserDefaults.xcodeproj -scheme 'SwiftyUserDefaults Mac' ONLY_ACTIVE_ARCH=NO | xcpretty
 
 - set -o pipefail && xctool test -project SwiftyUserDefaults.xcodeproj -scheme 'SwiftyUserDefaults' -sdk iphonesimulator -destination 'name=iPhone 6,OS=9.2' ONLY_ACTIVE_ARCH=NO | xcpretty
-- set -o pipefail && xctool test -project SwiftyUserDefaults.xcodeproj -scheme 'SwiftyUserDefaults tvOS' -sdk appletvsimulator9.2 -destination 'name=Apple TV 1080p' ONLY_ACTIVE_ARCH=NO | xcpretty
+- set -o pipefail && xctool test -project SwiftyUserDefaults.xcodeproj -scheme 'SwiftyUserDefaults tvOS' -sdk appletvos -destination 'name=Apple TV 1080p' ONLY_ACTIVE_ARCH=NO | xcpretty
 - set -o pipefail && xctool test -project SwiftyUserDefaults.xcodeproj -scheme 'SwiftyUserDefaults watchOS' -sdk iphonesimulator -destination 'name=Apple Watch - 42mm' ONLY_ACTIVE_ARCH=NO | xcpretty
 - set -o pipefail && xctool test -project SwiftyUserDefaults.xcodeproj -scheme 'SwiftyUserDefaults Mac' ONLY_ACTIVE_ARCH=NO | xcpretty
 
