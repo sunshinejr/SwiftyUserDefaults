@@ -137,7 +137,7 @@ public extension UserDefaults {
             case let v as Int: self.set(v, forKey: key)
             case let v as Double: self.set(v, forKey: key)
             case let v as Bool: self.set(v, forKey: key)
-            case let v as URL: setURL(v, forKey: key)
+            case let v as URL: self.set(v, forKey: key)
             case let v as NSObject: self.set(v, forKey: key)
             case nil: removeObject(forKey: key)
             default: assertionFailure("Invalid value type")
