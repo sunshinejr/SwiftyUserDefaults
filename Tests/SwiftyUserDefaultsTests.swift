@@ -578,9 +578,47 @@ class SwiftyUserDefaultsTests: XCTestCase {
         Defaults[key] = nil
         XCTAssert(Defaults[key] == nil)
     }
+
+    func testComposite() {
+        let size1 = CGSize(width: 12.3, height: 3.21)
+        let size2 = CGSize(width: 32.1, height: 1.23)
+        let key = CompositeDefaultsKey<CGSize>(["width", "height"])
+        XCTAssert(Defaults[key] == .zero)
+        Defaults[key] = size1
+        XCTAssert(Defaults[key] == size1)
+        Defaults[key] = size2
+        XCTAssert(Defaults[key] == size2)
+        Defaults[key] = .zero
+        XCTAssert(Defaults[key] == .zero)
+    }
 }
 
 extension DefaultsKeys {
     static let strings = DefaultsKey<[String]>("strings")
     static let optStrings = DefaultsKey<[String]?>("strings")
 }
+
+extension CGSize : CompositeType {
+    public typealias ValueType = CGFloat
+}
+
+public extension NSUserDefaults {
+    public subscript(key: CompositeDefaultsKey<CGSize>) -> CGSize {
+        get {
+            let width  = self[key._keys[0]]
+            let height = self[key._keys[1]]
+            return CGSize(width: CGFloat(width), height: CGFloat(height))
+        }
+
+        set {
+            self[key._keys[0]] = newValue.width
+            self[key._keys[1]] = newValue.height
+        }
+    }
+
+    public subscript(key: DefaultsKey<CGFloat>) -> CGFloat {
+        get { return CGFloat(numberForKey(key._key)?.doubleValue ?? 0.0) }
+        set { self[key._key] = Double(newValue) }
+    }
+}
+

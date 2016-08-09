@@ -200,6 +200,20 @@ public class DefaultsKey<ValueType>: DefaultsKeys {
     }
 }
 
+public protocol CompositeType {
+    // CompositeType is composed of values of type ValueType (e.g. CGRect is composed of CGFloats)
+    associatedtype ValueType
+}
+
+/// Base class for values that are a composite of two user defaults keys.
+public class CompositeDefaultsKey<ValueType: CompositeType> {
+    public let _keys: [DefaultsKey<ValueType.ValueType>]
+
+    public init(_ keys: [String]) {
+        _keys = keys.map { DefaultsKey($0) }
+    }
+}
+
 extension NSUserDefaults {
     /// This function allows you to create your own custom Defaults subscript. Example: [Int: String]
     public func set<T>(key: DefaultsKey<T>, _ value: Any?) {
