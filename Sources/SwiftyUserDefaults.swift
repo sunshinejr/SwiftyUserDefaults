@@ -350,6 +350,11 @@ extension NSUserDefaults {
         get { return arrayForKey(key._key) ?? [] }
         set { set(key, newValue) }
     }
+    
+    public subscript(key: DefaultsKey<[[String: AnyObject]]>) -> [[String: AnyObject]] {
+        get { return arrayForKey(key._key) as? [[String: AnyObject]] ?? [[:]] }
+        set { set(key, newValue) }
+    }
 }
 
 // We need the <T: AnyObject> and <T: _ObjectiveCBridgeable> variants to

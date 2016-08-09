@@ -486,6 +486,16 @@ class SwiftyUserDefaultsTests: XCTestCase {
         XCTAssert(Defaults[key] == [NSDate.distantFuture()])
     }
     
+    func testStaticDictionaryArray() {
+        let key = DefaultsKey<[[String: AnyObject]]>("dictionaries")
+        XCTAssert(Defaults[key] == [[:]])
+        Defaults[key] = [["foo": 123, "bar": "xyz"]]
+        XCTAssert(Defaults[key] == [["foo": 123, "bar": "xyz"]])
+        Defaults[key][0]["foo"] = 987
+        Defaults[key][0]["bar"] = "abc"
+        XCTAssert(Defaults[key] == [["foo": 987, "bar": "abc"]])
+    }
+    
     func testShortcutsAndExistence() {
         XCTAssert(Defaults[.strings] == [])
         XCTAssert(!Defaults.hasKey(.strings))
