@@ -133,8 +133,13 @@ public extension UserDefaults {
             return proxy
         }
         set {
+            
+            guard let newValue = newValue else {
+                removeObject(forKey: key)
+                return
+            }
+            
             switch newValue {
-            case nil: removeObject(forKey: key)
                 
             // @warning This should always be on top of Int because a cast
             // from Double to Int will always succeed.
