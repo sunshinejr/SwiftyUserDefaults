@@ -23,8 +23,8 @@ class SwiftyUserDefaultsTests: XCTestCase {
         XCTAssertEqual(Defaults[key].intValue, 0)
         XCTAssertEqual(Defaults[key].doubleValue, 0)
         XCTAssertEqual(Defaults[key].boolValue, false)
-        XCTAssertEqual(Defaults[key].arrayValue, [])
-        XCTAssertEqual(Defaults[key].dictionaryValue, [:])
+        XCTAssertEqual(Defaults[key].arrayValue.count, 0)
+        XCTAssertEqual(Defaults[key].dictionaryValue.keys.count, 0)
         XCTAssertEqual(Defaults[key].dataValue, Data())
     }
     
@@ -110,17 +110,24 @@ class SwiftyUserDefaultsTests: XCTestCase {
     
     func testArray() {
         let key = "array"
-        let array = [1, 2, "foo", true]
+        let array = [1, 2, "foo", true] as [Any]
         Defaults[key] = array
-        XCTAssertEqual(Defaults[key].array!, array)
-        XCTAssertEqual(Defaults[key].array![2] as? String, "foo")
+        
+        let array2 = Defaults[key].array!
+        XCTAssertEqual(array2[0] as? Int, 1)
+        XCTAssertEqual(array2[1] as? Int, 2)
+        XCTAssertEqual(array2[2] as? String, "foo")
+        XCTAssertEqual(array2[3] as? Bool, true)
     }
     
     func testDict() {
         let key = "dict"
-        let dict = ["foo": 1, "bar": [1, 2, 3]]
+        let dict: [String: Any] = ["foo": 1, "bar": [1, 2, 3]]
         Defaults[key] = dict
-        XCTAssertEqual(Defaults[key].dictionary!, dict)
+        
+        let dict2 = Defaults[key].dictionary!
+        XCTAssertEqual(dict2["foo"] as? Int, 1)
+        XCTAssertEqual((dict2["bar"] as? [Int])?.count, 3)
     }
     
     // --
@@ -244,17 +251,17 @@ class SwiftyUserDefaultsTests: XCTestCase {
     
     func testStaticDoubleOptional() {
         let key = DefaultsKey<Double?>("double")
-        XCTAssert(Defaults[key] == nil)
+        XCTAssertNil(Defaults[key])
         Defaults[key] = 10
         XCTAssert(Defaults[key] == 10.0)
     }
     
     func testStaticDouble() {
         let key = DefaultsKey<Double>("double")
-        XCTAssert(Defaults[key] == 0)
+        XCTAssertEqual(Defaults[key], 0)
         Defaults[key] = 2.14
         Defaults[key] += 1
-        XCTAssert(Defaults[key] == 3.14)
+        XCTAssertEqual(Defaults[key], 3.14)
     }
     
     func testStaticBoolOptional() {
@@ -277,21 +284,12 @@ class SwiftyUserDefaultsTests: XCTestCase {
     }
     
     func testStaticAnyObject() {
-        let key = DefaultsKey<AnyObject?>("object")
+        let key = DefaultsKey<Any?>("object")
         XCTAssert(Defaults[key] == nil)
         Defaults[key] = "foo"
         XCTAssert(Defaults[key] as? String == "foo")
         Defaults[key] = 10
         XCTAssert(Defaults[key] as? Int == 10)
-        Defaults[key] = Date.distantPast
-        XCTAssert(Defaults[key] as? Date == .distantPast)
-    }
-    
-    func testStaticNSObject() {
-        let key = DefaultsKey<NSObject?>("object")
-        XCTAssert(Defaults[key] == nil)
-        Defaults[key] = "foo"
-        XCTAssert(Defaults[key] as? NSString == "foo")
         Defaults[key] = Date.distantPast
         XCTAssert(Defaults[key] as? Date == .distantPast)
     }
@@ -333,14 +331,14 @@ class SwiftyUserDefaultsTests: XCTestCase {
     }
     
     func testStaticDictionaryOptional() {
-        let key = DefaultsKey<[String: AnyObject]?>("dictionary")
+        let key = DefaultsKey<[String: Any]?>("dictionary")
         XCTAssert(Defaults[key] == nil)
         Defaults[key] = ["foo": "bar", "bar": 123, "baz": Data()]
         XCTAssert(Defaults[key]! as NSDictionary == ["foo": "bar", "bar": 123, "baz": Data()])
     }
     
     func testStaticDictionary() {
-        let key = DefaultsKey<[String: AnyObject]>("dictionary")
+        let key = DefaultsKey<[String: Any]>("dictionary")
         XCTAssert(Defaults[key] as NSDictionary == [:])
         Defaults[key] = ["foo": "bar", "bar": 123, "baz": Data()]
         XCTAssert(Defaults[key] as NSDictionary == ["foo": "bar", "bar": 123, "baz": Data()])
@@ -353,39 +351,22 @@ class SwiftyUserDefaultsTests: XCTestCase {
     
     // --
     
-    func testStaticNSArrayOptional() {
-        let key = DefaultsKey<NSArray?>("nsarray")
-        XCTAssert(Defaults[key] == nil)
-        Defaults[key] = []
-        XCTAssert(Defaults[key] == [])
-        Defaults[key] = [1, "foo", Data()]
-        XCTAssert(Defaults[key] == [1, "foo", Data()])
-    }
-    
-    func testStaticNSArray() {
-        let key = DefaultsKey<NSArray>("nsarray")
-        XCTAssert(Defaults[key] == [])
-        Defaults[key] = [1, "foo", Data()]
-        XCTAssert(Defaults[key] == [1, "foo", Data()])
-    }
-    
     func testStaticArrayOptional() {
-        let key = DefaultsKey<[AnyObject]?>("array")
+        let key = DefaultsKey<[Any]?>("nsarray")
         XCTAssert(Defaults[key] == nil)
         Defaults[key] = []
-        XCTAssert(Defaults[key]! as NSArray == [])
+        XCTAssertEqual(Defaults[key]?.count, 0)
         Defaults[key] = [1, "foo", Data()]
-        XCTAssert(Defaults[key]! as NSArray == [1, "foo", Data()])
+        XCTAssertEqual(Defaults[key]?.count, 3)
     }
     
     func testStaticArray() {
-        let key = DefaultsKey<[AnyObject]>("array")
-        XCTAssert(Defaults[key] as NSArray == [])
-        Defaults[key].append(1)
-        Defaults[key].append("foo")
-        Defaults[key].append(false)
-        Defaults[key].append(Data())
-        XCTAssert(Defaults[key] as NSArray == [1, "foo", false, Data()])
+        let key = DefaultsKey<[Any]>("nsarray")
+        XCTAssertEqual(Defaults[key].count, 0)
+        Defaults[key] = [1, "foo", Data()]
+        XCTAssertEqual(Defaults[key][0] as? Int, 1)
+        XCTAssertEqual(Defaults[key][1] as? String, "foo")
+        XCTAssertEqual(Defaults[key][2] as? Data, Data())
     }
     
     // --
@@ -521,8 +502,8 @@ class SwiftyUserDefaultsTests: XCTestCase {
     func testArchiving() {
         let key = DefaultsKey<NSColor?>("color")
         XCTAssert(Defaults[key] == nil)
-        Defaults[key] = .white()
-        XCTAssert(Defaults[key]! == NSColor.white())
+        Defaults[key] = .white
+        XCTAssert(Defaults[key]! == NSColor.white)
         Defaults[key] = nil
         XCTAssert(Defaults[key] == nil)
     }
@@ -530,18 +511,18 @@ class SwiftyUserDefaultsTests: XCTestCase {
     func testArchiving2() {
         let key = DefaultsKey<NSColor>("color")
         XCTAssert(!Defaults.hasKey(key))
-        XCTAssert(Defaults[key] == NSColor.white())
-        Defaults[key] = .black()
-        XCTAssert(Defaults[key] == NSColor.black())
+        XCTAssert(Defaults[key] == NSColor.white)
+        Defaults[key] = .black
+        XCTAssert(Defaults[key] == NSColor.black)
     }
     
     func testArchiving3() {
         let key = DefaultsKey<[NSColor]>("colors")
         XCTAssert(Defaults[key] == [])
-        Defaults[key] = [.black()]
-        Defaults[key].append(.white())
-        Defaults[key].append(.red())
-        XCTAssert(Defaults[key] == [.black(), .white(), .red()])
+        Defaults[key] = [.black]
+        Defaults[key].append(.white)
+        Defaults[key].append(.red)
+        XCTAssert(Defaults[key] == [.black, .white, .red])
     }
     
     // --

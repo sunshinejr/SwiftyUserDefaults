@@ -26,29 +26,29 @@ import Foundation
 
 public extension UserDefaults {
     class Proxy {
-        private let defaults: UserDefaults
-        private let key: String
+        fileprivate let defaults: UserDefaults
+        fileprivate let key: String
         
-        private init(_ defaults: UserDefaults, _ key: String) {
+        fileprivate init(_ defaults: UserDefaults, _ key: String) {
             self.defaults = defaults
             self.key = key
         }
         
         // MARK: Getters
         
-        public var object: NSObject? {
-            return defaults.object(forKey: key) as? NSObject
+        public var object: Any? {
+            return defaults.object(forKey: key)
         }
         
         public var string: String? {
             return defaults.string(forKey: key)
         }
         
-        public var array: NSArray? {
+        public var array: [Any]? {
             return defaults.array(forKey: key)
         }
         
-        public var dictionary: NSDictionary? {
+        public var dictionary: [String: Any]? {
             return defaults.dictionary(forKey: key)
         }
         
@@ -82,12 +82,12 @@ public extension UserDefaults {
             return string ?? ""
         }
         
-        public var arrayValue: NSArray {
+        public var arrayValue: [Any] {
             return array ?? []
         }
         
-        public var dictionaryValue: NSDictionary {
-            return dictionary ?? NSDictionary()
+        public var dictionaryValue: [String: Any] {
+            return dictionary ?? [:]
         }
         
         public var dataValue: Data {
@@ -134,13 +134,16 @@ public extension UserDefaults {
         }
         set {
             switch newValue {
-            case let v as Int: self.set(v, forKey: key)
+            case nil: removeObject(forKey: key)
+                
+            // @warning This should always be on top of Int because a cast
+            // from Double to Int will always succeed.
             case let v as Double: self.set(v, forKey: key)
+            
+            case let v as Int: self.set(v, forKey: key)
             case let v as Bool: self.set(v, forKey: key)
             case let v as URL: self.set(v, forKey: key)
-            case let v as NSObject: self.set(v, forKey: key)
-            case nil: removeObject(forKey: key)
-            default: assertionFailure("Invalid value type")
+            default: self.set(newValue, forKey: key)
             }
         }
     }
@@ -185,7 +188,7 @@ public let Defaults = UserDefaults.standard
 /// so you can use the shortcut dot notation (e.g. `Defaults[.yourKey]`)
 
 public class DefaultsKeys {
-    private init() {}
+    fileprivate init() {}
 }
 
 /// Base class for static user defaults keys. Specialize with value type
@@ -197,6 +200,7 @@ public class DefaultsKey<ValueType>: DefaultsKeys {
     
     public init(_ key: String) {
         self._key = key
+        super.init()
     }
 }
 
@@ -235,15 +239,6 @@ extension UserDefaults {
         get { return string(forKey: key._key) ?? "" }
         set { set(key, newValue) }
     }
-    public subscript(key: DefaultsKey<NSString?>) -> NSString? {
-        get { return string(forKey: key._key) }
-        set { set(key, newValue) }
-    }
-    
-    public subscript(key: DefaultsKey<NSString>) -> NSString {
-        get { return string(forKey: key._key) ?? "" }
-        set { set(key, newValue) }
-    }
     
     public subscript(key: DefaultsKey<Int?>) -> Int? {
         get { return numberForKey(key._key)?.intValue }
@@ -275,13 +270,8 @@ extension UserDefaults {
         set { set(key, newValue) }
     }
     
-    public subscript(key: DefaultsKey<AnyObject?>) -> AnyObject? {
+    public subscript(key: DefaultsKey<Any?>) -> Any? {
         get { return object(forKey: key._key) }
-        set { set(key, newValue) }
-    }
-    
-    public subscript(key: DefaultsKey<NSObject?>) -> NSObject? {
-        get { return object(forKey: key._key) as? NSObject }
         set { set(key, newValue) }
     }
     
@@ -307,22 +297,12 @@ extension UserDefaults {
     
     // TODO: It would probably make sense to have support for statically typed dictionaries (e.g. [String: String])
     
-    public subscript(key: DefaultsKey<[String: AnyObject]?>) -> [String: AnyObject]? {
+    public subscript(key: DefaultsKey<[String: Any]?>) -> [String: Any]? {
         get { return dictionary(forKey: key._key) }
         set { set(key, newValue) }
     }
     
-    public subscript(key: DefaultsKey<[String: AnyObject]>) -> [String: AnyObject] {
-        get { return dictionary(forKey: key._key) ?? [:] }
-        set { set(key, newValue) }
-    }
-    
-    public subscript(key: DefaultsKey<NSDictionary?>) -> NSDictionary? {
-        get { return dictionary(forKey: key._key) }
-        set { set(key, newValue) }
-    }
-    
-    public subscript(key: DefaultsKey<NSDictionary>) -> NSDictionary {
+    public subscript(key: DefaultsKey<[String: Any]>) -> [String: Any] {
         get { return dictionary(forKey: key._key) ?? [:] }
         set { set(key, newValue) }
     }
@@ -331,22 +311,12 @@ extension UserDefaults {
 // MARK: Static subscripts for array types
 
 extension UserDefaults {
-    public subscript(key: DefaultsKey<NSArray?>) -> NSArray? {
+    public subscript(key: DefaultsKey<[Any]?>) -> [Any]? {
         get { return array(forKey: key._key) }
         set { set(key, newValue) }
     }
     
-    public subscript(key: DefaultsKey<NSArray>) -> NSArray {
-        get { return array(forKey: key._key) ?? [] }
-        set { set(key, newValue) }
-    }
-
-    public subscript(key: DefaultsKey<[AnyObject]?>) -> [AnyObject]? {
-        get { return array(forKey: key._key) }
-        set { set(key, newValue) }
-    }
-    
-    public subscript(key: DefaultsKey<[AnyObject]>) -> [AnyObject] {
+    public subscript(key: DefaultsKey<[Any]>) -> [Any] {
         get { return array(forKey: key._key) ?? [] }
         set { set(key, newValue) }
     }
@@ -366,11 +336,11 @@ extension UserDefaults {
         return array(forKey: key._key) as NSArray? as? [T]
     }
     
-    public func getArray<T: AnyObject>(_ key: DefaultsKey<[T]>) -> [T] {
+    public func getArray<T: Any>(_ key: DefaultsKey<[T]>) -> [T] {
         return array(forKey: key._key) as NSArray? as? [T] ?? []
     }
     
-    public func getArray<T: AnyObject>(_ key: DefaultsKey<[T]?>) -> [T]? {
+    public func getArray<T: Any>(_ key: DefaultsKey<[T]?>) -> [T]? {
         return array(forKey: key._key) as NSArray? as? [T]
     }
 }
@@ -467,32 +437,65 @@ extension UserDefaults {
 // MARK: NSCoding
 
 extension UserDefaults {
-    // TODO: Can we simplify this and ensure that T is NSCoding compliant?
     
-    public func archive<T>(_ key: DefaultsKey<T>, _ value: T) {
-        if let value: AnyObject = value as? AnyObject {
-            set(key, NSKeyedArchiver.archivedData(withRootObject: value))
-        } else {
-            assertionFailure("Invalid value type, needs to be a NSCoding-compliant type")
-        }
+    public func archive<T: NSCoding>(_ key: DefaultsKey<T>, _ value: T) {
+        set(key, NSKeyedArchiver.archivedData(withRootObject: value))
     }
     
-    public func archive<T>(_ key: DefaultsKey<T?>, _ value: T?) {
-        if let value: AnyObject = value as? AnyObject {
-            set(key, NSKeyedArchiver.archivedData(withRootObject: value))
-        } else if value == nil {
+    public func archive<T: NSCoding>(_ key: DefaultsKey<T?>, _ value: T?) {
+        guard let value = value else {
             remove(key)
-        } else {
-            assertionFailure("Invalid value type, needs to be a NSCoding-compliant type")
+            return
         }
+        set(key, NSKeyedArchiver.archivedData(withRootObject: value))
     }
     
-    public func unarchive<T>(_ key: DefaultsKey<T?>) -> T? {
+    public func archive<T: NSCoding>(_ key: DefaultsKey<[T]>, _ value: [T]) {
+        set(key, NSKeyedArchiver.archivedData(withRootObject: value))
+    }
+    
+    public func archive<T: NSCoding>(_ key: DefaultsKey<[T]?>, _ value: [T]?) {
+        guard let value = value else {
+            remove(key)
+            return
+        }
+        set(key, NSKeyedArchiver.archivedData(withRootObject: value))
+    }
+    
+    public func archive<T: NSCoding>(_ key: DefaultsKey<[String: T]>, _ value: [String: T]) {
+        set(key, NSKeyedArchiver.archivedData(withRootObject: value))
+    }
+    
+    public func archive<T: NSCoding>(_ key: DefaultsKey<[String: T]?>, _ value: [String: T]?) {
+        guard let value = value else {
+            remove(key)
+            return
+        }
+        set(key, NSKeyedArchiver.archivedData(withRootObject: value))
+    }
+    
+    public func unarchive<T: NSCoding>(_ key: DefaultsKey<T?>) -> T? {
         return data(forKey: key._key).flatMap { NSKeyedUnarchiver.unarchiveObject(with: $0) } as? T
     }
     
-    public func unarchive<T>(_ key: DefaultsKey<T>) -> T? {
+    public func unarchive<T: NSCoding>(_ key: DefaultsKey<T>) -> T? {
         return data(forKey: key._key).flatMap { NSKeyedUnarchiver.unarchiveObject(with: $0) } as? T
+    }
+    
+    public func unarchive<T: NSCoding>(_ key: DefaultsKey<[T]?>) -> [T]? {
+        return data(forKey: key._key).flatMap { NSKeyedUnarchiver.unarchiveObject(with: $0) } as? [T]
+    }
+    
+    public func unarchive<T: NSCoding>(_ key: DefaultsKey<[T]>) -> [T]? {
+        return data(forKey: key._key).flatMap { NSKeyedUnarchiver.unarchiveObject(with: $0) } as? [T]
+    }
+    
+    public func unarchive<T: NSCoding>(_ key: DefaultsKey<[String: T]?>) -> [String: T]? {
+        return data(forKey: key._key).flatMap { NSKeyedUnarchiver.unarchiveObject(with: $0) } as? [String: T]
+    }
+    
+    public func unarchive<T: NSCoding>(_ key: DefaultsKey<[String: T]>) -> [String: T]? {
+        return data(forKey: key._key).flatMap { NSKeyedUnarchiver.unarchiveObject(with: $0) } as? [String: T]
     }
 }
 

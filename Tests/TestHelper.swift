@@ -14,7 +14,7 @@ extension UserDefaults {
     }
     
     subscript(key: DefaultsKey<NSColor>) -> NSColor {
-        get { return unarchive(key) ?? .white() }
+        get { return unarchive(key) ?? .white }
         set { archive(key, newValue) }
     }
     
