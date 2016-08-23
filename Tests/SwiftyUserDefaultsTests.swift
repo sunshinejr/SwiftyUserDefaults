@@ -352,18 +352,24 @@ class SwiftyUserDefaultsTests: XCTestCase {
     // --
     
     func testStaticArrayOptional() {
-        let key = DefaultsKey<[Any]?>("nsarray")
+        let key = DefaultsKey<[Any]?>("array")
         XCTAssert(Defaults[key] == nil)
         Defaults[key] = []
         XCTAssertEqual(Defaults[key]?.count, 0)
         Defaults[key] = [1, "foo", Data()]
         XCTAssertEqual(Defaults[key]?.count, 3)
+        XCTAssertEqual(Defaults[key]?[0] as? Int, 1)
+        XCTAssertEqual(Defaults[key]?[1] as? String, "foo")
+        XCTAssertEqual(Defaults[key]?[2] as? Data, Data())
     }
     
     func testStaticArray() {
-        let key = DefaultsKey<[Any]>("nsarray")
+        let key = DefaultsKey<[Any]>("array")
         XCTAssertEqual(Defaults[key].count, 0)
-        Defaults[key] = [1, "foo", Data()]
+        Defaults[key].append(1)
+        Defaults[key].append("foo")
+        Defaults[key].append(Data())
+        XCTAssertEqual(Defaults[key].count, 3)
         XCTAssertEqual(Defaults[key][0] as? Int, 1)
         XCTAssertEqual(Defaults[key][1] as? String, "foo")
         XCTAssertEqual(Defaults[key][2] as? Data, Data())
