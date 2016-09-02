@@ -442,65 +442,26 @@ extension UserDefaults {
 // MARK: NSCoding
 
 extension UserDefaults {
-    
-    public func archive<T: NSCoding>(_ key: DefaultsKey<T>, _ value: T) {
+    // TODO: Can we simplify this and ensure that T is NSCoding compliant?
+
+    public func archive<T>(_ key: DefaultsKey<T>, _ value: T) {
         set(key, NSKeyedArchiver.archivedData(withRootObject: value))
     }
-    
-    public func archive<T: NSCoding>(_ key: DefaultsKey<T?>, _ value: T?) {
-        guard let value = value else {
+
+    public func archive<T>(_ key: DefaultsKey<T?>, _ value: T?) {
+        if let value = value {
+            set(key, NSKeyedArchiver.archivedData(withRootObject: value))
+        } else {
             remove(key)
-            return
         }
-        set(key, NSKeyedArchiver.archivedData(withRootObject: value))
     }
     
-    public func archive<T: NSCoding>(_ key: DefaultsKey<[T]>, _ value: [T]) {
-        set(key, NSKeyedArchiver.archivedData(withRootObject: value))
-    }
-    
-    public func archive<T: NSCoding>(_ key: DefaultsKey<[T]?>, _ value: [T]?) {
-        guard let value = value else {
-            remove(key)
-            return
-        }
-        set(key, NSKeyedArchiver.archivedData(withRootObject: value))
-    }
-    
-    public func archive<T: NSCoding>(_ key: DefaultsKey<[String: T]>, _ value: [String: T]) {
-        set(key, NSKeyedArchiver.archivedData(withRootObject: value))
-    }
-    
-    public func archive<T: NSCoding>(_ key: DefaultsKey<[String: T]?>, _ value: [String: T]?) {
-        guard let value = value else {
-            remove(key)
-            return
-        }
-        set(key, NSKeyedArchiver.archivedData(withRootObject: value))
-    }
-    
-    public func unarchive<T: NSCoding>(_ key: DefaultsKey<T?>) -> T? {
+    public func unarchive<T>(_ key: DefaultsKey<T>) -> T? {
         return data(forKey: key._key).flatMap { NSKeyedUnarchiver.unarchiveObject(with: $0) } as? T
     }
     
-    public func unarchive<T: NSCoding>(_ key: DefaultsKey<T>) -> T? {
+    public func unarchive<T>(_ key: DefaultsKey<T?>) -> T? {
         return data(forKey: key._key).flatMap { NSKeyedUnarchiver.unarchiveObject(with: $0) } as? T
-    }
-    
-    public func unarchive<T: NSCoding>(_ key: DefaultsKey<[T]?>) -> [T]? {
-        return data(forKey: key._key).flatMap { NSKeyedUnarchiver.unarchiveObject(with: $0) } as? [T]
-    }
-    
-    public func unarchive<T: NSCoding>(_ key: DefaultsKey<[T]>) -> [T]? {
-        return data(forKey: key._key).flatMap { NSKeyedUnarchiver.unarchiveObject(with: $0) } as? [T]
-    }
-    
-    public func unarchive<T: NSCoding>(_ key: DefaultsKey<[String: T]?>) -> [String: T]? {
-        return data(forKey: key._key).flatMap { NSKeyedUnarchiver.unarchiveObject(with: $0) } as? [String: T]
-    }
-    
-    public func unarchive<T: NSCoding>(_ key: DefaultsKey<[String: T]>) -> [String: T]? {
-        return data(forKey: key._key).flatMap { NSKeyedUnarchiver.unarchiveObject(with: $0) } as? [String: T]
     }
 }
 
