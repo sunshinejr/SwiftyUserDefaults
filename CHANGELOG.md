@@ -1,6 +1,8 @@
 ### swift3
 
 - Updated for Swift 3 and Xcode 8 compatibility #91 @askari01
+- Updated for Swift 3 beta 4 #102 @rinatkhanov
+- Updated for Swift 3 beta 6 #106 @ldiqual
 
 ### 2.2.0 (2016-04-10)
 
