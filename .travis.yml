@@ -3,20 +3,28 @@ cache: cocoapods
 rvm: 2.2.2
 osx_image: xcode8
 
+env:
+  - LC_CTYPE=en_US.UTF-8
+  - LANG=en_US.UTF-8
+  - PROJECT=SwiftyUserDefaults.xcodeproj
+
 before_install:
-- gem install cocoapods
-- gem install xcpretty
+  - gem install cocoapods
+  - gem install xcpretty
 
 script:
-- set -o pipefail && xctool build -project SwiftyUserDefaults.xcodeproj -scheme 'SwiftyUserDefaults' -destination 'name=iPhone 6,OS=10.0' ONLY_ACTIVE_ARCH=NO | xcpretty
-- set -o pipefail && xctool build -project SwiftyUserDefaults.xcodeproj -scheme 'SwiftyUserDefaults tvOS' -sdk iphonesimulator -destination 'name=Apple TV 1080p' ONLY_ACTIVE_ARCH=NO | xcpretty
-- set -o pipefail && xctool build -project SwiftyUserDefaults.xcodeproj -scheme 'SwiftyUserDefaults watchOS' -sdk iphonesimulator -destination 'name=Apple Watch - 42mm' ONLY_ACTIVE_ARCH=NO | xcpretty
-- set -o pipefail && xctool build -project SwiftyUserDefaults.xcodeproj -scheme 'SwiftyUserDefaults Mac' ONLY_ACTIVE_ARCH=NO | xcpretty
-
-- set -o pipefail && xctool test -project SwiftyUserDefaults.xcodeproj -scheme 'SwiftyUserDefaults' -sdk iphonesimulator -destination 'name=iPhone 6,OS=10.0' ONLY_ACTIVE_ARCH=NO | xcpretty
-- set -o pipefail && xctool test -project SwiftyUserDefaults.xcodeproj -scheme 'SwiftyUserDefaults tvOS' -sdk iphonesimulator -destination 'name=Apple TV 1080p' ONLY_ACTIVE_ARCH=NO | xcpretty
-- set -o pipefail && xctool test -project SwiftyUserDefaults.xcodeproj -scheme 'SwiftyUserDefaults watchOS' -sdk iphonesimulator -destination 'name=Apple Watch - 42mm' ONLY_ACTIVE_ARCH=NO | xcpretty
-- set -o pipefail && xctool test -project SwiftyUserDefaults.xcodeproj -scheme 'SwiftyUserDefaults Mac' ONLY_ACTIVE_ARCH=NO | xcpretty
-
-- pod lib lint
-
+  - set -o pipefail
+  - xcodebuild -version
+  - xcodebuild -showsdks
+  
+  - xctool build -project "$PROJECT" -scheme 'SwiftyUserDefaults' -destination 'name=iPhone 6,OS=10.0' ONLY_ACTIVE_ARCH=NO | xcpretty
+  - xctool build -project "$PROJECT" -scheme 'SwiftyUserDefaults tvOS' -sdk iphonesimulator -destination 'name=Apple TV 1080p' ONLY_ACTIVE_ARCH=NO | xcpretty
+  - xctool build -project "$PROJECT" -scheme 'SwiftyUserDefaults watchOS' -sdk iphonesimulator -destination 'name=Apple Watch - 42mm' ONLY_ACTIVE_ARCH=NO | xcpretty
+  - xctool build -project "$PROJECT" -scheme 'SwiftyUserDefaults Mac' ONLY_ACTIVE_ARCH=NO | xcpretty
+  
+  - xctool test -project "$PROJECT" -scheme 'SwiftyUserDefaults' -sdk iphonesimulator -destination 'name=iPhone 6,OS=10.0' ONLY_ACTIVE_ARCH=NO | xcpretty
+  - xctool test -project "$PROJECT" -scheme 'SwiftyUserDefaults tvOS' -sdk iphonesimulator -destination 'name=Apple TV 1080p' ONLY_ACTIVE_ARCH=NO | xcpretty
+  - xctool test -project "$PROJECT" -scheme 'SwiftyUserDefaults watchOS' -sdk iphonesimulator -destination 'name=Apple Watch - 42mm' ONLY_ACTIVE_ARCH=NO | xcpretty
+  - xctool test -project "$PROJECT" -scheme 'SwiftyUserDefaults Mac' ONLY_ACTIVE_ARCH=NO | xcpretty
+  
+  - pod lib lint
