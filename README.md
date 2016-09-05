@@ -52,7 +52,7 @@ Defaults[.libraries].append("SwiftyUserDefaults")
 Defaults[.libraries][0] += " 2.0"
 
 // Easily work with custom serialized types
-Defaults[.color] = NSColor.whiteColor()
+Defaults[.color] = NSColor.white
 Defaults[.color]?.whiteComponent // => 1.0
 ```
 
@@ -112,7 +112,7 @@ Defaults[.libraries].append("SwiftyUserDefaults")
 Defaults[.libraries][0] += " 2.0"
 
 // Easily work with custom serialized types
-Defaults[.color] = NSColor.whiteColor()
+Defaults[.color] = NSColor.white
 Defaults[.color]?.whiteComponent // => 1.0
 ```
 
@@ -128,15 +128,12 @@ Here's a full table:
 | `Int?`                 | `Int`                 | `0`           |
 | `Double?`              | `Double`              | `0.0`         |
 | `Bool?`                | `Bool`                | `false`       |
-| `NSData?`              | `NSData`              | `NSData()`    |
-| `[AnyObject]?`         | `[AnyObject]`         | `[]`          |
-| `[String: AnyObject]?` | `[String: AnyObject]` | `[:]`         |
-| `NSDate?`              | n/a                   | n/a           |
-| `NSURL?`               | n/a                   | n/a           |
-| `AnyObject?`           | n/a                   | n/a           |
-| `NSString?`            | `NSString`            | `""`          |
-| `NSArray?`             | `NSArray`             | `[]`          |
-| `NSDictionary?`        | `NSDictionary`        | `[:]`         |
+| `Data?`                | `Data`                | `Data()`      |
+| `[Any]?`               | `[Any]`               | `[]`          |
+| `[String: Any]?`       | `[String: Any]`       | `[:]`         |
+| `Date?`                | n/a                   | n/a           |
+| `URL?`                 | n/a                   | n/a           |
+| `Any?`                 | n/a                   | n/a           |
 
 You can mark a type as optional to get `nil` if the key doesn't exist. Otherwise, you'll get a default value that makes sense for a given type.
 
@@ -150,15 +147,15 @@ Additionally, typed arrays are available for these types:
 | `[Int]`    | `[Int]?`         |
 | `[Double]` | `[Double]?`      |
 | `[Bool]`   | `[Bool]?`        |
-| `[NSData]` | `[NSData]?`      |
-| `[NSDate]` | `[NSDate]?`      |
+| `[Data]`   | `[Data]?`        |
+| `[Date]`   | `[Date]?`        |
 
 ### Custom types
 
-You can easily store custom `NSCoding`-compliant types by extending `NSUserDefaults` with this stub subscript:
+You can easily store custom `NSCoding`-compliant types by extending `UserDefaults` with this stub subscript:
 
 ```swift
-extension NSUserDefaults {
+extension UserDefaults {
     subscript(key: DefaultsKey<NSColor?>) -> NSColor? {
         get { return unarchive(key) }
         set { archive(key, newValue) }
@@ -176,7 +173,7 @@ extension DefaultsKeys {
 }
 
 Defaults[.color] // => nil
-Defaults[.color] = NSColor.whiteColor()
+Defaults[.color] = NSColor.white
 Defaults[.color] // => w 1.0, a 1.0
 Defaults[.color]?.whiteComponent // => 1.0
 ```
@@ -186,9 +183,9 @@ Defaults[.color]?.whiteComponent // => 1.0
 If you don't want to deal with `nil` when fetching a user default value, you can remove `?` marks and supply the default value, like so:
 
 ```swift
-extension NSUserDefaults {
+extension UserDefaults {
     subscript(key: DefaultsKey<NSColor>) -> NSColor {
-        get { return unarchive(key) ?? NSColor.clearColor() }
+        get { return unarchive(key) ?? NSColor.clear }
         set { archive(key, newValue) }
     }
 }
@@ -203,7 +200,7 @@ enum MyEnum: String {
     case A, B, C
 }
 
-extension NSUserDefaults {
+extension UserDefaults {
     subscript(key: DefaultsKey<MyEnum?>) -> MyEnum? {
         get { return unarchive(key) }
         set { archive(key, newValue) }
@@ -236,7 +233,7 @@ Defaults.removeAll()
 If you're sharing your user defaults between different apps or an app and its extensions, you can use SwiftyUserDefaults by overriding the `Defaults` shortcut with your own. Just add in your app:
 
 ```swift
-var Defaults = NSUserDefaults(suiteName: "com.my.app")!
+var Defaults = UserDefaults(suiteName: "com.my.app")!
 ```
 
 ## Traditional API
@@ -248,11 +245,11 @@ Defaults["color"].string            // returns String?
 Defaults["launchCount"].int         // returns Int?
 Defaults["chimeVolume"].double      // returns Double?
 Defaults["loggingEnabled"].bool     // returns Bool?
-Defaults["lastPaths"].array         // returns NSArray?
-Defaults["credentials"].dictionary  // returns NSDictionary?
-Defaults["hotkey"].data             // returns NSData?
-Defaults["firstLaunchAt"].date      // returns NSDate?
-Defaults["anything"].object         // returns NSObject?
+Defaults["lastPaths"].array         // returns [Any]?
+Defaults["credentials"].dictionary  // returns [String: Any]?
+Defaults["hotkey"].data             // returns Data?
+Defaults["firstLaunchAt"].date      // returns Date?
+Defaults["anything"].object         // returns Any?
 Defaults["anything"].number         // returns NSNumber?
 ```
 
@@ -265,7 +262,7 @@ Defaults["chimeVolume"].doubleValue      // defaults to 0.0
 Defaults["loggingEnabled"].boolValue     // defaults to false
 Defaults["lastPaths"].arrayValue         // defaults to []
 Defaults["credentials"].dictionaryValue  // defaults to [:]
-Defaults["hotkey"].dataValue             // defaults to NSData()
+Defaults["hotkey"].dataValue             // defaults to Data()
 ```
 
 ## Installation
