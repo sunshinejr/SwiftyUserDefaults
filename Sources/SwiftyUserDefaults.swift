@@ -140,11 +140,9 @@ public extension UserDefaults {
             }
             
             switch newValue {
-                
             // @warning This should always be on top of Int because a cast
             // from Double to Int will always succeed.
             case let v as Double: self.set(v, forKey: key)
-            
             case let v as Int: self.set(v, forKey: key)
             case let v as Bool: self.set(v, forKey: key)
             case let v as URL: self.set(v, forKey: key)
@@ -167,7 +165,7 @@ public extension UserDefaults {
     
     /// Removes all keys and values from user defaults
     /// Use with caution!
-    /// - Note: This method only removes keys on the receiver `NSUserDefaults` object.
+    /// - Note: This method only removes keys on the receiver `UserDefaults` object.
     ///         System-defined keys will still be present afterwards.
     
     public func removeAll() {
@@ -177,12 +175,12 @@ public extension UserDefaults {
     }
 }
 
-/// Global shortcut for `NSUserDefaults.standardUserDefaults()`
+/// Global shortcut for `UserDefaults.standard`
 ///
 /// **Pro-Tip:** If you want to use shared user defaults, just
 ///  redefine this global shortcut in your app target, like so:
 ///  ~~~
-///  var Defaults = NSUserDefaults(suiteName: "com.my.app")!
+///  var Defaults = UserDefaults(suiteName: "com.my.app")!
 ///  ~~~
 
 public let Defaults = UserDefaults.standard
