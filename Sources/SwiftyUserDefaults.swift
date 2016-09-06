@@ -465,10 +465,7 @@ extension UserDefaults {
 
 // MARK: - Deprecations
 
-infix operator ?= {
-    associativity right
-    precedence 90
-}
+infix operator ?= : AssignmentPrecedence
 
 /// If key doesn't exist, sets its value to `expr`
 /// Note: This isn't the same as `Defaults.registerDefaults`. This method saves the new value to disk, whereas `registerDefaults` only modifies the defaults in memory.
