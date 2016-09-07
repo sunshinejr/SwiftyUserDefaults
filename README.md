@@ -43,8 +43,8 @@ let username = Defaults[.username]
 Defaults[.hotkeyEnabled] = true
 
 // Modify value types in place
-Defaults[.launchCount]++
-Defaults[.volume] += 0.1
+Defaults[.launchCount] += 1
+Defaults[.volume] -= 0.1
 Defaults[.strings] += "… can easily be extended!"
 
 // Use and modify typed arrays
@@ -103,8 +103,8 @@ You can easily modify value types (strings, numbers, array) in place, as if you 
 
 ```swift
 // Modify value types in place
-Defaults[.launchCount]++
-Defaults[.volume] += 0.1
+Defaults[.launchCount] += 1
+Defaults[.volume] -= 0.1
 Defaults[.strings] += "… can easily be extended!"
 
 // Use and modify typed arrays
