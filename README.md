@@ -267,7 +267,7 @@ Defaults["hotkey"].dataValue             // defaults to Data()
 
 ## Installation
 
-**Note:** If you're running Swift 2.2 or 2.3, use [SwiftyUserDefaults version 2.2.1](https://github.com/radex/SwiftyUserDefaults/tree/2.2.1)
+**Note:** If you're running Swift 2, use [SwiftyUserDefaults v2.2.1](https://github.com/radex/SwiftyUserDefaults/tree/2.2.1)
 
 #### CocoaPods
 
