@@ -267,12 +267,14 @@ Defaults["hotkey"].dataValue             // defaults to Data()
 
 ## Installation
 
+**Note:** If you're running Swift 2.2 or 2.3, use [SwiftyUserDefaults version 2.2.1](https://github.com/radex/SwiftyUserDefaults/tree/2.2.1)
+
 #### CocoaPods
 
 If you're using CocoaPods, just add this line to your Podfile:
 
 ```ruby
-pod 'SwiftyUserDefaults', git: 'https://github.com/radex/SwiftyUserDefaults.git', branch: 'swift3'
+pod 'SwiftyUserDefaults'
 ```
 
 Install by running this command in your terminal:
@@ -292,7 +294,7 @@ import SwiftyUserDefaults
 Just add to your Cartfile:
 
 ```ruby
-github "radex/SwiftyUserDefaults" "swift3"
+github "radex/SwiftyUserDefaults"
 ```
 
 #### Manually
