@@ -1,8 +1,20 @@
-### swift3
+### 3.0.0 (2016-09-14)
 
+This is the Swift 3 update version.
+
+It contains no major changes in the library itself, however it does change some APIs because of Swift 3 requirements.
+
+- Update documentation and README for Swift 3
 - Updated for Swift 3 and Xcode 8 compatibility #91 @askari01
 - Updated for Swift 3 beta 4 #102 @rinatkhanov
 - Updated for Swift 3 beta 6 #106 @ldiqual
+
+* * *
+
+### 2.2.1 (2016-08-03)
+
+- `NSUserDefaults.set()` is now public (useful for adding support for custom types) #85 @goktugyil
+- Support for Xcode 8 (Swift 2.3) for Carthage users #100 @KevinVitale
 
 ### 2.2.0 (2016-04-10)
 

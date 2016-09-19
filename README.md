@@ -43,8 +43,8 @@ let username = Defaults[.username]
 Defaults[.hotkeyEnabled] = true
 
 // Modify value types in place
-Defaults[.launchCount]++
-Defaults[.volume] += 0.1
+Defaults[.launchCount] += 1
+Defaults[.volume] -= 0.1
 Defaults[.strings] += "… can easily be extended!"
 
 // Use and modify typed arrays
@@ -103,8 +103,8 @@ You can easily modify value types (strings, numbers, array) in place, as if you 
 
 ```swift
 // Modify value types in place
-Defaults[.launchCount]++
-Defaults[.volume] += 0.1
+Defaults[.launchCount] += 1
+Defaults[.volume] -= 0.1
 Defaults[.strings] += "… can easily be extended!"
 
 // Use and modify typed arrays
@@ -267,12 +267,14 @@ Defaults["hotkey"].dataValue             // defaults to Data()
 
 ## Installation
 
+**Note:** If you're running Swift 2, use [SwiftyUserDefaults v2.2.1](https://github.com/radex/SwiftyUserDefaults/tree/2.2.1)
+
 #### CocoaPods
 
 If you're using CocoaPods, just add this line to your Podfile:
 
 ```ruby
-pod 'SwiftyUserDefaults', git: 'https://github.com/radex/SwiftyUserDefaults.git', branch: 'swift3'
+pod 'SwiftyUserDefaults'
 ```
 
 Install by running this command in your terminal:
@@ -292,7 +294,7 @@ import SwiftyUserDefaults
 Just add to your Cartfile:
 
 ```ruby
-github "radex/SwiftyUserDefaults" "swift3"
+github "radex/SwiftyUserDefaults"
 ```
 
 #### Manually
