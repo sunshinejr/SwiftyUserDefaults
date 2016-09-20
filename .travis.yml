@@ -19,12 +19,12 @@ script:
   - xcodebuild -showsdks
   
   - xcodebuild -project "$PROJECT" -scheme 'SwiftyUserDefaults' -destination 'name=iPhone 6,OS=10.0' ONLY_ACTIVE_ARCH=NO CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO build | xcpretty
-  - xcodebuild -project "$PROJECT" -scheme 'SwiftyUserDefaults tvOS' -sdk iphonesimulator -destination 'name=Apple TV 1080p' ONLY_ACTIVE_ARCH=NO CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO build | xcpretty
+  - xcodebuild -project "$PROJECT" -scheme 'SwiftyUserDefaults tvOS' -sdk appletvsimulator10.0 -destination 'name=Apple TV 1080p' ONLY_ACTIVE_ARCH=NO CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO build | xcpretty
   - xcodebuild -project "$PROJECT" -scheme 'SwiftyUserDefaults watchOS' -sdk iphonesimulator -destination 'name=Apple Watch - 42mm' ONLY_ACTIVE_ARCH=NO CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO build | xcpretty
   - xcodebuild -project "$PROJECT" -scheme 'SwiftyUserDefaults Mac' ONLY_ACTIVE_ARCH=NO CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO build | xcpretty
   
   - xcodebuild -project "$PROJECT" -scheme 'SwiftyUserDefaults' -sdk iphonesimulator -destination 'name=iPhone 6,OS=10.0' ONLY_ACTIVE_ARCH=NO CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO test | xcpretty
-  - xcodebuild -project "$PROJECT" -scheme 'SwiftyUserDefaults tvOS' -sdk iphonesimulator -destination 'name=Apple TV 1080p' ONLY_ACTIVE_ARCH=NO CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO test | xcpretty
+  - xcodebuild -project "$PROJECT" -scheme 'SwiftyUserDefaults tvOS' -sdk appletvsimulator10.0 -destination 'name=Apple TV 1080p' ONLY_ACTIVE_ARCH=NO CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO test | xcpretty
   # - xcodebuild -project "$PROJECT" -scheme 'SwiftyUserDefaults watchOS' -sdk iphonesimulator -destination 'name=Apple Watch - 42mm' ONLY_ACTIVE_ARCH=NO CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO test | xcpretty
   - xcodebuild -project "$PROJECT" -scheme 'SwiftyUserDefaults Mac' ONLY_ACTIVE_ARCH=NO CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO test | xcpretty
   
