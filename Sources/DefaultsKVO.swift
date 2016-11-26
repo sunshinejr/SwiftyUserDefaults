@@ -26,10 +26,18 @@
 
 import Foundation
 
+extension Array {
+
+    func appending(_ newElement: Element) -> [Element] {
+        var result = self
+        result.append(newElement)
+        return result
+    }
+}
+
 public struct DefaultsKVO {
 
     public typealias Token = Int64
-    public typealias EventHandler = (UserDefaults.Proxy) -> Void
 
     private static let lock: NSRecursiveLock = {
         let lock = NSRecursiveLock()
@@ -38,6 +46,8 @@ public struct DefaultsKVO {
     }()
     private static var instance = DefaultsKVO()
 
+    /// List of handlers for each key.
+    private var _handlers = [String : [BlockDisposable]]()
     private var _nextToken: Token = 0
 
     public static func nextToken() -> Token {
@@ -49,18 +59,41 @@ public struct DefaultsKVO {
 
         return token
     }
+
+    public static func handlers(key: String) -> [BlockDisposable] {
+
+        return instance._handlers[key] ?? []
+    }
+
+    public static func removeHandler(token: Token, forKey key: String) {
+
+        guard let handlers = instance._handlers[key]
+            else { return }
+
+        instance._handlers[key] = handlers
+            .filter { $0.token != token }
+    }
+
+    public static func add(handler: BlockDisposable, forKey key: String) {
+
+        instance._handlers[key] = handlers(key: key).appending(handler)
+    }
+
+    public static func notifyHandlers(forKey key: String, newValue value: UserDefaults.Proxy) {
+
+        handlers(key: key).forEach { $0.handler?(value) }
+    }
 }
 
 private var SwiftyUserDefaultsKVOContext: UnsafeMutableRawPointer? = nil
-private var kvoKeyAndHandlers = [String: [BlockDisposable]]()
 
 public final class BlockDisposable {
 
     let key: String
-    private let token: DefaultsKVO.Token
-    var handler: DefaultsKVO.EventHandler?
+    let token: DefaultsKVO.Token
+    var handler: UserDefaults.KVOEventHandler?
 
-    init(key: String, handler: @escaping DefaultsKVO.EventHandler) {
+    init(key: String, handler: @escaping UserDefaults.KVOEventHandler) {
 
         self.token = DefaultsKVO.nextToken()
 
@@ -70,14 +103,7 @@ public final class BlockDisposable {
 
     public func dispose() {
 
-        guard var handlers = kvoKeyAndHandlers[key]
-            else { return }
-
-        if let idx = handlers.index(where: { e in
-            return e.token == self.token
-        }) {
-            handlers.remove(at: idx)
-        }
+        DefaultsKVO.removeHandler(token: token, forKey: key)
         Defaults.removeObserver(Defaults, forKeyPath: key)
         handler = nil
     }
@@ -85,10 +111,12 @@ public final class BlockDisposable {
 
 extension UserDefaults {
 
+    public typealias KVOEventHandler = (UserDefaults.Proxy) -> Void
+
     public func observe(
         key: String,
         options: NSKeyValueObservingOptions = [.new],
-        handler: @escaping DefaultsKVO.EventHandler) -> BlockDisposable {
+        handler: @escaping KVOEventHandler) -> BlockDisposable {
 
         let key = DefaultsKey<String>(key)
         return observe(key: key, handler: handler)
@@ -97,17 +125,15 @@ extension UserDefaults {
     public func observe<T>(
         key: DefaultsKey<T>,
         options: NSKeyValueObservingOptions = [.new],
-        handler: @escaping DefaultsKVO.EventHandler) -> BlockDisposable {
+        handler: @escaping KVOEventHandler) -> BlockDisposable {
 
-        let block = BlockDisposable(key: key._key, handler: handler)
-        if let _ = kvoKeyAndHandlers[key._key] {
-            kvoKeyAndHandlers[key._key]!.append(block)
-        } else {
-            kvoKeyAndHandlers[key._key] = [block]
-        }
-        self.addObserver(self, forKeyPath: key._key,
-                         options: options, context: SwiftyUserDefaultsKVOContext)
-        return block
+        let disposable = BlockDisposable(key: key._key, handler: handler)
+        DefaultsKVO.add(handler: disposable, forKey: key._key)
+        self.addObserver(self,
+                         forKeyPath: key._key,
+                         options: options,
+                         context: SwiftyUserDefaultsKVOContext)
+        return disposable
     }
 
     open override func observeValue(
@@ -116,15 +142,14 @@ extension UserDefaults {
         change: [NSKeyValueChangeKey : Any]?,
         context: UnsafeMutableRawPointer?) {
 
-        guard let keyPath = maybeKeyPath,
-            let handlers = kvoKeyAndHandlers[keyPath],
-            context == SwiftyUserDefaultsKVOContext
+        guard context == SwiftyUserDefaultsKVOContext,
+            let keyPath = maybeKeyPath
             else {
                 super.observeValue(forKeyPath: maybeKeyPath, of: object, change: change, context: context);
                 return
         }
-        
+
         let value: Proxy = Defaults[keyPath]
-        handlers.forEach { $0.handler?(value) }
+        DefaultsKVO.notifyHandlers(forKey: keyPath, newValue: value)
     }
 }
