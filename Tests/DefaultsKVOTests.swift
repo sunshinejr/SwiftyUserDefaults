@@ -29,11 +29,11 @@ class DefaultsKVOTests: XCTestCase {
         let disposable = Defaults.observe(key: "count") { proxy in
             XCTFail()
         }
-        XCTAssert(DefaultsKVO.hasHandlers(forKey: "count"))
+        XCTAssert(UserDefaults.KVO.hasHandlers(forKey: "count"))
         disposable.dispose()
         Defaults["count"] = 1
         XCTAssert(disposable.handler == nil)
-        XCTAssertFalse(DefaultsKVO.hasHandlers(forKey: "count"))
+        XCTAssertFalse(UserDefaults.KVO.hasHandlers(forKey: "count"))
     }
 
     func testKVO_DisposingRemovesHandler() {

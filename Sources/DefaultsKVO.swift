@@ -35,57 +35,61 @@ extension Array {
     }
 }
 
-public struct DefaultsKVO {
+extension UserDefaults {
 
-    public typealias Token = Int64
+    public struct KVO {
 
-    private static let lock: NSRecursiveLock = {
-        let lock = NSRecursiveLock()
-        lock.name = "radex.SwiftyUserDefaults"
-        return lock
-    }()
-    private static var instance = DefaultsKVO()
+        public typealias EventHandler = (UserDefaults.Proxy) -> Void
+        public typealias Token = Int64
 
-    /// List of handlers for each key.
-    private var _handlers = [String : [BlockDisposable]]()
-    private var _nextToken: Token = 0
+        private static let lock: NSRecursiveLock = {
+            let lock = NSRecursiveLock()
+            lock.name = "radex.SwiftyUserDefaults"
+            return lock
+        }()
+        private static var instance = KVO()
 
-    public static func nextToken() -> Token {
+        /// List of handlers for each key.
+        private var _handlers = [String : [BlockDisposable]]()
+        private var _nextToken: Token = 0
 
-        lock.lock()
-        let token = instance._nextToken
-        instance._nextToken += 1
-        lock.unlock()
+        public static func nextToken() -> Token {
 
-        return token
-    }
+            lock.lock()
+            let token = instance._nextToken
+            instance._nextToken += 1
+            lock.unlock()
 
-    public static func handlers(key: String) -> [BlockDisposable] {
+            return token
+        }
 
-        return instance._handlers[key] ?? []
-    }
+        public static func handlers(key: String) -> [BlockDisposable] {
 
-    public static func removeHandler(token: Token, forKey key: String) {
+            return instance._handlers[key] ?? []
+        }
 
-        guard let handlers = instance._handlers[key]
-            else { return }
+        public static func removeHandler(token: Token, forKey key: String) {
 
-        instance._handlers[key] = handlers
-            .filter { $0.token != token }
-    }
+            guard let handlers = instance._handlers[key]
+                else { return }
 
-    public static func add(handler: BlockDisposable, forKey key: String) {
+            instance._handlers[key] = handlers
+                .filter { $0.token != token }
+        }
 
-        instance._handlers[key] = handlers(key: key).appending(handler)
-    }
+        public static func add(handler: BlockDisposable, forKey key: String) {
 
-    public static func hasHandlers(forKey key: String) -> Bool {
-        return !handlers(key: key).isEmpty
-    }
+            instance._handlers[key] = handlers(key: key).appending(handler)
+        }
 
-    public static func notifyHandlers(forKey key: String, newValue value: UserDefaults.Proxy) {
-
-        handlers(key: key).forEach { $0.handler?(value) }
+        public static func hasHandlers(forKey key: String) -> Bool {
+            return !handlers(key: key).isEmpty
+        }
+        
+        public static func notifyHandlers(forKey key: String, newValue value: UserDefaults.Proxy) {
+            
+            handlers(key: key).forEach { $0.handler?(value) }
+        }
     }
 }
 
@@ -94,12 +98,12 @@ private var SwiftyUserDefaultsKVOContext: UnsafeMutableRawPointer? = nil
 public final class BlockDisposable {
 
     let key: String
-    let token: DefaultsKVO.Token
-    var handler: UserDefaults.KVOEventHandler?
+    let token: UserDefaults.KVO.Token
+    var handler: UserDefaults.KVO.EventHandler?
 
-    init(key: String, handler: @escaping UserDefaults.KVOEventHandler) {
+    init(key: String, handler: @escaping UserDefaults.KVO.EventHandler) {
 
-        self.token = DefaultsKVO.nextToken()
+        self.token = UserDefaults.KVO.nextToken()
 
         self.key = key
         self.handler = handler
@@ -107,7 +111,7 @@ public final class BlockDisposable {
 
     public func dispose() {
 
-        DefaultsKVO.removeHandler(token: token, forKey: key)
+        UserDefaults.KVO.removeHandler(token: token, forKey: key)
         Defaults.removeObserver(Defaults, forKeyPath: key)
         handler = nil
     }
@@ -115,12 +119,10 @@ public final class BlockDisposable {
 
 extension UserDefaults {
 
-    public typealias KVOEventHandler = (UserDefaults.Proxy) -> Void
-
     public func observe(
         key: String,
         options: NSKeyValueObservingOptions = [.new],
-        handler: @escaping KVOEventHandler) -> BlockDisposable {
+        handler: @escaping KVO.EventHandler) -> BlockDisposable {
 
         let key = DefaultsKey<String>(key)
         return observe(key: key, handler: handler)
@@ -129,10 +131,10 @@ extension UserDefaults {
     public func observe<T>(
         key: DefaultsKey<T>,
         options: NSKeyValueObservingOptions = [.new],
-        handler: @escaping KVOEventHandler) -> BlockDisposable {
+        handler: @escaping KVO.EventHandler) -> BlockDisposable {
 
         let disposable = BlockDisposable(key: key._key, handler: handler)
-        DefaultsKVO.add(handler: disposable, forKey: key._key)
+        KVO.add(handler: disposable, forKey: key._key)
         self.addObserver(self,
                          forKeyPath: key._key,
                          options: options,
@@ -154,6 +156,6 @@ extension UserDefaults {
         }
 
         let value: Proxy = Defaults[keyPath]
-        DefaultsKVO.notifyHandlers(forKey: keyPath, newValue: value)
+        KVO.notifyHandlers(forKey: keyPath, newValue: value)
     }
 }
