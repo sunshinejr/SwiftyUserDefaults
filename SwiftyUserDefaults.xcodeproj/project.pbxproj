@@ -11,6 +11,9 @@
 		509865D21DE997A500D976CB /* DefaultsKVO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 509865D01DE997A500D976CB /* DefaultsKVO.swift */; };
 		509865D31DE997A500D976CB /* DefaultsKVO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 509865D01DE997A500D976CB /* DefaultsKVO.swift */; };
 		509865D41DE997A500D976CB /* DefaultsKVO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 509865D01DE997A500D976CB /* DefaultsKVO.swift */; };
+		509865D61DE9987D00D976CB /* DefaultsKVOTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 509865D51DE9987D00D976CB /* DefaultsKVOTests.swift */; };
+		509865D71DE99B6300D976CB /* DefaultsKVOTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 509865D51DE9987D00D976CB /* DefaultsKVOTests.swift */; };
+		509865D81DE99B6400D976CB /* DefaultsKVOTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 509865D51DE9987D00D976CB /* DefaultsKVOTests.swift */; };
 		52368ED71BE79AA60082969A /* SwiftyUserDefaults.h in Headers */ = {isa = PBXBuildFile; fileRef = 70264EA31B0DF85200B32B18 /* SwiftyUserDefaults.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		52368ED81BE79AAC0082969A /* SwiftyUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70264EBA1B0DF8B900B32B18 /* SwiftyUserDefaults.swift */; };
 		52368EE21BE79B350082969A /* SwiftyUserDefaults.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52368ECF1BE79A9B0082969A /* SwiftyUserDefaults.framework */; };
@@ -57,6 +60,7 @@
 
 /* Begin PBXFileReference section */
 		509865D01DE997A500D976CB /* DefaultsKVO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultsKVO.swift; sourceTree = "<group>"; };
+		509865D51DE9987D00D976CB /* DefaultsKVOTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultsKVOTests.swift; sourceTree = "<group>"; };
 		52368ECF1BE79A9B0082969A /* SwiftyUserDefaults.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftyUserDefaults.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		52368EDD1BE79B350082969A /* SwiftyUserDefaults tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "SwiftyUserDefaults tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		52E169451BE8089000116EA1 /* SwiftyUserDefaults.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftyUserDefaults.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -170,6 +174,7 @@
 			isa = PBXGroup;
 			children = (
 				70264EB01B0DF85300B32B18 /* SwiftyUserDefaultsTests.swift */,
+				509865D51DE9987D00D976CB /* DefaultsKVOTests.swift */,
 				6E903A8B1B66338C004CDFC4 /* TestHelper.swift */,
 				70264EAE1B0DF85300B32B18 /* Supporting Files */,
 			);
@@ -471,6 +476,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				509865D81DE99B6400D976CB /* DefaultsKVOTests.swift in Sources */,
 				52368EE81BE79B530082969A /* SwiftyUserDefaultsTests.swift in Sources */,
 				52368EE91BE79B560082969A /* TestHelper.swift in Sources */,
 			);
@@ -498,6 +504,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				509865D61DE9987D00D976CB /* DefaultsKVOTests.swift in Sources */,
 				70264EB11B0DF85300B32B18 /* SwiftyUserDefaultsTests.swift in Sources */,
 				6E903A8C1B66338C004CDFC4 /* TestHelper.swift in Sources */,
 			);
@@ -516,6 +523,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				509865D71DE99B6300D976CB /* DefaultsKVOTests.swift in Sources */,
 				D9D2CFC31B54AB3B00D6ABCE /* SwiftyUserDefaultsTests.swift in Sources */,
 				6E903A8D1B66338C004CDFC4 /* TestHelper.swift in Sources */,
 			);
