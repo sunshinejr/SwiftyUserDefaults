@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		509865D11DE997A500D976CB /* DefaultsKVO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 509865D01DE997A500D976CB /* DefaultsKVO.swift */; };
+		509865D21DE997A500D976CB /* DefaultsKVO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 509865D01DE997A500D976CB /* DefaultsKVO.swift */; };
+		509865D31DE997A500D976CB /* DefaultsKVO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 509865D01DE997A500D976CB /* DefaultsKVO.swift */; };
+		509865D41DE997A500D976CB /* DefaultsKVO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 509865D01DE997A500D976CB /* DefaultsKVO.swift */; };
 		52368ED71BE79AA60082969A /* SwiftyUserDefaults.h in Headers */ = {isa = PBXBuildFile; fileRef = 70264EA31B0DF85200B32B18 /* SwiftyUserDefaults.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		52368ED81BE79AAC0082969A /* SwiftyUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70264EBA1B0DF8B900B32B18 /* SwiftyUserDefaults.swift */; };
 		52368EE21BE79B350082969A /* SwiftyUserDefaults.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52368ECF1BE79A9B0082969A /* SwiftyUserDefaults.framework */; };
@@ -52,6 +56,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		509865D01DE997A500D976CB /* DefaultsKVO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultsKVO.swift; sourceTree = "<group>"; };
 		52368ECF1BE79A9B0082969A /* SwiftyUserDefaults.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftyUserDefaults.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		52368EDD1BE79B350082969A /* SwiftyUserDefaults tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "SwiftyUserDefaults tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		52E169451BE8089000116EA1 /* SwiftyUserDefaults.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftyUserDefaults.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -154,6 +159,7 @@
 			children = (
 				70264EA31B0DF85200B32B18 /* SwiftyUserDefaults.h */,
 				70264EBA1B0DF8B900B32B18 /* SwiftyUserDefaults.swift */,
+				509865D01DE997A500D976CB /* DefaultsKVO.swift */,
 				70264EA21B0DF85200B32B18 /* Info.plist */,
 			);
 			name = SwiftyUserDefaults;
@@ -456,6 +462,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				509865D31DE997A500D976CB /* DefaultsKVO.swift in Sources */,
 				52368ED81BE79AAC0082969A /* SwiftyUserDefaults.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -473,6 +480,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				509865D41DE997A500D976CB /* DefaultsKVO.swift in Sources */,
 				52E1694E1BE808B900116EA1 /* SwiftyUserDefaults.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -481,6 +489,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				509865D11DE997A500D976CB /* DefaultsKVO.swift in Sources */,
 				70264EBB1B0DF8B900B32B18 /* SwiftyUserDefaults.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -498,6 +507,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				509865D21DE997A500D976CB /* DefaultsKVO.swift in Sources */,
 				D9D2CFC21B54AB3500D6ABCE /* SwiftyUserDefaults.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
