@@ -79,6 +79,10 @@ public struct DefaultsKVO {
         instance._handlers[key] = handlers(key: key).appending(handler)
     }
 
+    public static func hasHandlers(forKey key: String) -> Bool {
+        return !handlers(key: key).isEmpty
+    }
+
     public static func notifyHandlers(forKey key: String, newValue value: UserDefaults.Proxy) {
 
         handlers(key: key).forEach { $0.handler?(value) }
