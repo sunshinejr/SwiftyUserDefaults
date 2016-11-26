@@ -54,3 +54,9 @@ extension UserDefaults {
         set { archive(key, newValue) }
     }
 }
+
+func clearDefaults() {
+    for (key, _) in Defaults.dictionaryRepresentation() {
+        Defaults.removeObject(forKey: key)
+    }
+}
