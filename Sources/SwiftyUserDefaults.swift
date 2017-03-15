@@ -211,6 +211,7 @@ extension UserDefaults {
     /// This function allows you to create your own custom Defaults subscript. Example: [Int: String]
     public func set<T>(_ key: DefaultsKey<T>, _ value: Any?) {
         self[key._key] = value
+        synchronize()
     }
 }
 
