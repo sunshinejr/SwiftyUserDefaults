@@ -3,11 +3,11 @@ import XCTest
 
 class SwiftyUserDefaultsTests: XCTestCase {
     override func setUp() {
+        super.setUp()
         // clear defaults before testing
         for (key, _) in Defaults.dictionaryRepresentation() {
             Defaults.removeObject(forKey: key)
         }
-        super.tearDown()
     }
 
     func testNone() {
