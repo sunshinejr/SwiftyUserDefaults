@@ -130,7 +130,7 @@
 			children = (
 				70264EBD1B0E2FB400B32B18 /* Foundation.framework */,
 				70264EA01B0DF85200B32B18 /* SwiftyUserDefaults */,
-				70264EAD1B0DF85300B32B18 /* Tests */,
+				70264EAD1B0DF85300B32B18 /* SwiftyUserDefaultsTests */,
 				70264E9F1B0DF85200B32B18 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -160,15 +160,16 @@
 			path = Sources;
 			sourceTree = "<group>";
 		};
-		70264EAD1B0DF85300B32B18 /* Tests */ = {
+		70264EAD1B0DF85300B32B18 /* SwiftyUserDefaultsTests */ = {
 			isa = PBXGroup;
 			children = (
 				70264EB01B0DF85300B32B18 /* SwiftyUserDefaultsTests.swift */,
 				6E903A8B1B66338C004CDFC4 /* TestHelper.swift */,
 				70264EAE1B0DF85300B32B18 /* Supporting Files */,
 			);
-			path = Tests;
-			sourceTree = "<group>";
+			name = SwiftyUserDefaultsTests;
+			path = Tests/SwiftyUserDefaultsTests;
+			sourceTree = SOURCE_ROOT;
 		};
 		70264EAE1B0DF85300B32B18 /* Supporting Files */ = {
 			isa = PBXGroup;
@@ -577,7 +578,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				INFOPLIST_FILE = Tests/Info.plist;
+				INFOPLIST_FILE = Tests/SwiftyUserDefaultsTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = io.radex.SwiftyUserDefaults.tests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -589,7 +590,7 @@
 		52368EE71BE79B350082969A /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				INFOPLIST_FILE = Tests/Info.plist;
+				INFOPLIST_FILE = Tests/SwiftyUserDefaultsTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = io.radex.SwiftyUserDefaults.tests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -782,7 +783,7 @@
 					"DEBUG=1",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = Tests/Info.plist;
+				INFOPLIST_FILE = Tests/SwiftyUserDefaultsTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = io.radex.SwiftyUserDefaults.tests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -796,7 +797,7 @@
 					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = Tests/Info.plist;
+				INFOPLIST_FILE = Tests/SwiftyUserDefaultsTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = io.radex.SwiftyUserDefaults.tests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -852,7 +853,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_TESTABILITY = YES;
-				INFOPLIST_FILE = Tests/Info.plist;
+				INFOPLIST_FILE = Tests/SwiftyUserDefaultsTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				PRODUCT_BUNDLE_IDENTIFIER = io.radex.SwiftyUserDefaults.tests;
@@ -865,7 +866,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
-				INFOPLIST_FILE = Tests/Info.plist;
+				INFOPLIST_FILE = Tests/SwiftyUserDefaultsTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				PRODUCT_BUNDLE_IDENTIFIER = io.radex.SwiftyUserDefaults.tests;
