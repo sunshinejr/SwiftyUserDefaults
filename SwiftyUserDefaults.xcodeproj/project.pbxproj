@@ -350,30 +350,35 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0710;
-				LastUpgradeCheck = 0800;
+				LastUpgradeCheck = 0900;
 				TargetAttributes = {
 					52368ECE1BE79A9B0082969A = {
 						CreatedOnToolsVersion = 7.1;
+						LastSwiftMigration = 0900;
 					};
 					52368EDC1BE79B350082969A = {
 						CreatedOnToolsVersion = 7.1;
+						LastSwiftMigration = 0900;
 					};
 					52E169441BE8089000116EA1 = {
 						CreatedOnToolsVersion = 7.1;
+						LastSwiftMigration = 0900;
 					};
 					70264E9D1B0DF85200B32B18 = {
 						CreatedOnToolsVersion = 6.3.2;
-						LastSwiftMigration = 0800;
+						LastSwiftMigration = 0900;
 					};
 					70264EA81B0DF85300B32B18 = {
 						CreatedOnToolsVersion = 6.3.2;
-						LastSwiftMigration = 0800;
+						LastSwiftMigration = 0900;
 					};
 					D9D2CFA91B54AAF600D6ABCE = {
 						CreatedOnToolsVersion = 7.0;
+						LastSwiftMigration = 0900;
 					};
 					D9D2CFB21B54AAF600D6ABCE = {
 						CreatedOnToolsVersion = 7.0;
+						LastSwiftMigration = 0900;
 					};
 				};
 			};
@@ -537,6 +542,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = YES;
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -549,6 +555,7 @@
 				PRODUCT_NAME = SwiftyUserDefaults;
 				SDKROOT = appletvos;
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 3;
 				TVOS_DEPLOYMENT_TARGET = 9.0;
 			};
@@ -558,6 +565,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = YES;
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -569,6 +577,7 @@
 				PRODUCT_NAME = SwiftyUserDefaults;
 				SDKROOT = appletvos;
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 3;
 				TVOS_DEPLOYMENT_TARGET = 9.0;
 			};
@@ -583,6 +592,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = io.radex.SwiftyUserDefaults.tests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;
+				SWIFT_VERSION = 4.0;
 				TVOS_DEPLOYMENT_TARGET = 9.0;
 			};
 			name = Debug;
@@ -595,6 +605,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = io.radex.SwiftyUserDefaults.tests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;
+				SWIFT_VERSION = 4.0;
 				TVOS_DEPLOYMENT_TARGET = 9.0;
 			};
 			name = Release;
@@ -603,6 +614,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = YES;
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -615,6 +627,7 @@
 				PRODUCT_NAME = SwiftyUserDefaults;
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 4;
 				WATCHOS_DEPLOYMENT_TARGET = 2.0;
 			};
@@ -624,6 +637,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = YES;
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -635,6 +649,7 @@
 				PRODUCT_NAME = SwiftyUserDefaults;
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 4;
 				WATCHOS_DEPLOYMENT_TARGET = 2.0;
 			};
@@ -648,13 +663,21 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -699,13 +722,21 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -741,6 +772,7 @@
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = YES;
 				CLANG_ENABLE_MODULES = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -751,6 +783,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = io.radex.SwiftyUserDefaults;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Debug;
 		};
@@ -759,6 +792,7 @@
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = YES;
 				CLANG_ENABLE_MODULES = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -769,6 +803,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = io.radex.SwiftyUserDefaults;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Release;
 		};
@@ -787,6 +822,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = io.radex.SwiftyUserDefaults.tests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
 			};
 			name = Debug;
 		};
@@ -801,6 +837,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = io.radex.SwiftyUserDefaults.tests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
 			};
 			name = Release;
 		};
@@ -823,6 +860,7 @@
 				PRODUCT_NAME = SwiftyUserDefaults;
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Debug;
 		};
@@ -844,6 +882,7 @@
 				PRODUCT_NAME = SwiftyUserDefaults;
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Release;
 		};
@@ -859,6 +898,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = io.radex.SwiftyUserDefaults.tests;
 				PRODUCT_NAME = SwiftyUserDefaultsTests;
 				SDKROOT = macosx;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Debug;
 		};
@@ -872,6 +912,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = io.radex.SwiftyUserDefaults.tests;
 				PRODUCT_NAME = SwiftyUserDefaultsTests;
 				SDKROOT = macosx;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Release;
 		};
