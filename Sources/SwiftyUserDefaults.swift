@@ -264,7 +264,7 @@ extension UserDefaults {
     }
     
     public subscript(key: DefaultsKey<Bool?>) -> Bool? {
-        get { return bool(forKey: key._key) }
+        get { return numberForKey(key._key)?.boolValue }
         set { set(key, newValue) }
     }
     
