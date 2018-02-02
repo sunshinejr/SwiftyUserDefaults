@@ -211,7 +211,7 @@ class SwiftyUserDefaultsTests: XCTestCase {
         // This should just return the Proxy value as Any
         // Tests if it doesn't fall into infinite loop
         let anyProxy: Any? = Defaults["test"]
-        XCTAssert(anyProxy is NSUserDefaults.Proxy)
+        XCTAssert(anyProxy is UserDefaults.Proxy)
         // This also used to fall into infinite loop
         XCTAssert(Defaults["test"] != nil)
     }
