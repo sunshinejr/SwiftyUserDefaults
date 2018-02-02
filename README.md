@@ -317,7 +317,11 @@ If you have comments, complaints or ideas for improvements, feel free to open an
 
 ### Author and license
 
-Radek Pietruszewski
+*Maintainer:* Łukasz Mróz
+* [github.com/sunshinejr](http://github.com/sunshinejr)
+* [twitter.com/thesunshinejr](http://twitter.com/thesunshinejr)
+
+*Created by:* Radek Pietruszewski
 
 * [github.com/radex](http://github.com/radex)
 * [twitter.com/radexp](http://twitter.com/radexp)
