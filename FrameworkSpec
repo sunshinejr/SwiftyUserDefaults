@@ -1,0 +1,45 @@
+language = swift("4.0")
+platforms = [
+    macos("10.9"),
+    ios("8.0"),
+    tvos("9.0"),
+    watchos("2.0")
+]
+
+platforms.each do |platform|
+    platform.search_paths = "$(inherited)"
+end
+
+swifty_user_defaults_tests = new_target do |target|
+  target.name = "SwiftyUserDefaultsTests"
+  target.platforms = platforms
+  target.language = language
+  target.info_plist = "Tests/Info.plist"
+  target.bundle_id = "io.radex.SwiftyUserDefaultsTests"
+  target.include_files = ["Tests/**/*.swift"]
+  target.exclude_files = []
+  target.resource_files = ["Tests/**/*.png"]
+  target.dependencies = []
+  target.type = :unit_test_bundle
+  target.enable_code_coverage = true
+end
+
+swifty_user_defaults = new_target do |target|
+  target.name = "SwiftyUserDefaults"
+  target.platforms = platforms
+  target.language = language
+  target.info_plist = "Sources/Info.plist"
+  target.bundle_id = "io.radex.SwiftyUserDefaults"
+  target.header = "Sources/SwiftyUserDefaults.h"
+  target.include_files = ["Sources/**/*.swift"]
+  target.exclude_files = []
+  target.is_safe_for_extensions = false
+  target.test_target = swifty_user_defaults_tests
+end
+
+project.name = "SwiftyUserDefaults"
+project.scripts_directory = "scripts"
+project.targets = [
+  swifty_user_defaults,
+  swifty_user_defaults_tests
+]
