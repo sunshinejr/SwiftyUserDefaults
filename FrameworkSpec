@@ -33,7 +33,7 @@ swifty_user_defaults = new_target do |target|
   target.header = "Sources/SwiftyUserDefaults.h"
   target.include_files = ["Sources/**/*.swift"]
   target.exclude_files = []
-  target.is_safe_for_extensions = false
+  target.is_safe_for_extensions = true
   target.test_target = swifty_user_defaults_tests
 end
 
