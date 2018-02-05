@@ -30,4 +30,4 @@ script:
   - xcodebuild -project "$PROJECT" -scheme 'SwiftyUserDefaultsTests' -sdk appletvsimulator11.0 -destination 'name=Apple TV 1080p' ONLY_ACTIVE_ARCH=NO CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO test | xcpretty
   - xcodebuild -project "$PROJECT" -scheme 'SwiftyUserDefaultsTests' ONLY_ACTIVE_ARCH=NO CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO test | xcpretty
   
-  - pod lib lint
+  - pod lib lint --verbose
