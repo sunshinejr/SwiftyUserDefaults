@@ -119,7 +119,6 @@
 				A6EB3B91BE9B73C4A279C511 /* Sources */,
 				5FB3CA9780C8301A86AD3782 /* Resources */,
 				26BE96C35894DC8F11807BA4 /* Frameworks */,
-				080A6AAAF7436D3C41E4F9F8 /* Copy Carthage Frameworks */,
 			);
 			buildRules = (
 			);
@@ -192,24 +191,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		080A6AAAF7436D3C41E4F9F8 /* Copy Carthage Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Copy Carthage Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = " exec \"${SRCROOT}/scripts/copy-carthage-frameworks.sh\"";
-			showEnvVarsInLog = 1;
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		6FE8BD7D434A6460EC98EE5F /* Sources */ = {
