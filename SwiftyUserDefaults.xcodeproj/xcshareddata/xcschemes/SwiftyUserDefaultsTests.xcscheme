@@ -14,10 +14,10 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '35534540EEBBBC1E053FB4D5'
-               BlueprintName = 'SwiftyUserDefaults'
+               BlueprintIdentifier = '14ECB11692012CB44F675777'
+               BlueprintName = 'SwiftyUserDefaultsTests'
                ReferencedContainer = 'container:SwiftyUserDefaults.xcodeproj'
-               BuildableName = 'SwiftyUserDefaults.framework'>
+               BuildableName = 'SwiftyUserDefaultsTests.xctest'>
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -27,7 +27,7 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES"
       buildConfiguration = "Debug"
-      codeCoverageEnabled = "NO">
+      codeCoverageEnabled = "YES">
       <AdditionalOptions>
       </AdditionalOptions>
       <Testables>
