@@ -6,10 +6,6 @@ platforms = [
     watchos("2.0")
 ]
 
-platforms.each do |platform|
-    platform.search_paths = "$(inherited)"
-end
-
 swifty_user_defaults_tests = new_target do |target|
   target.name = "SwiftyUserDefaultsTests"
   target.platforms = platforms
