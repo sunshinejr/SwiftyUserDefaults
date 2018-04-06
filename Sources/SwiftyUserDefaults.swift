@@ -24,157 +24,6 @@
 
 import Foundation
 
-public extension UserDefaults {
-    class Proxy {
-        fileprivate let defaults: UserDefaults
-        fileprivate let key: String
-        
-        fileprivate init(_ defaults: UserDefaults, _ key: String) {
-            self.defaults = defaults
-            self.key = key
-        }
-        
-        // MARK: Getters
-        
-        public var object: Any? {
-            return defaults.object(forKey: key)
-        }
-        
-        public var string: String? {
-            return defaults.string(forKey: key)
-        }
-        
-        public var array: [Any]? {
-            return defaults.array(forKey: key)
-        }
-        
-        public var dictionary: [String: Any]? {
-            return defaults.dictionary(forKey: key)
-        }
-        
-        public var data: Data? {
-            return defaults.data(forKey: key)
-        }
-        
-        public var date: Date? {
-            return object as? Date
-        }
-        
-        public var number: NSNumber? {
-            return defaults.numberForKey(key)
-        }
-        
-        public var int: Int? {
-            return number?.intValue
-        }
-        
-        public var double: Double? {
-            return number?.doubleValue
-        }
-        
-        public var bool: Bool? {
-            return number?.boolValue
-        }
-        
-        // MARK: Non-Optional Getters
-        
-        public var stringValue: String {
-            return string ?? ""
-        }
-        
-        public var arrayValue: [Any] {
-            return array ?? []
-        }
-        
-        public var dictionaryValue: [String: Any] {
-            return dictionary ?? [:]
-        }
-        
-        public var dataValue: Data {
-            return data ?? Data()
-        }
-        
-        public var numberValue: NSNumber {
-            return number ?? 0
-        }
-        
-        public var intValue: Int {
-            return int ?? 0
-        }
-        
-        public var doubleValue: Double {
-            return double ?? 0
-        }
-        
-        public var boolValue: Bool {
-            return bool ?? false
-        }
-    }
-    
-    /// `NSNumber` representation of a user default
-    
-    func numberForKey(_ key: String) -> NSNumber? {
-        return object(forKey: key) as? NSNumber
-    }
-    
-    /// Returns getter proxy for `key`
-    
-    public subscript(key: String) -> Proxy {
-        return Proxy(self, key)
-    }
-    
-    /// Sets value for `key`
-    
-    public subscript(key: String) -> Any? {
-        get {
-            // return untyped Proxy
-            // (make sure we don't fall into infinite loop)
-            let proxy: Proxy = self[key]
-            return proxy
-        }
-        set {
-            
-            guard let newValue = newValue else {
-                removeObject(forKey: key)
-                return
-            }
-            
-            switch newValue {
-            // @warning This should always be on top of Int because a cast
-            // from Double to Int will always succeed.
-            case let v as Double: self.set(v, forKey: key)
-            case let v as Int: self.set(v, forKey: key)
-            case let v as Bool: self.set(v, forKey: key)
-            case let v as URL: self.set(v, forKey: key)
-            default: self.set(newValue, forKey: key)
-            }
-        }
-    }
-    
-    /// Returns `true` if `key` exists
-    
-    public func hasKey(_ key: String) -> Bool {
-        return object(forKey: key) != nil
-    }
-    
-    /// Removes value for `key`
-    
-    public func remove(_ key: String) {
-        removeObject(forKey: key)
-    }
-    
-    /// Removes all keys and values from user defaults
-    /// Use with caution!
-    /// - Note: This method only removes keys on the receiver `UserDefaults` object.
-    ///         System-defined keys will still be present afterwards.
-    
-    public func removeAll() {
-        for (key, _) in dictionaryRepresentation() {
-            removeObject(forKey: key)
-        }
-    }
-}
-
 /// Global shortcut for `UserDefaults.standard`
 ///
 /// **Pro-Tip:** If you want to use shared user defaults, just
@@ -207,10 +56,37 @@ open class DefaultsKey<ValueType>: DefaultsKeys {
     }
 }
 
+// This one is tricky because we can't (and don't want to) extend Codable
+// so it implements DefaultsSerializable. So we have 3 cases:
+// - There is a Codable that wants to be saved (default saving)
+// - There is a custom object that wants to be saved, but it doesn't implement Codable
+// - There is a Codable that wants a custom getter/setter
 extension UserDefaults {
-    /// This function allows you to create your own custom Defaults subscript. Example: [Int: String]
-    public func set<T>(_ key: DefaultsKey<T>, _ value: Any?) {
-        self[key._key] = value
+    subscript<T: Codable>(key: DefaultsKey<T>) -> T? {
+        get {
+            return T.get(key: key._key, userDefaults: self)
+        }
+        set {
+            T.save(key: key._key, value: newValue, userDefaults: self)
+        }
+    }
+
+    subscript<T: DefaultsSerializable>(key: DefaultsKey<T>) -> T? {
+        get {
+            return T.get(key: key._key, userDefaults: self)
+        }
+        set {
+            T.save(key: key._key, value: newValue, userDefaults: self)
+        }
+    }
+
+    subscript<T: Codable & DefaultsSerializable>(key: DefaultsKey<T>) -> T? {
+        get {
+            return T.get(key: key._key, userDefaults: self)
+        }
+        set {
+            T.save(key: key._key, value: newValue, userDefaults: self)
+        }
     }
 }
 
@@ -226,90 +102,7 @@ extension UserDefaults {
     public func remove<T>(_ key: DefaultsKey<T>) {
         removeObject(forKey: key._key)
     }
-}
-
-// MARK: Subscripts for specific standard types
-
-// TODO: Use generic subscripts when they become available
-
-extension UserDefaults {
-    public subscript(key: DefaultsKey<String?>) -> String? {
-        get { return string(forKey: key._key) }
-        set { set(key, newValue) }
-    }
-    
-    public subscript(key: DefaultsKey<String>) -> String {
-        get { return string(forKey: key._key) ?? "" }
-        set { set(key, newValue) }
-    }
-    
-    public subscript(key: DefaultsKey<Int?>) -> Int? {
-        get { return numberForKey(key._key)?.intValue }
-        set { set(key, newValue) }
-    }
-    
-    public subscript(key: DefaultsKey<Int>) -> Int {
-        get { return numberForKey(key._key)?.intValue ?? 0 }
-        set { set(key, newValue) }
-    }
-    
-    public subscript(key: DefaultsKey<Double?>) -> Double? {
-        get { return numberForKey(key._key)?.doubleValue }
-        set { set(key, newValue) }
-    }
-    
-    public subscript(key: DefaultsKey<Double>) -> Double {
-        get { return numberForKey(key._key)?.doubleValue ?? 0.0 }
-        set { set(key, newValue) }
-    }
-    
-    public subscript(key: DefaultsKey<Bool?>) -> Bool? {
-        get { return numberForKey(key._key)?.boolValue }
-        set { set(key, newValue) }
-    }
-    
-    public subscript(key: DefaultsKey<Bool>) -> Bool {
-        get { return numberForKey(key._key)?.boolValue ?? false }
-        set { set(key, newValue) }
-    }
-    
-    public subscript(key: DefaultsKey<Any?>) -> Any? {
-        get { return object(forKey: key._key) }
-        set { set(key, newValue) }
-    }
-    
-    public subscript(key: DefaultsKey<Data?>) -> Data? {
-        get { return data(forKey: key._key) }
-        set { set(key, newValue) }
-    }
-    
-    public subscript(key: DefaultsKey<Data>) -> Data {
-        get { return data(forKey: key._key) ?? Data() }
-        set { set(key, newValue) }
-    }
-    
-    public subscript(key: DefaultsKey<Date?>) -> Date? {
-        get { return object(forKey: key._key) as? Date }
-        set { set(key, newValue) }
-    }
-    
-    public subscript(key: DefaultsKey<URL?>) -> URL? {
-        get { return url(forKey: key._key) }
-        set { set(key, newValue) }
-    }
-    
-    // TODO: It would probably make sense to have support for statically typed dictionaries (e.g. [String: String])
-    
-    public subscript(key: DefaultsKey<[String: Any]?>) -> [String: Any]? {
-        get { return dictionary(forKey: key._key) }
-        set { set(key, newValue) }
-    }
-    
-    public subscript(key: DefaultsKey<[String: Any]>) -> [String: Any] {
-        get { return dictionary(forKey: key._key) ?? [:] }
-        set { set(key, newValue) }
-    }
-}
+}qwww
 
 // MARK: Static subscripts for array types
 
