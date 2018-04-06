@@ -1,7 +1,7 @@
 //
 // SwiftyUserDefaults
 //
-// Copyright (c) 2015-2016 Radosław Pietruszewski
+// Copyright (c) 2015-2018 Radosław Pietruszewski, Łukasz Mróz
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -86,6 +86,28 @@ extension UserDefaults {
         }
         set {
             T.save(key: key._key, value: newValue, userDefaults: self)
+        }
+    }
+}
+
+extension UserDefaults {
+
+    internal func number(forKey key: String) -> NSNumber? {
+        return object(forKey: key) as? NSNumber
+    }
+
+    internal func decodable<T: Decodable>(forKey key: String) -> T? {
+        guard let decodableData = data(forKey: key) else { return nil }
+
+        return try? JSONDecoder().decode(T.self, from: decodableData)
+    }
+
+    internal func set<T: Encodable>(encodable: T, forKey key: String) {
+        let encoder = JSONEncoder()
+        if let data = try? encoder.encode(encodable) {
+            set(data, forKey: key)
+        } else {
+            assertionFailure("Encodable \(T.self) is not _actually_ encodable to any data...Please fix 😭")
         }
     }
 }
