@@ -90,19 +90,33 @@ extension UserDefaults {
     }
 }
 
-extension UserDefaults {
+public extension UserDefaults {
+    /// Returns `true` if `key` exists
 
-    internal func number(forKey key: String) -> NSNumber? {
+    func hasKey<T>(_ key: DefaultsKey<T>) -> Bool {
+        return object(forKey: key._key) != nil
+    }
+
+    /// Removes value for `key`
+
+    func remove<T>(_ key: DefaultsKey<T>) {
+        removeObject(forKey: key._key)
+    }
+}
+
+internal extension UserDefaults {
+    
+    func number(forKey key: String) -> NSNumber? {
         return object(forKey: key) as? NSNumber
     }
 
-    internal func decodable<T: Decodable>(forKey key: String) -> T? {
+    func decodable<T: Decodable>(forKey key: String) -> T? {
         guard let decodableData = data(forKey: key) else { return nil }
 
         return try? JSONDecoder().decode(T.self, from: decodableData)
     }
 
-    internal func set<T: Encodable>(encodable: T, forKey key: String) {
+    func set<T: Encodable>(encodable: T, forKey key: String) {
         let encoder = JSONEncoder()
         if let data = try? encoder.encode(encodable) {
             set(data, forKey: key)
@@ -112,19 +126,6 @@ extension UserDefaults {
     }
 }
 
-extension UserDefaults {
-    /// Returns `true` if `key` exists
-    
-    public func hasKey<T>(_ key: DefaultsKey<T>) -> Bool {
-        return object(forKey: key._key) != nil
-    }
-    
-    /// Removes value for `key`
-    
-    public func remove<T>(_ key: DefaultsKey<T>) {
-        removeObject(forKey: key._key)
-    }
-}
 //
 //// MARK: Static subscripts for array types
 //
