@@ -102,7 +102,7 @@ extension UserDefaults {
     public func remove<T>(_ key: DefaultsKey<T>) {
         removeObject(forKey: key._key)
     }
-}qwww
+}
 
 // MARK: Static subscripts for array types
 
