@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		14A278D22077DF5200EBF3D5 /* DefaultsSerializable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A278D12077DF5200EBF3D5 /* DefaultsSerializable.swift */; };
+		14A278D42077DFCA00EBF3D5 /* DefaultsSerializable+Codable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A278D32077DFCA00EBF3D5 /* DefaultsSerializable+Codable.swift */; };
 		16DAB06B6542CE6FA36224C2 /* TestHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE68DC4C16D31004634513A4 /* TestHelper.swift */; };
 		3981F45DB5C2F58C1DF4B34A /* SwiftyUserDefaults.h in Headers */ = {isa = PBXBuildFile; fileRef = 8352CFB88596AEEE665D2289 /* SwiftyUserDefaults.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		93A50BA8DAB5D1D2A2EC70A4 /* SwiftyUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 387E701DB6730F22DD9C2BCF /* SwiftyUserDefaults.swift */; };
@@ -26,6 +27,7 @@
 
 /* Begin PBXFileReference section */
 		14A278D12077DF5200EBF3D5 /* DefaultsSerializable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DefaultsSerializable.swift; path = Sources/DefaultsSerializable.swift; sourceTree = "<group>"; };
+		14A278D32077DFCA00EBF3D5 /* DefaultsSerializable+Codable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "DefaultsSerializable+Codable.swift"; path = "Sources/DefaultsSerializable+Codable.swift"; sourceTree = "<group>"; };
 		387E701DB6730F22DD9C2BCF /* SwiftyUserDefaults.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SwiftyUserDefaults.swift; path = Sources/SwiftyUserDefaults.swift; sourceTree = "<group>"; };
 		5403C73B8159E101319BDE20 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; name = Info.plist; path = Tests/Info.plist; sourceTree = "<group>"; };
 		5FB84CAEDD1ED45E55869AC3 /* SwiftyUserDefaults.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftyUserDefaults.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -78,6 +80,7 @@
 				8352CFB88596AEEE665D2289 /* SwiftyUserDefaults.h */,
 				387E701DB6730F22DD9C2BCF /* SwiftyUserDefaults.swift */,
 				14A278D12077DF5200EBF3D5 /* DefaultsSerializable.swift */,
+				14A278D32077DFCA00EBF3D5 /* DefaultsSerializable+Codable.swift */,
 			);
 			name = Sources;
 			sourceTree = "<group>";
@@ -210,6 +213,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				14A278D22077DF5200EBF3D5 /* DefaultsSerializable.swift in Sources */,
+				14A278D42077DFCA00EBF3D5 /* DefaultsSerializable+Codable.swift in Sources */,
 				93A50BA8DAB5D1D2A2EC70A4 /* SwiftyUserDefaults.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
