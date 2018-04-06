@@ -125,155 +125,155 @@ extension UserDefaults {
         removeObject(forKey: key._key)
     }
 }
-
-// MARK: Static subscripts for array types
-
-extension UserDefaults {
-    public subscript(key: DefaultsKey<[Any]?>) -> [Any]? {
-        get { return array(forKey: key._key) }
-        set { set(key, newValue) }
-    }
-    
-    public subscript(key: DefaultsKey<[Any]>) -> [Any] {
-        get { return array(forKey: key._key) ?? [] }
-        set { set(key, newValue) }
-    }
-}
-
-// We need the <T: AnyObject> and <T: _ObjectiveCBridgeable> variants to
-// suppress compiler warnings about NSArray not being convertible to [T]
-// AnyObject is for NSData and NSDate, _ObjectiveCBridgeable is for value
-// types bridge-able to Foundation types (String, Int, ...)
-
-extension UserDefaults {
-    public func getArray<T: _ObjectiveCBridgeable>(_ key: DefaultsKey<[T]>) -> [T] {
-        return array(forKey: key._key) as NSArray? as? [T] ?? []
-    }
-    
-    public func getArray<T: _ObjectiveCBridgeable>(_ key: DefaultsKey<[T]?>) -> [T]? {
-        return array(forKey: key._key) as NSArray? as? [T]
-    }
-    
-    public func getArray<T: Any>(_ key: DefaultsKey<[T]>) -> [T] {
-        return array(forKey: key._key) as NSArray? as? [T] ?? []
-    }
-    
-    public func getArray<T: Any>(_ key: DefaultsKey<[T]?>) -> [T]? {
-        return array(forKey: key._key) as NSArray? as? [T]
-    }
-}
-
-extension UserDefaults {
-    public subscript(key: DefaultsKey<[String]?>) -> [String]? {
-        get { return getArray(key) }
-        set { set(key, newValue) }
-    }
-    
-    public subscript(key: DefaultsKey<[String]>) -> [String] {
-        get { return getArray(key) }
-        set { set(key, newValue) }
-    }
-    
-    public subscript(key: DefaultsKey<[Int]?>) -> [Int]? {
-        get { return getArray(key) }
-        set { set(key, newValue) }
-    }
-    
-    public subscript(key: DefaultsKey<[Int]>) -> [Int] {
-        get { return getArray(key) }
-        set { set(key, newValue) }
-    }
-    
-    public subscript(key: DefaultsKey<[Double]?>) -> [Double]? {
-        get { return getArray(key) }
-        set { set(key, newValue) }
-    }
-    
-    public subscript(key: DefaultsKey<[Double]>) -> [Double] {
-        get { return getArray(key) }
-        set { set(key, newValue) }
-    }
-    
-    public subscript(key: DefaultsKey<[Bool]?>) -> [Bool]? {
-        get { return getArray(key) }
-        set { set(key, newValue) }
-    }
-    
-    public subscript(key: DefaultsKey<[Bool]>) -> [Bool] {
-        get { return getArray(key) }
-        set { set(key, newValue) }
-    }
-    
-    public subscript(key: DefaultsKey<[Data]?>) -> [Data]? {
-        get { return getArray(key) }
-        set { set(key, newValue) }
-    }
-    
-    public subscript(key: DefaultsKey<[Data]>) -> [Data] {
-        get { return getArray(key) }
-        set { set(key, newValue) }
-    }
-    
-    public subscript(key: DefaultsKey<[Date]?>) -> [Date]? {
-        get { return getArray(key) }
-        set { set(key, newValue) }
-    }
-    
-    public subscript(key: DefaultsKey<[Date]>) -> [Date] {
-        get { return getArray(key) }
-        set { set(key, newValue) }
-    }
-}
-
-// MARK: - Archiving custom types
-
-// MARK: RawRepresentable
-
-extension UserDefaults {
-    // TODO: Ensure that T.RawValue is compatible
-    public func archive<T: RawRepresentable>(_ key: DefaultsKey<T>, _ value: T) {
-        set(key, value.rawValue)
-    }
-    
-    public func archive<T: RawRepresentable>(_ key: DefaultsKey<T?>, _ value: T?) {
-        if let value = value {
-            set(key, value.rawValue)
-        } else {
-            remove(key)
-        }
-    }
-    
-    public func unarchive<T: RawRepresentable>(_ key: DefaultsKey<T?>) -> T? {
-        return object(forKey: key._key).flatMap { T(rawValue: $0 as! T.RawValue) }
-    }
-    
-    public func unarchive<T: RawRepresentable>(_ key: DefaultsKey<T>) -> T? {
-        return object(forKey: key._key).flatMap { T(rawValue: $0 as! T.RawValue) }
-    }
-}
-
-// MARK: NSCoding
-
-extension UserDefaults {
-    // TODO: Can we simplify this and ensure that T is NSCoding compliant?
-
-    public func archive<T>(_ key: DefaultsKey<T>, _ value: T) {
-        set(key, NSKeyedArchiver.archivedData(withRootObject: value))
-    }
-
-    public func archive<T>(_ key: DefaultsKey<T?>, _ value: T?) {
-        if let value = value {
-            set(key, NSKeyedArchiver.archivedData(withRootObject: value))
-        } else {
-            remove(key)
-        }
-    }
-    
-    public func unarchive<T>(_ key: DefaultsKey<T>) -> T? {
-        return data(forKey: key._key).flatMap { NSKeyedUnarchiver.unarchiveObject(with: $0) } as? T
-    }
-    
-    public func unarchive<T>(_ key: DefaultsKey<T?>) -> T? {
-        return data(forKey: key._key).flatMap { NSKeyedUnarchiver.unarchiveObject(with: $0) } as? T
-    }
-}
+//
+//// MARK: Static subscripts for array types
+//
+//extension UserDefaults {
+//    public subscript(key: DefaultsKey<[Any]?>) -> [Any]? {
+//        get { return array(forKey: key._key) }
+//        set { set(key, newValue) }
+//    }
+//    
+//    public subscript(key: DefaultsKey<[Any]>) -> [Any] {
+//        get { return array(forKey: key._key) ?? [] }
+//        set { set(key, newValue) }
+//    }
+//}
+//
+//// We need the <T: AnyObject> and <T: _ObjectiveCBridgeable> variants to
+//// suppress compiler warnings about NSArray not being convertible to [T]
+//// AnyObject is for NSData and NSDate, _ObjectiveCBridgeable is for value
+//// types bridge-able to Foundation types (String, Int, ...)
+//
+//extension UserDefaults {
+//    public func getArray<T: _ObjectiveCBridgeable>(_ key: DefaultsKey<[T]>) -> [T] {
+//        return array(forKey: key._key) as NSArray? as? [T] ?? []
+//    }
+//    
+//    public func getArray<T: _ObjectiveCBridgeable>(_ key: DefaultsKey<[T]?>) -> [T]? {
+//        return array(forKey: key._key) as NSArray? as? [T]
+//    }
+//    
+//    public func getArray<T: Any>(_ key: DefaultsKey<[T]>) -> [T] {
+//        return array(forKey: key._key) as NSArray? as? [T] ?? []
+//    }
+//    
+//    public func getArray<T: Any>(_ key: DefaultsKey<[T]?>) -> [T]? {
+//        return array(forKey: key._key) as NSArray? as? [T]
+//    }
+//}
+//
+//extension UserDefaults {
+//    public subscript(key: DefaultsKey<[String]?>) -> [String]? {
+//        get { return getArray(key) }
+//        set { set(key, newValue) }
+//    }
+//    
+//    public subscript(key: DefaultsKey<[String]>) -> [String] {
+//        get { return getArray(key) }
+//        set { set(key, newValue) }
+//    }
+//    
+//    public subscript(key: DefaultsKey<[Int]?>) -> [Int]? {
+//        get { return getArray(key) }
+//        set { set(key, newValue) }
+//    }
+//    
+//    public subscript(key: DefaultsKey<[Int]>) -> [Int] {
+//        get { return getArray(key) }
+//        set { set(key, newValue) }
+//    }
+//    
+//    public subscript(key: DefaultsKey<[Double]?>) -> [Double]? {
+//        get { return getArray(key) }
+//        set { set(key, newValue) }
+//    }
+//    
+//    public subscript(key: DefaultsKey<[Double]>) -> [Double] {
+//        get { return getArray(key) }
+//        set { set(key, newValue) }
+//    }
+//    
+//    public subscript(key: DefaultsKey<[Bool]?>) -> [Bool]? {
+//        get { return getArray(key) }
+//        set { set(key, newValue) }
+//    }
+//    
+//    public subscript(key: DefaultsKey<[Bool]>) -> [Bool] {
+//        get { return getArray(key) }
+//        set { set(key, newValue) }
+//    }
+//    
+//    public subscript(key: DefaultsKey<[Data]?>) -> [Data]? {
+//        get { return getArray(key) }
+//        set { set(key, newValue) }
+//    }
+//    
+//    public subscript(key: DefaultsKey<[Data]>) -> [Data] {
+//        get { return getArray(key) }
+//        set { set(key, newValue) }
+//    }
+//    
+//    public subscript(key: DefaultsKey<[Date]?>) -> [Date]? {
+//        get { return getArray(key) }
+//        set { set(key, newValue) }
+//    }
+//    
+//    public subscript(key: DefaultsKey<[Date]>) -> [Date] {
+//        get { return getArray(key) }
+//        set { set(key, newValue) }
+//    }
+//}
+//
+//// MARK: - Archiving custom types
+//
+//// MARK: RawRepresentable
+//
+//extension UserDefaults {
+//    // TODO: Ensure that T.RawValue is compatible
+//    public func archive<T: RawRepresentable>(_ key: DefaultsKey<T>, _ value: T) {
+//        set(key, value.rawValue)
+//    }
+//    
+//    public func archive<T: RawRepresentable>(_ key: DefaultsKey<T?>, _ value: T?) {
+//        if let value = value {
+//            set(key, value.rawValue)
+//        } else {
+//            remove(key)
+//        }
+//    }
+//    
+//    public func unarchive<T: RawRepresentable>(_ key: DefaultsKey<T?>) -> T? {
+//        return object(forKey: key._key).flatMap { T(rawValue: $0 as! T.RawValue) }
+//    }
+//    
+//    public func unarchive<T: RawRepresentable>(_ key: DefaultsKey<T>) -> T? {
+//        return object(forKey: key._key).flatMap { T(rawValue: $0 as! T.RawValue) }
+//    }
+//}
+//
+//// MARK: NSCoding
+//
+//extension UserDefaults {
+//    // TODO: Can we simplify this and ensure that T is NSCoding compliant?
+//
+//    public func archive<T>(_ key: DefaultsKey<T>, _ value: T) {
+//        set(key, NSKeyedArchiver.archivedData(withRootObject: value))
+//    }
+//
+//    public func archive<T>(_ key: DefaultsKey<T?>, _ value: T?) {
+//        if let value = value {
+//            set(key, NSKeyedArchiver.archivedData(withRootObject: value))
+//        } else {
+//            remove(key)
+//        }
+//    }
+//    
+//    public func unarchive<T>(_ key: DefaultsKey<T>) -> T? {
+//        return data(forKey: key._key).flatMap { NSKeyedUnarchiver.unarchiveObject(with: $0) } as? T
+//    }
+//    
+//    public func unarchive<T>(_ key: DefaultsKey<T?>) -> T? {
+//        return data(forKey: key._key).flatMap { NSKeyedUnarchiver.unarchiveObject(with: $0) } as? T
+//    }
+//}
