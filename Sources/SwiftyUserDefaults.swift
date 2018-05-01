@@ -34,55 +34,91 @@ import Foundation
 
 public let Defaults = UserDefaults.standard
 
-// MARK: - Static keys
+// DefaultsKey
+public extension UserDefaults {
 
-/// Extend this class and add your user defaults keys as static constants
-/// so you can use the shortcut dot notation (e.g. `Defaults[.yourKey]`)
-
-open class DefaultsKeys {
-    fileprivate init() {}
-}
-
-/// Base class for static user defaults keys. Specialize with value type
-/// and pass key name to the initializer to create a key.
-
-open class DefaultsKey<ValueType>: DefaultsKeys {
-    // TODO: Can we use protocols to ensure ValueType is a compatible type?
-    public let _key: String
-    
-    public init(_ key: String) {
-        self._key = key
-        super.init()
-    }
-}
-
-// This one is tricky because we can't (and don't want to) extend Codable
-// so it implements DefaultsSerializable. So we have 3 cases:
-// - There is a Codable that wants to be saved (default saving)
-// - There is a custom object that wants to be saved, but it doesn't implement Codable
-// - There is a Codable that wants a custom getter/setter
-extension UserDefaults {
-    subscript<T: Codable>(key: DefaultsKey<T>) -> T? {
+    subscript<T: DefaultsSerializable>(key: DefaultsKey<T?>) -> T? {
         get {
-            return T.get(key: key._key, userDefaults: self)
+            return T.get(key: key._key, userDefaults: self) ?? key.defaultValue as? T
         }
         set {
             T.save(key: key._key, value: newValue, userDefaults: self)
         }
     }
 
-    subscript<T: DefaultsSerializable>(key: DefaultsKey<T>) -> T? {
+    subscript<T: DefaultsSerializable>(key: DefaultsKey<T?>) -> T? where T: DefaultsDefaultValueType {
         get {
-            return T.get(key: key._key, userDefaults: self)
+            return T.get(key: key._key, userDefaults: self) ?? T.defaultValue
         }
         set {
             T.save(key: key._key, value: newValue, userDefaults: self)
         }
     }
 
-    subscript<T: Codable & DefaultsSerializable>(key: DefaultsKey<T>) -> T? {
+    subscript<T: DefaultsSerializable>(key: DefaultsKey<T>) -> T where T: DefaultsDefaultValueType {
         get {
-            return T.get(key: key._key, userDefaults: self)
+            return T.get(key: key._key, userDefaults: self) ?? key.defaultValue ?? T.defaultValue
+        }
+        set {
+            T.save(key: key._key, value: newValue, userDefaults: self)
+        }
+    }
+
+    subscript<T: DefaultsSerializable>(key: DefaultsKey<T>) -> T {
+        get {
+            if let value = T.get(key: key._key, userDefaults: self) {
+                return value
+            } else if let defaultValue = key.defaultValue {
+                return defaultValue
+            } else {
+                fatalError("Shouldn't really happen, `DefaultsKey` can be initialized only with defaultValue or with a type that conforms to `DefaultsDefaultValueType`.")
+            }
+        }
+        set {
+            T.save(key: key._key, value: newValue, userDefaults: self)
+        }
+    }
+}
+
+// DefaultsCodableKey
+public extension UserDefaults {
+
+    subscript<T: Codable>(key: DefaultsCodableKey<T?>) -> T? {
+        get {
+            return T.get(key: key._key, userDefaults: self) ?? key.defaultValue as? T
+        }
+        set {
+            T.save(key: key._key, value: newValue, userDefaults: self)
+        }
+    }
+
+    subscript<T: Codable>(key: DefaultsCodableKey<T?>) -> T? where T: DefaultsDefaultValueType {
+        get {
+            return T.get(key: key._key, userDefaults: self) ?? T.defaultValue
+        }
+        set {
+            T.save(key: key._key, value: newValue, userDefaults: self)
+        }
+    }
+
+    subscript<T: Codable>(key: DefaultsCodableKey<T>) -> T where T: DefaultsDefaultValueType {
+        get {
+            return T.get(key: key._key, userDefaults: self) ?? key.defaultValue ?? T.defaultValue
+        }
+        set {
+            T.save(key: key._key, value: newValue, userDefaults: self)
+        }
+    }
+
+    subscript<T: Codable>(key: DefaultsCodableKey<T>) -> T {
+        get {
+            if let value = T.get(key: key._key, userDefaults: self) {
+                return value
+            } else if let defaultValue = key.defaultValue {
+                return defaultValue
+            } else {
+                fatalError("Shouldn't really happen, `DefaultsKey` can be initialized only with defaultValue or with a type that conforms to `DefaultsDefaultValueType`.")
+            }
         }
         set {
             T.save(key: key._key, value: newValue, userDefaults: self)
@@ -105,7 +141,7 @@ public extension UserDefaults {
 }
 
 internal extension UserDefaults {
-    
+
     func number(forKey key: String) -> NSNumber? {
         return object(forKey: key) as? NSNumber
     }
@@ -123,6 +159,42 @@ internal extension UserDefaults {
         } else {
             assertionFailure("Encodable \(T.self) is not _actually_ encodable to any data...Please fix 😭")
         }
+    }
+}
+
+struct TestCodable: Codable {
+
+    let cos: String
+
+    init(cos: String = "cos") {
+        self.cos = cos
+    }
+}
+
+struct TestGettable: DefaultsSerializable {
+
+    let cosuu = "cosuu"
+
+    static func get(key: String, userDefaults: UserDefaults) -> TestGettable? {
+        return TestGettable()
+    }
+
+    static func save(key: String, value: TestGettable?, userDefaults: UserDefaults) {
+        NSLog("save TestCodableGettable")
+    }
+}
+
+struct TestCodableGettable: Codable, DefaultsGettable, DefaultsStoreable {
+
+    let cosuuuuuuu = "cosuuuuuuu"
+
+    static func get(key: String, userDefaults: UserDefaults) -> TestCodableGettable? {
+        NSLog("get TestCodableGettable")
+        return TestCodableGettable()
+    }
+
+    static func save(key: String, value: TestCodableGettable?, userDefaults: UserDefaults) {
+        NSLog("save TestCodableGettable")
     }
 }
 
