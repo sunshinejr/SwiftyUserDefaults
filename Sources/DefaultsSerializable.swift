@@ -24,12 +24,17 @@
 
 import Foundation
 
-typealias DefaultsSerializable = DefaultsStoreable & DefaultsGettable
+// TODO: Better names please.
+public typealias DefaultsSerializable = DefaultsStoreable & DefaultsGettable
 
-protocol DefaultsStoreable {
+public protocol DefaultsStoreable {
     static func save(key: String, value: Self?, userDefaults: UserDefaults)
 }
 
-protocol DefaultsGettable {
+public protocol DefaultsGettable {
     static func get(key: String, userDefaults: UserDefaults) -> Self?
+}
+
+public protocol DefaultsDefaultValueType {
+    static var defaultValue: Self { get }
 }
