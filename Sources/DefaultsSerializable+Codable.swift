@@ -22,57 +22,113 @@
 // SOFTWARE.
 //
 
-internal extension Decodable {
+import Foundation
 
-    static func get(key: String, userDefaults: UserDefaults) -> Self? {
-        // We switch using T type due to backwards compatibility.
-        // Example: Int is Codable, but it was saved using `object(forKey:)`
-        // Right now it would be saved by decoding into Data and then read using
-        // data(forKey:). Which means it won't be able to read old String in the
-        // UserDefaults because it was saved as a String, but now we want Data.
-        //
-        // I mean, we _could_ potentially think about backporting/migrating
-        // values in the older versions, or just say that
-        switch self.self {
-        case is String.Type:
-            return userDefaults.string(forKey: key) as? Self
-        case is Int.Type:
-            return userDefaults.number(forKey: key)?.intValue as? Self
-        case is Double.Type:
-            return userDefaults.number(forKey: key)?.doubleValue as? Self
-        case is Bool.Type:
-            // @warning we use number(forKey:) instead of bool(forKey:), because
-            // bool(forKey:) will always return value, even if it's not set
-            // and it does a little bit of magic under the hood as well
-            // e.g. transforming strings like "YES" or "true" to true
-            return userDefaults.number(forKey: key)?.boolValue as? Self
-        case is Data.Type:
-            return userDefaults.data(forKey: key) as? Self
-        case is Date.Type:
-            return userDefaults.object(forKey: key) as? Self
-        case is URL.Type:
-            return userDefaults.url(forKey: key) as? Self
-        default:
-            return userDefaults.decodable(forKey: key) as Self?
-        }
+extension String: DefaultsSerializable, DefaultsDefaultValueType {
+
+    public static var defaultValue: String = ""
+
+    public static func get(key: String, userDefaults: UserDefaults) -> String? {
+        return userDefaults.string(forKey: key)
+    }
+
+    public static func save(key: String, value: String?, userDefaults: UserDefaults) {
+        userDefaults.set(value, forKey: key)
     }
 }
 
-internal extension Encodable {
-    static func save(key: String, value: Self?, userDefaults: UserDefaults) {
+extension Int: DefaultsSerializable, DefaultsDefaultValueType {
+
+    public static var defaultValue: Int = 0
+
+    public static func get(key: String, userDefaults: UserDefaults) -> Int? {
+        return userDefaults.number(forKey: key)?.intValue
+    }
+
+    public static func save(key: String, value: Int?, userDefaults: UserDefaults) {
+        userDefaults.set(value, forKey: key)
+    }
+}
+
+extension Double: DefaultsSerializable, DefaultsDefaultValueType {
+
+    public static var defaultValue: Double = 0.0
+
+    public static func get(key: String, userDefaults: UserDefaults) -> Double? {
+        return userDefaults.number(forKey: key)?.doubleValue
+    }
+
+    public static func save(key: String, value: Double?, userDefaults: UserDefaults) {
+        userDefaults.set(value, forKey: key)
+    }
+}
+
+extension Bool: DefaultsSerializable, DefaultsDefaultValueType {
+
+    public static var defaultValue: Bool = false
+
+    public static func get(key: String, userDefaults: UserDefaults) -> Bool? {
+        // @warning we use number(forKey:) instead of bool(forKey:), because
+        // bool(forKey:) will always return value, even if it's not set
+        // and it does a little bit of magic under the hood as well
+        // e.g. transforming strings like "YES" or "true" to true
+        return userDefaults.number(forKey: key)?.boolValue
+    }
+
+    public static func save(key: String, value: Bool?, userDefaults: UserDefaults) {
+        userDefaults.set(value, forKey: key)
+    }
+}
+
+extension Data: DefaultsSerializable, DefaultsDefaultValueType {
+
+    public static var defaultValue: Data = Data()
+
+    public static func get(key: String, userDefaults: UserDefaults) -> Data? {
+        return userDefaults.data(forKey: key)
+    }
+
+    public static func save(key: String, value: Data?, userDefaults: UserDefaults) {
+        userDefaults.set(value, forKey: key)
+    }
+}
+
+extension Date: DefaultsSerializable {
+
+    public static func get(key: String, userDefaults: UserDefaults) -> Date? {
+        return userDefaults.object(forKey: key) as? Date
+    }
+
+    public static func save(key: String, value: Date?, userDefaults: UserDefaults) {
+        userDefaults.set(value, forKey: key)
+    }
+}
+extension URL: DefaultsSerializable {
+
+    public static func get(key: String, userDefaults: UserDefaults) -> URL? {
+        return userDefaults.url(forKey: key)
+    }
+
+    public static func save(key: String, value: URL?, userDefaults: UserDefaults) {
+        userDefaults.set(value, forKey: key)
+    }
+}
+
+extension Decodable {
+
+    public static func get(key: String, userDefaults: UserDefaults) -> Self? {
+        return userDefaults.decodable(forKey: key) as Self?
+    }
+}
+
+extension Encodable {
+    
+    public static func save(key: String, value: Self?, userDefaults: UserDefaults) {
         guard let value = value else {
             userDefaults.removeObject(forKey: key)
             return
         }
 
-        switch value {
-        // @warning This should always be on top of Int because a cast
-        // from Double to Int will always succeed.
-        case let v as Double: userDefaults.set(v, forKey: key)
-        case let v as Int: userDefaults.set(v, forKey: key)
-        case let v as Bool: userDefaults.set(v, forKey: key)
-        case let v as URL: userDefaults.set(v, forKey: key)
-        default: userDefaults.set(encodable: value, forKey: key)
-        }
+        userDefaults.set(encodable: value, forKey: key)
     }
 }
