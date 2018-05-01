@@ -34,107 +34,14 @@ import Foundation
 
 public let Defaults = UserDefaults.standard
 
-// DefaultsKey
 public extension UserDefaults {
-
-    subscript<T: DefaultsSerializable>(key: DefaultsKey<T?>) -> T? {
-        get {
-            return T.get(key: key._key, userDefaults: self) ?? key.defaultValue as? T
-        }
-        set {
-            T.save(key: key._key, value: newValue, userDefaults: self)
-        }
-    }
-
-    subscript<T: DefaultsSerializable>(key: DefaultsKey<T?>) -> T? where T: DefaultsDefaultValueType {
-        get {
-            return T.get(key: key._key, userDefaults: self) ?? T.defaultValue
-        }
-        set {
-            T.save(key: key._key, value: newValue, userDefaults: self)
-        }
-    }
-
-    subscript<T: DefaultsSerializable>(key: DefaultsKey<T>) -> T where T: DefaultsDefaultValueType {
-        get {
-            return T.get(key: key._key, userDefaults: self) ?? key.defaultValue ?? T.defaultValue
-        }
-        set {
-            T.save(key: key._key, value: newValue, userDefaults: self)
-        }
-    }
-
-    subscript<T: DefaultsSerializable>(key: DefaultsKey<T>) -> T {
-        get {
-            if let value = T.get(key: key._key, userDefaults: self) {
-                return value
-            } else if let defaultValue = key.defaultValue {
-                return defaultValue
-            } else {
-                fatalError("Shouldn't really happen, `DefaultsKey` can be initialized only with defaultValue or with a type that conforms to `DefaultsDefaultValueType`.")
-            }
-        }
-        set {
-            T.save(key: key._key, value: newValue, userDefaults: self)
-        }
-    }
-}
-
-// DefaultsCodableKey
-public extension UserDefaults {
-
-    subscript<T: Codable>(key: DefaultsCodableKey<T?>) -> T? {
-        get {
-            return T.get(key: key._key, userDefaults: self) ?? key.defaultValue as? T
-        }
-        set {
-            T.save(key: key._key, value: newValue, userDefaults: self)
-        }
-    }
-
-    subscript<T: Codable>(key: DefaultsCodableKey<T?>) -> T? where T: DefaultsDefaultValueType {
-        get {
-            return T.get(key: key._key, userDefaults: self) ?? T.defaultValue
-        }
-        set {
-            T.save(key: key._key, value: newValue, userDefaults: self)
-        }
-    }
-
-    subscript<T: Codable>(key: DefaultsCodableKey<T>) -> T where T: DefaultsDefaultValueType {
-        get {
-            return T.get(key: key._key, userDefaults: self) ?? key.defaultValue ?? T.defaultValue
-        }
-        set {
-            T.save(key: key._key, value: newValue, userDefaults: self)
-        }
-    }
-
-    subscript<T: Codable>(key: DefaultsCodableKey<T>) -> T {
-        get {
-            if let value = T.get(key: key._key, userDefaults: self) {
-                return value
-            } else if let defaultValue = key.defaultValue {
-                return defaultValue
-            } else {
-                fatalError("Shouldn't really happen, `DefaultsKey` can be initialized only with defaultValue or with a type that conforms to `DefaultsDefaultValueType`.")
-            }
-        }
-        set {
-            T.save(key: key._key, value: newValue, userDefaults: self)
-        }
-    }
-}
-
-public extension UserDefaults {
+    
     /// Returns `true` if `key` exists
-
     func hasKey<T>(_ key: DefaultsKey<T>) -> Bool {
         return object(forKey: key._key) != nil
     }
 
     /// Removes value for `key`
-
     func remove<T>(_ key: DefaultsKey<T>) {
         removeObject(forKey: key._key)
     }
@@ -159,42 +66,6 @@ internal extension UserDefaults {
         } else {
             assertionFailure("Encodable \(T.self) is not _actually_ encodable to any data...Please fix 😭")
         }
-    }
-}
-
-struct TestCodable: Codable {
-
-    let cos: String
-
-    init(cos: String = "cos") {
-        self.cos = cos
-    }
-}
-
-struct TestGettable: DefaultsSerializable {
-
-    let cosuu = "cosuu"
-
-    static func get(key: String, userDefaults: UserDefaults) -> TestGettable? {
-        return TestGettable()
-    }
-
-    static func save(key: String, value: TestGettable?, userDefaults: UserDefaults) {
-        NSLog("save TestCodableGettable")
-    }
-}
-
-struct TestCodableGettable: Codable, DefaultsGettable, DefaultsStoreable {
-
-    let cosuuuuuuu = "cosuuuuuuu"
-
-    static func get(key: String, userDefaults: UserDefaults) -> TestCodableGettable? {
-        NSLog("get TestCodableGettable")
-        return TestCodableGettable()
-    }
-
-    static func save(key: String, value: TestCodableGettable?, userDefaults: UserDefaults) {
-        NSLog("save TestCodableGettable")
     }
 }
 

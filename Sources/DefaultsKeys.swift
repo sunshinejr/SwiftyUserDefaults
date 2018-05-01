@@ -84,9 +84,6 @@ open class DefaultsCodableKey<ValueType: Codable>: DefaultsKeys {
     }
 }
 
-public protocol OptionalType { associatedtype Wrapped; var wrapped: Wrapped? { get } }
-extension Optional: OptionalType { public var wrapped: Wrapped? { return self } }
-
 public extension DefaultsCodableKey where ValueType: Codable, ValueType: OptionalType, ValueType.Wrapped: Codable {
 
     convenience init(_ key: String) {
@@ -102,6 +99,13 @@ public extension DefaultsKey where ValueType: DefaultsSerializable, ValueType: O
 }
 
 public extension DefaultsKey where ValueType: DefaultsDefaultValueType {
+
+    convenience init(_ key: String) {
+        self.init(key, defaultValue: ValueType.defaultValue)
+    }
+}
+
+public extension DefaultsCodableKey where ValueType: DefaultsDefaultValueType {
 
     convenience init(_ key: String) {
         self.init(key, defaultValue: ValueType.defaultValue)

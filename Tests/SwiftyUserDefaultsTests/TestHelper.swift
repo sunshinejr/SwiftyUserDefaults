@@ -1,3 +1,41 @@
+import SwiftyUserDefaults
+
+struct TestCodable: Codable {
+
+    let cos: String
+
+    init(cos: String = "cos") {
+        self.cos = cos
+    }
+}
+
+struct TestGettable: DefaultsSerializable {
+
+    let cosuu = "cosuu"
+
+    static func get(key: String, userDefaults: UserDefaults) -> TestGettable? {
+        return TestGettable()
+    }
+
+    static func save(key: String, value: TestGettable?, userDefaults: UserDefaults) {
+        NSLog("save TestCodableGettable")
+    }
+}
+
+struct TestCodableGettable: Codable, DefaultsGettable, DefaultsStoreable {
+
+    let cosuuuuuuu = "cosuuuuuuu"
+
+    static func get(key: String, userDefaults: UserDefaults) -> TestCodableGettable? {
+        NSLog("get TestCodableGettable")
+        return TestCodableGettable()
+    }
+
+    static func save(key: String, value: TestCodableGettable?, userDefaults: UserDefaults) {
+        NSLog("save TestCodableGettable")
+    }
+}
+
 //#if os(OSX)
 //    import Cocoa
 //#else
