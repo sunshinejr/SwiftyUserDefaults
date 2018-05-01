@@ -1,45 +1,6 @@
 import XCTest
 @testable import SwiftyUserDefaults
 
-extension DefaultsKeys {
-    // Optional DefaultSerializable support with default values and without
-    static let abc1 = DefaultsKey<TestCodableGettable?>("h1", defaultValue: TestCodableGettable())
-    static let abc2 = DefaultsKey<TestCodableGettable?>("h2", defaultValue: nil)
-    static let abc3 = DefaultsKey<TestCodableGettable?>("h3")
-
-    // DefaultSerializable support with default values
-    static let abc4 = DefaultsKey<TestCodableGettable>("h4", defaultValue: TestCodableGettable())
-    //    static let abc5 = DefaultsKey<TestCodableGettable>("h5") // error here, you won't be able to instantiate a non-optional value without defaultValue parameter
-
-
-    // Optional Codable support with default values and without
-    static let abc6 = DefaultsCodableKey<TestCodable?>("h6", defaultValue: TestCodable())
-    static let abc7 = DefaultsCodableKey<TestCodable?>("h7", defaultValue: nil)
-    static let abc8 = DefaultsCodableKey<TestCodable?>("h8")
-
-
-    // Codable support with default values
-    static let abc9 = DefaultsCodableKey<TestCodable>("h9", defaultValue: TestCodable())
-    //    static let abc10 = DefaultsCodableKey<TestCodable>("h10") // error here as well as in the DefaultsSerializable
-
-
-    // Built-in types with default values
-    static let abc11 = DefaultsKey<String>("h11")
-    static let abc12 = DefaultsKey<Bool>("h12")
-    static let abc13 = DefaultsKey<Double>("h13")
-    static let abc14 = DefaultsKey<Int>("h14")
-    static let abc15 = DefaultsKey<Data>("h15")
-
-
-    // Built-in serializable types without default values (need to provide them by parameter or extension to type)
-    //    static let abc16 = DefaultsKey<Date>("h16")
-    //    static let abc17 = DefaultsKey<URL>("h17")
-
-
-
-    static let abc18 = DefaultsKey<Date>("h18", defaultValue: Date())
-}
-
 class SwiftyUserDefaultsTests: XCTestCase {
 //    override func setUp() {
 //        super.setUp()
@@ -49,7 +10,7 @@ class SwiftyUserDefaultsTests: XCTestCase {
 //        }
 //    }
 
-    func testFun() {
+    func testInitializer() {
         let a1 = Defaults[.abc1]
         let a2 = Defaults[.abc2]
         let a3 = Defaults[.abc3]
@@ -57,11 +18,17 @@ class SwiftyUserDefaultsTests: XCTestCase {
         let a6 = Defaults[.abc6]
 
         XCTAssertNotNil(a1)
-        XCTAssertNil(a2) // tu  nie jest nilem bo custom getter zawsze zwraca wartosc
-        XCTAssertNil(a3) // jak wyzej
+        XCTAssertNil(a2)
+        XCTAssertNil(a3)
         XCTAssertNotNil(a4)
-        NSLog("a6: \(a6 ?? TestCodable(cos: "cos1"))")
         XCTAssertNotNil(a6)
+    }
+
+    func testSave() {
+        let froggy = FrogCodableSerializable(name: "newName!")
+        Defaults[.abc1] = froggy
+
+        XCTAssertEqual(froggy.name, Defaults[.abc1]?.name)
     }
 
 //    func testNone() {
@@ -81,9 +48,6 @@ class SwiftyUserDefaultsTests: XCTestCase {
 //        XCTAssertEqual(Defaults[key].dictionaryValue.keys.count, 0)
 //        XCTAssertEqual(Defaults[key].dataValue, Data())
 //    }
-    func testString() {
-        XCTAssertEqual("1", "2")
-    }
 //
 //    func testString() {
 //        // set and read
