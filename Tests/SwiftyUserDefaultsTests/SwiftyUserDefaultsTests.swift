@@ -2,13 +2,14 @@ import XCTest
 @testable import SwiftyUserDefaults
 
 class SwiftyUserDefaultsTests: XCTestCase {
-//    override func setUp() {
-//        super.setUp()
-//        // clear defaults before testing
-//        for (key, _) in Defaults.dictionaryRepresentation() {
-//            Defaults.removeObject(forKey: key)
-//        }
-//    }
+
+    override func setUp() {
+        super.setUp()
+        // clear defaults before testing
+        for (key, _) in Defaults.dictionaryRepresentation() {
+            Defaults.removeObject(forKey: key)
+        }
+    }
 
     func testInitializer() {
         let a1 = Defaults[.abc1]
@@ -29,6 +30,16 @@ class SwiftyUserDefaultsTests: XCTestCase {
         Defaults[.abc1] = froggy
 
         XCTAssertEqual(froggy.name, Defaults[.abc1]?.name)
+    }
+
+    func testSaveArray() {
+        let key = DefaultsKey<[String]>("h19", defaultValue: [])
+        XCTAssertEqual(0, Defaults[key].count)
+
+        let frogies = ["1", "2", "3"]
+        Defaults[key] = frogies
+
+        XCTAssertEqual(3, Defaults[key].count)
     }
 
 //    func testNone() {

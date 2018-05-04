@@ -72,14 +72,14 @@
 		6BDD44045C79B2541C32E0E6 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				2561E488E2243A96DCCC97BB /* Info.plist */,
-				2C17CB9806038A26514C7406 /* SwiftyUserDefaults.h */,
-				C9ACB91ED385A93309C04CD0 /* DefaultsSerializable+BuiltIns.swift */,
+				140C43B0209884EF00A41349 /* Defaults+Subscripts.swift */,
 				011AAFDAB7A23F6F60C5AA47 /* DefaultsKeys.swift */,
 				7ABE3C6B22CA2C636B53F97E /* DefaultsSerializable.swift */,
-				2D73A4729E806A0B4B940D1A /* SwiftyUserDefaults.swift */,
+				C9ACB91ED385A93309C04CD0 /* DefaultsSerializable+BuiltIns.swift */,
+				2561E488E2243A96DCCC97BB /* Info.plist */,
 				140C43AE2098836000A41349 /* OptionalType.swift */,
-				140C43B0209884EF00A41349 /* Defaults+Subscripts.swift */,
+				2C17CB9806038A26514C7406 /* SwiftyUserDefaults.h */,
+				2D73A4729E806A0B4B940D1A /* SwiftyUserDefaults.swift */,
 			);
 			name = Sources;
 			sourceTree = "<group>";

@@ -25,6 +25,8 @@
 import Foundation
 
 // TODO: Better names please.
+// TODO: NSCoding?
+// TODO: Arrays
 public typealias DefaultsSerializable = DefaultsStoreable & DefaultsGettable
 
 public protocol DefaultsStoreable {

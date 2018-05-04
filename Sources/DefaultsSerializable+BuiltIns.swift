@@ -114,6 +114,17 @@ extension URL: DefaultsSerializable {
     }
 }
 
+extension Array: DefaultsSerializable where Element: DefaultsSerializable {
+
+    public static func get(key: String, userDefaults: UserDefaults) -> Array<Element>? {
+        return userDefaults.array(forKey: key) as? [Element]
+    }
+
+    public static func save(key: String, value: Array<Element>?, userDefaults: UserDefaults) {
+        userDefaults.set(value, forKey: key)
+    }
+}
+
 extension Decodable {
 
     public static func get(key: String, userDefaults: UserDefaults) -> Self? {
