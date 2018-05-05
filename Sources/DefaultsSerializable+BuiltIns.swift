@@ -129,7 +129,8 @@ extension URL: DefaultsBuiltInSerializable {
 extension Array: DefaultsSerializable where Element: DefaultsSerializable {
 
     public static func get(key: String, userDefaults: UserDefaults) -> Array<Element>? {
-        if let _ = Element.self as? NSCoding.Type {
+        // URL/NSCoding are special for arrays, thus we use unarchiving instead of classic `array`
+        if Element.self is NSCoding.Type || Element.self is URL.Type {
             return userDefaults.data(forKey: key).flatMap(NSKeyedUnarchiver.unarchiveObject) as? [Element]
         } else {
             return userDefaults.array(forKey: key) as? [Element]
@@ -142,7 +143,8 @@ extension Array: DefaultsSerializable where Element: DefaultsSerializable {
             return
         }
 
-        if let _ = Element.self as? NSCoding.Type {
+        // URL/NSCoding are special for arrays, thus we use archiving instead of classic `array`
+        if Element.self is NSCoding.Type || Element.self is URL.Type {
             userDefaults.set(NSKeyedArchiver.archivedData(withRootObject: value), forKey: key)
         } else {
             userDefaults.set(value, forKey: key)

@@ -15,6 +15,7 @@
 		1491DA18209E5AFC00B62864 /* Defaults+Bool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1491DA17209E5AFC00B62864 /* Defaults+Bool.swift */; };
 		1491DA1A209E5B2E00B62864 /* Defaults+Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1491DA19209E5B2E00B62864 /* Defaults+Data.swift */; };
 		1491DA1C209E5B7B00B62864 /* Defaults+Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1491DA1B209E5B7B00B62864 /* Defaults+Date.swift */; };
+		1491DA1E209E5BCD00B62864 /* Defaults+URL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1491DA1D209E5BCD00B62864 /* Defaults+URL.swift */; };
 		947B50B172326B6A04FD5880 /* SwiftyUserDefaults.h in Headers */ = {isa = PBXBuildFile; fileRef = A9BFED60158679E195A45B47 /* SwiftyUserDefaults.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A4A80A1A684BA68E8BC0FBB7 /* TestHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA5D63158DA9B7DE73F139E /* TestHelper.swift */; };
 		A8FAA59A072724F689181B71 /* DefaultsSerializable+BuiltIns.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE2FC867FABADCCC80914FE /* DefaultsSerializable+BuiltIns.swift */; };
@@ -44,6 +45,7 @@
 		1491DA17209E5AFC00B62864 /* Defaults+Bool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Defaults+Bool.swift"; sourceTree = "<group>"; };
 		1491DA19209E5B2E00B62864 /* Defaults+Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Defaults+Data.swift"; sourceTree = "<group>"; };
 		1491DA1B209E5B7B00B62864 /* Defaults+Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Defaults+Date.swift"; sourceTree = "<group>"; };
+		1491DA1D209E5BCD00B62864 /* Defaults+URL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Defaults+URL.swift"; sourceTree = "<group>"; };
 		2B177C8163502A503B4F7B74 /* DefaultsSerializable.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = DefaultsSerializable.swift; path = Sources/DefaultsSerializable.swift; sourceTree = "<group>"; };
 		3AA5D63158DA9B7DE73F139E /* TestHelper.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = TestHelper.swift; path = Tests/SwiftyUserDefaultsTests/TestHelper.swift; sourceTree = "<group>"; };
 		59A24D13D369DF78046F9EF5 /* DefaultsKeys.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = DefaultsKeys.swift; path = Sources/DefaultsKeys.swift; sourceTree = "<group>"; };
@@ -93,6 +95,7 @@
 				1491DA0F209E52FC00B62864 /* Defaults+Int.swift */,
 				1491DA10209E52FC00B62864 /* Defaults+String.swift */,
 				1491DA1B209E5B7B00B62864 /* Defaults+Date.swift */,
+				1491DA1D209E5BCD00B62864 /* Defaults+URL.swift */,
 			);
 			name = "Built-Ins";
 			path = "Tests/SwiftyUserDefaultsTests/Built-Ins";
@@ -292,6 +295,7 @@
 				1491DA12209E52FC00B62864 /* Defaults+String.swift in Sources */,
 				1491DA16209E5A6000B62864 /* Defaults+Double.swift in Sources */,
 				A4A80A1A684BA68E8BC0FBB7 /* TestHelper.swift in Sources */,
+				1491DA1E209E5BCD00B62864 /* Defaults+URL.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
