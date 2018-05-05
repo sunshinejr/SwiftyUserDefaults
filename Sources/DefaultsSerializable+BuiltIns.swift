@@ -24,9 +24,10 @@
 
 import Foundation
 
-extension String: DefaultsBuiltInSerializable, DefaultsDefaultValueType {
+extension String: DefaultsSerializable, DefaultsDefaultArrayValueType, DefaultsDefaultValueType {
 
     public static var defaultValue: String = ""
+    public static var defaultArrayValue: [String] = []
 
     public static func get(key: String, userDefaults: UserDefaults) -> String? {
         return userDefaults.string(forKey: key)
@@ -37,16 +38,10 @@ extension String: DefaultsBuiltInSerializable, DefaultsDefaultValueType {
     }
 }
 
-extension Array: DefaultsDefaultValueType where Element: DefaultsBuiltInSerializable {
-
-    public static var defaultValue: Array<Element> {
-        return []
-    }
-}
-
-extension Int: DefaultsBuiltInSerializable, DefaultsDefaultValueType {
+extension Int: DefaultsSerializable, DefaultsDefaultArrayValueType, DefaultsDefaultValueType {
 
     public static var defaultValue: Int = 0
+    public static var defaultArrayValue: [Int] = []
 
     public static func get(key: String, userDefaults: UserDefaults) -> Int? {
         return userDefaults.number(forKey: key)?.intValue
@@ -62,9 +57,10 @@ extension Array where Element == Int {
     public static var defaultValue: Array<Int> = []
 }
 
-extension Double: DefaultsBuiltInSerializable, DefaultsDefaultValueType {
+extension Double: DefaultsSerializable, DefaultsDefaultArrayValueType, DefaultsDefaultValueType {
 
     public static var defaultValue: Double = 0.0
+    public static var defaultArrayValue: [Double] = []
 
     public static func get(key: String, userDefaults: UserDefaults) -> Double? {
         return userDefaults.number(forKey: key)?.doubleValue
@@ -75,9 +71,10 @@ extension Double: DefaultsBuiltInSerializable, DefaultsDefaultValueType {
     }
 }
 
-extension Bool: DefaultsBuiltInSerializable, DefaultsDefaultValueType {
+extension Bool: DefaultsSerializable, DefaultsDefaultArrayValueType, DefaultsDefaultValueType {
 
     public static var defaultValue: Bool = false
+    public static var defaultArrayValue: [Bool] = []
 
     public static func get(key: String, userDefaults: UserDefaults) -> Bool? {
         // @warning we use number(forKey:) instead of bool(forKey:), because
@@ -92,9 +89,10 @@ extension Bool: DefaultsBuiltInSerializable, DefaultsDefaultValueType {
     }
 }
 
-extension Data: DefaultsBuiltInSerializable, DefaultsDefaultValueType {
+extension Data: DefaultsSerializable, DefaultsDefaultArrayValueType, DefaultsDefaultValueType {
 
     public static var defaultValue: Data = Data()
+    public static var defaultArrayValue: [Data] = []
 
     public static func get(key: String, userDefaults: UserDefaults) -> Data? {
         return userDefaults.data(forKey: key)
@@ -105,7 +103,7 @@ extension Data: DefaultsBuiltInSerializable, DefaultsDefaultValueType {
     }
 }
 
-extension Date: DefaultsBuiltInSerializable {
+extension Date: DefaultsSerializable {
 
     public static func get(key: String, userDefaults: UserDefaults) -> Date? {
         return userDefaults.object(forKey: key) as? Date
@@ -115,7 +113,7 @@ extension Date: DefaultsBuiltInSerializable {
         userDefaults.set(value, forKey: key)
     }
 }
-extension URL: DefaultsBuiltInSerializable {
+extension URL: DefaultsSerializable {
 
     public static func get(key: String, userDefaults: UserDefaults) -> URL? {
         return userDefaults.url(forKey: key)
