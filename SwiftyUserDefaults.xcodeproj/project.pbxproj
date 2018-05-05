@@ -78,9 +78,9 @@
 		1491DA0E209E52FC00B62864 /* Built-Ins */ = {
 			isa = PBXGroup;
 			children = (
+				1491DA13209E584B00B62864 /* BuiltInSpecProtocol.swift */,
 				1491DA0F209E52FC00B62864 /* Defaults+Int.swift */,
 				1491DA10209E52FC00B62864 /* Defaults+String.swift */,
-				1491DA13209E584B00B62864 /* BuiltInSpecProtocol.swift */,
 			);
 			name = "Built-Ins";
 			path = "Tests/SwiftyUserDefaultsTests/Built-Ins";

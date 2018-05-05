@@ -43,7 +43,7 @@ extension BuiltInSpec where BuiltIn: DefaultsDefaultValueType {
             defaults.cleanObjects()
         }
 
-        when("default value") {
+        when("type-default value") {
             then("create a key") {
                 let key = DefaultsKey<BuiltIn>("test")
                 expect(key._key) == "test"
@@ -59,12 +59,28 @@ extension BuiltInSpec where BuiltIn: DefaultsDefaultValueType {
             then("get a default value") {
                 let key = DefaultsKey<BuiltIn>("test")
                 let value = defaults[key]
-                expect(value) == key.defaultValue
+                expect(value) == BuiltIn.defaultValue
+            }
+
+            then("get a default array value") {
+                let key = DefaultsKey<[BuiltIn]>("test")
+                let value = defaults[key]
+                expect(value) == [BuiltIn].defaultValue
             }
 
             then("save a value") {
                 let key = DefaultsKey<BuiltIn>("test")
                 let expectedValue = self.customValue
+                defaults[key] = expectedValue
+
+                let value = defaults[key]
+
+                expect(value) == expectedValue
+            }
+
+            then("save an array value") {
+                let key = DefaultsKey<[BuiltIn]>("test")
+                let expectedValue = [self.customValue]
                 defaults[key] = expectedValue
 
                 let value = defaults[key]
@@ -79,45 +95,57 @@ extension BuiltInSpec where BuiltIn: DefaultsDefaultValueType {
 extension BuiltInSpec {
 
     func testValues() {
-        var defaults: UserDefaults!
+        when("key-default value") {
+            var defaults: UserDefaults!
 
-        beforeEach {
-            defaults = UserDefaults()
-            defaults.cleanObjects()
-        }
+            beforeEach {
+                defaults = UserDefaults()
+                defaults.cleanObjects()
+            }
 
-        then("create an array key without default value") {
-            let key = DefaultsKey<[BuiltIn]>("test")
-            expect(key._key) == "test"
-            expect(key.defaultValue) == [BuiltIn].defaultValue
-        }
+            then("create a key") {
+                let key = DefaultsKey<BuiltIn>("test", defaultValue: self.defaultValue)
+                expect(key._key) == "test"
+                expect(key.defaultValue) == self.defaultValue
+            }
 
-        then("create a key with default value") {
-            let key = DefaultsKey<BuiltIn>("test", defaultValue: self.defaultValue)
-            expect(key._key) == "test"
-            expect(key.defaultValue) == self.defaultValue
-        }
+            then("create an array key") {
+                let key = DefaultsKey<[BuiltIn]>("test", defaultValue: [self.defaultValue])
+                expect(key._key) == "test"
+                expect(key.defaultValue) == [self.defaultValue]
+            }
 
-        then("create an array key with default value") {
-            let key = DefaultsKey<[BuiltIn]>("test", defaultValue: [self.defaultValue, self.customValue])
-            expect(key._key) == "test"
-            expect(key.defaultValue) == [self.defaultValue, self.customValue]
-        }
+            then("get a default value") {
+                let key = DefaultsKey<BuiltIn>("test", defaultValue: self.defaultValue)
+                let value = defaults[key]
+                expect(value) == self.defaultValue
+            }
 
-        then("get a custom-default value") {
-            let key = DefaultsKey<BuiltIn>("test", defaultValue: self.customValue)
-            let value = defaults[key]
-            expect(value) == self.customValue
-        }
+            then("get a default array value") {
+                let key = DefaultsKey<[BuiltIn]>("test", defaultValue: [self.defaultValue])
+                let value = defaults[key]
+                expect(value) == [self.defaultValue]
+            }
 
-        then("save a value for key with default custom value") {
-            let key = DefaultsKey<BuiltIn>("test", defaultValue: self.defaultValue)
-            let expectedValue = self.customValue
-            defaults[key] = expectedValue
+            then("save a value") {
+                let key = DefaultsKey<BuiltIn>("test", defaultValue: self.defaultValue)
+                let expectedValue = self.customValue
+                defaults[key] = expectedValue
 
-            let value = defaults[key]
+                let value = defaults[key]
 
-            expect(value) == expectedValue
+                expect(value) == expectedValue
+            }
+
+            then("save an array value") {
+                let key = DefaultsKey<[BuiltIn]>("test", defaultValue: [self.defaultValue])
+                let expectedValue = [self.customValue]
+                defaults[key] = expectedValue
+
+                let value = defaults[key]
+
+                expect(value) == expectedValue
+            }
         }
     }
 }
