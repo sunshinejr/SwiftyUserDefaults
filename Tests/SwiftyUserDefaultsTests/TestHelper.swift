@@ -23,7 +23,7 @@ extension UserDefaults {
     }
 }
 
-struct FrogCodable: Codable {
+struct FrogCodable: Codable, Equatable {
 
     let name: String
 
