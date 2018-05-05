@@ -24,7 +24,7 @@
 
 import Quick
 
-final class DefaultsDateSpec: QuickSpec, BuiltInSpec {
+final class DefaultsDateSpec: QuickSpec, DefaultsSerializableSpec {
 
     var customValue: Date = Date(timeIntervalSince1970: 50)
     var defaultValue: Date = Date()

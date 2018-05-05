@@ -24,7 +24,7 @@
 
 import Quick
 
-final class DefaultsUrlSpec: QuickSpec, BuiltInSpec {
+final class DefaultsUrlSpec: QuickSpec, DefaultsSerializableSpec {
 
     var customValue: URL = URL(string: "https://google.com")!
     var defaultValue: URL = URL(string: "https://github.com")!

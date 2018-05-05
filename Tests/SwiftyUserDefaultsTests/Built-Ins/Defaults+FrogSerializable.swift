@@ -24,7 +24,7 @@
 
 import Quick
 
-final class DefaultsFrogSerializableSpec: QuickSpec, BuiltInSpec {
+final class DefaultsFrogSerializableSpec: QuickSpec, DefaultsSerializableSpec {
 
     var customValue: FrogSerializable = FrogSerializable(name: "custom")
     var defaultValue: FrogSerializable = FrogSerializable(name: "default")

@@ -24,7 +24,7 @@
 
 import Quick
 
-final class DefaultsBoolSpec: QuickSpec, BuiltInSpec {
+final class DefaultsBoolSpec: QuickSpec, DefaultsSerializableSpec {
 
     var customValue: Bool = false
     var defaultValue: Bool = true

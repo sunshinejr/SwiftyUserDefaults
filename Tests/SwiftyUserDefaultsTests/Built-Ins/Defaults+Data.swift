@@ -24,7 +24,7 @@
 
 import Quick
 
-final class DefaultsDataSpec: QuickSpec, BuiltInSpec {
+final class DefaultsDataSpec: QuickSpec, DefaultsSerializableSpec {
 
     var customValue: Data = "custom data".data(using: .utf8)!
     var defaultValue: Data = "default data".data(using: .utf8)!

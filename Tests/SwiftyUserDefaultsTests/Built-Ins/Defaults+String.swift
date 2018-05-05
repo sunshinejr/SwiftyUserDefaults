@@ -24,7 +24,7 @@
 
 import Quick
 
-final class DefaultsStringSpec: QuickSpec, BuiltInSpec {
+final class DefaultsStringSpec: QuickSpec, DefaultsSerializableSpec {
 
     var customValue: String = "custom value"
     var defaultValue: String = "default value"
