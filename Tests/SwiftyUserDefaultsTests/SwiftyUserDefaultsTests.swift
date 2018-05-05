@@ -1,4 +1,6 @@
 import XCTest
+import Quick
+import Nimble
 @testable import SwiftyUserDefaults
 
 class SwiftyUserDefaultsTests: XCTestCase {
@@ -11,36 +13,49 @@ class SwiftyUserDefaultsTests: XCTestCase {
         }
     }
 
-    func testInitializer() {
-        let a1 = Defaults[.abc1]
-        let a2 = Defaults[.abc2]
-        let a3 = Defaults[.abc3]
-        let a4 = Defaults[.abc4]
-        let a6 = Defaults[.abc6]
-
-        XCTAssertNotNil(a1)
-        XCTAssertNil(a2)
-        XCTAssertNil(a3)
-        XCTAssertNotNil(a4)
-        XCTAssertNotNil(a6)
-    }
-
-    func testSave() {
-        let froggy = FrogCodableSerializable(name: "newName!")
-        Defaults[.abc1] = froggy
-
-        XCTAssertEqual(froggy.name, Defaults[.abc1]?.name)
-    }
-
-    func testSaveArray() {
-        let key = DefaultsKey<[String]>("h19", defaultValue: [])
-        XCTAssertEqual(0, Defaults[key].count)
-
-        let frogies = ["1", "2", "3"]
-        Defaults[key] = frogies
-
-        XCTAssertEqual(3, Defaults[key].count)
-    }
+//    func testInitializer() {
+//        let a1 = Defaults[.abc1]
+//        let a2 = Defaults[.abc2]
+//        let a3 = Defaults[.abc3]
+//        let a4 = Defaults[.abc4]
+//        let a6 = Defaults[.abc6]
+//
+//        XCTAssertNotNil(a1)
+//        XCTAssertNil(a2)
+//        XCTAssertNil(a3)
+//        XCTAssertNotNil(a4)
+//        XCTAssertNotNil(a6)
+//    }
+//
+//    func testSaveArrayBuiltInSerializable() {
+//        let key = DefaultsKey<[String]>("h19", defaultValue: [])
+//        XCTAssertEqual(0, Defaults[key].count)
+//
+//        let frogies = ["1", "2", "3"]
+//        Defaults[key] = frogies
+//
+//        XCTAssertEqual(3, Defaults[key].count)
+//    }
+//
+//    func testSaveArrayCustomSerializable() {
+//        let key = DefaultsKey<[FrogSerializable]>("h19", defaultValue: [])
+//        XCTAssertEqual(0, Defaults[key].count)
+//
+//        let frogies = ["1", "2", "3"].map(FrogSerializable.init)
+//        Defaults[key] = frogies
+//
+//        XCTAssertEqual(3, Defaults[key].count)
+//    }
+//
+//    func testSaveArrayCustomCodable() {
+//        let key = DefaultsCodableKey<[FrogCodable]>("h19", defaultValue: [])
+//        XCTAssertEqual(0, Defaults[key].count)
+//
+//        let frogies = ["1", "2", "3"].map(FrogCodable.init)
+//        Defaults[key] = frogies
+//
+//        XCTAssertEqual(3, Defaults[key].count)
+//    }
 
 //    func testNone() {
 //        let key = "none"
