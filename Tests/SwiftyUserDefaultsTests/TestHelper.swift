@@ -1,4 +1,27 @@
+import Foundation
+import Quick
 import SwiftyUserDefaults
+
+func given(_ description: String, closure: @escaping () -> ()) {
+    describe(description, closure)
+}
+
+func when(_ description: String, closure: @escaping () -> ()) {
+    context(description, closure)
+}
+
+func then(_ description: String, closure: @escaping () -> ()) {
+    it(description, closure: closure)
+}
+
+extension UserDefaults {
+
+    func cleanObjects() {
+        for (key, _) in dictionaryRepresentation() {
+            removeObject(forKey: key)
+        }
+    }
+}
 
 struct FrogCodable: Codable {
 
