@@ -33,7 +33,7 @@ protocol BuiltInSpec {
     var customValue: BuiltIn { get }
 }
 
-extension BuiltInSpec where BuiltIn: DefaultsBuiltInSerializable, BuiltIn: DefaultsDefaultValueType {
+extension BuiltInSpec where BuiltIn: DefaultsDefaultValueType {
 
     func testDefaultValues() {
         var defaults: UserDefaults!
@@ -50,22 +50,10 @@ extension BuiltInSpec where BuiltIn: DefaultsBuiltInSerializable, BuiltIn: Defau
                 expect(key.defaultValue) == BuiltIn.defaultValue
             }
 
-            then("create an array key") {
-                let key = DefaultsKey<[BuiltIn]>("test")
-                expect(key._key) == "test"
-                expect(key.defaultValue) == [BuiltIn].defaultValue
-            }
-
             then("get a default value") {
                 let key = DefaultsKey<BuiltIn>("test")
                 let value = defaults[key]
                 expect(value) == BuiltIn.defaultValue
-            }
-
-            then("get a default array value") {
-                let key = DefaultsKey<[BuiltIn]>("test")
-                let value = defaults[key]
-                expect(value) == [BuiltIn].defaultValue
             }
 
             then("save a value") {
@@ -76,6 +64,32 @@ extension BuiltInSpec where BuiltIn: DefaultsBuiltInSerializable, BuiltIn: Defau
                 let value = defaults[key]
 
                 expect(value) == expectedValue
+            }
+        }
+    }
+}
+
+extension BuiltInSpec where BuiltIn: DefaultsDefaultArrayValueType {
+
+    func testDefaultArrayValues() {
+        when("array-type-default value") {
+            var defaults: UserDefaults!
+
+            beforeEach {
+                defaults = UserDefaults()
+                defaults.cleanObjects()
+            }
+
+            then("create an array key") {
+                let key = DefaultsKey<[BuiltIn]>("test")
+                expect(key._key) == "test"
+                expect(key.defaultValue) == BuiltIn.defaultArrayValue
+            }
+
+            then("get a default array value") {
+                let key = DefaultsKey<[BuiltIn]>("test")
+                let value = defaults[key]
+                expect(value) == BuiltIn.defaultArrayValue
             }
 
             then("save an array value") {
@@ -89,7 +103,6 @@ extension BuiltInSpec where BuiltIn: DefaultsBuiltInSerializable, BuiltIn: Defau
             }
         }
     }
-
 }
 
 extension BuiltInSpec {

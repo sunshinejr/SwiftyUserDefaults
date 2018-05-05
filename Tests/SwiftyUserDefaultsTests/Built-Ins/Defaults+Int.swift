@@ -35,6 +35,10 @@ final class DefaultsIntSpec: QuickSpec, BuiltInSpec {
                 self.testDefaultValues()
             }
 
+            when("array-type-default values") {
+                self.testDefaultArrayValues()
+            }
+
             when("key-default values") {
                 self.testValues()
             }
