@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		12692241975EDEDC9513E966 /* Defaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BB2FF3D383B2C205AD28DFD /* Defaults.swift */; };
+		1491DA0B209E51E100B62864 /* Defaults+String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1491DA09209E515200B62864 /* Defaults+String.swift */; };
 		947B50B172326B6A04FD5880 /* SwiftyUserDefaults.h in Headers */ = {isa = PBXBuildFile; fileRef = A9BFED60158679E195A45B47 /* SwiftyUserDefaults.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A4A80A1A684BA68E8BC0FBB7 /* TestHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA5D63158DA9B7DE73F139E /* TestHelper.swift */; };
 		A8FAA59A072724F689181B71 /* DefaultsSerializable+BuiltIns.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE2FC867FABADCCC80914FE /* DefaultsSerializable+BuiltIns.swift */; };
@@ -30,6 +31,7 @@
 
 /* Begin PBXFileReference section */
 		0D65063C7458A8CBDA606B87 /* Defaults+Subscripts.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Defaults+Subscripts.swift"; path = "Sources/Defaults+Subscripts.swift"; sourceTree = "<group>"; };
+		1491DA09209E515200B62864 /* Defaults+String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Defaults+String.swift"; sourceTree = "<group>"; };
 		2B177C8163502A503B4F7B74 /* DefaultsSerializable.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = DefaultsSerializable.swift; path = Sources/DefaultsSerializable.swift; sourceTree = "<group>"; };
 		3AA5D63158DA9B7DE73F139E /* TestHelper.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = TestHelper.swift; path = Tests/SwiftyUserDefaultsTests/TestHelper.swift; sourceTree = "<group>"; };
 		59A24D13D369DF78046F9EF5 /* DefaultsKeys.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = DefaultsKeys.swift; path = Sources/DefaultsKeys.swift; sourceTree = "<group>"; };
@@ -69,6 +71,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		1491DA08209E513C00B62864 /* Built-Ins */ = {
+			isa = PBXGroup;
+			children = (
+				1491DA09209E515200B62864 /* Defaults+String.swift */,
+			);
+			name = "Built-Ins";
+			sourceTree = "<group>";
+		};
 		27C83C923B29C4CFD0095DF2 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
@@ -81,14 +91,14 @@
 		473A06C73756D9EF0718E671 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				60C354EA6D34071D009ACAE6 /* Info.plist */,
-				A9BFED60158679E195A45B47 /* SwiftyUserDefaults.h */,
-				59A24D13D369DF78046F9EF5 /* DefaultsKeys.swift */,
-				0D65063C7458A8CBDA606B87 /* Defaults+Subscripts.swift */,
-				6EE2FC867FABADCCC80914FE /* DefaultsSerializable+BuiltIns.swift */,
-				D3F350D9F8B0CD837ED1C7BB /* OptionalType.swift */,
-				2B177C8163502A503B4F7B74 /* DefaultsSerializable.swift */,
 				7BB2FF3D383B2C205AD28DFD /* Defaults.swift */,
+				0D65063C7458A8CBDA606B87 /* Defaults+Subscripts.swift */,
+				59A24D13D369DF78046F9EF5 /* DefaultsKeys.swift */,
+				2B177C8163502A503B4F7B74 /* DefaultsSerializable.swift */,
+				6EE2FC867FABADCCC80914FE /* DefaultsSerializable+BuiltIns.swift */,
+				60C354EA6D34071D009ACAE6 /* Info.plist */,
+				D3F350D9F8B0CD837ED1C7BB /* OptionalType.swift */,
+				A9BFED60158679E195A45B47 /* SwiftyUserDefaults.h */,
 			);
 			name = Sources;
 			sourceTree = "<group>";
@@ -106,6 +116,7 @@
 		A06245B62A8C7B3F50D81915 /* SwiftyUserDefaultsTests */ = {
 			isa = PBXGroup;
 			children = (
+				1491DA08209E513C00B62864 /* Built-Ins */,
 				D48468FF48D1C1D6A58BEE23 /* SwiftyUserDefaultsTests.swift */,
 				3AA5D63158DA9B7DE73F139E /* TestHelper.swift */,
 			);
@@ -232,7 +243,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = " exec \"${SRCROOT}/scripts/copy-carthage-frameworks.sh\"";
-			showEnvVarsInLog = 1;
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -254,6 +264,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1491DA0B209E51E100B62864 /* Defaults+String.swift in Sources */,
 				C02F2F0B20AEB25E388C5400 /* SwiftyUserDefaultsTests.swift in Sources */,
 				A4A80A1A684BA68E8BC0FBB7 /* TestHelper.swift in Sources */,
 			);
@@ -275,10 +286,22 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = NO;
-				"FRAMEWORK_SEARCH_PATHS[sdk=appletv*]" = "$(SRCROOT)/Carthage/Build/tvOS/ $(inherited)";
-				"FRAMEWORK_SEARCH_PATHS[sdk=iphone*]" = "$(SRCROOT)/Carthage/Build/iOS/ $(inherited)";
-				"FRAMEWORK_SEARCH_PATHS[sdk=macosx*]" = "$(SRCROOT)/Carthage/Build/Mac/ $(inherited)";
-				"FRAMEWORK_SEARCH_PATHS[sdk=watch*]" = "$(SRCROOT)/Carthage/Build/watchOS/ $(inherited)";
+				"FRAMEWORK_SEARCH_PATHS[sdk=appletv*]" = (
+					"$(SRCROOT)/Carthage/Build/tvOS/",
+					"$(inherited)",
+				);
+				"FRAMEWORK_SEARCH_PATHS[sdk=iphone*]" = (
+					"$(SRCROOT)/Carthage/Build/iOS/",
+					"$(inherited)",
+				);
+				"FRAMEWORK_SEARCH_PATHS[sdk=macosx*]" = (
+					"$(SRCROOT)/Carthage/Build/Mac/",
+					"$(inherited)",
+				);
+				"FRAMEWORK_SEARCH_PATHS[sdk=watch*]" = (
+					"$(SRCROOT)/Carthage/Build/watchOS/",
+					"$(inherited)",
+				);
 				INFOPLIST_FILE = Tests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -475,10 +498,22 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = NO;
-				"FRAMEWORK_SEARCH_PATHS[sdk=appletv*]" = "$(SRCROOT)/Carthage/Build/tvOS/ $(inherited)";
-				"FRAMEWORK_SEARCH_PATHS[sdk=iphone*]" = "$(SRCROOT)/Carthage/Build/iOS/ $(inherited)";
-				"FRAMEWORK_SEARCH_PATHS[sdk=macosx*]" = "$(SRCROOT)/Carthage/Build/Mac/ $(inherited)";
-				"FRAMEWORK_SEARCH_PATHS[sdk=watch*]" = "$(SRCROOT)/Carthage/Build/watchOS/ $(inherited)";
+				"FRAMEWORK_SEARCH_PATHS[sdk=appletv*]" = (
+					"$(SRCROOT)/Carthage/Build/tvOS/",
+					"$(inherited)",
+				);
+				"FRAMEWORK_SEARCH_PATHS[sdk=iphone*]" = (
+					"$(SRCROOT)/Carthage/Build/iOS/",
+					"$(inherited)",
+				);
+				"FRAMEWORK_SEARCH_PATHS[sdk=macosx*]" = (
+					"$(SRCROOT)/Carthage/Build/Mac/",
+					"$(inherited)",
+				);
+				"FRAMEWORK_SEARCH_PATHS[sdk=watch*]" = (
+					"$(SRCROOT)/Carthage/Build/watchOS/",
+					"$(inherited)",
+				);
 				INFOPLIST_FILE = Tests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
