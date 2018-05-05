@@ -24,7 +24,7 @@
 
 import Foundation
 
-extension String: DefaultsSerializable, DefaultsDefaultValueType {
+extension String: DefaultsBuiltInSerializable, DefaultsDefaultValueType {
 
     public static var defaultValue: String = ""
 
@@ -37,7 +37,14 @@ extension String: DefaultsSerializable, DefaultsDefaultValueType {
     }
 }
 
-extension Int: DefaultsSerializable, DefaultsDefaultValueType {
+extension Array: DefaultsDefaultValueType where Element: DefaultsBuiltInSerializable {
+
+    public static var defaultValue: Array<Element> {
+        return []
+    }
+}
+
+extension Int: DefaultsBuiltInSerializable, DefaultsDefaultValueType {
 
     public static var defaultValue: Int = 0
 
@@ -50,7 +57,12 @@ extension Int: DefaultsSerializable, DefaultsDefaultValueType {
     }
 }
 
-extension Double: DefaultsSerializable, DefaultsDefaultValueType {
+extension Array where Element == Int {
+
+    public static var defaultValue: Array<Int> = []
+}
+
+extension Double: DefaultsBuiltInSerializable, DefaultsDefaultValueType {
 
     public static var defaultValue: Double = 0.0
 
@@ -62,8 +74,13 @@ extension Double: DefaultsSerializable, DefaultsDefaultValueType {
         userDefaults.set(value, forKey: key)
     }
 }
+//
+//extension Array: DefaultsDefaultValueType where Element == Double {
+//
+//    public static var defaultValue: Array<Element> = []
+//}
 
-extension Bool: DefaultsSerializable, DefaultsDefaultValueType {
+extension Bool: DefaultsBuiltInSerializable, DefaultsDefaultValueType {
 
     public static var defaultValue: Bool = false
 
@@ -80,7 +97,7 @@ extension Bool: DefaultsSerializable, DefaultsDefaultValueType {
     }
 }
 
-extension Data: DefaultsSerializable, DefaultsDefaultValueType {
+extension Data: DefaultsBuiltInSerializable, DefaultsDefaultValueType {
 
     public static var defaultValue: Data = Data()
 
@@ -93,7 +110,7 @@ extension Data: DefaultsSerializable, DefaultsDefaultValueType {
     }
 }
 
-extension Date: DefaultsSerializable {
+extension Date: DefaultsBuiltInSerializable {
 
     public static func get(key: String, userDefaults: UserDefaults) -> Date? {
         return userDefaults.object(forKey: key) as? Date
@@ -103,7 +120,7 @@ extension Date: DefaultsSerializable {
         userDefaults.set(value, forKey: key)
     }
 }
-extension URL: DefaultsSerializable {
+extension URL: DefaultsBuiltInSerializable {
 
     public static func get(key: String, userDefaults: UserDefaults) -> URL? {
         return userDefaults.url(forKey: key)
