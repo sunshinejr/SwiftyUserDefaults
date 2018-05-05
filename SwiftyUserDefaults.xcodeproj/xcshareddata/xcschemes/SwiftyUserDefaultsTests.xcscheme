@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "76E66E10D4B525092AADB022"
+               BlueprintIdentifier = "D09CA51D40D09D71B86F248D"
                BlueprintName = "SwiftyUserDefaultsTests"
                ReferencedContainer = "container:SwiftyUserDefaults.xcodeproj"
                BuildableName = "SwiftyUserDefaultsTests.xctest">
@@ -35,7 +35,7 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "76E66E10D4B525092AADB022"
+               BlueprintIdentifier = "D09CA51D40D09D71B86F248D"
                BlueprintName = "SwiftyUserDefaultsTests"
                ReferencedContainer = "container:SwiftyUserDefaults.xcodeproj"
                BuildableName = "SwiftyUserDefaultsTests.xctest">
