@@ -30,7 +30,7 @@ final class DefaultsDateSpec: QuickSpec, BuiltInSpec {
     var defaultValue: Date = Date()
 
     override func spec() {
-        given("Int") {
+        given("Date") {
             when("key-default values") {
                 self.testValues()
             }

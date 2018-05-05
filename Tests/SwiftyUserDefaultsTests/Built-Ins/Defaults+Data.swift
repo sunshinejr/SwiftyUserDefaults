@@ -30,7 +30,7 @@ final class DefaultsDataSpec: QuickSpec, BuiltInSpec {
     var defaultValue: Data = "default data".data(using: .utf8)!
 
     override func spec() {
-        given("Int") {
+        given("Data") {
             when("type-default values") {
                 self.testDefaultValues()
             }

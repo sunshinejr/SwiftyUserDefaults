@@ -30,7 +30,7 @@ final class DefaultsDoubleSpec: QuickSpec, BuiltInSpec {
     var defaultValue: Double = 1.0
 
     override func spec() {
-        given("Int") {
+        given("Double") {
             when("type-default values") {
                 self.testDefaultValues()
             }

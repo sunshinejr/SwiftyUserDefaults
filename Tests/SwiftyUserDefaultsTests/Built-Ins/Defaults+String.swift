@@ -23,8 +23,6 @@
 //
 
 import Quick
-import Nimble
-@testable import SwiftyUserDefaults
 
 final class DefaultsStringSpec: QuickSpec, BuiltInSpec {
 
@@ -32,7 +30,7 @@ final class DefaultsStringSpec: QuickSpec, BuiltInSpec {
     var defaultValue: String = "default value"
 
     override func spec() {
-        given("Int") {
+        given("String") {
             when("type-default values") {
                 self.testDefaultValues()
             }

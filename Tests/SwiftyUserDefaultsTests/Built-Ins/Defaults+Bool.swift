@@ -30,7 +30,7 @@ final class DefaultsBoolSpec: QuickSpec, BuiltInSpec {
     var defaultValue: Bool = true
 
     override func spec() {
-        given("Int") {
+        given("Bool") {
             when("type-default values") {
                 self.testDefaultValues()
             }
