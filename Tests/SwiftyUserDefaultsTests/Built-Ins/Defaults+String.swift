@@ -31,7 +31,7 @@ final class DefaultsStringSpec: QuickSpec {
     override func spec() {
         var defaults: UserDefaults!
 
-        given("string") {
+        given("String") {
             beforeEach {
                 defaults = UserDefaults()
                 defaults.cleanObjects()

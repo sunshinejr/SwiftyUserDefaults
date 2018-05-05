@@ -28,7 +28,7 @@ import Foundation
 // TODO: NSCoding?
 // TODO: Arrays
 public typealias DefaultsSerializable = DefaultsStoreable & DefaultsGettable
-public protocol DefaultsBuiltInSerializable: DefaultsSerializable {}
+public protocol DefaultsBuiltInSerializable: DefaultsSerializable, Equatable {}
 
 public protocol DefaultsStoreable {
     static func save(key: String, value: Self?, userDefaults: UserDefaults)
