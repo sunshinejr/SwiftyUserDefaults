@@ -17,6 +17,8 @@
 		1491DA1C209E5B7B00B62864 /* Defaults+Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1491DA1B209E5B7B00B62864 /* Defaults+Date.swift */; };
 		1491DA1E209E5BCD00B62864 /* Defaults+URL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1491DA1D209E5BCD00B62864 /* Defaults+URL.swift */; };
 		1491DA20209E5F1D00B62864 /* Defaults+FrogSerializable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1491DA1F209E5F1D00B62864 /* Defaults+FrogSerializable.swift */; };
+		1491DA22209E623500B62864 /* Defaults+FrogCodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1491DA21209E623500B62864 /* Defaults+FrogCodable.swift */; };
+		1491DA24209E62AD00B62864 /* Defaults+FrogDefaultSerializable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1491DA23209E62AD00B62864 /* Defaults+FrogDefaultSerializable.swift */; };
 		947B50B172326B6A04FD5880 /* SwiftyUserDefaults.h in Headers */ = {isa = PBXBuildFile; fileRef = A9BFED60158679E195A45B47 /* SwiftyUserDefaults.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A4A80A1A684BA68E8BC0FBB7 /* TestHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA5D63158DA9B7DE73F139E /* TestHelper.swift */; };
 		A8FAA59A072724F689181B71 /* DefaultsSerializable+BuiltIns.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE2FC867FABADCCC80914FE /* DefaultsSerializable+BuiltIns.swift */; };
@@ -48,6 +50,8 @@
 		1491DA1B209E5B7B00B62864 /* Defaults+Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Defaults+Date.swift"; sourceTree = "<group>"; };
 		1491DA1D209E5BCD00B62864 /* Defaults+URL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Defaults+URL.swift"; sourceTree = "<group>"; };
 		1491DA1F209E5F1D00B62864 /* Defaults+FrogSerializable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Defaults+FrogSerializable.swift"; path = "Tests/SwiftyUserDefaultsTests/Built-Ins/Defaults+FrogSerializable.swift"; sourceTree = "<group>"; };
+		1491DA21209E623500B62864 /* Defaults+FrogCodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Defaults+FrogCodable.swift"; path = "Tests/SwiftyUserDefaultsTests/Defaults+FrogCodable.swift"; sourceTree = "<group>"; };
+		1491DA23209E62AD00B62864 /* Defaults+FrogDefaultSerializable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Defaults+FrogDefaultSerializable.swift"; path = "Tests/SwiftyUserDefaultsTests/Defaults+FrogDefaultSerializable.swift"; sourceTree = "<group>"; };
 		2B177C8163502A503B4F7B74 /* DefaultsSerializable.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = DefaultsSerializable.swift; path = Sources/DefaultsSerializable.swift; sourceTree = "<group>"; };
 		3AA5D63158DA9B7DE73F139E /* TestHelper.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = TestHelper.swift; path = Tests/SwiftyUserDefaultsTests/TestHelper.swift; sourceTree = "<group>"; };
 		59A24D13D369DF78046F9EF5 /* DefaultsKeys.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = DefaultsKeys.swift; path = Sources/DefaultsKeys.swift; sourceTree = "<group>"; };
@@ -144,6 +148,8 @@
 				D48468FF48D1C1D6A58BEE23 /* SwiftyUserDefaultsTests.swift */,
 				3AA5D63158DA9B7DE73F139E /* TestHelper.swift */,
 				1491DA1F209E5F1D00B62864 /* Defaults+FrogSerializable.swift */,
+				1491DA21209E623500B62864 /* Defaults+FrogCodable.swift */,
+				1491DA23209E62AD00B62864 /* Defaults+FrogDefaultSerializable.swift */,
 			);
 			name = SwiftyUserDefaultsTests;
 			sourceTree = "<group>";
@@ -297,6 +303,8 @@
 				1491DA1C209E5B7B00B62864 /* Defaults+Date.swift in Sources */,
 				1491DA12209E52FC00B62864 /* Defaults+String.swift in Sources */,
 				1491DA16209E5A6000B62864 /* Defaults+Double.swift in Sources */,
+				1491DA24209E62AD00B62864 /* Defaults+FrogDefaultSerializable.swift in Sources */,
+				1491DA22209E623500B62864 /* Defaults+FrogCodable.swift in Sources */,
 				1491DA20209E5F1D00B62864 /* Defaults+FrogSerializable.swift in Sources */,
 				A4A80A1A684BA68E8BC0FBB7 /* TestHelper.swift in Sources */,
 				1491DA1E209E5BCD00B62864 /* Defaults+URL.swift in Sources */,
