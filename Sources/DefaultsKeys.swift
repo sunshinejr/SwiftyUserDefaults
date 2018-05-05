@@ -59,6 +59,14 @@ open class DefaultsKey<ValueType: DefaultsSerializable>: DefaultsKeys {
     }
 }
 
+extension DefaultsKey where ValueType: Collection, ValueType.Element: DefaultsSerializable {
+
+    @available(*, unavailable, message: "Even though element of this array has a default value, the whole array doesnt and so you need to either pass it via argument or in extension.")
+    public convenience init(_ key: String) {
+        fatalError()
+    }
+}
+
 /// Base class for static Codable user defaults keys. Use for saving
 /// `Codable` values, otherwise use `DefaultsKey`.
 open class DefaultsCodableKey<ValueType: Codable>: DefaultsKeys {
@@ -84,6 +92,14 @@ open class DefaultsCodableKey<ValueType: Codable>: DefaultsKeys {
     }
 }
 
+extension DefaultsCodableKey where ValueType: Collection, ValueType.Element: DefaultsSerializable {
+
+    @available(*, unavailable, message: "Even though element of this array has a default value, the whole array doesnt and so you need to either pass it via argument or in extension.")
+    public convenience init(_ key: String) {
+        fatalError()
+    }
+}
+
 public extension DefaultsCodableKey where ValueType: Codable, ValueType: OptionalType, ValueType.Wrapped: Codable {
 
     convenience init(_ key: String) {
@@ -105,10 +121,26 @@ public extension DefaultsKey where ValueType: DefaultsDefaultValueType {
     }
 }
 
+public extension DefaultsKey where ValueType: Collection, ValueType.Element: DefaultsDefaultArrayValueType, ValueType.Element: DefaultsSerializable {
+
+    convenience init(_ key: String) {
+        let value: ValueType = ValueType.Element.defaultArrayValue as! ValueType
+        self.init(key, defaultValue: value)
+    }
+}
+
 public extension DefaultsCodableKey where ValueType: DefaultsDefaultValueType {
 
     convenience init(_ key: String) {
         self.init(key, defaultValue: ValueType.defaultValue)
+    }
+}
+
+public extension DefaultsCodableKey where ValueType: Collection, ValueType.Element: DefaultsDefaultArrayValueType, ValueType.Element: Codable {
+
+    convenience init(_ key: String) {
+        let value: ValueType = ValueType.Element.defaultArrayValue as! ValueType
+        self.init(key, defaultValue: value)
     }
 }
 
