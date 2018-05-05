@@ -73,34 +73,34 @@ public extension UserDefaults {
 
     subscript<T: Codable>(key: DefaultsCodableKey<T?>) -> T? {
         get {
-            return T.get(key: key._key, userDefaults: self) ?? key.defaultValue as? T
+            return T.decodable(key: key._key, userDefaults: self) ?? key.defaultValue as? T
         }
         set {
-            T.save(key: key._key, value: newValue, userDefaults: self)
+            T.saveEncodable(key: key._key, value: newValue, userDefaults: self)
         }
     }
 
     subscript<T: Codable>(key: DefaultsCodableKey<T?>) -> T? where T: DefaultsDefaultValueType {
         get {
-            return T.get(key: key._key, userDefaults: self) ?? T.defaultValue
+            return T.decodable(key: key._key, userDefaults: self) ?? T.defaultValue
         }
         set {
-            T.save(key: key._key, value: newValue, userDefaults: self)
+            T.saveEncodable(key: key._key, value: newValue, userDefaults: self)
         }
     }
 
     subscript<T: Codable>(key: DefaultsCodableKey<T>) -> T where T: DefaultsDefaultValueType {
         get {
-            return T.get(key: key._key, userDefaults: self) ?? key.defaultValue ?? T.defaultValue
+            return T.decodable(key: key._key, userDefaults: self) ?? key.defaultValue ?? T.defaultValue
         }
         set {
-            T.save(key: key._key, value: newValue, userDefaults: self)
+            T.saveEncodable(key: key._key, value: newValue, userDefaults: self)
         }
     }
 
     subscript<T: Codable>(key: DefaultsCodableKey<T>) -> T {
         get {
-            if let value = T.get(key: key._key, userDefaults: self) {
+            if let value = T.decodable(key: key._key, userDefaults: self) {
                 return value
             } else if let defaultValue = key.defaultValue {
                 return defaultValue
@@ -109,7 +109,7 @@ public extension UserDefaults {
             }
         }
         set {
-            T.save(key: key._key, value: newValue, userDefaults: self)
+            T.saveEncodable(key: key._key, value: newValue, userDefaults: self)
         }
     }
 }

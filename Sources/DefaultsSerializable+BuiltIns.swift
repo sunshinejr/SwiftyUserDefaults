@@ -117,29 +117,56 @@ extension URL: DefaultsSerializable {
 extension Array: DefaultsSerializable where Element: DefaultsSerializable {
 
     public static func get(key: String, userDefaults: UserDefaults) -> Array<Element>? {
-        return userDefaults.array(forKey: key) as? [Element]
+        if let _ = Element.self as? NSCoding.Type {
+            return userDefaults.data(forKey: key).flatMap(NSKeyedUnarchiver.unarchiveObject) as? [Element]
+        } else {
+            return userDefaults.array(forKey: key) as? [Element]
+        }
     }
 
     public static func save(key: String, value: Array<Element>?, userDefaults: UserDefaults) {
-        userDefaults.set(value, forKey: key)
+        guard let value = value else {
+            userDefaults.removeObject(forKey: key)
+            return
+        }
+
+        if let _ = Element.self as? NSCoding.Type {
+            userDefaults.set(NSKeyedArchiver.archivedData(withRootObject: value), forKey: key)
+        } else {
+            userDefaults.set(value, forKey: key)
+        }
     }
 }
 
 extension Decodable {
 
-    public static func get(key: String, userDefaults: UserDefaults) -> Self? {
+    public static func decodable(key: String, userDefaults: UserDefaults) -> Self? {
         return userDefaults.decodable(forKey: key) as Self?
     }
 }
 
 extension Encodable {
-    
-    public static func save(key: String, value: Self?, userDefaults: UserDefaults) {
+
+    public static func saveEncodable(key: String, value: Self?, userDefaults: UserDefaults) {
         guard let value = value else {
             userDefaults.removeObject(forKey: key)
             return
         }
 
         userDefaults.set(encodable: value, forKey: key)
+    }
+}
+
+extension DefaultsStoreable where Self: NSCoding {
+
+    public static func save(key: String, value: Self?, userDefaults: UserDefaults) {
+        userDefaults.set(value, forKey: key)
+    }
+}
+
+extension DefaultsGettable where Self: NSCoding {
+
+    public static func get(key: String, userDefaults: UserDefaults) -> Self? {
+        return userDefaults.object(forKey: key) as? Self
     }
 }
