@@ -74,11 +74,6 @@ extension Double: DefaultsBuiltInSerializable, DefaultsDefaultValueType {
         userDefaults.set(value, forKey: key)
     }
 }
-//
-//extension Array: DefaultsDefaultValueType where Element == Double {
-//
-//    public static var defaultValue: Array<Element> = []
-//}
 
 extension Bool: DefaultsBuiltInSerializable, DefaultsDefaultValueType {
 
