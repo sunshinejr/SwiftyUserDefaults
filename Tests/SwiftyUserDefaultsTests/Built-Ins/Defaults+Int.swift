@@ -23,75 +23,20 @@
 //
 
 import Quick
-import Nimble
-@testable import SwiftyUserDefaults
 
-// TODO: Okay, we cannot possibly copy/paste all these built-in types, maintaining them will be _awful_
-final class DefaultsIntSpec: QuickSpec {
+final class DefaultsIntSpec: QuickSpec, BuiltInSpec {
+
+    var customValue: Int = 2
+    var defaultValue: Int = 1
 
     override func spec() {
-        var defaults: UserDefaults!
-
         given("Int") {
-            beforeEach {
-                defaults = UserDefaults()
-                defaults.cleanObjects()
+            when("type-default values") {
+                self.testDefaultValues()
             }
 
-            then("create a key without default value") {
-                let key = DefaultsKey<Int>("test")
-                expect(key._key) == "test"
-                expect(key.defaultValue) == Int.defaultValue
-            }
-
-            then("create an array key without default value") {
-                let key = DefaultsKey<[Int]>("test")
-                expect(key._key) == "test"
-                expect(key.defaultValue) == [Int].defaultValue
-            }
-
-            then("create a key with default value") {
-                let key = DefaultsKey<Int>("test", defaultValue: 2)
-                expect(key._key) == "test"
-                expect(key.defaultValue) == 2
-            }
-
-            then("create an array key with default value") {
-                let key = DefaultsKey<[Int]>("test", defaultValue: [1, 2])
-                expect(key._key) == "test"
-                expect(key.defaultValue) == [1, 2]
-            }
-
-            then("get a default value") {
-                let key = DefaultsKey<Int>("test")
-                let value = defaults[key]
-                expect(value) == key.defaultValue
-            }
-
-            then("get a custom-default value") {
-                let key = DefaultsKey<Int>("test", defaultValue: 3)
-                let value = defaults[key]
-                expect(value) == 3
-            }
-
-            then("save a value") {
-                let key = DefaultsKey<Int>("test")
-                let expectedValue = 4
-                defaults[key] = expectedValue
-
-                let value = defaults[key]
-
-                expect(value) == expectedValue
-            }
-
-            then("save a value for key with default custom value") {
-                let key = DefaultsKey<Int>("test", defaultValue: 6)
-                let expectedValue = 5
-                defaults[key] = expectedValue
-
-                let value = defaults[key]
-
-                expect(value) == expectedValue
+            when("key-default values") {
+                self.testValues()
             }
         }
     }
