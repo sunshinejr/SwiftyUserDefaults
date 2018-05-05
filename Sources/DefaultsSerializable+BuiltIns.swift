@@ -174,13 +174,13 @@ extension Encodable {
 extension DefaultsStoreable where Self: NSCoding {
 
     public static func save(key: String, value: Self?, userDefaults: UserDefaults) {
-        userDefaults.set(value, forKey: key)
+        userDefaults.set(NSKeyedArchiver.archivedData(withRootObject: value), forKey: key)
     }
 }
 
 extension DefaultsGettable where Self: NSCoding {
 
     public static func get(key: String, userDefaults: UserDefaults) -> Self? {
-        return userDefaults.object(forKey: key) as? Self
+        return userDefaults.data(forKey: key).flatMap(NSKeyedUnarchiver.unarchiveObject) as? Self
     }
 }

@@ -27,13 +27,13 @@ import Nimble
 @testable import SwiftyUserDefaults
 
 protocol BuiltInSpec {
-    associatedtype BuiltIn: DefaultsBuiltInSerializable
+    associatedtype BuiltIn: DefaultsSerializable & Equatable
 
     var defaultValue: BuiltIn { get }
     var customValue: BuiltIn { get }
 }
 
-extension BuiltInSpec where BuiltIn: DefaultsDefaultValueType {
+extension BuiltInSpec where BuiltIn: DefaultsBuiltInSerializable, BuiltIn: DefaultsDefaultValueType {
 
     func testDefaultValues() {
         var defaults: UserDefaults!

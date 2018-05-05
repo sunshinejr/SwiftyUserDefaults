@@ -22,22 +22,18 @@
 // SOFTWARE.
 //
 
-import Foundation
+import Quick
 
-// TODO: Better names please.
-// TODO: NSCoding?
-// TODO: Arrays
-public typealias DefaultsSerializable = DefaultsStoreable & DefaultsGettable
-public protocol DefaultsBuiltInSerializable: DefaultsSerializable {}
+final class DefaultsFrogSerializableSpec: QuickSpec, BuiltInSpec {
 
-public protocol DefaultsStoreable {
-    static func save(key: String, value: Self?, userDefaults: UserDefaults)
-}
+    var customValue: FrogSerializable = FrogSerializable(name: "custom")
+    var defaultValue: FrogSerializable = FrogSerializable(name: "default")
 
-public protocol DefaultsGettable {
-    static func get(key: String, userDefaults: UserDefaults) -> Self?
-}
-
-public protocol DefaultsDefaultValueType {
-    static var defaultValue: Self { get }
+    override func spec() {
+        given("FrogSerializable") {
+            when("key-default values") {
+                self.testValues()
+            }
+        }
+    }
 }
