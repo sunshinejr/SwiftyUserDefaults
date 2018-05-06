@@ -4,16 +4,15 @@
 [![CI Status](https://api.travis-ci.org/radex/SwiftyUserDefaults.svg?branch=master)](https://travis-ci.org/radex/SwiftyUserDefaults)
 [![CocoaPods](http://img.shields.io/cocoapods/v/SwiftyUserDefaults.svg)](https://cocoapods.org/pods/SwiftyUserDefaults)
 [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](#carthage)
-![Swift version](https://img.shields.io/badge/swift-3.0-orange.svg)
+![Swift version](https://img.shields.io/badge/swift-4.1-orange.svg)
 
 #### Modern Swift API for `NSUserDefaults`
 ###### SwiftyUserDefaults makes user defaults enjoyable to use by combining expressive Swifty API with the benefits of static typing. Define your keys in one place, use value types easily, and get extra safety and convenient compile-time checks for free.
 
-Read [Statically-typed NSUserDefaults](http://radex.io/swift/nsuserdefaults/static) for more information about this project.
+Read [Statically-typed NSUserDefaults](http://radex.io/swift/nsuserdefaults/static) for more information about this project. <br />
 Read [documentation for version < 4.0.0 here](https://github.com/radex/SwiftyUserDefaults/blob/14b629b035bf6355b46ece22c3851068a488a895/README.md)
 
 # Version 4
--------
 <p align="center">
     <a href="#features">Features</a> &bull;
     <a href="#usage">Usage</a> &bull;
@@ -22,7 +21,6 @@ Read [documentation for version < 4.0.0 here](https://github.com/radex/SwiftyUse
     <a href="#installation">Installation</a> &bull; 
     <a href="#more-like-this">More info</a>
 </p>
--------
 
 ## Features
 
@@ -146,11 +144,11 @@ and arrays:
 | `[Date]`   | `[Date]?`        |
 | `[URL]`    | `[URL]?`         |
 
-But that's not everything...
+But that's not all!
 
 #### Codable
 
-Since version 4.0.0, `SwiftyUserDefaults` support `Codable`! Just add `DefaultsSerializable` type to your type, like:
+Since version 4, `SwiftyUserDefaults` support `Codable`! Just add `DefaultsSerializable` type to your type, like:
 ```swift
 final class FrogCodable: Codable, DefaultsSerializable {
     let name: String
@@ -162,14 +160,14 @@ No implementation needed! By doing this you will get an option to specify an opt
 let frog = DefaultsKey<FrogCodable?>("frog")
 ```
 
-Additionally, you've got an array support also for free:
+Additionally, you've got an array support for free:
 ```swift
-let frog = DefaultsKey<[FrogCodable]?>("frogs")
+let froggies = DefaultsKey<[FrogCodable]?>("froggies")
 ```
 
 #### NSCoding
 
-`NSCoding` was supported before version 4.0.0, but in this version we take the support on another level. No need for custom subscripts anymore!
+`NSCoding` was supported before version 4, but in this version we take the support on another level. No need for custom subscripts anymore!
 Support your custom `NSCoding` type the same way as you can support `Codable` types: add `DefaultsSerializable` to your implemented protocols:
 ```
 final class FrogSerializable: NSObject, NSCoding, DefaultsSerializable { ... }
@@ -182,14 +180,14 @@ let frog = DefaultsKey<FrogSerializable?>("frog")
 
 Additionally, you've got an array support also for free:
 ```swift
-let frog = DefaultsKey<[FrogSerializable]?>("frogs")
+let froggies = DefaultsKey<[FrogSerializable]?>("froggies")
 ```
 
 #### RawRepresentable
 
 And the last but not least, `RawRepresentable` support! It's all the same situation like with `NSCoding` or with `Codable`, add one
 little protocol to rule them all!
-```
+```swift
 enum BestFroggiesEnum: String, DefaultsSerializable {
     case Andy
     case Dandy
@@ -203,12 +201,12 @@ let frog = DefaultsKey<BestFroggiesEnum?>("frog")
 
 Additionally, you've got an array support also for free:
 ```swift
-let frog = DefaultsKey<[BestFroggiesEnum]?>("frogs")
+let froggies = DefaultsKey<[BestFroggiesEnum]?>("froggies")
 ```
 
 #### Default values
 
-Since version 4.0.0 you can support a default value for your key (arrays as well!):
+Since version 4, you can support a default value for your key (arrays as well!):
 ```swift
 let frog = DefaultsKey<FrogCodable>("frog", defaultValue: FrogCodable(name: "Froggy"))
 let frogs = DefaultsKey<FrogCodable>("frogs", defaultValue: [FrogCodable(name: "Froggy")])
@@ -236,7 +234,7 @@ let frogs = DefaultsKey<FrogCodable>("frogs")
 
 ### Custom types
 
-So let's say there is a type that is not supported yet (like `NSCoding`, `Codable` or `RawRepresentable` before), but you want to support it.
+So let's say there is a type that is not supported yet (like `NSCoding`, `Codable` or `RawRepresentable` before) and you want to support it.
 You can do it by specializing getters and setters of `DefaultsSerializable`. See this extension we have for `Codable`:
 ```swift
 extension Array: DefaultsSerializable where Element: DefaultsSerializable {
@@ -280,7 +278,7 @@ extension DefaultsStoreable where Self: Encodable {
 }
 ```
 
-And if you feel like this could be a valuable addition, don't hesitate and make a Pull Request 😉
+And if you feel like this could be a valuable addition to the library, don't hesitate and make a Pull Request 😉
 
 ### Remove all keys
 
