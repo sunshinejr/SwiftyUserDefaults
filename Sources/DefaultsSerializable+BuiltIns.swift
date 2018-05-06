@@ -167,6 +167,11 @@ extension Encodable {
 extension DefaultsStoreable where Self: NSCoding {
 
     public static func save(key: String, value: Self?, userDefaults: UserDefaults) {
+        guard let value = value else {
+            userDefaults.removeObject(forKey: key)
+            return
+        }
+
         userDefaults.set(NSKeyedArchiver.archivedData(withRootObject: value), forKey: key)
     }
 }
