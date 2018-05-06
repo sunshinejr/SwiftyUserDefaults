@@ -10,6 +10,7 @@
 		12692241975EDEDC9513E966 /* Defaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BB2FF3D383B2C205AD28DFD /* Defaults.swift */; };
 		14806E02209F8B85008FD31A /* Defaults+FrogCodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14806DFE209F8B5E008FD31A /* Defaults+FrogCodable.swift */; };
 		14806E03209F8B88008FD31A /* Defaults+FrogDefaultCodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14806DFF209F8B5E008FD31A /* Defaults+FrogDefaultCodable.swift */; };
+		14806E05209F9F37008FD31A /* Danger+BestFroggiesEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14806E04209F9F37008FD31A /* Danger+BestFroggiesEnum.swift */; };
 		1491DA11209E52FC00B62864 /* Defaults+Int.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1491DA0F209E52FC00B62864 /* Defaults+Int.swift */; };
 		1491DA12209E52FC00B62864 /* Defaults+String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1491DA10209E52FC00B62864 /* Defaults+String.swift */; };
 		1491DA14209E584B00B62864 /* DefaultsSerializableSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1491DA13209E584B00B62864 /* DefaultsSerializableSpec.swift */; };
@@ -43,6 +44,7 @@
 		0D65063C7458A8CBDA606B87 /* Defaults+Subscripts.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Defaults+Subscripts.swift"; path = "Sources/Defaults+Subscripts.swift"; sourceTree = "<group>"; };
 		14806DFE209F8B5E008FD31A /* Defaults+FrogCodable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Defaults+FrogCodable.swift"; sourceTree = "<group>"; };
 		14806DFF209F8B5E008FD31A /* Defaults+FrogDefaultCodable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Defaults+FrogDefaultCodable.swift"; sourceTree = "<group>"; };
+		14806E04209F9F37008FD31A /* Danger+BestFroggiesEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Danger+BestFroggiesEnum.swift"; sourceTree = "<group>"; };
 		1491DA0F209E52FC00B62864 /* Defaults+Int.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Defaults+Int.swift"; sourceTree = "<group>"; };
 		1491DA10209E52FC00B62864 /* Defaults+String.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Defaults+String.swift"; sourceTree = "<group>"; };
 		1491DA13209E584B00B62864 /* DefaultsSerializableSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultsSerializableSpec.swift; sourceTree = "<group>"; };
@@ -114,6 +116,7 @@
 				1491DA0F209E52FC00B62864 /* Defaults+Int.swift */,
 				1491DA10209E52FC00B62864 /* Defaults+String.swift */,
 				1491DA1D209E5BCD00B62864 /* Defaults+URL.swift */,
+				14806E04209F9F37008FD31A /* Danger+BestFroggiesEnum.swift */,
 			);
 			name = DefaultsSerializable;
 			path = Tests/SwiftyUserDefaultsTests/DefaultsSerializable;
@@ -315,6 +318,7 @@
 				14806E02209F8B85008FD31A /* Defaults+FrogCodable.swift in Sources */,
 				1491DA26209E6D8700B62864 /* Defaults+FrogSerializable.swift in Sources */,
 				A4A80A1A684BA68E8BC0FBB7 /* TestHelper.swift in Sources */,
+				14806E05209F9F37008FD31A /* Danger+BestFroggiesEnum.swift in Sources */,
 				14806E03209F8B88008FD31A /* Defaults+FrogDefaultCodable.swift in Sources */,
 				1491DA1E209E5BCD00B62864 /* Defaults+URL.swift in Sources */,
 			);

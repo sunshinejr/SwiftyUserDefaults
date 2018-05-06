@@ -235,6 +235,9 @@ extension DefaultsGettable where Self: NSCoding {
     public static func getArray(key: String, userDefaults: UserDefaults) -> [Self]? {
         return userDefaults.data(forKey: key).flatMap(NSKeyedUnarchiver.unarchiveObject) as? [Self]
     }
+}
+
+extension DefaultsStoreable where Self: NSCoding {
 
     public static func save(key: String, value: Self?, userDefaults: UserDefaults) {
         guard let value = value else {
@@ -247,5 +250,34 @@ extension DefaultsGettable where Self: NSCoding {
 
     public static func saveArray(key: String, value: [Self], userDefaults: UserDefaults) {
         userDefaults.set(NSKeyedArchiver.archivedData(withRootObject: value), forKey: key)
+    }
+}
+
+extension DefaultsGettable where Self: RawRepresentable {
+
+    public static func get(key: String, userDefaults: UserDefaults) -> Self? {
+        return userDefaults.object(forKey: key).flatMap { Self(rawValue: $0 as! Self.RawValue) }
+    }
+
+    public static func getArray(key: String, userDefaults: UserDefaults) -> [Self]? {
+        return userDefaults.array(forKey: key)?.compactMap { Self(rawValue: $0 as! Self.RawValue) }
+    }
+}
+
+extension DefaultsStoreable where Self: RawRepresentable {
+
+    public static func save(key: String, value: Self?, userDefaults: UserDefaults) {
+        guard let value = value?.rawValue else {
+            userDefaults.removeObject(forKey: key)
+            return
+        }
+
+        userDefaults.set(value, forKey: key)
+    }
+
+    public static func saveArray(key: String, value: [Self], userDefaults: UserDefaults) {
+        let raw = value.map { $0.rawValue }
+
+        userDefaults.set(raw, forKey: key)
     }
 }
