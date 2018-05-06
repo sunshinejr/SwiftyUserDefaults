@@ -8,22 +8,22 @@
 
 /* Begin PBXBuildFile section */
 		12692241975EDEDC9513E966 /* Defaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BB2FF3D383B2C205AD28DFD /* Defaults.swift */; };
-		14806E02209F8B85008FD31A /* Defaults+FrogCodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14806DFE209F8B5E008FD31A /* Defaults+FrogCodable.swift */; };
-		14806E03209F8B88008FD31A /* Defaults+FrogDefaultCodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14806DFF209F8B5E008FD31A /* Defaults+FrogDefaultCodable.swift */; };
-		14806E05209F9F37008FD31A /* Defaults+BestFroggiesEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14806E04209F9F37008FD31A /* Defaults+BestFroggiesEnum.swift */; };
-		14806E07209FA460008FD31A /* Defaults+BestFroggiesDefaultsEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14806E06209FA460008FD31A /* Defaults+BestFroggiesDefaultsEnum.swift */; };
-		1491DA11209E52FC00B62864 /* Defaults+Int.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1491DA0F209E52FC00B62864 /* Defaults+Int.swift */; };
-		1491DA12209E52FC00B62864 /* Defaults+String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1491DA10209E52FC00B62864 /* Defaults+String.swift */; };
-		1491DA14209E584B00B62864 /* DefaultsSerializableSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1491DA13209E584B00B62864 /* DefaultsSerializableSpec.swift */; };
-		1491DA16209E5A6000B62864 /* Defaults+Double.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1491DA15209E5A6000B62864 /* Defaults+Double.swift */; };
-		1491DA18209E5AFC00B62864 /* Defaults+Bool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1491DA17209E5AFC00B62864 /* Defaults+Bool.swift */; };
-		1491DA1A209E5B2E00B62864 /* Defaults+Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1491DA19209E5B2E00B62864 /* Defaults+Data.swift */; };
-		1491DA1C209E5B7B00B62864 /* Defaults+Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1491DA1B209E5B7B00B62864 /* Defaults+Date.swift */; };
-		1491DA1E209E5BCD00B62864 /* Defaults+URL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1491DA1D209E5BCD00B62864 /* Defaults+URL.swift */; };
-		1491DA24209E62AD00B62864 /* Defaults+FrogDefaultSerializable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1491DA23209E62AD00B62864 /* Defaults+FrogDefaultSerializable.swift */; };
-		1491DA26209E6D8700B62864 /* Defaults+FrogSerializable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1491DA25209E6D8700B62864 /* Defaults+FrogSerializable.swift */; };
+		14806E1F209FA77B008FD31A /* Defaults+BestFroggiesDefaultsEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14806E0C209FA77A008FD31A /* Defaults+BestFroggiesDefaultsEnum.swift */; };
+		14806E20209FA77B008FD31A /* Defaults+BestFroggiesEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14806E0D209FA77A008FD31A /* Defaults+BestFroggiesEnum.swift */; };
+		14806E21209FA77B008FD31A /* TestHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14806E0F209FA77A008FD31A /* TestHelper.swift */; };
+		14806E22209FA77B008FD31A /* DefaultsSerializableSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14806E10209FA77A008FD31A /* DefaultsSerializableSpec.swift */; };
+		14806E23209FA77B008FD31A /* Defaults+FrogSerializable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14806E12209FA77A008FD31A /* Defaults+FrogSerializable.swift */; };
+		14806E24209FA77B008FD31A /* Defaults+FrogDefaultSerializable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14806E13209FA77A008FD31A /* Defaults+FrogDefaultSerializable.swift */; };
+		14806E25209FA77B008FD31A /* Defaults+FrogCodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14806E15209FA77A008FD31A /* Defaults+FrogCodable.swift */; };
+		14806E26209FA77B008FD31A /* Defaults+FrogDefaultCodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14806E16209FA77A008FD31A /* Defaults+FrogDefaultCodable.swift */; };
+		14806E27209FA77B008FD31A /* Defaults+URL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14806E18209FA77B008FD31A /* Defaults+URL.swift */; };
+		14806E28209FA77B008FD31A /* Defaults+Int.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14806E19209FA77B008FD31A /* Defaults+Int.swift */; };
+		14806E29209FA77B008FD31A /* Defaults+Bool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14806E1A209FA77B008FD31A /* Defaults+Bool.swift */; };
+		14806E2A209FA77B008FD31A /* Defaults+Double.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14806E1B209FA77B008FD31A /* Defaults+Double.swift */; };
+		14806E2B209FA77B008FD31A /* Defaults+Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14806E1C209FA77B008FD31A /* Defaults+Data.swift */; };
+		14806E2C209FA77B008FD31A /* Defaults+Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14806E1D209FA77B008FD31A /* Defaults+Date.swift */; };
+		14806E2D209FA77B008FD31A /* Defaults+String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14806E1E209FA77B008FD31A /* Defaults+String.swift */; };
 		947B50B172326B6A04FD5880 /* SwiftyUserDefaults.h in Headers */ = {isa = PBXBuildFile; fileRef = A9BFED60158679E195A45B47 /* SwiftyUserDefaults.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		A4A80A1A684BA68E8BC0FBB7 /* TestHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA5D63158DA9B7DE73F139E /* TestHelper.swift */; };
 		A8FAA59A072724F689181B71 /* DefaultsSerializable+BuiltIns.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE2FC867FABADCCC80914FE /* DefaultsSerializable+BuiltIns.swift */; };
 		B31835E6AB6595CA2BD96927 /* DefaultsSerializable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B177C8163502A503B4F7B74 /* DefaultsSerializable.swift */; };
 		BF56676DA7797094A38CA31E /* Defaults+Subscripts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D65063C7458A8CBDA606B87 /* Defaults+Subscripts.swift */; };
@@ -43,22 +43,22 @@
 
 /* Begin PBXFileReference section */
 		0D65063C7458A8CBDA606B87 /* Defaults+Subscripts.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Defaults+Subscripts.swift"; path = "Sources/Defaults+Subscripts.swift"; sourceTree = "<group>"; };
-		14806DFE209F8B5E008FD31A /* Defaults+FrogCodable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Defaults+FrogCodable.swift"; sourceTree = "<group>"; };
-		14806DFF209F8B5E008FD31A /* Defaults+FrogDefaultCodable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Defaults+FrogDefaultCodable.swift"; sourceTree = "<group>"; };
-		14806E04209F9F37008FD31A /* Defaults+BestFroggiesEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Defaults+BestFroggiesEnum.swift"; sourceTree = "<group>"; };
-		14806E06209FA460008FD31A /* Defaults+BestFroggiesDefaultsEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Defaults+BestFroggiesDefaultsEnum.swift"; sourceTree = "<group>"; };
-		1491DA0F209E52FC00B62864 /* Defaults+Int.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Defaults+Int.swift"; sourceTree = "<group>"; };
-		1491DA10209E52FC00B62864 /* Defaults+String.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Defaults+String.swift"; sourceTree = "<group>"; };
-		1491DA13209E584B00B62864 /* DefaultsSerializableSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultsSerializableSpec.swift; sourceTree = "<group>"; };
-		1491DA15209E5A6000B62864 /* Defaults+Double.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Defaults+Double.swift"; sourceTree = "<group>"; };
-		1491DA17209E5AFC00B62864 /* Defaults+Bool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Defaults+Bool.swift"; sourceTree = "<group>"; };
-		1491DA19209E5B2E00B62864 /* Defaults+Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Defaults+Data.swift"; sourceTree = "<group>"; };
-		1491DA1B209E5B7B00B62864 /* Defaults+Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Defaults+Date.swift"; sourceTree = "<group>"; };
-		1491DA1D209E5BCD00B62864 /* Defaults+URL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Defaults+URL.swift"; sourceTree = "<group>"; };
-		1491DA23209E62AD00B62864 /* Defaults+FrogDefaultSerializable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Defaults+FrogDefaultSerializable.swift"; sourceTree = "<group>"; };
-		1491DA25209E6D8700B62864 /* Defaults+FrogSerializable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Defaults+FrogSerializable.swift"; sourceTree = "<group>"; };
+		14806E0C209FA77A008FD31A /* Defaults+BestFroggiesDefaultsEnum.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Defaults+BestFroggiesDefaultsEnum.swift"; sourceTree = "<group>"; };
+		14806E0D209FA77A008FD31A /* Defaults+BestFroggiesEnum.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Defaults+BestFroggiesEnum.swift"; sourceTree = "<group>"; };
+		14806E0F209FA77A008FD31A /* TestHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestHelper.swift; sourceTree = "<group>"; };
+		14806E10209FA77A008FD31A /* DefaultsSerializableSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultsSerializableSpec.swift; sourceTree = "<group>"; };
+		14806E12209FA77A008FD31A /* Defaults+FrogSerializable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Defaults+FrogSerializable.swift"; sourceTree = "<group>"; };
+		14806E13209FA77A008FD31A /* Defaults+FrogDefaultSerializable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Defaults+FrogDefaultSerializable.swift"; sourceTree = "<group>"; };
+		14806E15209FA77A008FD31A /* Defaults+FrogCodable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Defaults+FrogCodable.swift"; sourceTree = "<group>"; };
+		14806E16209FA77A008FD31A /* Defaults+FrogDefaultCodable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Defaults+FrogDefaultCodable.swift"; sourceTree = "<group>"; };
+		14806E18209FA77B008FD31A /* Defaults+URL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Defaults+URL.swift"; sourceTree = "<group>"; };
+		14806E19209FA77B008FD31A /* Defaults+Int.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Defaults+Int.swift"; sourceTree = "<group>"; };
+		14806E1A209FA77B008FD31A /* Defaults+Bool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Defaults+Bool.swift"; sourceTree = "<group>"; };
+		14806E1B209FA77B008FD31A /* Defaults+Double.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Defaults+Double.swift"; sourceTree = "<group>"; };
+		14806E1C209FA77B008FD31A /* Defaults+Data.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Defaults+Data.swift"; sourceTree = "<group>"; };
+		14806E1D209FA77B008FD31A /* Defaults+Date.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Defaults+Date.swift"; sourceTree = "<group>"; };
+		14806E1E209FA77B008FD31A /* Defaults+String.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Defaults+String.swift"; sourceTree = "<group>"; };
 		2B177C8163502A503B4F7B74 /* DefaultsSerializable.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = DefaultsSerializable.swift; path = Sources/DefaultsSerializable.swift; sourceTree = "<group>"; };
-		3AA5D63158DA9B7DE73F139E /* TestHelper.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = TestHelper.swift; path = Tests/SwiftyUserDefaultsTests/TestHelper.swift; sourceTree = "<group>"; };
 		59A24D13D369DF78046F9EF5 /* DefaultsKeys.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = DefaultsKeys.swift; path = Sources/DefaultsKeys.swift; sourceTree = "<group>"; };
 		60C354EA6D34071D009ACAE6 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; name = Info.plist; path = Sources/Info.plist; sourceTree = "<group>"; };
 		6EE2FC867FABADCCC80914FE /* DefaultsSerializable+BuiltIns.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "DefaultsSerializable+BuiltIns.swift"; path = "Sources/DefaultsSerializable+BuiltIns.swift"; sourceTree = "<group>"; };
@@ -95,34 +95,59 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		14806DFD209F8B5E008FD31A /* Codable */ = {
+		14806E0B209FA77A008FD31A /* RawRepresentable */ = {
 			isa = PBXGroup;
 			children = (
-				14806DFE209F8B5E008FD31A /* Defaults+FrogCodable.swift */,
-				14806DFF209F8B5E008FD31A /* Defaults+FrogDefaultCodable.swift */,
+				14806E0C209FA77A008FD31A /* Defaults+BestFroggiesDefaultsEnum.swift */,
+				14806E0D209FA77A008FD31A /* Defaults+BestFroggiesEnum.swift */,
+			);
+			name = RawRepresentable;
+			path = Tests/SwiftyUserDefaultsTests/RawRepresentable;
+			sourceTree = "<group>";
+		};
+		14806E0E209FA77A008FD31A /* TestHelpers */ = {
+			isa = PBXGroup;
+			children = (
+				14806E0F209FA77A008FD31A /* TestHelper.swift */,
+				14806E10209FA77A008FD31A /* DefaultsSerializableSpec.swift */,
+			);
+			name = TestHelpers;
+			path = Tests/SwiftyUserDefaultsTests/TestHelpers;
+			sourceTree = "<group>";
+		};
+		14806E11209FA77A008FD31A /* NSCoding */ = {
+			isa = PBXGroup;
+			children = (
+				14806E12209FA77A008FD31A /* Defaults+FrogSerializable.swift */,
+				14806E13209FA77A008FD31A /* Defaults+FrogDefaultSerializable.swift */,
+			);
+			name = NSCoding;
+			path = Tests/SwiftyUserDefaultsTests/NSCoding;
+			sourceTree = "<group>";
+		};
+		14806E14209FA77A008FD31A /* Codable */ = {
+			isa = PBXGroup;
+			children = (
+				14806E15209FA77A008FD31A /* Defaults+FrogCodable.swift */,
+				14806E16209FA77A008FD31A /* Defaults+FrogDefaultCodable.swift */,
 			);
 			name = Codable;
 			path = Tests/SwiftyUserDefaultsTests/Codable;
 			sourceTree = "<group>";
 		};
-		1491DA0E209E52FC00B62864 /* DefaultsSerializable */ = {
+		14806E17209FA77B008FD31A /* Primitives */ = {
 			isa = PBXGroup;
 			children = (
-				1491DA13209E584B00B62864 /* DefaultsSerializableSpec.swift */,
-				1491DA17209E5AFC00B62864 /* Defaults+Bool.swift */,
-				1491DA19209E5B2E00B62864 /* Defaults+Data.swift */,
-				1491DA1B209E5B7B00B62864 /* Defaults+Date.swift */,
-				1491DA15209E5A6000B62864 /* Defaults+Double.swift */,
-				1491DA25209E6D8700B62864 /* Defaults+FrogSerializable.swift */,
-				1491DA23209E62AD00B62864 /* Defaults+FrogDefaultSerializable.swift */,
-				1491DA0F209E52FC00B62864 /* Defaults+Int.swift */,
-				1491DA10209E52FC00B62864 /* Defaults+String.swift */,
-				1491DA1D209E5BCD00B62864 /* Defaults+URL.swift */,
-				14806E04209F9F37008FD31A /* Defaults+BestFroggiesEnum.swift */,
-				14806E06209FA460008FD31A /* Defaults+BestFroggiesDefaultsEnum.swift */,
+				14806E18209FA77B008FD31A /* Defaults+URL.swift */,
+				14806E19209FA77B008FD31A /* Defaults+Int.swift */,
+				14806E1A209FA77B008FD31A /* Defaults+Bool.swift */,
+				14806E1B209FA77B008FD31A /* Defaults+Double.swift */,
+				14806E1C209FA77B008FD31A /* Defaults+Data.swift */,
+				14806E1D209FA77B008FD31A /* Defaults+Date.swift */,
+				14806E1E209FA77B008FD31A /* Defaults+String.swift */,
 			);
-			name = DefaultsSerializable;
-			path = Tests/SwiftyUserDefaultsTests/DefaultsSerializable;
+			name = Primitives;
+			path = Tests/SwiftyUserDefaultsTests/Primitives;
 			sourceTree = "<group>";
 		};
 		27C83C923B29C4CFD0095DF2 /* Tests */ = {
@@ -162,9 +187,11 @@
 		A06245B62A8C7B3F50D81915 /* SwiftyUserDefaultsTests */ = {
 			isa = PBXGroup;
 			children = (
-				14806DFD209F8B5E008FD31A /* Codable */,
-				1491DA0E209E52FC00B62864 /* DefaultsSerializable */,
-				3AA5D63158DA9B7DE73F139E /* TestHelper.swift */,
+				14806E14209FA77A008FD31A /* Codable */,
+				14806E17209FA77B008FD31A /* Primitives */,
+				14806E11209FA77A008FD31A /* NSCoding */,
+				14806E0B209FA77A008FD31A /* RawRepresentable */,
+				14806E0E209FA77A008FD31A /* TestHelpers */,
 			);
 			name = SwiftyUserDefaultsTests;
 			sourceTree = "<group>";
@@ -310,21 +337,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				14806E07209FA460008FD31A /* Defaults+BestFroggiesDefaultsEnum.swift in Sources */,
-				1491DA18209E5AFC00B62864 /* Defaults+Bool.swift in Sources */,
-				1491DA11209E52FC00B62864 /* Defaults+Int.swift in Sources */,
-				1491DA14209E584B00B62864 /* DefaultsSerializableSpec.swift in Sources */,
-				1491DA1A209E5B2E00B62864 /* Defaults+Data.swift in Sources */,
-				1491DA1C209E5B7B00B62864 /* Defaults+Date.swift in Sources */,
-				1491DA12209E52FC00B62864 /* Defaults+String.swift in Sources */,
-				1491DA16209E5A6000B62864 /* Defaults+Double.swift in Sources */,
-				1491DA24209E62AD00B62864 /* Defaults+FrogDefaultSerializable.swift in Sources */,
-				14806E02209F8B85008FD31A /* Defaults+FrogCodable.swift in Sources */,
-				1491DA26209E6D8700B62864 /* Defaults+FrogSerializable.swift in Sources */,
-				A4A80A1A684BA68E8BC0FBB7 /* TestHelper.swift in Sources */,
-				14806E05209F9F37008FD31A /* Defaults+BestFroggiesEnum.swift in Sources */,
-				14806E03209F8B88008FD31A /* Defaults+FrogDefaultCodable.swift in Sources */,
-				1491DA1E209E5BCD00B62864 /* Defaults+URL.swift in Sources */,
+				14806E25209FA77B008FD31A /* Defaults+FrogCodable.swift in Sources */,
+				14806E24209FA77B008FD31A /* Defaults+FrogDefaultSerializable.swift in Sources */,
+				14806E21209FA77B008FD31A /* TestHelper.swift in Sources */,
+				14806E2D209FA77B008FD31A /* Defaults+String.swift in Sources */,
+				14806E20209FA77B008FD31A /* Defaults+BestFroggiesEnum.swift in Sources */,
+				14806E26209FA77B008FD31A /* Defaults+FrogDefaultCodable.swift in Sources */,
+				14806E1F209FA77B008FD31A /* Defaults+BestFroggiesDefaultsEnum.swift in Sources */,
+				14806E2B209FA77B008FD31A /* Defaults+Data.swift in Sources */,
+				14806E23209FA77B008FD31A /* Defaults+FrogSerializable.swift in Sources */,
+				14806E27209FA77B008FD31A /* Defaults+URL.swift in Sources */,
+				14806E29209FA77B008FD31A /* Defaults+Bool.swift in Sources */,
+				14806E22209FA77B008FD31A /* DefaultsSerializableSpec.swift in Sources */,
+				14806E2A209FA77B008FD31A /* Defaults+Double.swift in Sources */,
+				14806E28209FA77B008FD31A /* Defaults+Int.swift in Sources */,
+				14806E2C209FA77B008FD31A /* Defaults+Date.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
