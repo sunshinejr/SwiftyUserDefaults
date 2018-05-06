@@ -45,6 +45,16 @@ public extension UserDefaults {
     func remove<T>(_ key: DefaultsKey<T>) {
         removeObject(forKey: key._key)
     }
+
+    /// Removes all keys and values from user defaults
+    /// Use with caution!
+    /// - Note: This method only removes keys on the receiver `UserDefaults` object.
+    ///         System-defined keys will still be present afterwards.
+    public func removeAll() {
+        for (key, _) in dictionaryRepresentation() {
+            removeObject(forKey: key)
+        }
+    }
 }
 
 internal extension UserDefaults {
