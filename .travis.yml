@@ -19,7 +19,6 @@ env:
   - PROJECT=SwiftyUserDefaults.xcodeproj
 
 before_install:
-  - brew install carthage
   - gem install cocoapods -v 1.4.0
   - gem install xcpretty
 
