@@ -22,6 +22,8 @@
 // SOFTWARE.
 //
 
+import Foundation
+
 // DefaultsKey
 public extension UserDefaults {
 

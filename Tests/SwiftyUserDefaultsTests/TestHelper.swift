@@ -3,11 +3,11 @@ import Quick
 import SwiftyUserDefaults
 
 func given(_ description: String, closure: @escaping () -> ()) {
-    describe(description, closure)
+    describe(description, closure: closure)
 }
 
 func when(_ description: String, closure: @escaping () -> ()) {
-    context(description, closure)
+    context(description, closure: closure)
 }
 
 func then(_ description: String, closure: @escaping () -> ()) {

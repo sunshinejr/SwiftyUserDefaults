@@ -23,6 +23,7 @@
 //
 
 import Quick
+import Foundation
 
 final class DefaultsUrlSpec: QuickSpec, DefaultsSerializableSpec {
 
