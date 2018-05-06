@@ -1,0 +1,7 @@
+excluded:
+  - .build/
+  - Carthage/
+  - Tests/
+disabled_rules:
+  - line_length
+  - trailing_comma
