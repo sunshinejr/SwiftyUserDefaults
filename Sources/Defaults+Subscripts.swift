@@ -36,7 +36,16 @@ public extension UserDefaults {
 
     subscript<T: DefaultsSerializable>(key: DefaultsKey<T?>) -> T? where T: DefaultsDefaultValueType {
         get {
-            return T.get(key: key._key, userDefaults: self) ?? T.defaultValue
+            return T.get(key: key._key, userDefaults: self) ?? key.defaultValue ?? T.defaultValue
+        }
+        set {
+            T.save(key: key._key, value: newValue, userDefaults: self)
+        }
+    }
+
+    subscript<T: DefaultsSerializable>(key: DefaultsKey<T?>) -> T? where T: Collection, T.Element: DefaultsDefaultArrayValueType {
+        get {
+            return T.get(key: key._key, userDefaults: self) ?? key.defaultValue ?? T.Element.defaultArrayValue as? T
         }
         set {
             T.save(key: key._key, value: newValue, userDefaults: self)
@@ -46,6 +55,15 @@ public extension UserDefaults {
     subscript<T: DefaultsSerializable>(key: DefaultsKey<T>) -> T where T: DefaultsDefaultValueType {
         get {
             return T.get(key: key._key, userDefaults: self) ?? key.defaultValue ?? T.defaultValue
+        }
+        set {
+            T.save(key: key._key, value: newValue, userDefaults: self)
+        }
+    }
+
+    subscript<T: DefaultsSerializable>(key: DefaultsKey<T>) -> T where T: Collection, T.Element: DefaultsDefaultArrayValueType {
+        get {
+            return T.get(key: key._key, userDefaults: self) ?? key.defaultValue ?? T.Element.defaultArrayValue as! T
         }
         set {
             T.save(key: key._key, value: newValue, userDefaults: self)
@@ -82,7 +100,16 @@ public extension UserDefaults {
 
     subscript<T: Codable>(key: DefaultsCodableKey<T?>) -> T? where T: DefaultsDefaultValueType {
         get {
-            return T.decodable(key: key._key, userDefaults: self) ?? T.defaultValue
+            return T.decodable(key: key._key, userDefaults: self) ?? key.defaultValue ?? T.defaultValue
+        }
+        set {
+            T.saveEncodable(key: key._key, value: newValue, userDefaults: self)
+        }
+    }
+
+    subscript<T: Codable>(key: DefaultsCodableKey<T?>) -> T? where T: Collection, T.Element: DefaultsDefaultArrayValueType {
+        get {
+            return T.decodable(key: key._key, userDefaults: self) ?? key.defaultValue ?? T.Element.defaultArrayValue as? T
         }
         set {
             T.saveEncodable(key: key._key, value: newValue, userDefaults: self)
@@ -92,6 +119,15 @@ public extension UserDefaults {
     subscript<T: Codable>(key: DefaultsCodableKey<T>) -> T where T: DefaultsDefaultValueType {
         get {
             return T.decodable(key: key._key, userDefaults: self) ?? key.defaultValue ?? T.defaultValue
+        }
+        set {
+            T.saveEncodable(key: key._key, value: newValue, userDefaults: self)
+        }
+    }
+
+    subscript<T: Codable>(key: DefaultsCodableKey<T>) -> T where T: Collection, T.Element: DefaultsDefaultArrayValueType {
+        get {
+            return T.decodable(key: key._key, userDefaults: self) ?? key.defaultValue ?? T.Element.defaultArrayValue as! T
         }
         set {
             T.saveEncodable(key: key._key, value: newValue, userDefaults: self)
