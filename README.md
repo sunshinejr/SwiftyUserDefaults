@@ -10,7 +10,9 @@
 ###### SwiftyUserDefaults makes user defaults enjoyable to use by combining expressive Swifty API with the benefits of static typing. Define your keys in one place, use value types easily, and get extra safety and convenient compile-time checks for free.
 
 Read [Statically-typed NSUserDefaults](http://radex.io/swift/nsuserdefaults/static) for more information about this project.
+Read [documentation for version < 4.0.0 here](https://github.com/radex/SwiftyUserDefaults/blob/14b629b035bf6355b46ece22c3851068a488a895/README.md)
 
+# Version 4
 -------
 <p align="center">
     <a href="#features">Features</a> &bull;
@@ -120,105 +122,165 @@ Defaults[.color]?.whiteComponent // => 1.0
 
 SwiftyUserDefaults supports all of the standard `NSUserDefaults` types, like strings, numbers, booleans, arrays and dictionaries.
 
-Here's a full table:
+Here's a full table of built-in single value defaults:
 
-| Optional variant       | Non-optional variant  | Default value |
-|------------------------|-----------------------|---------------|
-| `String?`              | `String`              | `""`          |
-| `Int?`                 | `Int`                 | `0`           |
-| `Double?`              | `Double`              | `0.0`         |
-| `Bool?`                | `Bool`                | `false`       |
-| `Data?`                | `Data`                | `Data()`      |
-| `[Any]?`               | `[Any]`               | `[]`          |
-| `[String: Any]?`       | `[String: Any]`       | `[:]`         |
-| `Date?`                | n/a                   | n/a           |
-| `URL?`                 | n/a                   | n/a           |
-| `Any?`                 | n/a                   | n/a           |
+| Optional variant | Non-optional variant | Default value |
+| ---------------- | -------------------- | ------------- |
+| `String?`        | `String`             | `""`          |
+| `Int?`           | `Int`                | `0`           |
+| `Double?`        | `Double`             | `0.0`         |
+| `Bool?`          | `Bool`               | `false`       |
+| `Data?`          | `Data`               | `Data()`      |
+| `Date?`          | n/a                  | n/a           |
+| `URL?`           | n/a                  | n/a           |
 
-You can mark a type as optional to get `nil` if the key doesn't exist. Otherwise, you'll get a default value that makes sense for a given type.
-
-#### Typed arrays
-
-Additionally, typed arrays are available for these types:
+and arrays:
 
 | Array type | Optional variant |
-|------------|------------------|
+| ---------- | ---------------- |
 | `[String]` | `[String]?`      |
 | `[Int]`    | `[Int]?`         |
 | `[Double]` | `[Double]?`      |
 | `[Bool]`   | `[Bool]?`        |
 | `[Data]`   | `[Data]?`        |
 | `[Date]`   | `[Date]?`        |
+| `[URL]`    | `[URL]?`         |
+
+But that's not everything...
+
+#### Codable
+
+Since version 4.0.0, `SwiftyUserDefaults` support `Codable`! Just add `DefaultsSerializable` type to your type, like:
+```swift
+final class FrogCodable: Codable, DefaultsSerializable {
+    let name: String
+ }
+```
+
+No implementation needed! By doing this you will get an option to specify an optional `DefaultsKey`:
+```swift
+let frog = DefaultsKey<FrogCodable?>("frog")
+```
+
+Additionally, you've got an array support also for free:
+```swift
+let frog = DefaultsKey<[FrogCodable]?>("frogs")
+```
+
+#### NSCoding
+
+`NSCoding` was supported before version 4.0.0, but in this version we take the support on another level. No need for custom subscripts anymore!
+Support your custom `NSCoding` type the same way as you can support `Codable` types: add `DefaultsSerializable` to your implemented protocols:
+```
+final class FrogSerializable: NSObject, NSCoding, DefaultsSerializable { ... }
+```
+
+No implementation needed as well! By doing this you will get an option to specify an optional `DefaultsKey`:
+```swift
+let frog = DefaultsKey<FrogSerializable?>("frog")
+```
+
+Additionally, you've got an array support also for free:
+```swift
+let frog = DefaultsKey<[FrogSerializable]?>("frogs")
+```
+
+#### RawRepresentable
+
+And the last but not least, `RawRepresentable` support! It's all the same situation like with `NSCoding` or with `Codable`, add one
+little protocol to rule them all!
+```
+enum BestFroggiesEnum: String, DefaultsSerializable {
+    case Andy
+    case Dandy
+}
+```
+
+No implementation needed as well! By doing this you will get an option to specify an optional `DefaultsKey`:
+```swift
+let frog = DefaultsKey<BestFroggiesEnum?>("frog")
+```
+
+Additionally, you've got an array support also for free:
+```swift
+let frog = DefaultsKey<[BestFroggiesEnum]?>("frogs")
+```
+
+#### Default values
+
+Since version 4.0.0 you can support a default value for your key (arrays as well!):
+```swift
+let frog = DefaultsKey<FrogCodable>("frog", defaultValue: FrogCodable(name: "Froggy"))
+let frogs = DefaultsKey<FrogCodable>("frogs", defaultValue: [FrogCodable(name: "Froggy")])
+```
+
+ _or_ you can specify a default value for the whole type using two protocols, `DefaultsDefaultValueType` for a single value default:
+ ```swift
+extension FrogCodable: DefaultsDefaultValueType {
+    static let defaultValue: FrogCodable = FrogCodable(name: "Froggy")
+}
+ ```
+
+ or `DefaultsDefaultArrayValueType` for an array of type default:
+ ```swift
+extension FrogCodable: DefaultsDefaultArrayValueType {
+    static let defaultArrayValue: [FrogCodable] = []
+}
+ ```
+
+And then you can create your keys without specyfing a `defaultValue` each time!
+```swift
+let frog = DefaultsKey<FrogCodable>("frog")
+let frogs = DefaultsKey<FrogCodable>("frogs")
+```
 
 ### Custom types
 
-You can easily store custom `NSCoding`-compliant types by extending `UserDefaults` with this stub subscript:
-
+So let's say there is a type that is not supported yet (like `NSCoding`, `Codable` or `RawRepresentable` before), but you want to support it.
+You can do it by specializing getters and setters of `DefaultsSerializable`. See this extension we have for `Codable`:
 ```swift
-extension UserDefaults {
-    subscript(key: DefaultsKey<NSColor?>) -> NSColor? {
-        get { return unarchive(key) }
-        set { archive(key, newValue) }
+extension Array: DefaultsSerializable where Element: DefaultsSerializable {
+
+    public static func get(key: String, userDefaults: UserDefaults) -> [Element]? {
+        return Element.getArray(key: key, userDefaults: userDefaults)
+    }
+
+    public static func getArray(key: String, userDefaults: UserDefaults) -> [[Element]]? {
+        return [Element].getArray(key: key, userDefaults: userDefaults)
+    }
+
+    public static func save(key: String, value: [Element]?, userDefaults: UserDefaults) {
+        guard let value = value else {
+            userDefaults.removeObject(forKey: key)
+            return
+        }
+
+        Element.saveArray(key: key, value: value, userDefaults: userDefaults)
+    }
+
+    public static func saveArray(key: String, value: [[Element]], userDefaults: UserDefaults) {
+        [Element].saveArray(key: key, value: value, userDefaults: userDefaults)
+    }
+}
+
+extension DefaultsStoreable where Self: Encodable {
+
+    public static func saveArray(key: String, value: [Self], userDefaults: UserDefaults) {
+        userDefaults.set(encodable: value, forKey: key)
+    }
+
+    public static func save(key: String, value: Self?, userDefaults: UserDefaults) {
+        guard let value = value else {
+            userDefaults.removeObject(forKey: key)
+            return
+        }
+
+        userDefaults.set(encodable: value, forKey: key)
     }
 }
 ```
 
-Just copy&paste this and change `NSColor` to your class name.
-
-Here's a usage example:
-
-```swift
-extension DefaultsKeys {
-    static let color = DefaultsKey<NSColor?>("color")
-}
-
-Defaults[.color] // => nil
-Defaults[.color] = NSColor.white
-Defaults[.color] // => w 1.0, a 1.0
-Defaults[.color]?.whiteComponent // => 1.0
-```
-
-#### Custom types with default values
-
-If you don't want to deal with `nil` when fetching a user default value, you can remove `?` marks and supply the default value, like so:
-
-```swift
-extension UserDefaults {
-    subscript(key: DefaultsKey<NSColor>) -> NSColor {
-        get { return unarchive(key) ?? NSColor.clear }
-        set { archive(key, newValue) }
-    }
-}
-```
-
-#### Enums
-
-In addition to `NSCoding`, you can store `enum` values the same way:
-
-```swift
-enum MyEnum: String {
-    case A, B, C
-}
-
-extension UserDefaults {
-    subscript(key: DefaultsKey<MyEnum?>) -> MyEnum? {
-        get { return unarchive(key) }
-        set { archive(key, newValue) }
-    }
-}
-```
-
-The only requirement is that the enum has to be `RawRepresentable` by a simple type like `String` or `Int`.
-
-### Existence
-
-```swift
-if !Defaults.hasKey(.hotkey) {
-    Defaults.remove(.hotkeyOptions)
-}
-```
-
-You can use the `hasKey` method to check for key's existence in the user defaults. `remove()` is an alias for `removeObjectForKey()`, that also works with `DefaultsKeys` shortcuts.
+And if you feel like this could be a valuable addition, don't hesitate and make a Pull Request 😉
 
 ### Remove all keys
 
@@ -236,38 +298,7 @@ If you're sharing your user defaults between different apps or an app and its ex
 var Defaults = UserDefaults(suiteName: "com.my.app")!
 ```
 
-## Traditional API
-
-There's also a more traditional string-based API available. This is considered legacy API, and it's recommended that you use statically defined keys instead.
-
-```swift
-Defaults["color"].string            // returns String?
-Defaults["launchCount"].int         // returns Int?
-Defaults["chimeVolume"].double      // returns Double?
-Defaults["loggingEnabled"].bool     // returns Bool?
-Defaults["lastPaths"].array         // returns [Any]?
-Defaults["credentials"].dictionary  // returns [String: Any]?
-Defaults["hotkey"].data             // returns Data?
-Defaults["firstLaunchAt"].date      // returns Date?
-Defaults["anything"].object         // returns Any?
-Defaults["anything"].number         // returns NSNumber?
-```
-
-When you don't want to deal with the `nil` case, you can use these helpers that return a default value for non-existing defaults:
-
-```swift
-Defaults["color"].stringValue            // defaults to ""
-Defaults["launchCount"].intValue         // defaults to 0
-Defaults["chimeVolume"].doubleValue      // defaults to 0.0
-Defaults["loggingEnabled"].boolValue     // defaults to false
-Defaults["lastPaths"].arrayValue         // defaults to []
-Defaults["credentials"].dictionaryValue  // defaults to [:]
-Defaults["hotkey"].dataValue             // defaults to Data()
-```
-
 ## Installation
-
-**Note:** If you're running Swift 2, use [SwiftyUserDefaults v2.2.1](https://github.com/radex/SwiftyUserDefaults/tree/2.2.1)
 
 #### CocoaPods
 
@@ -297,9 +328,19 @@ Just add to your Cartfile:
 github "radex/SwiftyUserDefaults"
 ```
 
-#### Manually
+#### Swift Package Manager
 
-Simply copy `Sources/SwiftyUserDefaults.swift` to your Xcode project.
+Just add to your `Package.swift` under dependencies:
+```swift
+let package = Package(
+    name: "MyPackage",
+    products: [...],
+    dependencies: [
+        .package(url: "https://github.com/radex/SwiftyUserDefaults.git", .upToNextMajor(from: "4.0.0")),
+    ],
+    targets: [...]
+)
+```
 
 ## More like this
 
@@ -313,13 +354,14 @@ You might also be interested in my blog posts which explain the design process b
 
 ### Contributing
 
-If you have comments, complaints or ideas for improvements, feel free to open an issue or a pull request. Or [ping me on Twitter](http://twitter.com/radexp).
+If you have comments, complaints or ideas for improvements, feel free to open an issue or a pull request.
 
 ### Author and license
 
 *Maintainer:* Łukasz Mróz
 * [github.com/sunshinejr](http://github.com/sunshinejr)
 * [twitter.com/thesunshinejr](http://twitter.com/thesunshinejr)
+* [sunshinejr.com](https://sunshinejr.com)
 
 *Created by:* Radek Pietruszewski
 
