@@ -44,4 +44,4 @@ script:
   - swift build
   - swift test
   - pod lib lint
-  - danger process danger-swift
+  - DEBUG="*" danger process danger-swift
