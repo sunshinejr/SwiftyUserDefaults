@@ -16,10 +16,12 @@ Read [documentation for version < 4.0.0 here](https://github.com/radex/SwiftyUse
 <p align="center">
     <a href="#features">Features</a> &bull;
     <a href="#usage">Usage</a> &bull;
+    <a href="#codable">Codable</a> &bull;
+    <a href="#nscoding">NSCoding</a> &bull;
+    <a href="#rawrepresentable">RawRepresentable</a> &bull;
+    <a href="#default-values">Default values</a> &bull;
     <a href="#custom-types">Custom types</a> &bull;
-    <a href="#traditional-api">Traditional API</a> &bull; 
-    <a href="#installation">Installation</a> &bull; 
-    <a href="#more-like-this">More info</a>
+    <a href="#installation">Installation</a>
 </p>
 
 ## Features
