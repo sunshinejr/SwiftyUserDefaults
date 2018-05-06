@@ -31,9 +31,8 @@ final class DefaultsFrogCodableSpec: QuickSpec, CodableSpec {
 
     override func spec() {
         given("FrogSerializable") {
-            when("key-default values") {
-                self.testValues()
-            }
+            self.testValues()
+            self.testOptionalValues()
         }
     }
 }
