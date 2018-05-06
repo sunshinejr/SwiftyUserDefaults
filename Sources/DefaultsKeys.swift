@@ -34,8 +34,7 @@ open class DefaultsKeys {
 }
 
 /// Base class for static user defaults keys. Specialize with value type
-/// and pass key name to the initializer to create a key. For `Codable`
-/// values use `DefaultsCodableKey` instead.
+/// and pass key name to the initializer to create a key.
 open class DefaultsKey<ValueType: DefaultsSerializable>: DefaultsKeys {
 
     public let _key: String
@@ -67,46 +66,6 @@ extension DefaultsKey where ValueType: Collection, ValueType.Element: DefaultsSe
     }
 }
 
-/// Base class for static Codable user defaults keys. Use for saving
-/// `Codable` values, otherwise use `DefaultsKey`.
-open class DefaultsCodableKey<ValueType: Codable>: DefaultsKeys {
-
-    public let _key: String
-    internal let defaultValue: ValueType?
-
-    public init(_ key: String, defaultValue: ValueType) {
-        self._key = key
-        self.defaultValue = defaultValue
-    }
-
-    // Couldn't figure out a way of how to pass a nil/none value from extension, thus this initializer.
-    // Used for creating an optional key (without defaultValue) in the extension below
-    private init(key: String) {
-        self._key = key
-        self.defaultValue = nil
-    }
-
-    @available(*, unavailable, message: "This key needs a default value, either using an argument or a type with implemented `defaultValue`. If this type does not have a default value, consider using an optional key.")
-    public init(_ key: String) {
-        fatalError()
-    }
-}
-
-extension DefaultsCodableKey where ValueType: Collection, ValueType.Element: DefaultsSerializable {
-
-    @available(*, unavailable, message: "Even though element of this array has a default value, the whole array doesnt and so you need to either pass it via argument or in extension.")
-    public convenience init(_ key: String) {
-        fatalError()
-    }
-}
-
-public extension DefaultsCodableKey where ValueType: Codable, ValueType: OptionalType, ValueType.Wrapped: Codable {
-
-    convenience init(_ key: String) {
-        self.init(key: key)
-    }
-}
-
 public extension DefaultsKey where ValueType: DefaultsSerializable, ValueType: OptionalType, ValueType.Wrapped: DefaultsSerializable {
 
     convenience init(_ key: String) {
@@ -128,23 +87,14 @@ public extension DefaultsKey where ValueType: Collection, ValueType.Element: Def
     }
 }
 
-public extension DefaultsCodableKey where ValueType: DefaultsDefaultValueType {
-
-    convenience init(_ key: String) {
-        self.init(key: key)
-    }
-}
-
-public extension DefaultsCodableKey where ValueType: Collection, ValueType.Element: DefaultsDefaultArrayValueType, ValueType.Element: Codable {
-
-    convenience init(_ key: String) {
-        self.init(key: key)
-    }
-}
-
 extension Optional: DefaultsSerializable where Wrapped: DefaultsSerializable {
+
     public static func get(key: String, userDefaults: UserDefaults) -> Optional<Wrapped>? {
         return Wrapped.get(key: key, userDefaults: userDefaults)
+    }
+
+    public static func getArray(key: String, userDefaults: UserDefaults) -> [Optional<Wrapped>]? {
+        return Wrapped.getArray(key: key, userDefaults: userDefaults)
     }
 
     public static func save(key: String, value: Optional<Wrapped>?, userDefaults: UserDefaults) {
@@ -153,6 +103,10 @@ extension Optional: DefaultsSerializable where Wrapped: DefaultsSerializable {
         } else {
             Wrapped.save(key: key, value: nil, userDefaults: userDefaults)
         }
+    }
+
+    public static func saveArray(key: String, value: [Optional<Wrapped>], userDefaults: UserDefaults) {
+        Wrapped.saveArray(key: key, value: value.compactMap { $0 }, userDefaults: userDefaults)
     }
 }
 

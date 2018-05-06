@@ -33,7 +33,15 @@ extension String: DefaultsSerializable, DefaultsDefaultArrayValueType, DefaultsD
         return userDefaults.string(forKey: key)
     }
 
+    public static func getArray(key: String, userDefaults: UserDefaults) -> [String]? {
+        return userDefaults.array(forKey: key) as? [String]
+    }
+
     public static func save(key: String, value: String?, userDefaults: UserDefaults) {
+        userDefaults.set(value, forKey: key)
+    }
+
+    public static func saveArray(key: String, value: [String], userDefaults: UserDefaults) {
         userDefaults.set(value, forKey: key)
     }
 }
@@ -47,7 +55,15 @@ extension Int: DefaultsSerializable, DefaultsDefaultArrayValueType, DefaultsDefa
         return userDefaults.number(forKey: key)?.intValue
     }
 
+    public static func getArray(key: String, userDefaults: UserDefaults) -> [Int]? {
+        return userDefaults.array(forKey: key) as? [Int]
+    }
+
     public static func save(key: String, value: Int?, userDefaults: UserDefaults) {
+        userDefaults.set(value, forKey: key)
+    }
+
+    public static func saveArray(key: String, value: [Int], userDefaults: UserDefaults) {
         userDefaults.set(value, forKey: key)
     }
 }
@@ -61,7 +77,15 @@ extension Double: DefaultsSerializable, DefaultsDefaultArrayValueType, DefaultsD
         return userDefaults.number(forKey: key)?.doubleValue
     }
 
+    public static func getArray(key: String, userDefaults: UserDefaults) -> [Double]? {
+        return userDefaults.array(forKey: key) as? [Double]
+    }
+
     public static func save(key: String, value: Double?, userDefaults: UserDefaults) {
+        userDefaults.set(value, forKey: key)
+    }
+
+    public static func saveArray(key: String, value: [Double], userDefaults: UserDefaults) {
         userDefaults.set(value, forKey: key)
     }
 }
@@ -79,7 +103,15 @@ extension Bool: DefaultsSerializable, DefaultsDefaultArrayValueType, DefaultsDef
         return userDefaults.number(forKey: key)?.boolValue
     }
 
+    public static func getArray(key: String, userDefaults: UserDefaults) -> [Bool]? {
+        return userDefaults.array(forKey: key) as? [Bool]
+    }
+
     public static func save(key: String, value: Bool?, userDefaults: UserDefaults) {
+        userDefaults.set(value, forKey: key)
+    }
+
+    public static func saveArray(key: String, value: [Bool], userDefaults: UserDefaults) {
         userDefaults.set(value, forKey: key)
     }
 }
@@ -93,7 +125,15 @@ extension Data: DefaultsSerializable, DefaultsDefaultArrayValueType, DefaultsDef
         return userDefaults.data(forKey: key)
     }
 
+    public static func getArray(key: String, userDefaults: UserDefaults) -> [Data]? {
+        return userDefaults.array(forKey: key) as? [Data]
+    }
+
     public static func save(key: String, value: Data?, userDefaults: UserDefaults) {
+        userDefaults.set(value, forKey: key)
+    }
+
+    public static func saveArray(key: String, value: [Data], userDefaults: UserDefaults) {
         userDefaults.set(value, forKey: key)
     }
 }
@@ -104,7 +144,15 @@ extension Date: DefaultsSerializable {
         return userDefaults.object(forKey: key) as? Date
     }
 
+    public static func getArray(key: String, userDefaults: UserDefaults) -> [Date]? {
+        return userDefaults.array(forKey: key) as? [Date]
+    }
+
     public static func save(key: String, value: Date?, userDefaults: UserDefaults) {
+        userDefaults.set(value, forKey: key)
+    }
+
+    public static func saveArray(key: String, value: [Date], userDefaults: UserDefaults) {
         userDefaults.set(value, forKey: key)
     }
 }
@@ -114,20 +162,27 @@ extension URL: DefaultsSerializable {
         return userDefaults.url(forKey: key)
     }
 
+    public static func getArray(key: String, userDefaults: UserDefaults) -> [URL]? {
+        return userDefaults.data(forKey: key).flatMap(NSKeyedUnarchiver.unarchiveObject) as? [URL]
+    }
+
     public static func save(key: String, value: URL?, userDefaults: UserDefaults) {
         userDefaults.set(value, forKey: key)
+    }
+
+    public static func saveArray(key: String, value: [URL], userDefaults: UserDefaults) {
+        userDefaults.set(NSKeyedArchiver.archivedData(withRootObject: value), forKey: key)
     }
 }
 
 extension Array: DefaultsSerializable where Element: DefaultsSerializable {
 
     public static func get(key: String, userDefaults: UserDefaults) -> Array<Element>? {
-        // URL/NSCoding are special for arrays, thus we use unarchiving instead of classic `array`
-        if Element.self is NSCoding.Type || Element.self is URL.Type {
-            return userDefaults.data(forKey: key).flatMap(NSKeyedUnarchiver.unarchiveObject) as? [Element]
-        } else {
-            return userDefaults.array(forKey: key) as? [Element]
-        }
+        return Element.getArray(key: key, userDefaults: userDefaults)
+    }
+
+    public static func getArray(key: String, userDefaults: UserDefaults) -> [Array<Element>]? {
+        return [Element].getArray(key: key, userDefaults: userDefaults)
     }
 
     public static func save(key: String, value: Array<Element>?, userDefaults: UserDefaults) {
@@ -136,25 +191,21 @@ extension Array: DefaultsSerializable where Element: DefaultsSerializable {
             return
         }
 
-        // URL/NSCoding are special for arrays, thus we use archiving instead of classic `array`
-        if Element.self is NSCoding.Type || Element.self is URL.Type {
-            userDefaults.set(NSKeyedArchiver.archivedData(withRootObject: value), forKey: key)
-        } else {
-            userDefaults.set(value, forKey: key)
-        }
+        Element.saveArray(key: key, value: value, userDefaults: userDefaults)
+    }
+
+    public static func saveArray(key: String, value: [Array<Element>], userDefaults: UserDefaults) {
+        [Element].saveArray(key: key, value: value, userDefaults: userDefaults)
     }
 }
 
-extension Decodable {
+extension DefaultsStoreable where Self: Encodable {
 
-    public static func decodable(key: String, userDefaults: UserDefaults) -> Self? {
-        return userDefaults.decodable(forKey: key) as Self?
+    public static func saveArray(key: String, value: [Self], userDefaults: UserDefaults) {
+        userDefaults.set(encodable: value, forKey: key)
     }
-}
 
-extension Encodable {
-
-    public static func saveEncodable(key: String, value: Self?, userDefaults: UserDefaults) {
+    public static func save(key: String, value: Self?, userDefaults: UserDefaults) {
         guard let value = value else {
             userDefaults.removeObject(forKey: key)
             return
@@ -164,7 +215,26 @@ extension Encodable {
     }
 }
 
-extension DefaultsStoreable where Self: NSCoding {
+extension DefaultsGettable where Self: Decodable {
+
+    public static func getArray(key: String, userDefaults: UserDefaults) -> [Self]? {
+        return userDefaults.decodable(forKey: key) as [Self]?
+    }
+
+    public static func get(key: String, userDefaults: UserDefaults) -> Self? {
+        return userDefaults.decodable(forKey: key) as Self?
+    }
+}
+
+extension DefaultsGettable where Self: NSCoding {
+
+    public static func get(key: String, userDefaults: UserDefaults) -> Self? {
+        return userDefaults.data(forKey: key).flatMap(NSKeyedUnarchiver.unarchiveObject) as? Self
+    }
+
+    public static func getArray(key: String, userDefaults: UserDefaults) -> [Self]? {
+        return userDefaults.data(forKey: key).flatMap(NSKeyedUnarchiver.unarchiveObject) as? [Self]
+    }
 
     public static func save(key: String, value: Self?, userDefaults: UserDefaults) {
         guard let value = value else {
@@ -174,11 +244,8 @@ extension DefaultsStoreable where Self: NSCoding {
 
         userDefaults.set(NSKeyedArchiver.archivedData(withRootObject: value), forKey: key)
     }
-}
 
-extension DefaultsGettable where Self: NSCoding {
-
-    public static func get(key: String, userDefaults: UserDefaults) -> Self? {
-        return userDefaults.data(forKey: key).flatMap(NSKeyedUnarchiver.unarchiveObject) as? Self
+    public static func saveArray(key: String, value: [Self], userDefaults: UserDefaults) {
+        userDefaults.set(NSKeyedArchiver.archivedData(withRootObject: value), forKey: key)
     }
 }

@@ -28,10 +28,12 @@ public typealias DefaultsSerializable = DefaultsStoreable & DefaultsGettable
 
 public protocol DefaultsStoreable {
     static func save(key: String, value: Self?, userDefaults: UserDefaults)
+    static func saveArray(key: String, value: [Self], userDefaults: UserDefaults)
 }
 
 public protocol DefaultsGettable {
     static func get(key: String, userDefaults: UserDefaults) -> Self?
+    static func getArray(key: String, userDefaults: UserDefaults) -> [Self]?
 }
 
 public protocol DefaultsDefaultValueType {

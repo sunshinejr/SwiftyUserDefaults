@@ -23,7 +23,7 @@ extension UserDefaults {
     }
 }
 
-struct FrogCodable: Codable, Equatable {
+struct FrogCodable: Codable, Equatable, DefaultsSerializable {
 
     let name: String
 
@@ -32,7 +32,7 @@ struct FrogCodable: Codable, Equatable {
     }
 }
 
-struct FrogDefaultCodable: Codable, Equatable, DefaultsDefaultValueType, DefaultsDefaultArrayValueType {
+struct FrogDefaultCodable: Codable, Equatable, DefaultsDefaultValueType, DefaultsDefaultArrayValueType, DefaultsSerializable {
 
     static let defaultValue: FrogDefaultCodable = FrogDefaultCodable(name: "frog default")
     static let defaultArrayValue: [FrogDefaultCodable] = []

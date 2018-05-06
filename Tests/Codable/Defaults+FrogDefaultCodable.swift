@@ -24,7 +24,7 @@
 
 import Quick
 
-final class DefaultsFrogDefaultCodableSpec: QuickSpec, CodableSpec {
+final class DefaultsFrogDefaultCodableSpec: QuickSpec, DefaultsSerializableSpec {
 
     var customValue: FrogDefaultCodable = FrogDefaultCodable(name: "custom")
     var defaultValue: FrogDefaultCodable = FrogDefaultCodable(name: "default")

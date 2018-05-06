@@ -19,7 +19,6 @@
 		1491DA22209E623500B62864 /* Defaults+FrogCodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1491DA21209E623500B62864 /* Defaults+FrogCodable.swift */; };
 		1491DA24209E62AD00B62864 /* Defaults+FrogDefaultSerializable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1491DA23209E62AD00B62864 /* Defaults+FrogDefaultSerializable.swift */; };
 		1491DA26209E6D8700B62864 /* Defaults+FrogSerializable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1491DA25209E6D8700B62864 /* Defaults+FrogSerializable.swift */; };
-		1491DA29209E6DAE00B62864 /* CodableSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1491DA28209E6DAE00B62864 /* CodableSpec.swift */; };
 		1491DA2B209E6F0F00B62864 /* Defaults+FrogDefaultCodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1491DA2A209E6F0F00B62864 /* Defaults+FrogDefaultCodable.swift */; };
 		947B50B172326B6A04FD5880 /* SwiftyUserDefaults.h in Headers */ = {isa = PBXBuildFile; fileRef = A9BFED60158679E195A45B47 /* SwiftyUserDefaults.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A4A80A1A684BA68E8BC0FBB7 /* TestHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA5D63158DA9B7DE73F139E /* TestHelper.swift */; };
@@ -53,7 +52,6 @@
 		1491DA21209E623500B62864 /* Defaults+FrogCodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Defaults+FrogCodable.swift"; sourceTree = "<group>"; };
 		1491DA23209E62AD00B62864 /* Defaults+FrogDefaultSerializable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Defaults+FrogDefaultSerializable.swift"; sourceTree = "<group>"; };
 		1491DA25209E6D8700B62864 /* Defaults+FrogSerializable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Defaults+FrogSerializable.swift"; sourceTree = "<group>"; };
-		1491DA28209E6DAE00B62864 /* CodableSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CodableSpec.swift; path = Tests/Codable/CodableSpec.swift; sourceTree = SOURCE_ROOT; };
 		1491DA2A209E6F0F00B62864 /* Defaults+FrogDefaultCodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Defaults+FrogDefaultCodable.swift"; path = "Tests/Codable/Defaults+FrogDefaultCodable.swift"; sourceTree = SOURCE_ROOT; };
 		2B177C8163502A503B4F7B74 /* DefaultsSerializable.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = DefaultsSerializable.swift; path = Sources/DefaultsSerializable.swift; sourceTree = "<group>"; };
 		3AA5D63158DA9B7DE73F139E /* TestHelper.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = TestHelper.swift; path = Tests/SwiftyUserDefaultsTests/TestHelper.swift; sourceTree = "<group>"; };
@@ -114,7 +112,6 @@
 		1491DA27209E6D9100B62864 /* Codable */ = {
 			isa = PBXGroup;
 			children = (
-				1491DA28209E6DAE00B62864 /* CodableSpec.swift */,
 				1491DA21209E623500B62864 /* Defaults+FrogCodable.swift */,
 				1491DA2A209E6F0F00B62864 /* Defaults+FrogDefaultCodable.swift */,
 			);
@@ -307,7 +304,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				1491DA18209E5AFC00B62864 /* Defaults+Bool.swift in Sources */,
-				1491DA29209E6DAE00B62864 /* CodableSpec.swift in Sources */,
 				1491DA11209E52FC00B62864 /* Defaults+Int.swift in Sources */,
 				1491DA14209E584B00B62864 /* DefaultsSerializableSpec.swift in Sources */,
 				1491DA1A209E5B2E00B62864 /* Defaults+Data.swift in Sources */,
