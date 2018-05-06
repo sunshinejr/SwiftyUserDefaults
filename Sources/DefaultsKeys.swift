@@ -117,30 +117,28 @@ public extension DefaultsKey where ValueType: DefaultsSerializable, ValueType: O
 public extension DefaultsKey where ValueType: DefaultsDefaultValueType {
 
     convenience init(_ key: String) {
-        self.init(key, defaultValue: ValueType.defaultValue)
+        self.init(key: key)
     }
 }
 
 public extension DefaultsKey where ValueType: Collection, ValueType.Element: DefaultsDefaultArrayValueType, ValueType.Element: DefaultsSerializable {
 
     convenience init(_ key: String) {
-        let value: ValueType = ValueType.Element.defaultArrayValue as! ValueType
-        self.init(key, defaultValue: value)
+        self.init(key: key)
     }
 }
 
 public extension DefaultsCodableKey where ValueType: DefaultsDefaultValueType {
 
     convenience init(_ key: String) {
-        self.init(key, defaultValue: ValueType.defaultValue)
+        self.init(key: key)
     }
 }
 
 public extension DefaultsCodableKey where ValueType: Collection, ValueType.Element: DefaultsDefaultArrayValueType, ValueType.Element: Codable {
 
     convenience init(_ key: String) {
-        let value: ValueType = ValueType.Element.defaultArrayValue as! ValueType
-        self.init(key, defaultValue: value)
+        self.init(key: key)
     }
 }
 
