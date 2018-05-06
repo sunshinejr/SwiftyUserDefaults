@@ -44,12 +44,6 @@ struct FrogDefaultCodable: Codable, Equatable, DefaultsDefaultValueType, Default
     }
 }
 
-enum BestFroggiesEnum: String, DefaultsSerializable {
-
-    case Andy
-    case Dandy
-}
-
 final class FrogSerializable: NSObject, NSCoding, DefaultsSerializable {
 
     let name: String
@@ -101,4 +95,21 @@ final class FrogDefaultSerializable: NSObject, NSCoding, DefaultsSerializable, D
 
         return name == rhs.name
     }
+}
+
+
+enum BestFroggiesEnum: String, DefaultsSerializable {
+
+    case Andy
+    case Dandy
+}
+
+
+enum BestFroggiesDefaultsEnum: String, DefaultsSerializable, DefaultsDefaultValueType, DefaultsDefaultArrayValueType {
+
+    static let defaultValue: BestFroggiesDefaultsEnum = .Andy
+    static let defaultArrayValue: [BestFroggiesDefaultsEnum] = []
+
+    case Andy
+    case Dandy
 }
