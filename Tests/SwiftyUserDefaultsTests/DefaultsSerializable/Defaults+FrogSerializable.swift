@@ -31,9 +31,8 @@ final class DefaultsFrogSerializableSpec: QuickSpec, DefaultsSerializableSpec {
 
     override func spec() {
         given("FrogSerializable") {
-            when("key-default values") {
-                self.testValues()
-            }
+            self.testValues()
+            self.testOptionalValues()
         }
     }
 }

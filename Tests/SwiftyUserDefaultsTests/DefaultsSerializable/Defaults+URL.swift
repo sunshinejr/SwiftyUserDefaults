@@ -31,9 +31,8 @@ final class DefaultsUrlSpec: QuickSpec, DefaultsSerializableSpec {
 
     override func spec() {
         given("Int") {
-            when("key-default values") {
-                self.testValues()
-            }
+            self.testValues()
+            self.testOptionalValues()
         }
     }
 }

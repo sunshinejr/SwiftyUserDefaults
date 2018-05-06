@@ -31,9 +31,8 @@ final class DefaultsDateSpec: QuickSpec, DefaultsSerializableSpec {
 
     override func spec() {
         given("Date") {
-            when("key-default values") {
-                self.testValues()
-            }
+            self.testValues()
+            self.testOptionalValues()
         }
     }
 }

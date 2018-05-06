@@ -31,17 +31,13 @@ final class DefaultsIntSpec: QuickSpec, DefaultsSerializableSpec {
 
     override func spec() {
         given("Int") {
-            when("type-default values") {
-                self.testDefaultValues()
-            }
+            self.testValues()
+            self.testDefaultValues()
+            self.testDefaultArrayValues()
 
-            when("array-type-default values") {
-                self.testDefaultArrayValues()
-            }
-
-            when("key-default values") {
-                self.testValues()
-            }
+            self.testOptionalValues()
+            self.testOptionalDefaultValues()
+            self.testOptionalDefaultArrayValues()
         }
     }
 }
