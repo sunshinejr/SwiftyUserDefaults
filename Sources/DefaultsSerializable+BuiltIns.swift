@@ -177,15 +177,15 @@ extension URL: DefaultsSerializable {
 
 extension Array: DefaultsSerializable where Element: DefaultsSerializable {
 
-    public static func get(key: String, userDefaults: UserDefaults) -> Array<Element>? {
+    public static func get(key: String, userDefaults: UserDefaults) -> [Element]? {
         return Element.getArray(key: key, userDefaults: userDefaults)
     }
 
-    public static func getArray(key: String, userDefaults: UserDefaults) -> [Array<Element>]? {
+    public static func getArray(key: String, userDefaults: UserDefaults) -> [[Element]]? {
         return [Element].getArray(key: key, userDefaults: userDefaults)
     }
 
-    public static func save(key: String, value: Array<Element>?, userDefaults: UserDefaults) {
+    public static func save(key: String, value: [Element]?, userDefaults: UserDefaults) {
         guard let value = value else {
             userDefaults.removeObject(forKey: key)
             return
@@ -194,7 +194,7 @@ extension Array: DefaultsSerializable where Element: DefaultsSerializable {
         Element.saveArray(key: key, value: value, userDefaults: userDefaults)
     }
 
-    public static func saveArray(key: String, value: [Array<Element>], userDefaults: UserDefaults) {
+    public static func saveArray(key: String, value: [[Element]], userDefaults: UserDefaults) {
         [Element].saveArray(key: key, value: value, userDefaults: userDefaults)
     }
 }

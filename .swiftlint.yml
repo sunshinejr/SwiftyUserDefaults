@@ -3,5 +3,6 @@ excluded:
   - Carthage/
   - Tests/
 disabled_rules:
+  - identifier_name
   - line_length
   - trailing_comma

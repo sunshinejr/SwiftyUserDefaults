@@ -65,7 +65,8 @@ public extension UserDefaults {
 
     subscript<T: DefaultsSerializable>(key: DefaultsKey<T>) -> T where T: Collection, T.Element: DefaultsDefaultArrayValueType {
         get {
-            return T.get(key: key._key, userDefaults: self) ?? key.defaultValue ?? T.Element.defaultArrayValue as! T
+            // There _must_ be a value: you can't create a key without a default value in type or in the key itself
+            return T.get(key: key._key, userDefaults: self) ?? key.defaultValue ?? T.Element.defaultArrayValue as! T // swiftlint:disable:this force_cast
         }
         set {
             T.save(key: key._key, value: newValue, userDefaults: self)

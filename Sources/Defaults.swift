@@ -35,7 +35,7 @@ import Foundation
 public let Defaults = UserDefaults.standard
 
 public extension UserDefaults {
-    
+
     /// Returns `true` if `key` exists
     func hasKey<T>(_ key: DefaultsKey<T>) -> Bool {
         return object(forKey: key._key) != nil

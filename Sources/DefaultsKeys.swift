@@ -89,15 +89,15 @@ public extension DefaultsKey where ValueType: Collection, ValueType.Element: Def
 
 extension Optional: DefaultsSerializable where Wrapped: DefaultsSerializable {
 
-    public static func get(key: String, userDefaults: UserDefaults) -> Optional<Wrapped>? {
+    public static func get(key: String, userDefaults: UserDefaults) -> Wrapped?? {
         return Wrapped.get(key: key, userDefaults: userDefaults)
     }
 
-    public static func getArray(key: String, userDefaults: UserDefaults) -> [Optional<Wrapped>]? {
+    public static func getArray(key: String, userDefaults: UserDefaults) -> [Wrapped?]? {
         return Wrapped.getArray(key: key, userDefaults: userDefaults)
     }
 
-    public static func save(key: String, value: Optional<Wrapped>?, userDefaults: UserDefaults) {
+    public static func save(key: String, value: Wrapped??, userDefaults: UserDefaults) {
         if let _value = value, let value = _value {
             Wrapped.save(key: key, value: value, userDefaults: userDefaults)
         } else {
@@ -105,8 +105,7 @@ extension Optional: DefaultsSerializable where Wrapped: DefaultsSerializable {
         }
     }
 
-    public static func saveArray(key: String, value: [Optional<Wrapped>], userDefaults: UserDefaults) {
+    public static func saveArray(key: String, value: [Wrapped?], userDefaults: UserDefaults) {
         Wrapped.saveArray(key: key, value: value.compactMap { $0 }, userDefaults: userDefaults)
     }
 }
-
