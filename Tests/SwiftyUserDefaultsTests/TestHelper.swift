@@ -32,7 +32,7 @@ struct FrogCodable: Codable, Equatable {
     }
 }
 
-struct FrogDefaultCodable: Codable, DefaultsDefaultValueType, DefaultsDefaultArrayValueType {
+struct FrogDefaultCodable: Codable, Equatable, DefaultsDefaultValueType, DefaultsDefaultArrayValueType {
 
     static let defaultValue: FrogDefaultCodable = FrogDefaultCodable(name: "frog default")
     static let defaultArrayValue: [FrogDefaultCodable] = []

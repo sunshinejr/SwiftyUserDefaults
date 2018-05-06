@@ -47,7 +47,7 @@ extension DefaultsSerializableSpec where Serializable: DefaultsDefaultValueType 
             then("create a key") {
                 let key = DefaultsKey<Serializable>("test")
                 expect(key._key) == "test"
-                expect(key.defaultValue) == Serializable.defaultValue
+                expect(key.defaultValue).to(beNil())
             }
 
             then("get a default value") {
@@ -64,6 +64,15 @@ extension DefaultsSerializableSpec where Serializable: DefaultsDefaultValueType 
                 let value = defaults[key]
 
                 expect(value) == expectedValue
+            }
+
+            then("remove a value") {
+                let key = DefaultsKey<Serializable>("test")
+
+                defaults[key] = self.customValue
+                defaults.removeObject(forKey: "test")
+
+                expect(defaults[key]) == Serializable.defaultValue
             }
         }
     }
@@ -83,7 +92,7 @@ extension DefaultsSerializableSpec where Serializable: DefaultsDefaultArrayValue
             then("create an array key") {
                 let key = DefaultsKey<[Serializable]>("test")
                 expect(key._key) == "test"
-                expect(key.defaultValue) == Serializable.defaultArrayValue
+                expect(key.defaultValue).to(beNil())
             }
 
             then("get a default array value") {
@@ -100,6 +109,15 @@ extension DefaultsSerializableSpec where Serializable: DefaultsDefaultArrayValue
                 let value = defaults[key]
 
                 expect(value) == expectedValue
+            }
+
+            then("remove an array value") {
+                let key = DefaultsKey<[Serializable]>("test")
+
+                defaults[key] = [self.customValue]
+                defaults.removeObject(forKey: "test")
+
+                expect(defaults[key]) == Serializable.defaultArrayValue
             }
         }
     }
@@ -158,6 +176,186 @@ extension DefaultsSerializableSpec {
                 let value = defaults[key]
 
                 expect(value) == expectedValue
+            }
+
+            then("remove a value") {
+                let key = DefaultsKey<Serializable>("test", defaultValue: self.defaultValue)
+                defaults[key] = self.customValue
+
+                defaults.removeObject(forKey: "test")
+
+                expect(defaults[key]) == self.defaultValue
+            }
+
+            then("remove an array value") {
+                let key = DefaultsKey<[Serializable]?>("test", defaultValue: [self.defaultValue])
+                defaults[key] = [self.customValue]
+
+                defaults.removeObject(forKey: "test")
+
+                expect(defaults[key]) == [self.defaultValue]
+            }
+        }
+    }
+}
+
+extension DefaultsSerializableSpec {
+
+    func testOptionalValues() {
+        when("key-default optional value") {
+            var defaults: UserDefaults!
+
+            beforeEach {
+                defaults = UserDefaults()
+                defaults.cleanObjects()
+            }
+
+            then("create a key") {
+                let key = DefaultsKey<Serializable?>("test", defaultValue: self.defaultValue)
+                expect(key._key) == "test"
+                expect(key.defaultValue) == self.defaultValue
+            }
+
+            then("create an array key") {
+                let key = DefaultsKey<[Serializable]?>("test", defaultValue: [self.defaultValue])
+                expect(key._key) == "test"
+                expect(key.defaultValue) == [self.defaultValue]
+            }
+
+            then("get a default value") {
+                let key = DefaultsKey<Serializable?>("test", defaultValue: self.defaultValue)
+                let value = defaults[key]
+                expect(value) == self.defaultValue
+            }
+
+            then("get a default array value") {
+                let key = DefaultsKey<[Serializable]?>("test", defaultValue: [self.defaultValue])
+                let value = defaults[key]
+                expect(value) == [self.defaultValue]
+            }
+
+            then("save a value") {
+                let key = DefaultsKey<Serializable?>("test", defaultValue: self.defaultValue)
+                let expectedValue = self.customValue
+                defaults[key] = expectedValue
+
+                let value = defaults[key]
+
+                expect(value) == expectedValue
+            }
+
+            then("save an array value") {
+                let key = DefaultsKey<[Serializable]?>("test", defaultValue: [self.defaultValue])
+                let expectedValue = [self.customValue]
+                defaults[key] = expectedValue
+
+                let value = defaults[key]
+
+                expect(value) == expectedValue
+            }
+
+            then("remove a value") {
+                let key = DefaultsKey<Serializable?>("test", defaultValue: self.defaultValue)
+
+                defaults[key] = nil
+
+                expect(defaults[key]) == self.defaultValue
+            }
+
+            then("remove an array value") {
+                let key = DefaultsKey<[Serializable]?>("test", defaultValue: [self.defaultValue])
+
+                defaults[key] = nil
+
+                expect(defaults[key]) == [self.defaultValue]
+            }
+        }
+    }
+}
+
+extension DefaultsSerializableSpec where Serializable: DefaultsDefaultValueType {
+
+    func testOptionalDefaultValues() {
+        var defaults: UserDefaults!
+
+        beforeEach {
+            defaults = UserDefaults()
+            defaults.cleanObjects()
+        }
+
+        when("type-default value") {
+            then("create a key") {
+                let key = DefaultsKey<Serializable?>("test")
+                expect(key._key) == "test"
+                expect(key.defaultValue).to(beNil())
+            }
+
+            then("get a default value") {
+                let key = DefaultsKey<Serializable?>("test")
+                let value = defaults[key]
+                expect(value) == Serializable.defaultValue
+            }
+
+            then("save a value") {
+                let key = DefaultsKey<Serializable?>("test")
+                let expectedValue = self.customValue
+                defaults[key] = expectedValue
+
+                let value = defaults[key]
+
+                expect(value) == expectedValue
+            }
+
+            then("remove a value") {
+                let key = DefaultsKey<Serializable?>("test")
+
+                defaults[key] = nil
+
+                expect(defaults[key]) == Serializable.defaultValue
+            }
+        }
+    }
+}
+
+extension DefaultsSerializableSpec where Serializable: DefaultsDefaultArrayValueType {
+
+    func testOptionalDefaultArrayValues() {
+        when("array-type-default value") {
+            var defaults: UserDefaults!
+
+            beforeEach {
+                defaults = UserDefaults()
+                defaults.cleanObjects()
+            }
+
+            then("create an array key") {
+                let key = DefaultsKey<[Serializable]?>("test")
+                expect(key._key) == "test"
+                expect(key.defaultValue).to(beNil())
+            }
+
+            then("get a default array value") {
+                let key = DefaultsKey<[Serializable]?>("test")
+                let value = defaults[key]
+                expect(value) == Serializable.defaultArrayValue
+            }
+
+            then("save an array value") {
+                let key = DefaultsKey<[Serializable]?>("test")
+                let expectedValue = [self.customValue]
+                defaults[key] = expectedValue
+
+                let value = defaults[key]
+
+                expect(value) == expectedValue
+            }
+
+            then("remove an array value") {
+                let key = DefaultsKey<[Serializable]?>("test")
+
+                defaults[key] = nil
+
+                expect(defaults[key]) == Serializable.defaultArrayValue
             }
         }
     }
