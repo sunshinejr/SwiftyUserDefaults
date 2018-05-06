@@ -52,11 +52,6 @@ extension Int: DefaultsSerializable, DefaultsDefaultArrayValueType, DefaultsDefa
     }
 }
 
-extension Array where Element == Int {
-
-    public static var defaultValue: Array<Int> = []
-}
-
 extension Double: DefaultsSerializable, DefaultsDefaultArrayValueType, DefaultsDefaultValueType {
 
     public static var defaultValue: Double = 0.0
