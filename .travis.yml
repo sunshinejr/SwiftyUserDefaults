@@ -24,7 +24,7 @@ before_install:
 
 script:
   - set -o pipefail
-  - carthage update
+  - carthage update --no-use-binaries --cache-builds
   - xcodebuild -version
   - xcodebuild -showsdks
   
@@ -33,9 +33,11 @@ script:
   - xcodebuild -project "$PROJECT" -scheme 'SwiftyUserDefaults' -sdk watchsimulator4.3 -destination 'name=Apple Watch - 42mm' ONLY_ACTIVE_ARCH=NO CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO build | xcpretty
   - xcodebuild -project "$PROJECT" -scheme 'SwiftyUserDefaults' ONLY_ACTIVE_ARCH=NO CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO build | xcpretty
   
-  - xcodebuild -project "$PROJECT" -scheme 'SwiftyUserDefaultsTests' -sdk iphonesimulator11.3 -destination 'name=iPhone 6s,OS=11.3' ONLY_ACTIVE_ARCH=NO CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO test | xcpretty
-  - xcodebuild -project "$PROJECT" -scheme 'SwiftyUserDefaultsTests' -sdk appletvsimulator11.3 -destination 'name=Apple TV 4K (at 1080p)' ONLY_ACTIVE_ARCH=NO CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO test | xcpretty
-  - xcodebuild -project "$PROJECT" -scheme 'SwiftyUserDefaultsTests' ONLY_ACTIVE_ARCH=NO CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO test | xcpretty
+  # currently there is a problem with starting simulators so we're gonna test only using swift test...
+  # if someone is interested in helping out, it would be awesome!
+  # - xcodebuild -project "$PROJECT" -scheme 'SwiftyUserDefaultsTests' -sdk iphonesimulator11.3 -destination 'name=iPhone 6s,OS=11.3' ONLY_ACTIVE_ARCH=NO CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO test | xcpretty
+  # - xcodebuild -project "$PROJECT" -scheme 'SwiftyUserDefaultsTests' -sdk appletvsimulator11.3 -destination 'name=Apple TV 4K (at 1080p)' ONLY_ACTIVE_ARCH=NO CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO test | xcpretty
+  # - xcodebuild -project "$PROJECT" -scheme 'SwiftyUserDefaultsTests' ONLY_ACTIVE_ARCH=NO CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO test | xcpretty
   
   - swift build
   - swift test
