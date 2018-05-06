@@ -21,6 +21,9 @@ env:
 before_install:
   - gem install cocoapods -v 1.4.0
   - gem install xcpretty
+  - brew install swiftlint
+  - npm install -g danger
+  - brew install danger/tap/danger-swift
 
 script:
   - set -o pipefail
@@ -41,5 +44,5 @@ script:
   
   - swift build
   - swift test
-
   - pod lib lint
+  - danger process danger-swift
