@@ -8,6 +8,9 @@ notifications:
 
 cache:
   edge: true
+  directories:
+    - Carthage
+    - .build
 
 env:
   global:
@@ -16,24 +19,26 @@ env:
   - PROJECT=SwiftyUserDefaults.xcodeproj
 
 before_install:
+  - brew install carthage
   - gem install cocoapods -v 1.4.0
   - gem install xcpretty
 
 script:
   - set -o pipefail
+  - carthage update
   - xcodebuild -version
   - xcodebuild -showsdks
   
-  - xcodebuild -project "$PROJECT" -scheme 'SwiftyUserDefaults' -sdk iphonesimulator11.0  -destination 'name=iPhone 6s,OS=11.0' ONLY_ACTIVE_ARCH=NO CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO build | xcpretty
-  - xcodebuild -project "$PROJECT" -scheme 'SwiftyUserDefaults' -sdk appletvsimulator11.0 -destination 'name=Apple TV 1080p' ONLY_ACTIVE_ARCH=NO CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO build | xcpretty
-  - xcodebuild -project "$PROJECT" -scheme 'SwiftyUserDefaults' -sdk watchsimulator4.0 -destination 'name=Apple Watch - 42mm' ONLY_ACTIVE_ARCH=NO CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO build | xcpretty
+  - xcodebuild -project "$PROJECT" -scheme 'SwiftyUserDefaults' -sdk iphonesimulator11.3  -destination 'name=iPhone 6s,OS=11.3' ONLY_ACTIVE_ARCH=NO CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO build | xcpretty
+  - xcodebuild -project "$PROJECT" -scheme 'SwiftyUserDefaults' -sdk appletvsimulator11.3 -destination 'name=Apple TV 1080p' ONLY_ACTIVE_ARCH=NO CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO build | xcpretty
+  - xcodebuild -project "$PROJECT" -scheme 'SwiftyUserDefaults' -sdk watchsimulator4.3 -destination 'name=Apple Watch - 42mm' ONLY_ACTIVE_ARCH=NO CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO build | xcpretty
   - xcodebuild -project "$PROJECT" -scheme 'SwiftyUserDefaults' ONLY_ACTIVE_ARCH=NO CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO build | xcpretty
   
-  - xcodebuild -project "$PROJECT" -scheme 'SwiftyUserDefaultsTests' -sdk iphonesimulator11.0 -destination 'name=iPhone 6s,OS=11.0' ONLY_ACTIVE_ARCH=NO CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO test | xcpretty
-  - xcodebuild -project "$PROJECT" -scheme 'SwiftyUserDefaultsTests' -sdk appletvsimulator11.0 -destination 'name=Apple TV 1080p' ONLY_ACTIVE_ARCH=NO CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO test | xcpretty
+  - xcodebuild -project "$PROJECT" -scheme 'SwiftyUserDefaultsTests' -sdk iphonesimulator11.3 -destination 'name=iPhone 6s,OS=11.0' ONLY_ACTIVE_ARCH=NO CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO test | xcpretty
+  - xcodebuild -project "$PROJECT" -scheme 'SwiftyUserDefaultsTests' -sdk appletvsimulator11.3 -destination 'name=Apple TV 1080p' ONLY_ACTIVE_ARCH=NO CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO test | xcpretty
   - xcodebuild -project "$PROJECT" -scheme 'SwiftyUserDefaultsTests' ONLY_ACTIVE_ARCH=NO CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO test | xcpretty
   
   - swift build
   - swift test
-  
+
   - pod lib lint
