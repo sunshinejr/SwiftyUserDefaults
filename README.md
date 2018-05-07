@@ -9,10 +9,13 @@
 #### Modern Swift API for `NSUserDefaults`
 ###### SwiftyUserDefaults makes user defaults enjoyable to use by combining expressive Swifty API with the benefits of static typing. Define your keys in one place, use value types easily, and get extra safety and convenient compile-time checks for free.
 
-Read [Statically-typed NSUserDefaults](http://radex.io/swift/nsuserdefaults/static) for more information about this project. <br />
-Read [documentation for version < 4.0.0 here](https://github.com/radex/SwiftyUserDefaults/blob/14b629b035bf6355b46ece22c3851068a488a895/README.md)
+Read [Statically-typed NSUserDefaults](http://radex.io/swift/nsuserdefaults/static) for more information about this project.
 
-# Version 4
+# Version 4 - alpha 1
+
+*[Read documentation for stable version 3.0.1](https://github.com/radex/SwiftyUserDefaults/blob/14b629b035bf6355b46ece22c3851068a488a895/README.md)*
+
+
 <p align="center">
     <a href="#features">Features</a> &bull;
     <a href="#usage">Usage</a> &bull;
@@ -305,7 +308,7 @@ var Defaults = UserDefaults(suiteName: "com.my.app")!
 If you're using CocoaPods, just add this line to your Podfile:
 
 ```ruby
-pod 'SwiftyUserDefaults'
+pod 'SwiftyUserDefaults', '4.0.0-alpha.1'
 ```
 
 Install by running this command in your terminal:
@@ -325,7 +328,7 @@ import SwiftyUserDefaults
 Just add to your Cartfile:
 
 ```ruby
-github "radex/SwiftyUserDefaults"
+github "radex/SwiftyUserDefaults" "4.0.0-alpha.1"
 ```
 
 #### Swift Package Manager
@@ -336,7 +339,7 @@ let package = Package(
     name: "MyPackage",
     products: [...],
     dependencies: [
-        .package(url: "https://github.com/radex/SwiftyUserDefaults.git", .upToNextMajor(from: "4.0.0")),
+        .package(url: "https://github.com/radex/SwiftyUserDefaults.git", .exact("4.0.0-alpha.1")),
     ],
     targets: [...]
 )
