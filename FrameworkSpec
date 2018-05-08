@@ -15,7 +15,7 @@ swifty_user_defaults_tests = new_target do |target|
   target.include_files = ["Tests/**/*.swift"]
   target.exclude_files = []
   target.resource_files = ["Tests/**/*.png"]
-  target.dependencies = []
+  target.dependencies = ["Quick", "Nimble"]
   target.type = :unit_test_bundle
   target.enable_code_coverage = true
 end

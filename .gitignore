@@ -17,7 +17,7 @@ xcuserdata/
 /DerivedData/
 
 /Pods/
-
+/.build/
 /www
 
-/Carthage/Build
+/Carthage

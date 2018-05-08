@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0700"
+   LastUpgradeVersion = "0930"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -13,11 +13,11 @@
             buildForProfiling = "YES"
             buildForArchiving = "YES">
             <BuildableReference
-               BuildableIdentifier = 'primary'
-               BlueprintIdentifier = 'F2A3838126D8C4126BEDAD4E'
-               BlueprintName = 'SwiftyUserDefaults'
-               ReferencedContainer = 'container:SwiftyUserDefaults.xcodeproj'
-               BuildableName = 'SwiftyUserDefaults.framework'>
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "5348ECF5A50ED80FEB346B81"
+               BlueprintName = "SwiftyUserDefaults"
+               ReferencedContainer = "container:SwiftyUserDefaults.xcodeproj"
+               BuildableName = "SwiftyUserDefaults.framework">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -34,11 +34,11 @@
          <TestableReference
             skipped = "NO">
             <BuildableReference
-               BuildableIdentifier = 'primary'
-               BlueprintIdentifier = 'B4EEFF918A0C7657FAD12C04'
-               BlueprintName = 'SwiftyUserDefaultsTests'
-               ReferencedContainer = 'container:SwiftyUserDefaults.xcodeproj'
-               BuildableName = 'SwiftyUserDefaultsTests.xctest'>
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "D09CA51D40D09D71B86F248D"
+               BlueprintName = "SwiftyUserDefaultsTests"
+               ReferencedContainer = "container:SwiftyUserDefaults.xcodeproj"
+               BuildableName = "SwiftyUserDefaultsTests.xctest">
             </BuildableReference>
          </TestableReference>
       </Testables>
