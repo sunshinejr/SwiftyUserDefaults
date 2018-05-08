@@ -14,7 +14,8 @@ Read [Statically-typed NSUserDefaults](http://radex.io/swift/nsuserdefaults/stat
 # Version 4 - alpha 1
 
 <p align="center">
-*Read documentation for stable version 3.0.1, [here](https://github.com/radex/SwiftyUserDefaults/blob/14b629b035bf6355b46ece22c3851068a488a895/README.md)*
+*Read documentation for stable version 3.0.1, [here](https://github.com/radex/SwiftyUserDefaults/blob/14b629b035bf6355b46ece22c3851068a488a895/README.md)*<br />
+*Read migration guide from version 3.x to 4.x, [here](MigrationGuides/migration_3_to_4.md)*
 </p>
 
 
