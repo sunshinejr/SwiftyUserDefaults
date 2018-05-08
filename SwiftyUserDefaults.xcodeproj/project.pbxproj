@@ -108,8 +108,8 @@
 		14806E0E209FA77A008FD31A /* TestHelpers */ = {
 			isa = PBXGroup;
 			children = (
-				14806E0F209FA77A008FD31A /* TestHelper.swift */,
 				14806E10209FA77A008FD31A /* DefaultsSerializableSpec.swift */,
+				14806E0F209FA77A008FD31A /* TestHelper.swift */,
 			);
 			name = TestHelpers;
 			path = Tests/SwiftyUserDefaultsTests/TestHelpers;
@@ -118,8 +118,8 @@
 		14806E11209FA77A008FD31A /* NSCoding */ = {
 			isa = PBXGroup;
 			children = (
-				14806E12209FA77A008FD31A /* Defaults+FrogSerializable.swift */,
 				14806E13209FA77A008FD31A /* Defaults+FrogDefaultSerializable.swift */,
+				14806E12209FA77A008FD31A /* Defaults+FrogSerializable.swift */,
 			);
 			name = NSCoding;
 			path = Tests/SwiftyUserDefaultsTests/NSCoding;
@@ -138,13 +138,13 @@
 		14806E17209FA77B008FD31A /* Primitives */ = {
 			isa = PBXGroup;
 			children = (
-				14806E18209FA77B008FD31A /* Defaults+URL.swift */,
-				14806E19209FA77B008FD31A /* Defaults+Int.swift */,
 				14806E1A209FA77B008FD31A /* Defaults+Bool.swift */,
-				14806E1B209FA77B008FD31A /* Defaults+Double.swift */,
 				14806E1C209FA77B008FD31A /* Defaults+Data.swift */,
 				14806E1D209FA77B008FD31A /* Defaults+Date.swift */,
+				14806E1B209FA77B008FD31A /* Defaults+Double.swift */,
+				14806E19209FA77B008FD31A /* Defaults+Int.swift */,
 				14806E1E209FA77B008FD31A /* Defaults+String.swift */,
+				14806E18209FA77B008FD31A /* Defaults+URL.swift */,
 			);
 			name = Primitives;
 			path = Tests/SwiftyUserDefaultsTests/Primitives;
