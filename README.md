@@ -242,50 +242,28 @@ let frogs = DefaultsKey<FrogCodable>("frogs")
 ### Custom types
 
 So let's say there is a type that is not supported yet (like `NSCoding`, `Codable` or `RawRepresentable` before) and you want to support it.
-You can do it by specializing getters and setters of `DefaultsSerializable`. See this extension we have for `Codable`:
+You can do it by specializing getters and setters of `DefaultsSerializable`. See this extension we have for the Foundation's `URL` type:
 ```swift
-extension Array: DefaultsSerializable where Element: DefaultsSerializable {
-
-    public static func get(key: String, userDefaults: UserDefaults) -> [Element]? {
-        return Element.getArray(key: key, userDefaults: userDefaults)
+extension URL: DefaultsSerializable {
+    public static func get(key: String, userDefaults: UserDefaults) -> URL? {
+        return userDefaults.url(forKey: key)
     }
 
-    public static func getArray(key: String, userDefaults: UserDefaults) -> [[Element]]? {
-        return [Element].getArray(key: key, userDefaults: userDefaults)
+    public static func getArray(key: String, userDefaults: UserDefaults) -> [URL]? {
+        return userDefaults.data(forKey: key).flatMap(NSKeyedUnarchiver.unarchiveObject) as? [URL]
     }
 
-    public static func save(key: String, value: [Element]?, userDefaults: UserDefaults) {
-        guard let value = value else {
-            userDefaults.removeObject(forKey: key)
-            return
-        }
-
-        Element.saveArray(key: key, value: value, userDefaults: userDefaults)
+    public static func save(key: String, value: URL?, userDefaults: UserDefaults) {
+        userDefaults.set(value, forKey: key)
     }
 
-    public static func saveArray(key: String, value: [[Element]], userDefaults: UserDefaults) {
-        [Element].saveArray(key: key, value: value, userDefaults: userDefaults)
-    }
-}
-
-extension DefaultsStoreable where Self: Encodable {
-
-    public static func saveArray(key: String, value: [Self], userDefaults: UserDefaults) {
-        userDefaults.set(encodable: value, forKey: key)
-    }
-
-    public static func save(key: String, value: Self?, userDefaults: UserDefaults) {
-        guard let value = value else {
-            userDefaults.removeObject(forKey: key)
-            return
-        }
-
-        userDefaults.set(encodable: value, forKey: key)
+    public static func saveArray(key: String, value: [URL], userDefaults: UserDefaults) {
+        userDefaults.set(NSKeyedArchiver.archivedData(withRootObject: value), forKey: key)
     }
 }
 ```
 
-And if you feel like this could be a valuable addition to the library, don't hesitate and make a Pull Request 😉
+And if you feel there is a type that we could support this, don't hesitate and create an Issue, or better yet, make a Pull Request 😉 We're gonna try to help you as much as possible!
 
 ### Remove all keys
 
