@@ -9,15 +9,11 @@
 #### Modern Swift API for `NSUserDefaults`
 ###### SwiftyUserDefaults makes user defaults enjoyable to use by combining expressive Swifty API with the benefits of static typing. Define your keys in one place, use value types easily, and get extra safety and convenient compile-time checks for free.
 
-Read [Statically-typed NSUserDefaults](http://radex.io/swift/nsuserdefaults/static) for more information about this project.
+Read [Statically-typed NSUserDefaults](http://radex.io/swift/nsuserdefaults/static) for more information about this project.<br />
+Read [documentation for stable version 3.0.1](https://github.com/radex/SwiftyUserDefaults/blob/14b629b035bf6355b46ece22c3851068a488a895/README.md)<br />
+Read [migration guide from version 3.x to 4.x](MigrationGuides/migration_3_to_4.md)
 
 # Version 4 - alpha 1
-
-<p align="center">
-*Read documentation for stable version 3.0.1, [here](https://github.com/radex/SwiftyUserDefaults/blob/14b629b035bf6355b46ece22c3851068a488a895/README.md)*<br />
-*Read migration guide from version 3.x to 4.x, [here](MigrationGuides/migration_3_to_4.md)*
-</p>
-
 
 <p align="center">
     <a href="#features">Features</a> &bull;
