@@ -44,38 +44,42 @@ Replace it with the code below:
 final class Froggy: NSObject, NSCoding, DefaultsSerializable { ... }
 ```
 
-And that's it! You have free custom types if you implement `NSCoding`, `RawRepresentable`(e.g. enums as well) or `Codable`. If you want a default value for that type, add `DefaultsDefaultValueType` for a single-value-key and `DefaultsDefaultArrayValueType` for array-value-key:
+And that's it! You have free custom types if you implement `NSCoding`, `RawRepresentable`(e.g. enums as well) or `Codable`. 
 
+And if you want to add your own custom type that we don't support yet, no worries! We've got your covered as well. We use `DefaultsBridge`s of many kinds to specify how you get/set values and arrays of values. When you look at `DefaultsSerializable` protocol, it expects two properties in each type: `_defaults` and `_defaultsArray` which are of type `DefaultsBridge`.
+
+For instance, this is a bridge for single value data storing/retrieving:
 ```swift
-final class Froggy: NSObject, NSCoding, DefaultsSerializable { ... }
-
-extension Froggy: DefaultsDefaultValueType {
-  static let defaultValue: Froggy = FrogCodable(name: "Froggy")
-}
-
-extension Froggy: DefaultsDefaultArrayValueType {
-  static let defaultArrayValue: [Froggy] = []
-}
-```
-
-And if you want to add your own custom type that we don't support yet, no worries! We've got your covered as well. Below is an example of how we've got implemented `URL` extension:
-
-```swift
-extension URL: DefaultsSerializable {
-    public static func get(key: String, userDefaults: UserDefaults) -> URL? {
-        return userDefaults.url(forKey: key)
-    }
-
-    public static func getArray(key: String, userDefaults: UserDefaults) -> [URL]? {
-        return userDefaults.data(forKey: key).flatMap(NSKeyedUnarchiver.unarchiveObject) as? [URL]
-    }
-
-    public static func save(key: String, value: URL?, userDefaults: UserDefaults) {
+public final class DefaultsDataBridge: DefaultsBridge<Data> {
+    public override func save(key: String, value: Data?, userDefaults: UserDefaults) {
         userDefaults.set(value, forKey: key)
     }
 
-    public static func saveArray(key: String, value: [URL], userDefaults: UserDefaults) {
-        userDefaults.set(NSKeyedArchiver.archivedData(withRootObject: value), forKey: key)
+    public override func get(key: String, userDefaults: UserDefaults) -> Data? {
+        return userDefaults.data(forKey: key)
     }
 }
 ```
+
+And for a simple case of storing/retrieving an array values:
+```swift
+public final class DefaultsArrayBridge<T: Collection>: DefaultsBridge<T> {
+    public override func save(key: String, value: T?, userDefaults: UserDefaults) {
+        userDefaults.set(value, forKey: key)
+    }
+
+    public override func get(key: String, userDefaults: UserDefaults) -> T? {
+        return userDefaults.array(forKey: key) as? T
+    }
+}
+```
+
+And now that we have both bridges for single values/arrays, we can extend `Data` so it's supported out of the box!
+```swift
+extension Data: DefaultsSerializable {
+    public static var _defaults: DefaultsBridge<Data> { return DefaultsDataBridge() }
+    public static var _defaultsArray: DefaultsBridge<[Data]> { return DefaultsArrayBridge() }
+}
+```
+
+Take a look at our source code (or tests) to look at more examples or make an issue and we will try to help you out in need!
