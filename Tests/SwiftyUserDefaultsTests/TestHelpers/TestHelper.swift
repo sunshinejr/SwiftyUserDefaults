@@ -32,19 +32,13 @@ struct FrogCodable: Codable, Equatable, DefaultsSerializable {
     }
 }
 
-struct FrogDefaultCodable: Codable, Equatable, DefaultsDefaultValueType, DefaultsDefaultArrayValueType, DefaultsSerializable {
+final class FrogSerializable: NSObject, DefaultsSerializable, NSCoding {
 
-    static let defaultValue: FrogDefaultCodable = FrogDefaultCodable(name: "frog default")
-    static let defaultArrayValue: [FrogDefaultCodable] = []
+    static var defaults_bridge: DefaultsBridge<FrogSerializable> { return DefaultsKeyedArchiverBridge() }
 
-    let name: String
+    static var defaults_arrayBridge: DefaultsBridge<[FrogSerializable]> { return DefaultsKeyedArchiverBridge() }
 
-    init(name: String = "Froggy") {
-        self.name = name
-    }
-}
-
-final class FrogSerializable: NSObject, NSCoding, DefaultsSerializable {
+    typealias T = FrogSerializable
 
     let name: String
 
@@ -69,46 +63,8 @@ final class FrogSerializable: NSObject, NSCoding, DefaultsSerializable {
     }
 }
 
-final class FrogDefaultSerializable: NSObject, NSCoding, DefaultsSerializable, DefaultsDefaultValueType, DefaultsDefaultArrayValueType {
-
-    static let defaultValue: FrogDefaultSerializable = FrogDefaultSerializable(name: "frog default")
-    static let defaultArrayValue: [FrogDefaultSerializable] = []
-
-    let name: String
-
-    init(name: String = "Froggy") {
-        self.name = name
-    }
-
-    init?(coder aDecoder: NSCoder) {
-        guard let name = aDecoder.decodeObject(forKey: "name") as? String else { return nil }
-
-        self.name = name
-    }
-
-    func encode(with aCoder: NSCoder) {
-        aCoder.encode(name, forKey: "name")
-    }
-
-    override func isEqual(_ object: Any?) -> Bool {
-        guard let rhs = object as? FrogDefaultSerializable else { return false }
-
-        return name == rhs.name
-    }
-}
-
 
 enum BestFroggiesEnum: String, DefaultsSerializable {
-
-    case Andy
-    case Dandy
-}
-
-
-enum BestFroggiesDefaultsEnum: String, DefaultsSerializable, DefaultsDefaultValueType, DefaultsDefaultArrayValueType {
-
-    static let defaultValue: BestFroggiesDefaultsEnum = .Andy
-    static let defaultArrayValue: [BestFroggiesDefaultsEnum] = []
 
     case Andy
     case Dandy

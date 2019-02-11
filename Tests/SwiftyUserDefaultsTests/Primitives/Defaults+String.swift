@@ -26,18 +26,16 @@ import Quick
 
 final class DefaultsStringSpec: QuickSpec, DefaultsSerializableSpec {
 
+    typealias Serializable = String
+
     var customValue: String = "custom value"
     var defaultValue: String = "default value"
 
     override func spec() {
         given("String") {
             self.testValues()
-            self.testDefaultValues()
-            self.testDefaultArrayValues()
-
             self.testOptionalValues()
-            self.testOptionalDefaultValues()
-            self.testOptionalDefaultArrayValues()
+            self.testOptionalValuesWithoutDefaultValue()
         }
     }
 }

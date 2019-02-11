@@ -23,21 +23,25 @@
 //
 
 import Quick
+import Nimble
+import UIKit
+import SwiftyUserDefaults
 
-final class DefaultsFrogDefaultSerializableSpec: QuickSpec, DefaultsSerializableSpec {
+extension UIColor: DefaultsSerializable {}
 
-    var customValue: FrogDefaultSerializable = FrogDefaultSerializable(name: "custom")
-    var defaultValue: FrogDefaultSerializable = FrogDefaultSerializable(name: "default")
+final class DefaultsUIColorSerializableSpec: QuickSpec, DefaultsSerializableSpec {
+
+    typealias Serializable = UIColor
+
+    var customValue: UIColor = .green
+    var defaultValue: UIColor = .blue
 
     override func spec() {
-        given("FrogDefaultSerializable") {
+        given("UIColor") {
             self.testValues()
-            self.testDefaultValues()
-            self.testDefaultArrayValues()
-
             self.testOptionalValues()
-            self.testOptionalDefaultValues()
-            self.testOptionalDefaultArrayValues()
+            self.testOptionalValuesWithoutDefaultValue()
         }
     }
 }
+

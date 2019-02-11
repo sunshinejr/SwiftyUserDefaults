@@ -26,6 +26,8 @@ import Quick
 
 final class DefaultsBestFroggiesEnumSerializableSpec: QuickSpec, DefaultsSerializableSpec {
 
+    typealias Serializable = BestFroggiesEnum
+
     var customValue: BestFroggiesEnum = .Andy
     var defaultValue: BestFroggiesEnum = .Dandy
 
@@ -33,6 +35,7 @@ final class DefaultsBestFroggiesEnumSerializableSpec: QuickSpec, DefaultsSeriali
         given("BestFroggiesEnum") {
             self.testValues()
             self.testOptionalValues()
+            self.testOptionalValuesWithoutDefaultValue()
         }
     }
 }

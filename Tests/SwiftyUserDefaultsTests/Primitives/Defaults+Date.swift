@@ -27,6 +27,8 @@ import Foundation
 
 final class DefaultsDateSpec: QuickSpec, DefaultsSerializableSpec {
 
+    typealias Serializable = Date
+
     var customValue: Date = Date(timeIntervalSince1970: 50)
     var defaultValue: Date = Date()
 
@@ -34,6 +36,7 @@ final class DefaultsDateSpec: QuickSpec, DefaultsSerializableSpec {
         given("Date") {
             self.testValues()
             self.testOptionalValues()
+            self.testOptionalValuesWithoutDefaultValue()
         }
     }
 }

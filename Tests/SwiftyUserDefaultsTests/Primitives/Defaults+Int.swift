@@ -25,6 +25,7 @@
 import Quick
 
 final class DefaultsIntSpec: QuickSpec, DefaultsSerializableSpec {
+    typealias Serializable = Int
 
     var customValue: Int = 2
     var defaultValue: Int = 1
@@ -32,12 +33,8 @@ final class DefaultsIntSpec: QuickSpec, DefaultsSerializableSpec {
     override func spec() {
         given("Int") {
             self.testValues()
-            self.testDefaultValues()
-            self.testDefaultArrayValues()
-
             self.testOptionalValues()
-            self.testOptionalDefaultValues()
-            self.testOptionalDefaultArrayValues()
+            self.testOptionalValuesWithoutDefaultValue()
         }
     }
 }

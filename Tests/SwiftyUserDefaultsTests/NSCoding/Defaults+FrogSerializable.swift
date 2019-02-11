@@ -26,6 +26,8 @@ import Quick
 
 final class DefaultsFrogSerializableSpec: QuickSpec, DefaultsSerializableSpec {
 
+    typealias Serializable = FrogSerializable
+
     var customValue: FrogSerializable = FrogSerializable(name: "custom")
     var defaultValue: FrogSerializable = FrogSerializable(name: "default")
 
@@ -33,6 +35,7 @@ final class DefaultsFrogSerializableSpec: QuickSpec, DefaultsSerializableSpec {
         given("FrogSerializable") {
             self.testValues()
             self.testOptionalValues()
+            self.testOptionalValuesWithoutDefaultValue()
         }
     }
 }

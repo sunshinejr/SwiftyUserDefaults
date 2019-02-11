@@ -27,18 +27,16 @@ import Foundation
 
 final class DefaultsDataSpec: QuickSpec, DefaultsSerializableSpec {
 
+    typealias Serializable = Data
+
     var customValue: Data = "custom data".data(using: .utf8)!
     var defaultValue: Data = "default data".data(using: .utf8)!
 
     override func spec() {
         given("Data") {
             self.testValues()
-            self.testDefaultValues()
-            self.testDefaultArrayValues()
-
             self.testOptionalValues()
-            self.testOptionalDefaultValues()
-            self.testOptionalDefaultArrayValues()
+            self.testOptionalValuesWithoutDefaultValue()
         }
     }
 }

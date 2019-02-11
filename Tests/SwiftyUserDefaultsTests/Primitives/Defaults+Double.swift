@@ -26,18 +26,16 @@ import Quick
 
 final class DefaultsDoubleSpec: QuickSpec, DefaultsSerializableSpec {
 
+    typealias Serializable = Double
+
     var customValue: Double = 2.0
     var defaultValue: Double = 1.0
 
     override func spec() {
         given("Double") {
             self.testValues()
-            self.testDefaultValues()
-            self.testDefaultArrayValues()
-
             self.testOptionalValues()
-            self.testOptionalDefaultValues()
-            self.testOptionalDefaultArrayValues()
+            self.testOptionalValuesWithoutDefaultValue()
         }
     }
 }
