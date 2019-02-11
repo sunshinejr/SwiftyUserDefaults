@@ -24,15 +24,15 @@
 
 import Foundation
 
-public class DefaultsBridge<T>: DefaultsBridgeType {
+open class DefaultsBridge<T>: DefaultsBridgeType {
 
     public init() {}
 
-    public func save(key: String, value: T?, userDefaults: UserDefaults) {
+    open func save(key: String, value: T?, userDefaults: UserDefaults) {
         fatalError("This Bridge wasn't subclassed! Please do so before using it in your type.")
     }
 
-    public func get(key: String, userDefaults: UserDefaults) -> T? {
+    open func get(key: String, userDefaults: UserDefaults) -> T? {
         fatalError("This Bridge wasn't subclassed! Please do so before using it in your type.")
     }
 }
