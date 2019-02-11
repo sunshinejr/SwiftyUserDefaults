@@ -38,9 +38,9 @@ open class DefaultsKeys {
 open class DefaultsKey<ValueType: DefaultsSerializable>: DefaultsKeys {
 
     public let _key: String
-    internal let defaultValue: ValueType?
+    internal let defaultValue: ValueType.T?
 
-    public init(_ key: String, defaultValue: ValueType) {
+    public init(_ key: String, defaultValue: ValueType.T) {
         self._key = key
         self.defaultValue = defaultValue
     }
@@ -52,16 +52,8 @@ open class DefaultsKey<ValueType: DefaultsSerializable>: DefaultsKeys {
         self.defaultValue = nil
     }
 
-    @available(*, unavailable, message: "This key needs a default value, either using an argument or a type with implemented `defaultValue`. If this type does not have a default value, consider using an optional key.")
+    @available(*, unavailable, message: "This key needs a `defaultValue` parameter. If this type does not have a default value, consider using an optional key.")
     public init(_ key: String) {
-        fatalError()
-    }
-}
-
-extension DefaultsKey where ValueType: Collection, ValueType.Element: DefaultsSerializable {
-
-    @available(*, unavailable, message: "Even though element of this array has a default value, the whole array doesnt and so you need to either pass it via argument or in extension.")
-    public convenience init(_ key: String) {
         fatalError()
     }
 }
@@ -70,42 +62,5 @@ public extension DefaultsKey where ValueType: DefaultsSerializable, ValueType: O
 
     convenience init(_ key: String) {
         self.init(key: key)
-    }
-}
-
-public extension DefaultsKey where ValueType: DefaultsDefaultValueType {
-
-    convenience init(_ key: String) {
-        self.init(key: key)
-    }
-}
-
-public extension DefaultsKey where ValueType: Collection, ValueType.Element: DefaultsDefaultArrayValueType, ValueType.Element: DefaultsSerializable {
-
-    convenience init(_ key: String) {
-        self.init(key: key)
-    }
-}
-
-extension Optional: DefaultsSerializable where Wrapped: DefaultsSerializable {
-
-    public static func get(key: String, userDefaults: UserDefaults) -> Wrapped?? {
-        return Wrapped.get(key: key, userDefaults: userDefaults)
-    }
-
-    public static func getArray(key: String, userDefaults: UserDefaults) -> [Wrapped?]? {
-        return Wrapped.getArray(key: key, userDefaults: userDefaults)
-    }
-
-    public static func save(key: String, value: Wrapped??, userDefaults: UserDefaults) {
-        if let _value = value, let value = _value {
-            Wrapped.save(key: key, value: value, userDefaults: userDefaults)
-        } else {
-            Wrapped.save(key: key, value: nil, userDefaults: userDefaults)
-        }
-    }
-
-    public static func saveArray(key: String, value: [Wrapped?], userDefaults: UserDefaults) {
-        Wrapped.saveArray(key: key, value: value.compactMap { $0 }, userDefaults: userDefaults)
     }
 }

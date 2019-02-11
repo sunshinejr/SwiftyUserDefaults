@@ -24,22 +24,16 @@
 
 import Foundation
 
-public typealias DefaultsSerializable = DefaultsStoreable & DefaultsGettable
+public protocol DefaultsBridgeType {
+    associatedtype T
 
-public protocol DefaultsStoreable {
-    static func save(key: String, value: Self?, userDefaults: UserDefaults)
-    static func saveArray(key: String, value: [Self], userDefaults: UserDefaults)
+    func save(key: String, value: T?, userDefaults: UserDefaults)
+    func get(key: String, userDefaults: UserDefaults) -> T?
 }
 
-public protocol DefaultsGettable {
-    static func get(key: String, userDefaults: UserDefaults) -> Self?
-    static func getArray(key: String, userDefaults: UserDefaults) -> [Self]?
-}
+public protocol DefaultsSerializable {
+    associatedtype T
 
-public protocol DefaultsDefaultValueType {
-    static var defaultValue: Self { get }
-}
-
-public protocol DefaultsDefaultArrayValueType {
-    static var defaultArrayValue: [Self] { get }
+    static var defaults_bridge: DefaultsBridge<T> { get }
+    static var defaults_arrayBridge: DefaultsBridge<[T]> { get }
 }

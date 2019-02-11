@@ -27,64 +27,33 @@ import Foundation
 // DefaultsKey
 public extension UserDefaults {
 
-    subscript<T: DefaultsSerializable>(key: DefaultsKey<T?>) -> T? {
+    subscript<T: DefaultsSerializable>(key: DefaultsKey<T?>) -> T.T? {
         get {
-            return T.get(key: key._key, userDefaults: self) ?? key.defaultValue as? T
+            if let value = T.defaults_bridge.get(key: key._key, userDefaults: self) {
+                return value
+            } else if let defaultValue = key.defaultValue as? T.T {
+                return defaultValue
+            } else {
+                return nil
+            }
         }
         set {
-            T.save(key: key._key, value: newValue, userDefaults: self)
+            T.defaults_bridge.save(key: key._key, value: newValue, userDefaults: self)
         }
     }
 
-    subscript<T: DefaultsSerializable>(key: DefaultsKey<T?>) -> T? where T: DefaultsDefaultValueType {
+    subscript<T: DefaultsSerializable>(key: DefaultsKey<T>) -> T.T {
         get {
-            return T.get(key: key._key, userDefaults: self) ?? key.defaultValue ?? T.defaultValue
-        }
-        set {
-            T.save(key: key._key, value: newValue, userDefaults: self)
-        }
-    }
-
-    subscript<T: DefaultsSerializable>(key: DefaultsKey<T?>) -> T? where T: Collection, T.Element: DefaultsDefaultArrayValueType {
-        get {
-            return T.get(key: key._key, userDefaults: self) ?? key.defaultValue ?? T.Element.defaultArrayValue as? T
-        }
-        set {
-            T.save(key: key._key, value: newValue, userDefaults: self)
-        }
-    }
-
-    subscript<T: DefaultsSerializable>(key: DefaultsKey<T>) -> T where T: DefaultsDefaultValueType {
-        get {
-            return T.get(key: key._key, userDefaults: self) ?? key.defaultValue ?? T.defaultValue
-        }
-        set {
-            T.save(key: key._key, value: newValue, userDefaults: self)
-        }
-    }
-
-    subscript<T: DefaultsSerializable>(key: DefaultsKey<T>) -> T where T: Collection, T.Element: DefaultsDefaultArrayValueType {
-        get {
-            // There _must_ be a value: you can't create a key without a default value in type or in the key itself
-            return T.get(key: key._key, userDefaults: self) ?? key.defaultValue ?? T.Element.defaultArrayValue as! T // swiftlint:disable:this force_cast
-        }
-        set {
-            T.save(key: key._key, value: newValue, userDefaults: self)
-        }
-    }
-
-    subscript<T: DefaultsSerializable>(key: DefaultsKey<T>) -> T {
-        get {
-            if let value = T.get(key: key._key, userDefaults: self) {
+            if let value = T.defaults_bridge.get(key: key._key, userDefaults: self) {
                 return value
             } else if let defaultValue = key.defaultValue {
                 return defaultValue
             } else {
-                fatalError("Shouldn't really happen, `DefaultsKey` can be initialized only with defaultValue or with a type that conforms to `DefaultsDefaultValueType`.")
+                fatalError("Shouldn't happen, please report!")
             }
         }
         set {
-            T.save(key: key._key, value: newValue, userDefaults: self)
+            T.defaults_bridge.save(key: key._key, value: newValue, userDefaults: self)
         }
     }
 }
