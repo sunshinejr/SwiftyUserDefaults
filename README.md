@@ -213,7 +213,7 @@ let froggies = DefaultsKey<[BestFroggiesEnum]?>("froggies")
 Since version 4, you can support a default value for your key (arrays as well!):
 ```swift
 let frog = DefaultsKey<FrogCodable>("frog", defaultValue: FrogCodable(name: "Froggy"))
-let frogs = DefaultsKey<FrogCodable>("frogs", defaultValue: [FrogCodable(name: "Froggy")])
+let frogs = DefaultsKey<[FrogCodable]>("frogs", defaultValue: [FrogCodable(name: "Froggy")])
 ```
 
  _or_ you can specify a default value for the whole type using two protocols, `DefaultsDefaultValueType` for a single value default:
@@ -233,7 +233,7 @@ extension FrogCodable: DefaultsDefaultArrayValueType {
 And then you can create your keys without specyfing a `defaultValue` each time!
 ```swift
 let frog = DefaultsKey<FrogCodable>("frog")
-let frogs = DefaultsKey<FrogCodable>("frogs")
+let frogs = DefaultsKey<[FrogCodable]>("frogs")
 ```
 
 ### Custom types
