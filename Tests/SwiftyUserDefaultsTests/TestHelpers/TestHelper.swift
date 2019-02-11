@@ -34,10 +34,6 @@ struct FrogCodable: Codable, Equatable, DefaultsSerializable {
 
 final class FrogSerializable: NSObject, DefaultsSerializable, NSCoding {
 
-    static var _defaults: DefaultsBridge<FrogSerializable> { return DefaultsKeyedArchiverBridge() }
-
-    static var _defaultsArray: DefaultsBridge<[FrogSerializable]> { return DefaultsKeyedArchiverBridge() }
-
     typealias T = FrogSerializable
 
     let name: String
@@ -63,9 +59,42 @@ final class FrogSerializable: NSObject, DefaultsSerializable, NSCoding {
     }
 }
 
-
 enum BestFroggiesEnum: String, DefaultsSerializable {
 
     case Andy
     case Dandy
+}
+
+final class DefaultsFrogBridge: DefaultsBridge<FrogCustomSerializable> {
+    override func get(key: String, userDefaults: UserDefaults) -> FrogCustomSerializable? {
+        let name = userDefaults.string(forKey: key)
+        return name.map(FrogCustomSerializable.init)
+    }
+
+    override func save(key: String, value: FrogCustomSerializable?, userDefaults: UserDefaults) {
+        userDefaults.set(value?.name, forKey: key)
+    }
+}
+
+final class DefaultsFrogArrayBridge: DefaultsBridge<[FrogCustomSerializable]> {
+    override func get(key: String, userDefaults: UserDefaults) -> [FrogCustomSerializable]? {
+        return userDefaults.array(forKey: key)?
+            .compactMap { $0 as? String }
+            .map(FrogCustomSerializable.init)
+    }
+
+    override func save(key: String, value: [FrogCustomSerializable]?, userDefaults: UserDefaults) {
+        let values = value?.map { $0.name }
+        userDefaults.set(values, forKey: key)
+    }
+}
+
+struct FrogCustomSerializable: DefaultsSerializable, Equatable {
+
+    static var _defaults: DefaultsBridge<FrogCustomSerializable> { return DefaultsFrogBridge() }
+
+    static var _defaultsArray: DefaultsBridge<[FrogCustomSerializable]> { return DefaultsFrogArrayBridge() }
+
+
+    let name: String
 }
