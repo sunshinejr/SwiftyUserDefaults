@@ -34,6 +34,6 @@ public protocol DefaultsBridgeType {
 public protocol DefaultsSerializable {
     associatedtype T
 
-    static var defaults_bridge: DefaultsBridge<T> { get }
-    static var defaults_arrayBridge: DefaultsBridge<[T]> { get }
+    static var _defaults: DefaultsBridge<T> { get }
+    static var _defaultsArray: DefaultsBridge<[T]> { get }
 }

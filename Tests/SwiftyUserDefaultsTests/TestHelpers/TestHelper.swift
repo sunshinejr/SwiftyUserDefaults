@@ -34,9 +34,9 @@ struct FrogCodable: Codable, Equatable, DefaultsSerializable {
 
 final class FrogSerializable: NSObject, DefaultsSerializable, NSCoding {
 
-    static var defaults_bridge: DefaultsBridge<FrogSerializable> { return DefaultsKeyedArchiverBridge() }
+    static var _defaults: DefaultsBridge<FrogSerializable> { return DefaultsKeyedArchiverBridge() }
 
-    static var defaults_arrayBridge: DefaultsBridge<[FrogSerializable]> { return DefaultsKeyedArchiverBridge() }
+    static var _defaultsArray: DefaultsBridge<[FrogSerializable]> { return DefaultsKeyedArchiverBridge() }
 
     typealias T = FrogSerializable
 
