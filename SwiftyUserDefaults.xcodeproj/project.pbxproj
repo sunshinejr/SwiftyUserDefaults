@@ -21,7 +21,7 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
-		8551BC2C2211EABE0004E121 /* Defaults+UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8551BC2B2211EABE0004E121 /* Defaults+UIColor.swift */; };
+		8551BC2C2211EABE0004E121 /* Defaults+Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8551BC2B2211EABE0004E121 /* Defaults+Color.swift */; };
 		8551BC3A2211F7D20004E121 /* DefaultsBridges.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8551BC392211F7D20004E121 /* DefaultsBridges.swift */; };
 		8551BC3D221207F20004E121 /* Defaults+FrogCustomSerializable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8551BC3C221207F20004E121 /* Defaults+FrogCustomSerializable.swift */; };
 		OBJ_152 /* AdapterProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_76 /* AdapterProtocols.swift */; };
@@ -174,7 +174,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		8551BC2B2211EABE0004E121 /* Defaults+UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Defaults+UIColor.swift"; sourceTree = "<group>"; };
+		8551BC2B2211EABE0004E121 /* Defaults+Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Defaults+Color.swift"; sourceTree = "<group>"; };
 		8551BC392211F7D20004E121 /* DefaultsBridges.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultsBridges.swift; sourceTree = "<group>"; };
 		8551BC3C221207F20004E121 /* Defaults+FrogCustomSerializable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Defaults+FrogCustomSerializable.swift"; sourceTree = "<group>"; };
 		"Nimble::Nimble::Product" /* Nimble.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Nimble.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -403,7 +403,7 @@
 			isa = PBXGroup;
 			children = (
 				OBJ_24 /* Defaults+FrogSerializable.swift */,
-				8551BC2B2211EABE0004E121 /* Defaults+UIColor.swift */,
+				8551BC2B2211EABE0004E121 /* Defaults+Color.swift */,
 			);
 			path = NSCoding;
 			sourceTree = "<group>";
@@ -973,7 +973,7 @@
 			files = (
 				OBJ_284 /* Defaults+FrogCodable.swift in Sources */,
 				OBJ_288 /* Defaults+FrogSerializable.swift in Sources */,
-				8551BC2C2211EABE0004E121 /* Defaults+UIColor.swift in Sources */,
+				8551BC2C2211EABE0004E121 /* Defaults+Color.swift in Sources */,
 				OBJ_289 /* Defaults+Bool.swift in Sources */,
 				OBJ_290 /* Defaults+Data.swift in Sources */,
 				OBJ_291 /* Defaults+Date.swift in Sources */,
