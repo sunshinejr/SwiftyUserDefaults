@@ -1,7 +1,7 @@
 language: objective-c
 cache: cocoapods
 rvm: 2.3
-osx_image: xcode9.3
+osx_image: xcode10.1
 
 notifications:
   email: false
@@ -19,7 +19,7 @@ env:
   - PROJECT=SwiftyUserDefaults.xcodeproj
 
 before_install:
-  - gem install cocoapods -v 1.4.0
+  - gem install cocoapods -v 1.6.0
   - gem install xcpretty
   # - npm install -g danger
   # - brew install danger/tap/danger-swift
@@ -30,9 +30,9 @@ script:
   - xcodebuild -version
   - xcodebuild -showsdks
   
-  - xcodebuild -project "$PROJECT" -scheme 'SwiftyUserDefaults' -sdk iphonesimulator11.3  -destination 'name=iPhone 6s,OS=11.3' ONLY_ACTIVE_ARCH=NO CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO build | xcpretty
-  - xcodebuild -project "$PROJECT" -scheme 'SwiftyUserDefaults' -sdk appletvsimulator11.3 -destination 'name=Apple TV 4K (at 1080p)' ONLY_ACTIVE_ARCH=NO CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO build | xcpretty
-  - xcodebuild -project "$PROJECT" -scheme 'SwiftyUserDefaults' -sdk watchsimulator4.3 -destination 'name=Apple Watch - 42mm' ONLY_ACTIVE_ARCH=NO CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO build | xcpretty
+  - xcodebuild -project "$PROJECT" -scheme 'SwiftyUserDefaults' -sdk iphonesimulator12.1  -destination 'name=iPhone 6s,OS=12.1' ONLY_ACTIVE_ARCH=NO CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO build | xcpretty
+  - xcodebuild -project "$PROJECT" -scheme 'SwiftyUserDefaults' -sdk appletvsimulator12.1 -destination 'name=Apple TV 4K (at 1080p)' ONLY_ACTIVE_ARCH=NO CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO build | xcpretty
+  - xcodebuild -project "$PROJECT" -scheme 'SwiftyUserDefaults' -sdk watchsimulator5.1 -destination 'name=Apple Watch - 42mm' ONLY_ACTIVE_ARCH=NO CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO build | xcpretty
   - xcodebuild -project "$PROJECT" -scheme 'SwiftyUserDefaults' ONLY_ACTIVE_ARCH=NO CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO build | xcpretty
   
   # currently there is a problem with starting simulators so we're gonna test only using swift test...
