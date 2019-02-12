@@ -143,6 +143,11 @@ public final class DefaultsKeyedArchiverBridge<T>: DefaultsBridge<T> {
     }
 
     public override func save(key: String, value: T?, userDefaults: UserDefaults) {
+        guard let value = value else {
+            userDefaults.removeObject(forKey: key)
+            return
+        }
+
         userDefaults.set(NSKeyedArchiver.archivedData(withRootObject: value), forKey: key)
     }
 }
