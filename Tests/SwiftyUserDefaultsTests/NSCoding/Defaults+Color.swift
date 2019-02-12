@@ -26,46 +26,28 @@ import Quick
 import Nimble
 import SwiftyUserDefaults
 
-#if canImport(AppKit)
-    import AppKit
-
-    extension NSColor: DefaultsSerializable {}
-
-    final class DefaultsUIColorSerializableSpec: QuickSpec, DefaultsSerializableSpec {
-
-        typealias Serializable = NSColor
-
-        var customValue: NSColor = .green
-        var defaultValue: NSColor = .blue
-
-        override func spec() {
-            given("NSColor") {
-                self.testValues()
-                self.testOptionalValues()
-                self.testOptionalValuesWithoutDefaultValue()
-            }
-        }
-    }
+#if canImport(UIKit)
+    import UIKit.UIColor
+    public typealias Color = UIColor
+#elseif canImport(AppKit)
+    import AppKit.NSColor
+    public typealias Color = NSColor
 #endif
 
-#if canImport(UIKit)
-import UIKit
-
-extension UIColor: DefaultsSerializable {}
+extension Color: DefaultsSerializable {}
 
 final class DefaultsUIColorSerializableSpec: QuickSpec, DefaultsSerializableSpec {
 
-    typealias Serializable = UIColor
+    typealias Serializable = Color
 
-    var customValue: UIColor = .green
-    var defaultValue: UIColor = .blue
+    var customValue: Color = .green
+    var defaultValue: Color = .blue
 
     override func spec() {
-        given("UIColor") {
+        given("NSColor") {
             self.testValues()
             self.testOptionalValues()
             self.testOptionalValuesWithoutDefaultValue()
         }
     }
 }
-#endif
