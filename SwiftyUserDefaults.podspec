@@ -12,7 +12,7 @@ Pod::Spec.new do |s|
   s.osx.deployment_target = '10.9'
   s.tvos.deployment_target = '9.0'
   s.watchos.deployment_target = '2.0'
-  s.swift_version = '4.0'
+  s.swift_version = '4.2'
   s.cocoapods_version = '>= 1.4.0'  
 
   s.source_files = 'Sources/*.swift'
