@@ -24,7 +24,7 @@ Read [migration guide from version 4.0.0-alpha.1 to 4.0.0-alpha.2](MigrationGuid
     <a href="#rawrepresentable">RawRepresentable</a> &bull;
     <a href="#extending-existing-types">Extending existing types</a> &bull;
     <a href="#custom-types">Custom types</a> &bull;
-    <a href="#installation">Installation</a>
+    <a href="#installation">Installation & Requirements</a>
 </p>
 
 ## Features
@@ -317,7 +317,10 @@ If you're sharing your user defaults between different apps or an app and its ex
 var Defaults = UserDefaults(suiteName: "com.my.app")!
 ```
 
-## Installation
+## Installation & Requirements
+
+#### Requirements
+Swift version >= 4.1
 
 #### CocoaPods
 
