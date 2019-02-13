@@ -55,7 +55,7 @@ before_install:
 
 script:
   - set -o pipefail
-  - carthage update --no-use-binaries --cache-builds
+  - carthage update --no-use-binaries --cache-builds --verbose
   - xcodebuild -version
   - xcodebuild -showsdks
   
