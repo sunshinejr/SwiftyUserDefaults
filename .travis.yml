@@ -1,7 +1,46 @@
-language: objective-c
-cache: cocoapods
-rvm: 2.3
-osx_image: xcode10.1
+language: generic
+matrix:
+  include: 
+    - os: osx
+      osx_image: xcode10.2
+      env:
+        - SWIFT_VERSION=5.0
+        - IOS_SIMULATOR='name=iPhone 6s,OS=12.2'
+        - IOS_SDK=iphonesimulator12.2
+        - TVOS_SIMULATOR='name=Apple TV 4K (at 1080p)'
+        - TVOS_SDK=appletvsimulator12.2
+        - WATCHOS_SIMULATOR='name=Apple Watch - 42mm'
+        - WATCHOS_SDK=watchsimulator5.2
+    - os: osx
+      osx_image: xcode10.1
+      env:
+        - SWIFT_VERSION=4.2
+        - IOS_SIMULATOR='name=iPhone 6s,OS=12.1'
+        - IOS_SDK=iphonesimulator12.1
+        - TVOS_SIMULATOR='name=Apple TV 4K (at 1080p)'
+        - TVOS_SDK=appletvsimulator12.1
+        - WATCHOS_SIMULATOR='name=Apple Watch - 42mm'
+        - WATCHOS_SDK=watchsimulator5.1        
+    - os: osx
+      osx_image: xcode9.4
+      env: 
+        - SWIFT_VERSION=4.0 # it's in fact 4.1
+        - IOS_SIMULATOR='name=iPhone 6s,OS=11.4'
+        - IOS_SDK=iphonesimulator11.4
+        - TVOS_SIMULATOR='name=Apple TV 4K (at 1080p)'
+        - TVOS_SDK=appletvsimulator11.4
+        - WATCHOS_SIMULATOR='name=Apple Watch - 42mm'
+        - WATCHOS_SDK=watchsimulator4.3       
+    - os: osx
+      osx_image: xcode9.2
+      env:
+        - SWIFT_VERSION=4.0 # real 4.0
+        - IOS_SIMULATOR='name=iPhone 6s,OS=11.2'
+        - IOS_SDK=iphonesimulator11.2
+        - TVOS_SIMULATOR='name=Apple TV 4K (at 1080p)'
+        - TVOS_SDK=appletvsimulator11.2
+        - WATCHOS_SIMULATOR='name=Apple Watch - 42mm'
+        - WATCHOS_SDK=watchsimulator4.2        
 
 notifications:
   email: false
@@ -30,9 +69,9 @@ script:
   - xcodebuild -version
   - xcodebuild -showsdks
   
-  - xcodebuild -project "$PROJECT" -scheme 'SwiftyUserDefaults' -sdk iphonesimulator12.1  -destination 'name=iPhone 6s,OS=12.1' ONLY_ACTIVE_ARCH=NO CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO build | xcpretty
-  - xcodebuild -project "$PROJECT" -scheme 'SwiftyUserDefaults' -sdk appletvsimulator12.1 -destination 'name=Apple TV 4K (at 1080p)' ONLY_ACTIVE_ARCH=NO CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO build | xcpretty
-  - xcodebuild -project "$PROJECT" -scheme 'SwiftyUserDefaults' -sdk watchsimulator5.1 -destination 'name=Apple Watch - 42mm' ONLY_ACTIVE_ARCH=NO CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO build | xcpretty
+  - xcodebuild -project "$PROJECT" -scheme 'SwiftyUserDefaults' -sdk $IOS_SDK  -destination $IOS_SIMULATOR ONLY_ACTIVE_ARCH=NO CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO SWIFT_VERSION=$SWIFT_VERSION build | xcpretty
+  - xcodebuild -project "$PROJECT" -scheme 'SwiftyUserDefaults' -sdk $TVOS_SDK -destination $TVOS_SIMULATOR ONLY_ACTIVE_ARCH=NO CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO SWIFT_VERSION=$SWIFT_VERSION build | xcpretty
+  - xcodebuild -project "$PROJECT" -scheme 'SwiftyUserDefaults' -sdk $WATCHOS_SDK -destination $WATCHOS_SIMULATOR ONLY_ACTIVE_ARCH=NO CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO SWIFT_VERSION=$SWIFT_VERSION build | xcpretty
   - xcodebuild -project "$PROJECT" -scheme 'SwiftyUserDefaults' ONLY_ACTIVE_ARCH=NO CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO build | xcpretty
   
   # currently there is a problem with starting simulators so we're gonna test only using swift test...
