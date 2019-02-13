@@ -29,18 +29,18 @@ Read [migration guide from version 4.0.0-alpha.1 to 4.0.0-alpha.2](MigrationGuid
 
 ## Features
 
-**There's only two steps to using SwiftyUserDefaults:**
+**There's only one step to start using SwiftyUserDefaults:**
 
-Step 1: Define your keys
+Define your keys
 
 ```swift
 extension DefaultsKeys {
     static let username = DefaultsKey<String?>("username")
-    static let launchCount = DefaultsKey<Int>("launchCount")
+    static let launchCount = DefaultsKey<Int>("launchCount", defaultValue: 0)
 }
 ```
 
-Step 2: Just use it!
+Just use it!
 
 ```swift
 // Get and set user defaults easily
@@ -70,10 +70,10 @@ The convenient dot syntax is only available if you define your keys by extending
 To get the most out of SwiftyUserDefaults, define your user defaults keys ahead of time:
 
 ```swift
-let colorKey = DefaultsKey<String>("color")
+let colorKey = DefaultsKey<String>("color", defaultValue: "")
 ```
 
-Just create a `DefaultsKey` object, put the type of the value you want to store in angle brackets, the key name in parentheses, and you're good to go.
+Just create a `DefaultsKey` object, put the type of the value you want to store in angle brackets, the key name in parentheses, and you're good to go. If you want to have a non-optional value, just provide a `defaultValue` in the key (look at the example above).
 
 You can now use the `Defaults` shortcut to access those values:
 
@@ -91,7 +91,7 @@ For extra convenience, define your keys by extending magic `DefaultsKeys` class 
 ```swift
 extension DefaultsKeys {
     static let username = DefaultsKey<String?>("username")
-    static let launchCount = DefaultsKey<Int>("launchCount")
+    static let launchCount = DefaultsKey<Int>("launchCount", defaultValue: 0)
 }
 ```
 
@@ -99,26 +99,7 @@ And use the shortcut dot syntax:
 
 ```swift
 Defaults[.username] = "joe"
-Defaults[.launchCount]
-```
-
-### Just use it!
-
-You can easily modify value types (strings, numbers, array) in place, as if you were working with a plain old dictionary:
-
-```swift
-// Modify value types in place
 Defaults[.launchCount] += 1
-Defaults[.volume] -= 0.1
-Defaults[.strings] += "… can easily be extended!"
-
-// Use and modify typed arrays
-Defaults[.libraries].append("SwiftyUserDefaults")
-Defaults[.libraries][0] += " 2.0"
-
-// Easily work with custom serialized types
-Defaults[.color] = NSColor.white
-Defaults[.color]?.whiteComponent // => 1.0
 ```
 
 ### Supported types
@@ -141,7 +122,7 @@ But that's not all!
 
 #### Codable
 
-Since version 4, `SwiftyUserDefaults` support `Codable`! Just add `DefaultsSerializable` type to your type, like:
+Since version 4, `SwiftyUserDefaults` support `Codable`! Just conform to `DefaultsSerializable` in your type:
 ```swift
 final class FrogCodable: Codable, DefaultsSerializable {
     let name: String
@@ -161,7 +142,7 @@ let froggies = DefaultsKey<[FrogCodable]?>("froggies")
 #### NSCoding
 
 `NSCoding` was supported before version 4, but in this version we take the support on another level. No need for custom subscripts anymore!
-Support your custom `NSCoding` type the same way as you can support `Codable` types: add `DefaultsSerializable` to your implemented protocols:
+Support your custom `NSCoding` type the same way as with `Codable` support:
 ```
 final class FrogSerializable: NSObject, NSCoding, DefaultsSerializable { ... }
 ```
@@ -178,8 +159,7 @@ let froggies = DefaultsKey<[FrogSerializable]?>("froggies")
 
 #### RawRepresentable
 
-And the last but not least, `RawRepresentable` support! It's all the same situation like with `NSCoding` or with `Codable`, add one
-little protocol to rule them all!
+And the last but not least, `RawRepresentable` support! Again, the same situation like with `NSCoding` and `Codable`:
 ```swift
 enum BestFroggiesEnum: String, DefaultsSerializable {
     case Andy
@@ -205,13 +185,13 @@ Extending it to be `SwiftyUserDefaults`-friendly should be as easy as:
 extension UIColor: DefaultsSerializable {}
 ```
 
-If it's not, we have two options:
-a) It's a custom type that we don't know how to serialize, in this case [look below](#custom-types)
-b) It's a bug and it should be supported, in this case please file an issue, please (and you could also use [custom types](#custom-types) method as a workaround before we fix it)
+If it's not, we have two options:<br />
+a) It's a custom type that we don't know how to serialize, in this case at [Custom types](#custom-types)<br />
+b) It's a bug and it should be supported, in this case please file an issue (+ you can use [custom types](#custom-types) method as a workaround in the meantime)<br />
 
 ### Custom types
 
-If you want to add your own custom type that we don't support yet, no worries! We've got your covered as well. We use `DefaultsBridge`s of many kinds to specify how you get/set values and arrays of values. When you look at `DefaultsSerializable` protocol, it expects two properties in each type: `_defaults` and `_defaultsArray` which are of type `DefaultsBridge`.
+If you want to add your own custom type that we don't support yet, we've got you covered. We use `DefaultsBridge`s of many kinds to specify how you get/set values and arrays of values. When you look at `DefaultsSerializable` protocol, it expects two properties in each type: `_defaults` and `_defaultsArray`, where both are of type `DefaultsBridge`.
 
 For instance, this is a bridge for single value data storing/retrieving using `NSKeyedArchiver`/`NSKeyedUnarchiver`:
 ```swift
@@ -227,7 +207,7 @@ public final class DefaultsKeyedArchiverBridge<T>: DefaultsBridge<T> {
 }
 ```
 
-And for a simple case of storing/retrieving an array values:
+Bridge for default storing/retrieving array values:
 ```swift
 public final class DefaultsArrayBridge<T: Collection>: DefaultsBridge<T> {
     public override func save(key: String, value: T?, userDefaults: UserDefaults) {
@@ -240,7 +220,7 @@ public final class DefaultsArrayBridge<T: Collection>: DefaultsBridge<T> {
 }
 ```
 
-Now, if you want to create a custom type and want to use `DefaultsKeyedArchiverBridge`:
+Now, to use these bridges in our type we simply declare it as follows:
 ```swift
 struct FrogCustomSerializable: DefaultsSerializable {
 
@@ -251,7 +231,7 @@ struct FrogCustomSerializable: DefaultsSerializable {
 }
 ```
 
-You have to remember though, that these built-in bridges are for specific use cases and you probably will end up writing your own bridges:
+Unfortunately, if you find yourself in a situation where you need a custom bridge, you'll probably need to write your own:
 ```swift
 final class DefaultsFrogBridge: DefaultsBridge<FrogCustomSerializable> {
     override func get(key: String, userDefaults: UserDefaults) -> FrogCustomSerializable? {
@@ -276,22 +256,17 @@ final class DefaultsFrogArrayBridge: DefaultsBridge<[FrogCustomSerializable]> {
         userDefaults.set(values, forKey: key)
     }
 }
-```
 
-and then provide them in your custom type:
-```swift
 struct FrogCustomSerializable: DefaultsSerializable, Equatable {
 
     static var _defaults: DefaultsBridge<FrogCustomSerializable> { return DefaultsFrogBridge() }
-
     static var _defaultsArray: DefaultsBridge<[FrogCustomSerializable]> { return DefaultsFrogArrayBridge() }
-
 
     let name: String
 }
 ```
 
-But, you can also extend an existing type!
+To support existing types with different bridges, you can extend it similarly:
 ```swift
 extension Data: DefaultsSerializable {
     public static var _defaults: DefaultsBridge<Data> { return DefaultsDataBridge() }
@@ -299,7 +274,7 @@ extension Data: DefaultsSerializable {
 }
 ```
 
-Also, take a look at our source code (or tests) to look at more examples or make an issue and we will try to help you out in need! And if you feel there is a type that we could support this, don't hesitate and create an Issue, or better yet, make a Pull Request 😉
+Also, take a look at our source code (or tests) to see more examples of bridges. If you find yourself confused with all these bridges, please [create an issue](https://github.com/radex/SwiftyUserDefaults/issues/new) and we will figure something out.
 
 ### Remove all keys
 
