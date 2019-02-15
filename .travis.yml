@@ -55,6 +55,8 @@ before_install:
 
 script:
   - set -o pipefail
+  - if [[ "$SWIFT_VERSION" == "5.0" ]]; then mv Cartfile_5.0.private Cartfile.private; fi
+  - if [[ "$SWIFT_VERSION" == "5.0" ]]; then mv Cartfile_5.0.resolved Cartfile.resolved; fi
   - carthage update --no-use-binaries --cache-builds --verbose
   - xcodebuild -version
   - xcodebuild -showsdks
