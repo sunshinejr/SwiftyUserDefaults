@@ -1,2 +1,2 @@
-github "Quick/Quick" ~> 1.1.0
+github "Sunshinejr/Quick" "feature/update_nimble"
 github "Quick/Nimble" "master"
