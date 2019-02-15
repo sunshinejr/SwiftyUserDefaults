@@ -9,7 +9,7 @@ matrix:
         - IOS_SDK=iphonesimulator12.2
         - TVOS_SIMULATOR='name=Apple TV 4K (at 1080p)'
         - TVOS_SDK=appletvsimulator12.2
-        - WATCHOS_SIMULATOR='name=Apple Watch - 42mm'
+        - WATCHOS_SIMULATOR='name=Apple Watch Series 4 - 44mm'
         - WATCHOS_SDK=watchsimulator5.2
     - os: osx
       osx_image: xcode10.1
