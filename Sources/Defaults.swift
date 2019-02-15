@@ -50,7 +50,7 @@ public extension UserDefaults {
     /// Use with caution!
     /// - Note: This method only removes keys on the receiver `UserDefaults` object.
     ///         System-defined keys will still be present afterwards.
-    public func removeAll() {
+    func removeAll() {
         for (key, _) in dictionaryRepresentation() {
             removeObject(forKey: key)
         }
