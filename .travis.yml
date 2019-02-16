@@ -4,6 +4,7 @@ matrix:
     - os: osx
       osx_image: xcode10.2
       env:
+        - CACHE_NAME=SWIFT5_0
         - SWIFT_VERSION=5.0
         - IOS_SIMULATOR='name=iPhone 6s,OS=12.2'
         - IOS_SDK=iphonesimulator12.2
@@ -14,6 +15,7 @@ matrix:
     - os: osx
       osx_image: xcode10.1
       env:
+        - CACHE_NAME=SWIFT4_2
         - SWIFT_VERSION=4.2
         - IOS_SIMULATOR='name=iPhone 6s,OS=12.1'
         - IOS_SDK=iphonesimulator12.1
@@ -24,6 +26,7 @@ matrix:
     - os: osx
       osx_image: xcode9.4
       env: 
+        - CACHE_NAME=SWIFT4_1
         - SWIFT_VERSION=4.0 # it's in fact 4.1
         - IOS_SIMULATOR='name=iPhone 6s,OS=11.4'
         - IOS_SDK=iphonesimulator11.4
