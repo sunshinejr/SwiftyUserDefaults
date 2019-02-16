@@ -148,7 +148,12 @@ public final class DefaultsKeyedArchiverBridge<T>: DefaultsBridge<T> {
             return
         }
 
-        userDefaults.set(NSKeyedArchiver.archivedData(withRootObject: value), forKey: key)
+        // Needed because Quick/Nimble have min target 10.10...
+        if #available(OSX 10.11, *) {
+            userDefaults.set(NSKeyedArchiver.archivedData(withRootObject: value), forKey: key)
+        } else {
+            fatalError("Shouldn't really happen. We do not support macOS 10.10, if it happened to you please report your use-case on GitHub issues.")
+        }
     }
 }
 
