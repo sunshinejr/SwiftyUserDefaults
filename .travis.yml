@@ -73,7 +73,6 @@ script:
   
   - xcodebuild -project "$PROJECT" -scheme 'SwiftyUserDefaults' -sdk $IOS_SDK  -destination "$IOS_SIMULATOR" ONLY_ACTIVE_ARCH=NO CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO SWIFT_VERSION=$SWIFT_VERSION test | xcpretty
   - xcodebuild -project "$PROJECT" -scheme 'SwiftyUserDefaults' -sdk $TVOS_SDK -destination "$TVOS_SIMULATOR" ONLY_ACTIVE_ARCH=NO CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO SWIFT_VERSION=$SWIFT_VERSION test | xcpretty
-  - xcodebuild -project "$PROJECT" -scheme 'SwiftyUserDefaults' -sdk $WATCHOS_SDK -destination "$WATCHOS_SIMULATOR" ONLY_ACTIVE_ARCH=NO CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO SWIFT_VERSION=$SWIFT_VERSION test | xcpretty
   - xcodebuild -project "$PROJECT" -scheme 'SwiftyUserDefaults' ONLY_ACTIVE_ARCH=NO CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO test | xcpretty
   
   - swift build
