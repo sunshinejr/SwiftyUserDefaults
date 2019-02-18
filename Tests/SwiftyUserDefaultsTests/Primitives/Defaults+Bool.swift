@@ -26,18 +26,16 @@ import Quick
 
 final class DefaultsBoolSpec: QuickSpec, DefaultsSerializableSpec {
 
+    typealias Serializable = Bool
+
     var customValue: Bool = false
     var defaultValue: Bool = true
 
     override func spec() {
         given("Bool") {
             self.testValues()
-            self.testDefaultValues()
-            self.testDefaultArrayValues()
-
             self.testOptionalValues()
-            self.testOptionalDefaultValues()
-            self.testOptionalDefaultArrayValues()
+            self.testOptionalValuesWithoutDefaultValue()
         }
     }
 }

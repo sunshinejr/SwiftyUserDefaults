@@ -1,67 +1,17 @@
-# Migration guide from 3.x to 4.x
+# Migration guide from 4.0.0-alpha.1 to 4.0.0-alpha.2
 
-### Legacy APIs
+Because there was a long delay in releasing a new version, and some things had changed, here is a quick migration guide.
 
-We've removed the support for legacy APIs using `String` values as keys in favor of `DefaultsKey`.
-So if you've used `SwiftyUserDefaults` similar to:
+### Removed type-based default value types
+Oh well it didn't end up being that useful and in result we got both: our code got a lot more complicated and we got [major bug](https://github.com/radex/SwiftyUserDefaults/issues/162) to fix.
 
-```swift
-let value = Defaults["key"].intValue
-```
-
-You need to either migrate to using `DefaultsKey` (and get all benefits of statically typed keys):
-
-```swift
-let key = DefaultsKey<Int>("key")
-let value = Defaults[key]
-```
-
-or use `UserDefaults` instead.
-
-If you used `Any` as a type of the `DefaultsKey`, you also need to migrate to use a proper type instead.
-
-
-### Removed default values for certain types
-
-You might've used this syntax before:
-```swift
-let key = DefaultsKey<String>("test1") // this might be nil when you access it, and so we were using some default values in the past like empty string
-```
-
-These defaults were quite confusing for some people and we decided to remove it in version 4 (+ it was really heavy in terms of codebase spaghetti). Don't worry though, as you can still define your own default values in version 4.0:
+Right now if you want to have a default value for your key, you need to specify it in the key _only_:
 ```swift
 let key = DefaultsKey<String>("test1", defaultValue: "")
 ```
 
-Or might try to create some custom inits/factories. If you can't migrate in your use-case, please provide details and create an issue so we can help with that!
-
-### NSCoding, RawRepresentable and Custom Types
-
-If you used custom types with SwiftyUserDefaults, fear no more: you still can use them!
-Now, you don't need your own `subcript` so remove it and add `DefaultsSerializable` protocol to your type!
-
-Example. Let's say you had a class `Froggy` that conformed to the `NSCoding` protocol and you had your own subscript:
-
-```swift
-final class Froggy: NSObject, NSCoding { ... }
-
-extension UserDefaults {
-    subscript(key: DefaultsKey<Froggy?>) -> NSColor? {
-        get { return unarchive(key) }
-        set { archive(key, newValue) }
-    }
-}
-```
-
-Replace it with the code below:
-
-```swift
-final class Froggy: NSObject, NSCoding, DefaultsSerializable { ... }
-```
-
-And that's it! You have free custom types if you implement `NSCoding`, `RawRepresentable`(e.g. enums as well) or `Codable`. 
-
-Or if you want to add your own custom type that we don't support yet, no worries! We've got your covered as well. We use `DefaultsBridge`s of many kinds to specify how you get/set values and arrays of values. When you look at `DefaultsSerializable` protocol, it expects two properties in each type: `_defaults` and `_defaultsArray` which are of type `DefaultsBridge`.
+### Updated a way of introducing custom retrieving/saving the values from a type:
+Now we use `DefaultsBridge`s of many kinds to specify how you get/set values and arrays of values. When you look at `DefaultsSerializable` protocol, it expects two properties in each type: `_defaults` and `_defaultsArray` which are of type `DefaultsBridge`.
 
 For instance, this is a bridge for single value data storing/retrieving using `NSKeyedArchiver`/`NSKeyedUnarchiver`:
 ```swift

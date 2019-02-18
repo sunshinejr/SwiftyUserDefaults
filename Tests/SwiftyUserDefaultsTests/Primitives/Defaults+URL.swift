@@ -27,13 +27,16 @@ import Foundation
 
 final class DefaultsUrlSpec: QuickSpec, DefaultsSerializableSpec {
 
+    typealias Serializable = URL
+
     var customValue: URL = URL(string: "https://google.com")!
     var defaultValue: URL = URL(string: "https://github.com")!
 
     override func spec() {
-        given("Int") {
+        given("URL") {
             self.testValues()
             self.testOptionalValues()
+            self.testOptionalValuesWithoutDefaultValue()
         }
     }
 }

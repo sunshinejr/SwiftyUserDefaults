@@ -24,260 +24,73 @@
 
 import Foundation
 
-extension String: DefaultsSerializable, DefaultsDefaultArrayValueType, DefaultsDefaultValueType {
-
-    public static var defaultValue: String = ""
-    public static var defaultArrayValue: [String] = []
-
-    public static func get(key: String, userDefaults: UserDefaults) -> String? {
-        return userDefaults.string(forKey: key)
-    }
-
-    public static func getArray(key: String, userDefaults: UserDefaults) -> [String]? {
-        return userDefaults.array(forKey: key) as? [String]
-    }
-
-    public static func save(key: String, value: String?, userDefaults: UserDefaults) {
-        userDefaults.set(value, forKey: key)
-    }
-
-    public static func saveArray(key: String, value: [String], userDefaults: UserDefaults) {
-        userDefaults.set(value, forKey: key)
-    }
-}
-
-extension Int: DefaultsSerializable, DefaultsDefaultArrayValueType, DefaultsDefaultValueType {
-
-    public static var defaultValue: Int = 0
-    public static var defaultArrayValue: [Int] = []
-
-    public static func get(key: String, userDefaults: UserDefaults) -> Int? {
-        return userDefaults.number(forKey: key)?.intValue
-    }
-
-    public static func getArray(key: String, userDefaults: UserDefaults) -> [Int]? {
-        return userDefaults.array(forKey: key) as? [Int]
-    }
-
-    public static func save(key: String, value: Int?, userDefaults: UserDefaults) {
-        userDefaults.set(value, forKey: key)
-    }
-
-    public static func saveArray(key: String, value: [Int], userDefaults: UserDefaults) {
-        userDefaults.set(value, forKey: key)
-    }
-}
-
-extension Double: DefaultsSerializable, DefaultsDefaultArrayValueType, DefaultsDefaultValueType {
-
-    public static var defaultValue: Double = 0.0
-    public static var defaultArrayValue: [Double] = []
-
-    public static func get(key: String, userDefaults: UserDefaults) -> Double? {
-        return userDefaults.number(forKey: key)?.doubleValue
-    }
-
-    public static func getArray(key: String, userDefaults: UserDefaults) -> [Double]? {
-        return userDefaults.array(forKey: key) as? [Double]
-    }
-
-    public static func save(key: String, value: Double?, userDefaults: UserDefaults) {
-        userDefaults.set(value, forKey: key)
-    }
-
-    public static func saveArray(key: String, value: [Double], userDefaults: UserDefaults) {
-        userDefaults.set(value, forKey: key)
-    }
-}
-
-extension Bool: DefaultsSerializable, DefaultsDefaultArrayValueType, DefaultsDefaultValueType {
-
-    public static var defaultValue: Bool = false
-    public static var defaultArrayValue: [Bool] = []
-
-    public static func get(key: String, userDefaults: UserDefaults) -> Bool? {
-        // @warning we use number(forKey:) instead of bool(forKey:), because
-        // bool(forKey:) will always return value, even if it's not set
-        // and it does a little bit of magic under the hood as well
-        // e.g. transforming strings like "YES" or "true" to true
-        return userDefaults.number(forKey: key)?.boolValue
-    }
-
-    public static func getArray(key: String, userDefaults: UserDefaults) -> [Bool]? {
-        return userDefaults.array(forKey: key) as? [Bool]
-    }
-
-    public static func save(key: String, value: Bool?, userDefaults: UserDefaults) {
-        userDefaults.set(value, forKey: key)
-    }
-
-    public static func saveArray(key: String, value: [Bool], userDefaults: UserDefaults) {
-        userDefaults.set(value, forKey: key)
-    }
-}
-
-extension Data: DefaultsSerializable, DefaultsDefaultArrayValueType, DefaultsDefaultValueType {
-
-    public static var defaultValue: Data = Data()
-    public static var defaultArrayValue: [Data] = []
-
-    public static func get(key: String, userDefaults: UserDefaults) -> Data? {
-        return userDefaults.data(forKey: key)
-    }
-
-    public static func getArray(key: String, userDefaults: UserDefaults) -> [Data]? {
-        return userDefaults.array(forKey: key) as? [Data]
-    }
-
-    public static func save(key: String, value: Data?, userDefaults: UserDefaults) {
-        userDefaults.set(value, forKey: key)
-    }
-
-    public static func saveArray(key: String, value: [Data], userDefaults: UserDefaults) {
-        userDefaults.set(value, forKey: key)
-    }
-}
-
 extension Date: DefaultsSerializable {
-
-    public static func get(key: String, userDefaults: UserDefaults) -> Date? {
-        return userDefaults.object(forKey: key) as? Date
-    }
-
-    public static func getArray(key: String, userDefaults: UserDefaults) -> [Date]? {
-        return userDefaults.array(forKey: key) as? [Date]
-    }
-
-    public static func save(key: String, value: Date?, userDefaults: UserDefaults) {
-        userDefaults.set(value, forKey: key)
-    }
-
-    public static func saveArray(key: String, value: [Date], userDefaults: UserDefaults) {
-        userDefaults.set(value, forKey: key)
-    }
+    public static var _defaults: DefaultsBridge<Date> { return DefaultsObjectBridge() }
+    public static var _defaultsArray: DefaultsBridge<[Date]> { return DefaultsArrayBridge() }
 }
+
+extension String: DefaultsSerializable {
+    public static var _defaults: DefaultsBridge<String> { return DefaultsStringBridge() }
+    public static var _defaultsArray: DefaultsBridge<[String]> { return DefaultsArrayBridge() }
+}
+
+extension Int: DefaultsSerializable {
+    public static var _defaults: DefaultsBridge<Int> { return DefaultsIntBridge() }
+    public static var _defaultsArray: DefaultsBridge<[Int]> { return DefaultsArrayBridge() }
+}
+
+extension Double: DefaultsSerializable {
+    public static var _defaults: DefaultsBridge<Double> { return DefaultsDoubleBridge() }
+    public static var _defaultsArray: DefaultsBridge<[Double]> { return DefaultsArrayBridge() }
+}
+
+extension Bool: DefaultsSerializable {
+    public static var _defaults: DefaultsBridge<Bool> { return DefaultsBoolBridge() }
+    public static var _defaultsArray: DefaultsBridge<[Bool]> { return DefaultsArrayBridge() }
+}
+
+extension Data: DefaultsSerializable {
+    public static var _defaults: DefaultsBridge<Data> { return DefaultsDataBridge() }
+    public static var _defaultsArray: DefaultsBridge<[Data]> { return DefaultsArrayBridge() }
+}
+
 extension URL: DefaultsSerializable {
+    public static var _defaults: DefaultsBridge<URL> { return DefaultsUrlBridge() }
+    public static var _defaultsArray: DefaultsBridge<[URL]> { return DefaultsKeyedArchiverBridge() }
+}
 
-    public static func get(key: String, userDefaults: UserDefaults) -> URL? {
-        return userDefaults.url(forKey: key)
-    }
+extension DefaultsSerializable where Self: Encodable, Self: Decodable {
+    public static var _defaults: DefaultsBridge<Self> { return DefaultsCodableBridge() }
+    public static var _defaultsArray: DefaultsBridge<[Self]> { return DefaultsCodableBridge() }
+}
 
-    public static func getArray(key: String, userDefaults: UserDefaults) -> [URL]? {
-        return userDefaults.data(forKey: key).flatMap(NSKeyedUnarchiver.unarchiveObject) as? [URL]
-    }
+extension DefaultsSerializable where Self: RawRepresentable {
+    public static var _defaults: DefaultsBridge<Self> { return DefaultsRawRepresentableBridge() }
+    public static var _defaultsArray: DefaultsBridge<[Self]> { return DefaultsRawRepresentableArrayBridge() }
+}
 
-    public static func save(key: String, value: URL?, userDefaults: UserDefaults) {
-        userDefaults.set(value, forKey: key)
-    }
-
-    public static func saveArray(key: String, value: [URL], userDefaults: UserDefaults) {
-        userDefaults.set(NSKeyedArchiver.archivedData(withRootObject: value), forKey: key)
-    }
+extension DefaultsSerializable where Self: NSCoding {
+    public static var _defaults: DefaultsBridge<Self> { return DefaultsKeyedArchiverBridge() }
+    public static var _defaultsArray: DefaultsBridge<[Self]> { return DefaultsKeyedArchiverBridge() }
 }
 
 extension Array: DefaultsSerializable where Element: DefaultsSerializable {
 
-    public static func get(key: String, userDefaults: UserDefaults) -> [Element]? {
-        return Element.getArray(key: key, userDefaults: userDefaults)
+    public typealias T = [Element]
+
+    public static var _defaults: DefaultsBridge<[Element]> {
+        return Element._defaultsArray as! DefaultsBridge<[Element]>
     }
 
-    public static func getArray(key: String, userDefaults: UserDefaults) -> [[Element]]? {
-        return [Element].getArray(key: key, userDefaults: userDefaults)
-    }
-
-    public static func save(key: String, value: [Element]?, userDefaults: UserDefaults) {
-        guard let value = value else {
-            userDefaults.removeObject(forKey: key)
-            return
-        }
-
-        Element.saveArray(key: key, value: value, userDefaults: userDefaults)
-    }
-
-    public static func saveArray(key: String, value: [[Element]], userDefaults: UserDefaults) {
-        [Element].saveArray(key: key, value: value, userDefaults: userDefaults)
+    public static var _defaultsArray: DefaultsBridge<[[Element]]> {
+        fatalError("Multidimensional arrays are not supported yet")
     }
 }
 
-extension DefaultsStoreable where Self: Encodable {
+extension Optional: DefaultsSerializable where Wrapped: DefaultsSerializable {
+    public typealias T = Wrapped
 
-    public static func saveArray(key: String, value: [Self], userDefaults: UserDefaults) {
-        userDefaults.set(encodable: value, forKey: key)
-    }
+    public static var _defaults: DefaultsBridge<Wrapped> { return Wrapped._defaults as! DefaultsBridge<Wrapped> }
 
-    public static func save(key: String, value: Self?, userDefaults: UserDefaults) {
-        guard let value = value else {
-            userDefaults.removeObject(forKey: key)
-            return
-        }
-
-        userDefaults.set(encodable: value, forKey: key)
-    }
-}
-
-extension DefaultsGettable where Self: Decodable {
-
-    public static func getArray(key: String, userDefaults: UserDefaults) -> [Self]? {
-        return userDefaults.decodable(forKey: key) as [Self]?
-    }
-
-    public static func get(key: String, userDefaults: UserDefaults) -> Self? {
-        return userDefaults.decodable(forKey: key) as Self?
-    }
-}
-
-extension DefaultsGettable where Self: NSCoding {
-
-    public static func get(key: String, userDefaults: UserDefaults) -> Self? {
-        return userDefaults.data(forKey: key).flatMap(NSKeyedUnarchiver.unarchiveObject) as? Self
-    }
-
-    public static func getArray(key: String, userDefaults: UserDefaults) -> [Self]? {
-        return userDefaults.data(forKey: key).flatMap(NSKeyedUnarchiver.unarchiveObject) as? [Self]
-    }
-}
-
-extension DefaultsStoreable where Self: NSCoding {
-
-    public static func save(key: String, value: Self?, userDefaults: UserDefaults) {
-        guard let value = value else {
-            userDefaults.removeObject(forKey: key)
-            return
-        }
-
-        userDefaults.set(NSKeyedArchiver.archivedData(withRootObject: value), forKey: key)
-    }
-
-    public static func saveArray(key: String, value: [Self], userDefaults: UserDefaults) {
-        userDefaults.set(NSKeyedArchiver.archivedData(withRootObject: value), forKey: key)
-    }
-}
-
-extension DefaultsGettable where Self: RawRepresentable {
-
-    public static func get(key: String, userDefaults: UserDefaults) -> Self? {
-        return userDefaults.object(forKey: key).flatMap { Self(rawValue: $0 as! Self.RawValue) }
-    }
-
-    public static func getArray(key: String, userDefaults: UserDefaults) -> [Self]? {
-        return userDefaults.array(forKey: key)?.compactMap { Self(rawValue: $0 as! Self.RawValue) }
-    }
-}
-
-extension DefaultsStoreable where Self: RawRepresentable {
-
-    public static func save(key: String, value: Self?, userDefaults: UserDefaults) {
-        guard let value = value?.rawValue else {
-            userDefaults.removeObject(forKey: key)
-            return
-        }
-
-        userDefaults.set(value, forKey: key)
-    }
-
-    public static func saveArray(key: String, value: [Self], userDefaults: UserDefaults) {
-        let raw = value.map { $0.rawValue }
-
-        userDefaults.set(raw, forKey: key)
-    }
+    public static var _defaultsArray: DefaultsBridge<[Wrapped]> { return Wrapped._defaultsArray as! DefaultsBridge<[Wrapped]> }
 }

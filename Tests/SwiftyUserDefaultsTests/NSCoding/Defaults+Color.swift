@@ -23,21 +23,31 @@
 //
 
 import Quick
+import Nimble
+import SwiftyUserDefaults
 
-final class DefaultsBestFroggiesDefaultsEnumSerializableSpec: QuickSpec, DefaultsSerializableSpec {
+#if canImport(UIKit)
+    import UIKit.UIColor
+    public typealias Color = UIColor
+#elseif canImport(AppKit)
+    import AppKit.NSColor
+    public typealias Color = NSColor
+#endif
 
-    var customValue: BestFroggiesDefaultsEnum = .Andy
-    var defaultValue: BestFroggiesDefaultsEnum = .Dandy
+extension Color: DefaultsSerializable {}
+
+final class DefaultsUIColorSerializableSpec: QuickSpec, DefaultsSerializableSpec {
+
+    typealias Serializable = Color
+
+    var customValue: Color = .green
+    var defaultValue: Color = .blue
 
     override func spec() {
-        given("BestFroggiesDefaultsEnum") {
+        given("NSColor") {
             self.testValues()
-            self.testDefaultValues()
-            self.testDefaultArrayValues()
-
             self.testOptionalValues()
-            self.testOptionalDefaultValues()
-            self.testOptionalDefaultArrayValues()
+            self.testOptionalValuesWithoutDefaultValue()
         }
     }
 }

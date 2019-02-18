@@ -24,20 +24,18 @@
 
 import Quick
 
-final class DefaultsFrogDefaultSerializableSpec: QuickSpec, DefaultsSerializableSpec {
+final class DefaultsFrogCustomSerializableSpec: QuickSpec, DefaultsSerializableSpec {
 
-    var customValue: FrogDefaultSerializable = FrogDefaultSerializable(name: "custom")
-    var defaultValue: FrogDefaultSerializable = FrogDefaultSerializable(name: "default")
+    typealias Serializable = FrogCustomSerializable
+
+    var customValue: FrogCustomSerializable = FrogCustomSerializable(name: "custom")
+    var defaultValue: FrogCustomSerializable = FrogCustomSerializable(name: "default")
 
     override func spec() {
-        given("FrogDefaultSerializable") {
+        given("FrogCustomSerializable") {
             self.testValues()
-            self.testDefaultValues()
-            self.testDefaultArrayValues()
-
             self.testOptionalValues()
-            self.testOptionalDefaultValues()
-            self.testOptionalDefaultArrayValues()
+            self.testOptionalValuesWithoutDefaultValue()
         }
     }
 }
