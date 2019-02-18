@@ -82,6 +82,7 @@ script:
 
   - scripts/cocoapods_integration_step.sh
   - scripts/carthage_integration_step.sh
+  - scripts/spm_integration_step.sh
   
   # there is a problem with danger-swift currently, commenting it for now
   # - DEBUG="*" danger process danger-swift
