@@ -83,7 +83,7 @@ extension Array: DefaultsSerializable where Element: DefaultsSerializable {
     }
 
     public static var _defaultsArray: DefaultsBridge<[[Element]]> {
-        fatalError("More than 2D arrays not supported yet")
+        fatalError("Multidimensional arrays are not supported yet")
     }
 }
 
