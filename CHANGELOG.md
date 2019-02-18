@@ -1,9 +1,19 @@
 ### Next
 
+### 4.0.0-alpha.2 (2019-02-18)
+
+* Swift 4.2 support. [@sunshinejr](https://github.com/sunshinejr)
+* Early Swift 5.0 support! [@sunshinejr](https://github.com/sunshinejr)
+* Rewritten core. We use `DefaultsBridges` now to define getters/setters for given type. [@sunshinejr](https://github.com/sunshinejr)
+* Fixed a bug where you couldn't extend non-final class like `NSColor`. [@sunshinejr](https://github.com/sunshinejr)
+* Removed type-based default values. This means you need to use key-based defaultValue or use an optional `DefaultsKey` from now on. [@sunshinejr](https://github.com/sunshinejr)
+* Improved CI infra: Swift 4.1/4.2/5.0 builds with CocoaPods/Carthage/SPM integration scripts. [@sunshinejr](https://github.com/sunshinejr)
+
+
 ### 4.0.0-alpha.1 (2018-05-08)
 
-* Swift 4.1 support
-* Added `Codable` support!
+* Swift 4.1 support [@sunshinejr](https://github.com/sunshinejr)
+* Added `Codable` support! [@sunshinejr](https://github.com/sunshinejr)
 * Added generic subscripts support (better `DefaultsKey` init diagnostics and accessing `Defaults[.key]`) [@sunshinejr](https://github.com/sunshinejr)
 * Added default values protocols (`DefaultsDefaultValueType`, `DefaultsDefaultArrayValueType`) - this means that you can extend any type with default value so you can create non-optional `DefaultsKey` afterwards! [@sunshinejr](https://github.com/sunshinejr)
 * Added default values in `DefaultsKey`, e.g. `DefaultsKey<String>("test", defaultValue: "default value")` [@sunshinejr](https://github.com/sunshinejr)
