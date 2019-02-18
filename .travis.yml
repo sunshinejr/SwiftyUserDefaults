@@ -79,5 +79,8 @@ script:
   - swift build
   - swift test
   - pod lib lint
+
+  - scripts/cocoapods_integration_step.sh
+  
   # there is a problem with danger-swift currently, commenting it for now
   # - DEBUG="*" danger process danger-swift
