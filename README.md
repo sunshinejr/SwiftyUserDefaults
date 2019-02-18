@@ -11,7 +11,7 @@
 
 Read [Statically-typed NSUserDefaults](http://radex.io/swift/nsuserdefaults/static) for more information about this project.<br />
 Read [documentation for stable version 3.0.1](https://github.com/radex/SwiftyUserDefaults/blob/14b629b035bf6355b46ece22c3851068a488a895/README.md)<br />
-Read [migration guide from version 3.x to 4.x](MigrationGuides/migration_3_to_4.md)
+Read [migration guide from version 3.x to 4.x](MigrationGuides/migration_3_to_4.md)<br />
 Read [migration guide from version 4.0.0-alpha.1 to 4.0.0-alpha.2](MigrationGuides/migration_4_alpha_1_to_4_alpha_2.md)
 
 # Version 4 - alpha 2
@@ -24,14 +24,14 @@ Read [migration guide from version 4.0.0-alpha.1 to 4.0.0-alpha.2](MigrationGuid
     <a href="#rawrepresentable">RawRepresentable</a> &bull;
     <a href="#extending-existing-types">Extending existing types</a> &bull;
     <a href="#custom-types">Custom types</a> &bull;
-    <a href="#installation">Installation & Requirements</a>
+    <a href="#installation">Installation</a>
 </p>
 
 ## Features
 
 **There's only one step to start using SwiftyUserDefaults:**
 
-Define your keys
+Define your keys!
 
 ```swift
 extension DefaultsKeys {
@@ -40,7 +40,7 @@ extension DefaultsKeys {
 }
 ```
 
-Just use it!
+And just use it ;-)
 
 ```swift
 // Get and set user defaults easily

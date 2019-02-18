@@ -25,11 +25,10 @@ If you used `Any` as a type of the `DefaultsKey`, you also need to migrate to us
 
 You might've used this syntax before:
 ```swift
-let key = DefaultsKey<String>("test1") // what if there is nothing stored?
+let key = DefaultsKey<String>("test1") // this might be nil when you access it, and so we were using some default values in the past like empty string
 ```
 
-The problem here is that not only this complicates the codebase a lot, it also is kinda unclear for new people.
-In version 4 you will need to specify the key by yourself:
+These defaults were quite confusing for some people and we decided to remove it in version 4 (+ it was really heavy in terms of codebase spaghetti). Don't worry though, as you can still define your own default values in version 4.0:
 ```swift
 let key = DefaultsKey<String>("test1", defaultValue: "")
 ```
