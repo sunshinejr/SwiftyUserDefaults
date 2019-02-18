@@ -79,7 +79,5 @@ script:
   - swift build
   - swift test
   - pod lib lint
-
-  - mkdir TestCocoaPods && cd TestCocoaPods && echo "name: TestCocoaPods\ntargets:\n  TestCocoaPods:\n    type: application\n    platform: iOS\n    deploymentTarget: '11.0'" > project.yml && xcodegen generate && echo "target 'TestCocoaPods' do\n   use_frameworks\!\n  pod 'SwiftyUserDefaults', :path => '../'\nend" > Podfile && pod install && cd ../;
   # there is a problem with danger-swift currently, commenting it for now
   # - DEBUG="*" danger process danger-swift
