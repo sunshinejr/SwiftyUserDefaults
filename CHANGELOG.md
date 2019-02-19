@@ -1,5 +1,10 @@
 ### Next
 
+### 4.0.0-alpha.3 (2019-02-19)
+
+* Fixed a non-optional vs optional comparison bug ([#176](https://github.com/radex/SwiftyUserDefaults/issues/176)). [@z3bi](https://github.com/z3bi) and [@sunshinejr](https://github.com/sunshinejr)
+* Fixed invalid Info.plist error ([#173](https://github.com/radex/SwiftyUserDefaults/issues/173)). [@sunshinejr](https://github.com/sunshinejr)
+
 ### 4.0.0-alpha.2 (2019-02-18)
 
 * Swift 4.2 support. [@sunshinejr](https://github.com/sunshinejr)
