@@ -302,7 +302,7 @@ Swift version >= 4.1
 If you're using CocoaPods, just add this line to your Podfile:
 
 ```ruby
-pod 'SwiftyUserDefaults', '4.0.0-alpha.1'
+pod 'SwiftyUserDefaults', '4.0.0-alpha.2'
 ```
 
 Install by running this command in your terminal:
@@ -322,7 +322,7 @@ import SwiftyUserDefaults
 Just add to your Cartfile:
 
 ```ruby
-github "radex/SwiftyUserDefaults" "4.0.0-alpha.1"
+github "radex/SwiftyUserDefaults" "4.0.0-alpha.2"
 ```
 
 #### Swift Package Manager
@@ -333,7 +333,7 @@ let package = Package(
     name: "MyPackage",
     products: [...],
     dependencies: [
-        .package(url: "https://github.com/radex/SwiftyUserDefaults.git", .exact("4.0.0-alpha.1")),
+        .package(url: "https://github.com/radex/SwiftyUserDefaults.git", .exact("4.0.0-alpha.2")),
     ],
     targets: [...]
 )
