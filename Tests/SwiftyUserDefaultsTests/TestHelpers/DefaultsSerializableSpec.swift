@@ -241,7 +241,7 @@ extension DefaultsSerializableSpec where Serializable.T: Equatable, Serializable
                 expect(defaults[key]).to(beNil())
             }
             
-            then("compare a value") {
+            then("compare optional value to non-optional value") {
                 let key = DefaultsKey<Serializable?>("test")
                 expect(defaults[key] == nil).to(beTrue())
                 expect(defaults[key] != self.defaultValue).to(beTrue())

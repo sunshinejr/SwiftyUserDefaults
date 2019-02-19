@@ -42,7 +42,7 @@ public extension UserDefaults {
         }
     }
 
-    subscript<T: DefaultsSerializable>(key: DefaultsKey<T>) -> T.T {
+    subscript<T: DefaultsSerializable>(key: DefaultsKey<T>) -> T.T where T.T == T {
         get {
             if let value = T._defaults.get(key: key._key, userDefaults: self) {
                 return value
