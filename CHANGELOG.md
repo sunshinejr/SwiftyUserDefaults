@@ -1,5 +1,7 @@
 ### Next
 
+* Brought back dictionary support for [String: Any]/[String: String] and corresponding array version of it [[String: Any]]/[[String: String]]. [@sunshinejr](https://github.com/sunshinejr)
+
 ### 4.0.0-alpha.3 (2019-02-19)
 
 * Fixed a non-optional vs optional comparison bug ([#176](https://github.com/radex/SwiftyUserDefaults/issues/176)). [@z3bi](https://github.com/z3bi) and [@sunshinejr](https://github.com/sunshinejr)

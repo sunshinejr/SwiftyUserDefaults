@@ -117,6 +117,7 @@ Here's a full table of built-in single value defaults:
 | `Data`           | `[Data]`             |
 | `Date`           | `[Date]`             |
 | `URL`            | `[URL]`              |
+| `[String: Any]`  | `[[String: Any]]`    |
 
 But that's not all!
 
