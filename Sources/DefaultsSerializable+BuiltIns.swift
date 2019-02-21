@@ -1,7 +1,7 @@
 //
 // SwiftyUserDefaults
 //
-// Copyright (c) 2015-2018 Radosław Pietruszewski, Łukasz Mróz
+// Copyright (c) 2015-present Radosław Pietruszewski, Łukasz Mróz
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -72,6 +72,14 @@ extension DefaultsSerializable where Self: RawRepresentable {
 extension DefaultsSerializable where Self: NSCoding {
     public static var _defaults: DefaultsBridge<Self> { return DefaultsKeyedArchiverBridge() }
     public static var _defaultsArray: DefaultsBridge<[Self]> { return DefaultsKeyedArchiverBridge() }
+}
+
+extension Dictionary: DefaultsSerializable where Key == String {
+    
+    public typealias T = [Key: Value]
+
+    public static var _defaults: DefaultsBridge<[Key: Value]> { return DefaultsObjectBridge() }
+    public static var _defaultsArray: DefaultsBridge<[[Key: Value]]> { return DefaultsArrayBridge() }
 }
 
 extension Array: DefaultsSerializable where Element: DefaultsSerializable {

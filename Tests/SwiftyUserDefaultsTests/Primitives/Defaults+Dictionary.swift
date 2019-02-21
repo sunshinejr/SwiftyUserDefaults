@@ -23,16 +23,17 @@
 //
 
 import Quick
+import Foundation
 
-final class DefaultsBoolSpec: QuickSpec, DefaultsSerializableSpec {
+final class DefaultsDictionarySpec: QuickSpec, DefaultsSerializableSpec {
 
-    typealias Serializable = Bool
+    typealias Serializable = [String: AnyHashable]
 
-    var customValue: Bool = false
-    var defaultValue: Bool = true
+    var customValue: [String: AnyHashable] = ["a": "b"]
+    var defaultValue: [String: AnyHashable] = ["c": "d", "e": 1]
 
     override func spec() {
-        given("Bool") {
+        given("Dictionary") {
             self.testValues()
             self.testOptionalValues()
             self.testOptionalValuesWithoutDefaultValue()
