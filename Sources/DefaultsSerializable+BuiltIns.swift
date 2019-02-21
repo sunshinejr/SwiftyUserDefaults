@@ -74,6 +74,11 @@ extension DefaultsSerializable where Self: NSCoding {
     public static var _defaultsArray: DefaultsBridge<[Self]> { return DefaultsKeyedArchiverBridge() }
 }
 
+extension Dictionary: DefaultsSerializable where Key == String {
+    public static var _defaults: DefaultsBridge<[Key: Value]> { return DefaultsObjectBridge() }
+    public static var _defaultsArray: DefaultsBridge<[[Key: Value]]> { return DefaultsArrayBridge() }
+}
+
 extension Array: DefaultsSerializable where Element: DefaultsSerializable {
 
     public typealias T = [Element]
