@@ -1,6 +1,7 @@
 ### Next
 
 * Brought back dictionary support for `[String: Any]`/`[String: String]` and corresponding array version of it `[[String: Any]]`/`[[String: String]]`. [@sunshinejr](https://github.com/sunshinejr)
+* Added support for launch arguments/plist booleans. [@sunshinejr](https://github.com/sunshinejr)
 
 ### 4.0.0-alpha.3 (2019-02-19)
 
