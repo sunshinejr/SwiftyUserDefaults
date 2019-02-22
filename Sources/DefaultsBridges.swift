@@ -73,7 +73,17 @@ public final class DefaultsIntBridge: DefaultsBridge<Int> {
     }
 
     public override func get(key: String, userDefaults: UserDefaults) -> Int? {
-        return userDefaults.number(forKey: key)?.intValue
+        if let int = userDefaults.number(forKey: key)?.intValue {
+            return int
+        }
+
+        // Fallback for launch arguments
+        if let string = userDefaults.object(forKey: key) as? String,
+            let int = Int(string) {
+            return int
+        }
+
+        return nil
     }
 }
 
