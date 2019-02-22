@@ -93,7 +93,17 @@ public final class DefaultsDoubleBridge: DefaultsBridge<Double> {
     }
 
     public override func get(key: String, userDefaults: UserDefaults) -> Double? {
-        return userDefaults.number(forKey: key)?.doubleValue
+        if let double = userDefaults.number(forKey: key)?.doubleValue {
+            return double
+        }
+
+        // Fallback for launch arguments
+        if let string = userDefaults.object(forKey: key) as? String,
+            let double = Double(string) {
+            return double
+        }
+
+        return nil
     }
 }
 
