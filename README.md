@@ -9,14 +9,13 @@
 ![Swift version](https://img.shields.io/badge/swift-5.0-orange.svg)
 
 #### Modern Swift API for `NSUserDefaults`
-###### SwiftyUserDefaults makes user defaults enjoyable to use by combining expressive Swifty API with the benefits of static typing. Define your keys in one place, use value types easily, and get extra safety and convenient compile-time checks for free.
+###### SwiftyUserDefaults makes user defaults enjoyable to use by combining expressive Swifty API with the benefits of static typing. Define your keys in one place, use value types easily, and get extra safety and convenient compile-time checks for free. Oh, and add any type that you want to store with ease :-)
 
-Read [Statically-typed NSUserDefaults](http://radex.io/swift/nsuserdefaults/static) for more information about this project.<br />
 Read [documentation for stable version 3.0.1](https://github.com/radex/SwiftyUserDefaults/blob/14b629b035bf6355b46ece22c3851068a488a895/README.md)<br />
 Read [migration guide from version 3.x to 4.x](MigrationGuides/migration_3_to_4.md)<br />
 Read [migration guide from version 4.0.0-alpha.1 to 4.0.0-alpha.3](MigrationGuides/migration_4_alpha_1_to_4_alpha_2.md)
 
-# Version 4 - alpha 2
+# Version 4 - alpha 3
 
 <p align="center">
     <a href="#features">Features</a> &bull;
@@ -26,6 +25,7 @@ Read [migration guide from version 4.0.0-alpha.1 to 4.0.0-alpha.3](MigrationGuid
     <a href="#rawrepresentable">RawRepresentable</a> &bull;
     <a href="#extending-existing-types">Extending existing types</a> &bull;
     <a href="#custom-types">Custom types</a> &bull;
+    <a href="#launch-arguments">Launch arguments</a> &bull;
     <a href="#installation">Installation</a>
 </p>
 
@@ -279,6 +279,28 @@ extension Data: DefaultsSerializable {
 
 Also, take a look at our source code (or tests) to see more examples of bridges. If you find yourself confused with all these bridges, please [create an issue](https://github.com/radex/SwiftyUserDefaults/issues/new) and we will figure something out.
 
+### Launch arguments
+
+Do you like to customize your app/script/tests by UserDefaults? Now it's fully supported on our side, statically typed of course. 
+
+_Note: for now we support only `Bool`, `Double`, `Int`, `String` values, but if you have any other requests for that feature, please open an issue or PR and we can talk about implementing it in new versions._
+
+#### You can pass your arguments in your schema:
+<img src="https://i.imgur.com/SDpOBpK.png" alt="Pass launch arguments in Xcode Schema editor." />
+
+#### Or you can use launch arguments in XCUIApplication:
+```swift
+func testExample() {
+    let app = XCUIApplication()
+    app.launchArguments = ["-skipLogin", "true", "-loginTries", "3", "-lastGameTime", "61.3", "-nickname", "sunshinejr"]
+    app.launch()
+}
+```
+#### Or pass them as command line arguments!
+```bash
+./script -skipLogin true -loginTries 3 -lastGameTime 61.3 -nickname sunshinejr
+```
+
 ### Remove all keys
 
 To reset user defaults, use `removeAll` method.
@@ -298,11 +320,11 @@ var Defaults = UserDefaults(suiteName: "com.my.app")!
 ## Installation & Requirements
 
 #### Requirements
-**Swift** version >= **4.1**
-**iOS** version >= **8.0**
-**macOS** version >= **10.11**
-**tvOS** version >= **9.0**
-**watchOS** version >= **2.0**
+**Swift** version **>= 4.1**<br />
+**iOS** version **>= 8.0**<br />
+**macOS** version **>= 10.11**<br />
+**tvOS** version **>= 9.0**<br />
+**watchOS** version **>= 2.0**
 
 #### CocoaPods
 
