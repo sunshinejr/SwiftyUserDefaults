@@ -14,7 +14,7 @@ Read [documentation for stable version 3.0.1](https://github.com/radex/SwiftyUse
 Read [migration guide from version 3.x to 4.x](MigrationGuides/migration_3_to_4.md)<br />
 Read [migration guide from version 4.0.0-alpha.1 to 4.0.0-alpha.3](MigrationGuides/migration_4_alpha_1_to_4_alpha_2.md)
 
-# Version 4 - alpha 2
+# Version 4 - alpha 3
 
 <p align="center">
     <a href="#features">Features</a> &bull;
