@@ -125,7 +125,7 @@ Here's a full table of built-in single value defaults:
 
 But that's not all!
 
-#### Codable
+## Codable
 
 Since version 4, `SwiftyUserDefaults` support `Codable`! Just conform to `DefaultsSerializable` in your type:
 ```swift
@@ -144,7 +144,7 @@ Additionally, you've got an array support for free:
 let froggies = DefaultsKey<[FrogCodable]?>("froggies")
 ```
 
-#### NSCoding
+## NSCoding
 
 `NSCoding` was supported before version 4, but in this version we take the support on another level. No need for custom subscripts anymore!
 Support your custom `NSCoding` type the same way as with `Codable` support:
@@ -162,7 +162,7 @@ Additionally, you've got an array support also for free:
 let froggies = DefaultsKey<[FrogSerializable]?>("froggies")
 ```
 
-#### RawRepresentable
+## RawRepresentable
 
 And the last but not least, `RawRepresentable` support! Again, the same situation like with `NSCoding` and `Codable`:
 ```swift
@@ -182,7 +182,7 @@ Additionally, you've got an array support also for free:
 let froggies = DefaultsKey<[BestFroggiesEnum]?>("froggies")
 ```
 
-### Extending existing types
+## Extending existing types
 
 Let's say you want to extend a support `UIColor` or any other type that is `NSCoding`, `Codable` or `RawRepresentable`.
 Extending it to be `SwiftyUserDefaults`-friendly should be as easy as:
@@ -194,7 +194,7 @@ If it's not, we have two options:<br />
 a) It's a custom type that we don't know how to serialize, in this case at [Custom types](#custom-types)<br />
 b) It's a bug and it should be supported, in this case please file an issue (+ you can use [custom types](#custom-types) method as a workaround in the meantime)<br />
 
-### Custom types
+## Custom types
 
 If you want to add your own custom type that we don't support yet, we've got you covered. We use `DefaultsBridge`s of many kinds to specify how you get/set values and arrays of values. When you look at `DefaultsSerializable` protocol, it expects two properties in each type: `_defaults` and `_defaultsArray`, where both are of type `DefaultsBridge`.
 
@@ -281,16 +281,16 @@ extension Data: DefaultsSerializable {
 
 Also, take a look at our source code (or tests) to see more examples of bridges. If you find yourself confused with all these bridges, please [create an issue](https://github.com/radex/SwiftyUserDefaults/issues/new) and we will figure something out.
 
-### Launch arguments
+## Launch arguments
 
 Do you like to customize your app/script/tests by UserDefaults? Now it's fully supported on our side, statically typed of course. 
 
 _Note: for now we support only `Bool`, `Double`, `Int`, `String` values, but if you have any other requests for that feature, please open an issue or PR and we can talk about implementing it in new versions._
 
-#### You can pass your arguments in your schema:
+### You can pass your arguments in your schema:
 <img src="https://i.imgur.com/SDpOBpK.png" alt="Pass launch arguments in Xcode Schema editor." />
 
-#### Or you can use launch arguments in XCUIApplication:
+### Or you can use launch arguments in XCUIApplication:
 ```swift
 func testExample() {
     let app = XCUIApplication()
@@ -298,14 +298,14 @@ func testExample() {
     app.launch()
 }
 ```
-#### Or pass them as command line arguments!
+### Or pass them as command line arguments!
 ```bash
 ./script -skipLogin true -loginTries 3 -lastGameTime 61.3 -nickname sunshinejr
 ```
 
-### Utils
+## Utils
 
-#### Remove all keys
+### Remove all keys
 
 To reset user defaults, use `removeAll` method.
 
@@ -313,7 +313,7 @@ To reset user defaults, use `removeAll` method.
 Defaults.removeAll()
 ```
 
-#### Shared user defaults
+### Shared user defaults
 
 If you're sharing your user defaults between different apps or an app and its extensions, you can use SwiftyUserDefaults by overriding the `Defaults` shortcut with your own. Just add in your app:
 
@@ -321,7 +321,7 @@ If you're sharing your user defaults between different apps or an app and its ex
 var Defaults = UserDefaults(suiteName: "com.my.app")!
 ```
 
-#### Check key
+### Check key
 
 If you want to check if we've got a value for `DefaultsKey`:
 ```swift
@@ -330,14 +330,14 @@ let hasKey = Defaults.hasKey(.skipLogin)
 
 ## Installation & Requirements
 
-#### Requirements
+### Requirements
 **Swift** version **>= 4.1**<br />
 **iOS** version **>= 8.0**<br />
 **macOS** version **>= 10.11**<br />
 **tvOS** version **>= 9.0**<br />
 **watchOS** version **>= 2.0**
 
-#### CocoaPods
+### CocoaPods
 
 If you're using CocoaPods, just add this line to your Podfile:
 
@@ -357,7 +357,7 @@ Then import the library in all files where you use it:
 import SwiftyUserDefaults
 ```
 
-#### Carthage
+### Carthage
 
 Just add to your Cartfile:
 
@@ -365,7 +365,7 @@ Just add to your Cartfile:
 github "radex/SwiftyUserDefaults" "4.0.0-alpha.3"
 ```
 
-#### Swift Package Manager
+### Swift Package Manager
 
 Just add to your `Package.swift` under dependencies:
 ```swift
@@ -389,11 +389,11 @@ You might also be interested in my blog posts which explain the design process b
 - [Swifty APIs: NSTimer](http://radex.io/swift/nstimer/)
 - [Swifty methods](http://radex.io/swift/methods/)
 
-### Contributing
+## Contributing
 
 If you have comments, complaints or ideas for improvements, feel free to open an issue or a pull request.
 
-### Author and license
+## Authors and license
 
 *Maintainer:* Łukasz Mróz
 * [github.com/sunshinejr](http://github.com/sunshinejr)
