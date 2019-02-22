@@ -328,7 +328,7 @@ If you want to check if we've got a value for `DefaultsKey`:
 let hasKey = Defaults.hasKey(.skipLogin)
 ```
 
-## Installation & Requirements
+## Installation
 
 ### Requirements
 **Swift** version **>= 4.1**<br />
