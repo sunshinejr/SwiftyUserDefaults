@@ -26,6 +26,7 @@
 		8551BC3D221207F20004E121 /* Defaults+FrogCustomSerializable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8551BC3C221207F20004E121 /* Defaults+FrogCustomSerializable.swift */; };
 		85ABD921221EDD32002E63D8 /* Defaults+Dictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85ABD920221EDD32002E63D8 /* Defaults+Dictionary.swift */; };
 		85E9D0AC22203B1100E0F0EA /* Defaults+StringToBool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85E9D0AB22203B1100E0F0EA /* Defaults+StringToBool.swift */; };
+		85E9D0AE22203C6A00E0F0EA /* UserDefaults+PropertyList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85E9D0AD22203C6A00E0F0EA /* UserDefaults+PropertyList.swift */; };
 		OBJ_152 /* AdapterProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_76 /* AdapterProtocols.swift */; };
 		OBJ_153 /* AssertionDispatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_77 /* AssertionDispatcher.swift */; };
 		OBJ_154 /* AssertionRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_78 /* AssertionRecorder.swift */; };
@@ -181,6 +182,7 @@
 		8551BC3C221207F20004E121 /* Defaults+FrogCustomSerializable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Defaults+FrogCustomSerializable.swift"; sourceTree = "<group>"; };
 		85ABD920221EDD32002E63D8 /* Defaults+Dictionary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Defaults+Dictionary.swift"; sourceTree = "<group>"; };
 		85E9D0AB22203B1100E0F0EA /* Defaults+StringToBool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Defaults+StringToBool.swift"; sourceTree = "<group>"; };
+		85E9D0AD22203C6A00E0F0EA /* UserDefaults+PropertyList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+PropertyList.swift"; sourceTree = "<group>"; };
 		"Nimble::Nimble::Product" /* Nimble.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Nimble.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		OBJ_10 /* Defaults+Subscripts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Defaults+Subscripts.swift"; sourceTree = "<group>"; };
 		OBJ_100 /* BeIdenticalTo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeIdenticalTo.swift; sourceTree = "<group>"; };
@@ -439,6 +441,7 @@
 			children = (
 				OBJ_37 /* DefaultsSerializableSpec.swift */,
 				OBJ_38 /* TestHelper.swift */,
+				85E9D0AD22203C6A00E0F0EA /* UserDefaults+PropertyList.swift */,
 			);
 			path = TestHelpers;
 			sourceTree = "<group>";
@@ -989,6 +992,7 @@
 				OBJ_295 /* Defaults+URL.swift in Sources */,
 				OBJ_297 /* Defaults+BestFroggiesEnum.swift in Sources */,
 				8551BC3D221207F20004E121 /* Defaults+FrogCustomSerializable.swift in Sources */,
+				85E9D0AE22203C6A00E0F0EA /* UserDefaults+PropertyList.swift in Sources */,
 				OBJ_298 /* DefaultsSerializableSpec.swift in Sources */,
 				OBJ_299 /* TestHelper.swift in Sources */,
 			);
