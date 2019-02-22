@@ -296,7 +296,11 @@ var Defaults = UserDefaults(suiteName: "com.my.app")!
 ## Installation & Requirements
 
 #### Requirements
-Swift version >= 4.1
+**Swift** version >= **4.1**
+**iOS** version >= **8.0**
+**macOS** version >= **10.11**
+**tvOS** version >= **9.0**
+**watchOS** version >= **2.0**
 
 #### CocoaPods
 
