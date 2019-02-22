@@ -73,7 +73,17 @@ public final class DefaultsIntBridge: DefaultsBridge<Int> {
     }
 
     public override func get(key: String, userDefaults: UserDefaults) -> Int? {
-        return userDefaults.number(forKey: key)?.intValue
+        if let int = userDefaults.number(forKey: key)?.intValue {
+            return int
+        }
+
+        // Fallback for launch arguments
+        if let string = userDefaults.object(forKey: key) as? String,
+            let int = Int(string) {
+            return int
+        }
+
+        return nil
     }
 }
 
@@ -83,7 +93,17 @@ public final class DefaultsDoubleBridge: DefaultsBridge<Double> {
     }
 
     public override func get(key: String, userDefaults: UserDefaults) -> Double? {
-        return userDefaults.number(forKey: key)?.doubleValue
+        if let double = userDefaults.number(forKey: key)?.doubleValue {
+            return double
+        }
+
+        // Fallback for launch arguments
+        if let string = userDefaults.object(forKey: key) as? String,
+            let double = Double(string) {
+            return double
+        }
+
+        return nil
     }
 }
 
@@ -95,9 +115,15 @@ public final class DefaultsBoolBridge: DefaultsBridge<Bool> {
     public override func get(key: String, userDefaults: UserDefaults) -> Bool? {
         // @warning we use number(forKey:) instead of bool(forKey:), because
         // bool(forKey:) will always return value, even if it's not set
-        // and it does a little bit of magic under the hood as well
-        // e.g. transforming strings like "YES" or "true" to true
-        return userDefaults.number(forKey: key)?.boolValue
+        //
+        // Now, let's see if there is value in defaults that converts to Bool first:
+        if let bool = userDefaults.number(forKey: key)?.boolValue {
+            return bool
+        }
+
+        // If not, fallback for values saved in a plist (e.g. for testing)
+        // For instance, few of the string("YES", "true", "NO", "false") convert to Bool from a property list
+        return (userDefaults.object(forKey: key) as? String)?.bool
     }
 }
 

@@ -28,14 +28,34 @@ final class DefaultsBoolSpec: QuickSpec, DefaultsSerializableSpec {
 
     typealias Serializable = Bool
 
-    var customValue: Bool = false
-    var defaultValue: Bool = true
+    var customValue: Bool = true
+    var defaultValue: Bool = false
 
     override func spec() {
         given("Bool") {
             self.testValues()
             self.testOptionalValues()
             self.testOptionalValuesWithoutDefaultValue()
+            self.testPlistRegisteringValues(valueStrings: ["YES": true,
+                                                           "yes": true,
+                                                           "TRUE": true,
+                                                           "true": true,
+                                                           "Y": true,
+                                                           "y": true,
+                                                           "T": true,
+                                                           "t": true,
+                                                           "1": true,
+                                                           "NO": false,
+                                                           "no": false,
+                                                           "FALSE": false,
+                                                           "false": false,
+                                                           "N": false,
+                                                           "n": false,
+                                                           "f": false,
+                                                           "F": false,
+                                                           "0": false,
+                                                           "blabla": nil,
+                                                           "test": nil])
         }
     }
 }

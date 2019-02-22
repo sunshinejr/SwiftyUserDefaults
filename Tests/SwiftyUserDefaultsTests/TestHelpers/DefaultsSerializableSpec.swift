@@ -248,4 +248,72 @@ extension DefaultsSerializableSpec where Serializable.T: Equatable, Serializable
             }
         }
     }
+
+    func testPlistRegisteringValues(valueStrings: [String: Serializable?]) {
+        let keyPrefix = "argumentToInject"
+        let enumeratedArguments = valueStrings.enumerated()
+
+        given("plist-registered values") {
+            var defaults: UserDefaults!
+
+            beforeEach {
+                let suiteName = UUID().uuidString
+                defaults = UserDefaults(suiteName: suiteName)
+                injectPlistArguments(to: defaults)
+            }
+
+            then("read values to non-optional keys") {
+                precondition(!valueStrings.isEmpty, "`valueStrings` cannot be empty as we need strings:values to test fetching them from plist")
+
+                for (key, value) in transformToProperKeyValue() {
+                    let (stringValue, expectedParsedValue) = value
+                    let defaultsKey = DefaultsKey<Serializable>(key, defaultValue: self.defaultValue)
+                    precondition(defaults.hasKey(defaultsKey), "UserDefaults didn't pick up the process arguments")
+
+                    let expectedValue = expectedParsedValue ?? self.defaultValue
+                    expect(defaults[defaultsKey]).to(equal(expectedValue), description: "key: \(key), stringValue: \(stringValue)")
+                }
+            }
+
+            then("read values to optional keys") {
+                precondition(!valueStrings.isEmpty, "`valueStrings` cannot be empty as we need strings:values to test fetching them from plist")
+
+                for (key, value) in transformToProperKeyValue() {
+                    let (stringValue, expectedParsedValue) = value
+                    let defaultsKey = DefaultsKey<Serializable?>(key)
+                    precondition(defaults.hasKey(defaultsKey), "UserDefaults didn't pick up the process arguments")
+
+                    if let expectedValue = expectedParsedValue {
+                        expect(defaults[defaultsKey]).to(equal(expectedValue), description: "key: \(key), stringValue: \(stringValue)")
+                    } else {
+                        expect(defaults[defaultsKey]).to(beNil(), description: "key: \(key), stringValue: \(stringValue)")
+                    }
+                }
+            }
+        }
+
+        func injectPlistArguments(to userDefaults: UserDefaults) {
+            let arguments = transformToProperKeyValue()
+                .reduce(into: [String]()) { (result, element) in
+                    let (key, value) = element
+                    let (stringValue, _) = value
+                    result.append(contentsOf: ["-" + key, stringValue])
+            }
+            let parsedArguments = UserDefaults._parseArguments(arguments)
+
+            userDefaults.setVolatileDomain(parsedArguments, forName: "NSArgumentDomain")
+        }
+
+        // Because we accept a dictionary that contains [stringValue: expected parsedValue]
+        // this function transforms it to a [defaultsKey: (stringValue, expectedParsedValue)]
+        func transformToProperKeyValue() -> [String: (String, Serializable?)] {
+            return enumeratedArguments
+                .reduce(into: [String: (String, Serializable?)]()) { (result, enumeratedElement) in
+                    let (index, element) = enumeratedElement
+                    let (value, expectedParsedValue) = element
+                    let argumentKey = "\(keyPrefix)\(index)"
+                    result[argumentKey] = (value, expectedParsedValue)
+            }
+        }
+    }
 }

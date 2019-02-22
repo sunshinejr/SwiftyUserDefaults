@@ -22,24 +22,19 @@
 // SOFTWARE.
 //
 
-import Quick
+import Foundation
 
-final class DefaultsDoubleSpec: QuickSpec, DefaultsSerializableSpec {
-
-    typealias Serializable = Double
-
-    var customValue: Double = 2.0
-    var defaultValue: Double = 1.0
-
-    override func spec() {
-        given("Double") {
-            self.testValues()
-            self.testOptionalValues()
-            self.testOptionalValuesWithoutDefaultValue()
-            self.testPlistRegisteringValues(valueStrings: ["0": 0.0,
-                                                           "1": 1.0,
-                                                           "2": 2.0,
-                                                           "31.0": 31.0])
+// We don't want to use `NSString.boolValue` as it's converting every miss to `false`, instead of `nil`
+internal extension String {
+    var bool: Bool? {
+        switch self.lowercased() {
+        case "true", "t", "yes", "y", "1":
+            return true
+        case "false", "f", "no", "n", "0":
+            return false
+        default:
+            return nil
         }
     }
 }
+
