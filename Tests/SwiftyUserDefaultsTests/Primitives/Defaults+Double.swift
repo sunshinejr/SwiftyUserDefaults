@@ -36,6 +36,10 @@ final class DefaultsDoubleSpec: QuickSpec, DefaultsSerializableSpec {
             self.testValues()
             self.testOptionalValues()
             self.testOptionalValuesWithoutDefaultValue()
+            self.testPlistRegisteringValues(valueStrings: ["0": 0.0,
+                                                           "1": 1.0,
+                                                           "2": 2.0,
+                                                           "31.0": 31.0])
         }
     }
 }
