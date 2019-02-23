@@ -84,4 +84,4 @@ script:
   - scripts/carthage_integration_step.sh
   - scripts/spm_integration_step.sh
   
-  - DEBUG="*" danger process danger-swift
+  - DEBUG="*" danger-swift
