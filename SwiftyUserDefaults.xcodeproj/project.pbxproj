@@ -24,6 +24,7 @@
 		8551BC2C2211EABE0004E121 /* Defaults+Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8551BC2B2211EABE0004E121 /* Defaults+Color.swift */; };
 		8551BC3A2211F7D20004E121 /* DefaultsBridges.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8551BC392211F7D20004E121 /* DefaultsBridges.swift */; };
 		8551BC3D221207F20004E121 /* Defaults+FrogCustomSerializable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8551BC3C221207F20004E121 /* Defaults+FrogCustomSerializable.swift */; };
+		8598978C2221AA8100B31FD5 /* DefaultsObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8598978B2221AA8100B31FD5 /* DefaultsObserver.swift */; };
 		85ABD921221EDD32002E63D8 /* Defaults+Dictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85ABD920221EDD32002E63D8 /* Defaults+Dictionary.swift */; };
 		85E9D0AC22203B1100E0F0EA /* Defaults+StringToBool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85E9D0AB22203B1100E0F0EA /* Defaults+StringToBool.swift */; };
 		85E9D0AE22203C6A00E0F0EA /* UserDefaults+PropertyList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85E9D0AD22203C6A00E0F0EA /* UserDefaults+PropertyList.swift */; };
@@ -180,6 +181,7 @@
 		8551BC2B2211EABE0004E121 /* Defaults+Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Defaults+Color.swift"; sourceTree = "<group>"; };
 		8551BC392211F7D20004E121 /* DefaultsBridges.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultsBridges.swift; sourceTree = "<group>"; };
 		8551BC3C221207F20004E121 /* Defaults+FrogCustomSerializable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Defaults+FrogCustomSerializable.swift"; sourceTree = "<group>"; };
+		8598978B2221AA8100B31FD5 /* DefaultsObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultsObserver.swift; sourceTree = "<group>"; };
 		85ABD920221EDD32002E63D8 /* Defaults+Dictionary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Defaults+Dictionary.swift"; sourceTree = "<group>"; };
 		85E9D0AB22203B1100E0F0EA /* Defaults+StringToBool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Defaults+StringToBool.swift"; sourceTree = "<group>"; };
 		85E9D0AD22203C6A00E0F0EA /* UserDefaults+PropertyList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+PropertyList.swift"; sourceTree = "<group>"; };
@@ -563,6 +565,7 @@
 				OBJ_15 /* OptionalType.swift */,
 				8551BC392211F7D20004E121 /* DefaultsBridges.swift */,
 				85E9D0AB22203B1100E0F0EA /* Defaults+StringToBool.swift */,
+				8598978B2221AA8100B31FD5 /* DefaultsObserver.swift */,
 			);
 			path = Sources;
 			sourceTree = SOURCE_ROOT;
@@ -964,6 +967,7 @@
 				OBJ_265 /* DefaultsSerializable.swift in Sources */,
 				OBJ_266 /* OptionalType.swift in Sources */,
 				85E9D0AC22203B1100E0F0EA /* Defaults+StringToBool.swift in Sources */,
+				8598978C2221AA8100B31FD5 /* DefaultsObserver.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
