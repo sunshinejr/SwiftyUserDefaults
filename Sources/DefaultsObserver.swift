@@ -49,6 +49,7 @@ public final class DefaultsObserver<T: DefaultsSerializable>: NSObject, Defaults
     private let key: DefaultsKey<T>
     private let userDefaults: UserDefaults
     private let handler: ((Update) -> Void)
+    private var didRemoveObserver = false
 
     init(key: DefaultsKey<T>, userDefaults: UserDefaults, options: NSKeyValueObservingOptions, handler: @escaping ((Update) -> Void)) {
         self.key = key
@@ -73,6 +74,11 @@ public final class DefaultsObserver<T: DefaultsSerializable>: NSObject, Defaults
     }
 
     public func dispose() {
+        // We use this local property because when you use `removeObserver` when you are
+        // not actually observing anymore, you'll receive a runtime error.
+        if didRemoveObserver { return }
+
+        didRemoveObserver = true
         userDefaults.removeObserver(self, forKeyPath: key._key, context: nil)
     }
 }
