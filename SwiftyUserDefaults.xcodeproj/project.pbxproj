@@ -21,6 +21,7 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		853DC6E82221CCBE005FB9BA /* Defaults+Observing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 853DC6E72221CCBE005FB9BA /* Defaults+Observing.swift */; };
 		8551BC2C2211EABE0004E121 /* Defaults+Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8551BC2B2211EABE0004E121 /* Defaults+Color.swift */; };
 		8551BC3A2211F7D20004E121 /* DefaultsBridges.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8551BC392211F7D20004E121 /* DefaultsBridges.swift */; };
 		8551BC3D221207F20004E121 /* Defaults+FrogCustomSerializable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8551BC3C221207F20004E121 /* Defaults+FrogCustomSerializable.swift */; };
@@ -178,6 +179,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		853DC6E72221CCBE005FB9BA /* Defaults+Observing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Defaults+Observing.swift"; sourceTree = "<group>"; };
 		8551BC2B2211EABE0004E121 /* Defaults+Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Defaults+Color.swift"; sourceTree = "<group>"; };
 		8551BC392211F7D20004E121 /* DefaultsBridges.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultsBridges.swift; sourceTree = "<group>"; };
 		8551BC3C221207F20004E121 /* Defaults+FrogCustomSerializable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Defaults+FrogCustomSerializable.swift"; sourceTree = "<group>"; };
@@ -533,6 +535,7 @@
 			isa = PBXGroup;
 			children = (
 				OBJ_11 /* Defaults.swift */,
+				853DC6E72221CCBE005FB9BA /* Defaults+Observing.swift */,
 				85E9D0AB22203B1100E0F0EA /* Defaults+StringToBool.swift */,
 				OBJ_10 /* Defaults+Subscripts.swift */,
 				8551BC392211F7D20004E121 /* DefaultsBridges.swift */,
@@ -944,6 +947,7 @@
 				OBJ_266 /* OptionalType.swift in Sources */,
 				85E9D0AC22203B1100E0F0EA /* Defaults+StringToBool.swift in Sources */,
 				8598978C2221AA8100B31FD5 /* DefaultsObserver.swift in Sources */,
+				853DC6E82221CCBE005FB9BA /* Defaults+Observing.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -57,13 +57,6 @@ public extension UserDefaults {
     }
 }
 
-public extension UserDefaults {
-
-    public func observe<T: DefaultsSerializable>(key: DefaultsKey<T>, options: NSKeyValueObservingOptions, handler: @escaping (DefaultsObserver<T>.Update) -> Void) -> DefaultsDisposable {
-        return DefaultsObserver(key: key, userDefaults: self, options: options, handler: handler)
-    }
-}
-
 internal extension UserDefaults {
 
     func number(forKey key: String) -> NSNumber? {

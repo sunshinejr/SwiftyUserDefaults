@@ -34,15 +34,15 @@ public final class DefaultsObserver<T: DefaultsSerializable>: NSObject, Defaults
         public let kind: NSKeyValueChange
         public let indexes: IndexSet?
         public let isPrior: Bool
-        public let newValue: T?
-        public let oldValue: T?
+        public let newValue: T.T?
+        public let oldValue: T.T?
 
         init(dict: [NSKeyValueChangeKey: Any]) {
             kind = NSKeyValueChange(rawValue: dict[.kindKey] as! UInt)!
             indexes = dict[.indexesKey] as? IndexSet
             isPrior = dict[.notificationIsPriorKey] as? Bool ?? false
-            newValue = dict[.newKey] as? T
-            oldValue = dict[.oldKey] as? T
+            newValue = dict[.newKey] as? T.T
+            oldValue = dict[.oldKey] as? T.T
         }
     }
 
