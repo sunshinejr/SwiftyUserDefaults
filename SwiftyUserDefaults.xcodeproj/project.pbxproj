@@ -344,12 +344,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		8551BC3B221207C50004E121 /* CustomTypes */ = {
+		8598978D2221BDFE00B31FD5 /* External types */ = {
 			isa = PBXGroup;
 			children = (
+				OBJ_35 /* Defaults+BestFroggiesEnum.swift */,
+				8551BC2B2211EABE0004E121 /* Defaults+Color.swift */,
+				OBJ_19 /* Defaults+FrogCodable.swift */,
 				8551BC3C221207F20004E121 /* Defaults+FrogCustomSerializable.swift */,
+				OBJ_24 /* Defaults+FrogSerializable.swift */,
 			);
-			path = CustomTypes;
+			path = "External types";
 			sourceTree = "<group>";
 		};
 		OBJ_124 /* Utils */ = {
@@ -387,55 +391,27 @@
 		OBJ_17 /* SwiftyUserDefaultsTests */ = {
 			isa = PBXGroup;
 			children = (
-				8551BC3B221207C50004E121 /* CustomTypes */,
-				OBJ_18 /* Codable */,
-				OBJ_22 /* NSCoding */,
-				OBJ_25 /* Primitives */,
-				OBJ_33 /* RawRepresentable */,
+				8598978D2221BDFE00B31FD5 /* External types */,
+				OBJ_25 /* Built-ins */,
 				OBJ_36 /* TestHelpers */,
 			);
 			name = SwiftyUserDefaultsTests;
 			path = Tests/SwiftyUserDefaultsTests;
 			sourceTree = SOURCE_ROOT;
 		};
-		OBJ_18 /* Codable */ = {
-			isa = PBXGroup;
-			children = (
-				OBJ_19 /* Defaults+FrogCodable.swift */,
-			);
-			path = Codable;
-			sourceTree = "<group>";
-		};
-		OBJ_22 /* NSCoding */ = {
-			isa = PBXGroup;
-			children = (
-				OBJ_24 /* Defaults+FrogSerializable.swift */,
-				8551BC2B2211EABE0004E121 /* Defaults+Color.swift */,
-			);
-			path = NSCoding;
-			sourceTree = "<group>";
-		};
-		OBJ_25 /* Primitives */ = {
+		OBJ_25 /* Built-ins */ = {
 			isa = PBXGroup;
 			children = (
 				OBJ_26 /* Defaults+Bool.swift */,
 				OBJ_27 /* Defaults+Data.swift */,
 				OBJ_28 /* Defaults+Date.swift */,
+				85ABD920221EDD32002E63D8 /* Defaults+Dictionary.swift */,
 				OBJ_29 /* Defaults+Double.swift */,
 				OBJ_30 /* Defaults+Int.swift */,
 				OBJ_31 /* Defaults+String.swift */,
 				OBJ_32 /* Defaults+URL.swift */,
-				85ABD920221EDD32002E63D8 /* Defaults+Dictionary.swift */,
 			);
-			path = Primitives;
-			sourceTree = "<group>";
-		};
-		OBJ_33 /* RawRepresentable */ = {
-			isa = PBXGroup;
-			children = (
-				OBJ_35 /* Defaults+BestFroggiesEnum.swift */,
-			);
-			path = RawRepresentable;
+			path = "Built-ins";
 			sourceTree = "<group>";
 		};
 		OBJ_36 /* TestHelpers */ = {
@@ -556,16 +532,16 @@
 		OBJ_7 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				OBJ_8 /* SwiftyUserDefaults.h */,
-				OBJ_10 /* Defaults+Subscripts.swift */,
 				OBJ_11 /* Defaults.swift */,
-				OBJ_12 /* DefaultsKeys.swift */,
-				OBJ_13 /* DefaultsSerializable+BuiltIns.swift */,
-				OBJ_14 /* DefaultsSerializable.swift */,
-				OBJ_15 /* OptionalType.swift */,
-				8551BC392211F7D20004E121 /* DefaultsBridges.swift */,
 				85E9D0AB22203B1100E0F0EA /* Defaults+StringToBool.swift */,
+				OBJ_10 /* Defaults+Subscripts.swift */,
+				8551BC392211F7D20004E121 /* DefaultsBridges.swift */,
+				OBJ_12 /* DefaultsKeys.swift */,
 				8598978B2221AA8100B31FD5 /* DefaultsObserver.swift */,
+				OBJ_14 /* DefaultsSerializable.swift */,
+				OBJ_13 /* DefaultsSerializable+BuiltIns.swift */,
+				OBJ_15 /* OptionalType.swift */,
+				OBJ_8 /* SwiftyUserDefaults.h */,
 			);
 			path = Sources;
 			sourceTree = SOURCE_ROOT;
