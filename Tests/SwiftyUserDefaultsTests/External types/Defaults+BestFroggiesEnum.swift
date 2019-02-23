@@ -36,6 +36,7 @@ final class DefaultsBestFroggiesEnumSerializableSpec: QuickSpec, DefaultsSeriali
             self.testValues()
             self.testOptionalValues()
             self.testOptionalValuesWithoutDefaultValue()
+            self.testObserving()
         }
     }
 }

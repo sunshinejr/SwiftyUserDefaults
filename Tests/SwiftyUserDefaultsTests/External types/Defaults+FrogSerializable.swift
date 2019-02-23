@@ -36,6 +36,7 @@ final class DefaultsFrogSerializableSpec: QuickSpec, DefaultsSerializableSpec {
             self.testValues()
             self.testOptionalValues()
             self.testOptionalValuesWithoutDefaultValue()
+            self.testObserving()
         }
     }
 }

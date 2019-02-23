@@ -48,6 +48,7 @@ final class DefaultsUIColorSerializableSpec: QuickSpec, DefaultsSerializableSpec
             self.testValues()
             self.testOptionalValues()
             self.testOptionalValuesWithoutDefaultValue()
+            self.testObserving()
         }
     }
 }

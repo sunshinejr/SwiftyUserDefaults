@@ -35,6 +35,7 @@ final class DefaultsIntSpec: QuickSpec, DefaultsSerializableSpec {
             self.testValues()
             self.testOptionalValues()
             self.testOptionalValuesWithoutDefaultValue()
+            self.testObserving()
             self.testPlistRegisteringValues(valueStrings: ["0": 0,
                                                            "1": 1,
                                                            "2": 2,

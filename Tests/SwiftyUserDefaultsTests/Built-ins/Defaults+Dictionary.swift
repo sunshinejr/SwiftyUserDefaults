@@ -37,6 +37,7 @@ final class DefaultsDictionarySpec: QuickSpec, DefaultsSerializableSpec {
             self.testValues()
             self.testOptionalValues()
             self.testOptionalValuesWithoutDefaultValue()
+            self.testObserving()
         }
     }
 }
