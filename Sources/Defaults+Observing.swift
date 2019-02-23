@@ -26,7 +26,7 @@ import Foundation
 
 public extension UserDefaults {
 
-    public func observe<T: DefaultsSerializable>(key: DefaultsKey<T>, options: NSKeyValueObservingOptions, handler: @escaping (DefaultsObserver<T>.Update) -> Void) -> DefaultsDisposable {
+    public func observe<T: DefaultsSerializable>(key: DefaultsKey<T>, options: NSKeyValueObservingOptions = [.initial, .old, .new], handler: @escaping (DefaultsObserver<T>.Update) -> Void) -> DefaultsDisposable {
         return DefaultsObserver(key: key, userDefaults: self, options: options, handler: handler)
     }
 }
