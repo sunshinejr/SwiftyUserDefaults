@@ -54,8 +54,8 @@ before_install:
   - gem install cocoapods -v 1.6.0
   - gem install xcpretty
   - brew install xcodegen
-  # - npm install -g danger
-  # - brew install danger/tap/danger-swift
+  - npm install -g danger
+  - brew install danger/tap/danger-swift
 
 script:
   - set -o pipefail
@@ -84,5 +84,4 @@ script:
   - scripts/carthage_integration_step.sh
   - scripts/spm_integration_step.sh
   
-  # there is a problem with danger-swift currently, commenting it for now
-  # - DEBUG="*" danger process danger-swift
+  - DEBUG="*" danger process danger-swift
