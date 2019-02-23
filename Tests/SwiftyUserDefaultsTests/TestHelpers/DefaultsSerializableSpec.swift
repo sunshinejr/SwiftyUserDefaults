@@ -316,4 +316,108 @@ extension DefaultsSerializableSpec where Serializable.T: Equatable, Serializable
             }
         }
     }
+
+    func testObserving() {
+        given("key-value observing") {
+            var defaults: UserDefaults!
+
+            beforeEach {
+                let suiteName = UUID().uuidString
+                defaults = UserDefaults(suiteName: suiteName)
+            }
+
+            when("optional key without default value") {
+                then("receive updates") {
+                    let key = DefaultsKey<Serializable?>("test")
+
+                    var update: DefaultsObserver<Serializable?>.Update?
+                    let observer = defaults.observe(key: key) { receivedUpdate in
+                        update = receivedUpdate
+                    }
+
+                    defaults[key] = self.customValue
+
+                    expect(update?.oldValue).toEventually(beNil())
+                    expect(update?.newValue).toEventually(equal(self.customValue))
+                }
+
+                then("remove observer on dispose") {
+                    let key = DefaultsKey<Serializable?>("test")
+
+                    var update: DefaultsObserver<Serializable?>.Update?
+                    let observer = defaults.observe(key: key) { receivedUpdate in
+                        update = receivedUpdate
+                    }
+
+                    observer.dispose()
+                    defaults[key] = self.customValue
+
+                    expect(update?.oldValue).toEventually(beNil())
+                    expect(update?.newValue).toEventually(beNil())
+                }
+            }
+
+            when("optional key with default value") {
+                then("receive updates") {
+                    let key = DefaultsKey<Serializable?>("test", defaultValue: self.defaultValue)
+
+                    var update: DefaultsObserver<Serializable?>.Update?
+                    let observer = defaults.observe(key: key) { receivedUpdate in
+                        update = receivedUpdate
+                    }
+
+                    defaults[key] = self.customValue
+
+                    expect(update?.oldValue).toEventually(equal(self.defaultValue))
+                    expect(update?.newValue).toEventually(equal(self.customValue))
+                }
+
+                then("remove observer on dispose") {
+                    let key = DefaultsKey<Serializable?>("test", defaultValue: self.defaultValue)
+
+                    var update: DefaultsObserver<Serializable?>.Update?
+                    let observer = defaults.observe(key: key) { receivedUpdate in
+                        update = receivedUpdate
+                    }
+
+                    observer.dispose()
+                    defaults[key] = self.customValue
+
+                    expect(update?.oldValue).toEventually(beNil())
+                    expect(update?.newValue).toEventually(beNil())
+                }
+            }
+
+            when("non-optional key") {
+                then("receive updates") {
+                    let key = DefaultsKey<Serializable>("test", defaultValue: self.defaultValue)
+
+                    var update: DefaultsObserver<Serializable>.Update?
+                    let observer = defaults.observe(key: key) { receivedUpdate in
+                        update = receivedUpdate
+                    }
+
+                    defaults[key] = self.customValue
+
+                    expect(update?.oldValue).toEventually(equal(self.defaultValue))
+                    expect(update?.newValue).toEventually(equal(self.customValue))
+                }
+
+                then("remove observer on dispose") {
+                    let key = DefaultsKey<Serializable>("test", defaultValue: self.defaultValue)
+
+                    var update: DefaultsObserver<Serializable>.Update?
+                    let observer = defaults.observe(key: key) { receivedUpdate in
+                        update = receivedUpdate
+                    }
+
+                    observer.dispose()
+                    defaults[key] = self.customValue
+
+                    expect(update?.oldValue).toEventually(beNil())
+                    expect(update?.newValue).toEventually(beNil())
+                }
+            }
+        }
+    }
 }
