@@ -18,7 +18,7 @@ matrix:
       script: DEBUG="*" danger-swift ci  
     - os: osx
       osx_image: xcode10.2
-      name: Swift 5 compatibility
+      name: Swift 5.0 compatibility
       env:
         - CACHE_NAME=SWIFT5_0
         - SWIFT_VERSION=5.0
