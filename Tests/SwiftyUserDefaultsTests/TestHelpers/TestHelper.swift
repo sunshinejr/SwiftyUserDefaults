@@ -74,6 +74,16 @@ final class DefaultsFrogBridge: DefaultsBridge<FrogCustomSerializable> {
     override func save(key: String, value: FrogCustomSerializable?, userDefaults: UserDefaults) {
         userDefaults.set(value?.name, forKey: key)
     }
+
+    public override func isSerialized() -> Bool {
+        return true
+    }
+
+    public override func deserialize(_ object: Any) -> FrogCustomSerializable? {
+        guard let name = object as? String else { return nil }
+
+        return FrogCustomSerializable(name: name)
+    }
 }
 
 final class DefaultsFrogArrayBridge: DefaultsBridge<[FrogCustomSerializable]> {
@@ -87,14 +97,22 @@ final class DefaultsFrogArrayBridge: DefaultsBridge<[FrogCustomSerializable]> {
         let values = value?.map { $0.name }
         userDefaults.set(values, forKey: key)
     }
+
+    public override func isSerialized() -> Bool {
+        return true
+    }
+
+    public override func deserialize(_ object: Any) -> [FrogCustomSerializable]? {
+        guard let names = object as? [String] else { return nil }
+
+        return names.map(FrogCustomSerializable.init)
+    }
 }
 
 struct FrogCustomSerializable: DefaultsSerializable, Equatable {
 
     static var _defaults: DefaultsBridge<FrogCustomSerializable> { return DefaultsFrogBridge() }
-
     static var _defaultsArray: DefaultsBridge<[FrogCustomSerializable]> { return DefaultsFrogArrayBridge() }
-
 
     let name: String
 }
