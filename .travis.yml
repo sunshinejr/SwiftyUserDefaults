@@ -32,8 +32,9 @@ matrix:
       sudo: required
       dist: trusty    
       name: Swift 5.0 compatibility
-      install:
+      before_install:
         - eval "$(curl -sL https://swiftenv.fuller.li/install.sh)"
+        - swiftenv install 5.0
         - swiftenv global 5.0
       script:
         - swift test
@@ -53,8 +54,9 @@ matrix:
       sudo: required
       dist: trusty    
       name: Swift 4.2 compatibility
-      install:
+      before_install:
         - eval "$(curl -sL https://swiftenv.fuller.li/install.sh)"
+        - swiftenv install 4.2
         - swiftenv global 4.2
       script:
         - swift test              
@@ -74,8 +76,9 @@ matrix:
       sudo: required
       dist: trusty    
       name: Swift 4.1 compatibility
-      install:
+      before_install:
         - eval "$(curl -sL https://swiftenv.fuller.li/install.sh)"
+        - swiftenv install 4.1
         - swiftenv global 4.1
       script:
         - swift test            
