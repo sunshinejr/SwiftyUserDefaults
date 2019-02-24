@@ -3,6 +3,7 @@ matrix:
   include: 
     - os: osx
       osx_image: xcode10.2
+      name: Swift 5 compatibility
       env:
         - CACHE_NAME=SWIFT5_0
         - SWIFT_VERSION=5.0
@@ -14,6 +15,7 @@ matrix:
         - WATCHOS_SDK=watchsimulator5.2
     - os: osx
       osx_image: xcode10.2
+      name: Danger
       env:
         - CACHE_NAME=SWIFT5_0
         - SWIFT_VERSION=5.0
@@ -28,6 +30,7 @@ matrix:
       script: DEBUG="*" danger-swift ci
     - os: osx
       osx_image: xcode10.1
+      name: Swift 4.2 compatibility
       env:
         - CACHE_NAME=SWIFT4_2
         - SWIFT_VERSION=4.2
@@ -39,6 +42,7 @@ matrix:
         - WATCHOS_SDK=watchsimulator5.1        
     - os: osx
       osx_image: xcode9.4
+      name: Swift 4.1 compatibility
       env: 
         - CACHE_NAME=SWIFT4_1
         - SWIFT_VERSION=4.0 # it's in fact 4.1
