@@ -24,8 +24,6 @@ matrix:
         - WATCHOS_SIMULATOR='name=Apple Watch Series 4 - 44mm'
         - WATCHOS_SDK=watchsimulator5.2    
       before_install:
-        - rvm install "ruby-2.5.1"
-        - npm install -g danger
         - brew install danger/tap/danger-swift
       script: DEBUG="*" danger-swift ci
     - os: osx
