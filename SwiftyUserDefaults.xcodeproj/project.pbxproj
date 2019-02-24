@@ -179,6 +179,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		852E0EA522221F4C0008A20E /* LinuxMain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LinuxMain.swift; path = Tests/LinuxMain.swift; sourceTree = SOURCE_ROOT; };
 		853DC6E72221CCBE005FB9BA /* Defaults+Observing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Defaults+Observing.swift"; sourceTree = "<group>"; };
 		8551BC2B2211EABE0004E121 /* Defaults+Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Defaults+Color.swift"; sourceTree = "<group>"; };
 		8551BC392211F7D20004E121 /* DefaultsBridges.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultsBridges.swift; sourceTree = "<group>"; };
@@ -396,6 +397,7 @@
 				8598978D2221BDFE00B31FD5 /* External types */,
 				OBJ_25 /* Built-ins */,
 				OBJ_36 /* TestHelpers */,
+				852E0EA522221F4C0008A20E /* LinuxMain.swift */,
 			);
 			name = SwiftyUserDefaultsTests;
 			path = Tests/SwiftyUserDefaultsTests;

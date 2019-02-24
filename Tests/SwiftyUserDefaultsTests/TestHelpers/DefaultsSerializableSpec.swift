@@ -318,6 +318,7 @@ extension DefaultsSerializableSpec where Serializable.T: Equatable, Serializable
     }
 
     func testObserving() {
+        #if !os(Linux)
         given("key-value observing") {
             var defaults: UserDefaults!
 
@@ -419,5 +420,6 @@ extension DefaultsSerializableSpec where Serializable.T: Equatable, Serializable
                 }
             }
         }
+        #endif
     }
 }

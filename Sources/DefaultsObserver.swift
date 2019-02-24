@@ -28,6 +28,7 @@ public protocol DefaultsDisposable {
     func dispose()
 }
 
+#if !os(Linux)
 public final class DefaultsObserver<T: DefaultsSerializable>: NSObject, DefaultsDisposable {
 
     public struct Update {
@@ -82,4 +83,4 @@ public final class DefaultsObserver<T: DefaultsSerializable>: NSObject, Defaults
         userDefaults.removeObserver(self, forKeyPath: key._key, context: nil)
     }
 }
-
+#endif
