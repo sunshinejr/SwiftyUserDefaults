@@ -151,7 +151,10 @@ public final class DefaultsUrlBridge: DefaultsBridge<URL> {
     }
 
     public override func get(key: String, userDefaults: UserDefaults) -> URL? {
-        return userDefaults.url(forKey: key)
+        guard let object = userDefaults.object(forKey: key) else {
+            return nil
+        }
+        return deserialize(object)
     }
 
     public override func isSerialized() -> Bool {
@@ -163,13 +166,13 @@ public final class DefaultsUrlBridge: DefaultsBridge<URL> {
             return object
         }
 
+        if let object = object as? Data {
+            return NSKeyedUnarchiver.unarchiveObject(with: object) as? URL
+        }
+
         if let object = object as? NSString {
             let path = object.expandingTildeInPath
             return URL(fileURLWithPath: path)
-        }
-
-        if let object = object as? Data {
-            return NSKeyedUnarchiver.unarchiveObject(with: object) as? URL
         }
 
         return nil
