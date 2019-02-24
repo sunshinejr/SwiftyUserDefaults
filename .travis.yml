@@ -34,8 +34,8 @@ matrix:
       name: Swift 5.0 compatibility
       before_install:
         - eval "$(curl -sL https://swiftenv.fuller.li/install.sh)"
-        - swiftenv install 5.0
-        - swiftenv global 5.0
+        - swiftenv install 5.0-DEVELOPMENT-SNAPSHOT-2019-02-05-a
+        - swiftenv global 5.0-DEVELOPMENT-SNAPSHOT-2019-02-05-a
       script:
         - swift test
     - os: osx

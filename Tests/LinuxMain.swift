@@ -37,7 +37,6 @@ QCKMain([
     DefaultsStringSpec.self,
     DefaultsUrlSpec.self,
     DefaultsBestFroggiesEnumSerializableSpec.self,
-    DefaultsUIColorSerializableSpec.self,
     DefaultsFrogCodableSpec.self,
     DefaultsFrogCustomSerializableSpec.self,
     DefaultsFrogSerializableSpec.self,
