@@ -39,6 +39,7 @@ public final class DefaultsObserver<T: DefaultsSerializable>: NSObject, Defaults
         public let oldValue: T.T?
 
         init(dict: [NSKeyValueChangeKey: Any], key: DefaultsKey<T>) {
+            // swiftlint:disable:next force_cast
             kind = NSKeyValueChange(rawValue: dict[.kindKey] as! UInt)!
             indexes = dict[.indexesKey] as? IndexSet
             isPrior = dict[.notificationIsPriorKey] as? Bool ?? false
@@ -76,6 +77,7 @@ public final class DefaultsObserver<T: DefaultsSerializable>: NSObject, Defaults
         dispose()
     }
 
+    // swiftlint:disable:next block_based_kvo
     public override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey: Any]?, context: UnsafeMutableRawPointer?) {
         guard let change = change, object != nil, keyPath == key._key else {
             return

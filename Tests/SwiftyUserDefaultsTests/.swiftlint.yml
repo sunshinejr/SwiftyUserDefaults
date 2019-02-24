@@ -1,5 +1,6 @@
 disabled_rules:
   - line_length
+  - file_length
   - type_name
   - force_unwrapping
   - force_cast
@@ -7,6 +8,7 @@ disabled_rules:
   - function_body_length
   - cyclomatic_complexity
   - operator_whitespace
+  - identifier_name
 
 opt_in_rules:
   - empty_count

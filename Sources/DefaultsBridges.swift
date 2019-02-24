@@ -226,7 +226,7 @@ public final class DefaultsKeyedArchiverBridge<T>: DefaultsBridge<T> {
             fatalError("Shouldn't really happen. We do not support macOS 10.10, if it happened to you please report your use-case on GitHub issues.")
         }
     }
-    
+
     public override func isSerialized() -> Bool {
         return true
     }
@@ -241,7 +241,9 @@ public final class DefaultsKeyedArchiverBridge<T>: DefaultsBridge<T> {
 public final class DefaultsRawRepresentableBridge<T: RawRepresentable>: DefaultsBridge<T> {
 
     public override func get(key: String, userDefaults: UserDefaults) -> T? {
-        return userDefaults.object(forKey: key).flatMap { T(rawValue: $0 as! T.RawValue) }
+        guard let object = userDefaults.object(forKey: key) else { return nil }
+
+        return deserialize(object)
     }
 
     public override func save(key: String, value: T?, userDefaults: UserDefaults) {
@@ -262,7 +264,9 @@ public final class DefaultsRawRepresentableBridge<T: RawRepresentable>: Defaults
 public final class DefaultsRawRepresentableArrayBridge<T: Collection>: DefaultsBridge<T> where T.Element: RawRepresentable {
 
     public override func get(key: String, userDefaults: UserDefaults) -> T? {
-        return userDefaults.array(forKey: key)?.compactMap { T.Element(rawValue: $0 as! T.Element.RawValue) } as? T
+        guard let object = userDefaults.array(forKey: key) else { return nil }
+
+        return deserialize(object)
     }
 
     public override func save(key: String, value: T?, userDefaults: UserDefaults) {

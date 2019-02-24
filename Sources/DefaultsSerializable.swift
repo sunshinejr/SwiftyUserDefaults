@@ -25,6 +25,7 @@
 import Foundation
 
 public protocol DefaultsSerializable {
+    // swiftlint:disable:next type_name
     associatedtype T
 
     static var _defaults: DefaultsBridge<T> { get }

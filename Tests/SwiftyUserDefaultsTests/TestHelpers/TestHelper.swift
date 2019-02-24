@@ -2,15 +2,15 @@ import Foundation
 import Quick
 import SwiftyUserDefaults
 
-func given(_ description: String, closure: @escaping () -> ()) {
+func given(_ description: String, closure: @escaping () -> Void) {
     describe(description, closure: closure)
 }
 
-func when(_ description: String, closure: @escaping () -> ()) {
+func when(_ description: String, closure: @escaping () -> Void) {
     context(description, closure: closure)
 }
 
-func then(_ description: String, closure: @escaping () -> ()) {
+func then(_ description: String, closure: @escaping () -> Void) {
     it(description, closure: closure)
 }
 

@@ -39,5 +39,5 @@ QCKMain([
     DefaultsBestFroggiesEnumSerializableSpec.self,
     DefaultsFrogCodableSpec.self,
     DefaultsFrogCustomSerializableSpec.self,
-    DefaultsFrogSerializableSpec.self,
+    DefaultsFrogSerializableSpec.self
 ])
