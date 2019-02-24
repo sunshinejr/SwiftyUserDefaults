@@ -153,6 +153,27 @@ public final class DefaultsUrlBridge: DefaultsBridge<URL> {
     public override func get(key: String, userDefaults: UserDefaults) -> URL? {
         return userDefaults.url(forKey: key)
     }
+
+    public override func isSerialized() -> Bool {
+        return true
+    }
+
+    public override func deserialize(_ object: Any) -> URL? {
+        if let object = object as? URL {
+            return object
+        }
+
+        if let object = object as? NSString {
+            let path = object.expandingTildeInPath
+            return URL(fileURLWithPath: path)
+        }
+
+        if let object = object as? Data {
+            return NSKeyedUnarchiver.unarchiveObject(with: object) as? URL
+        }
+
+        return nil
+    }
 }
 
 public final class DefaultsCodableBridge<T: Codable>: DefaultsBridge<T> {
