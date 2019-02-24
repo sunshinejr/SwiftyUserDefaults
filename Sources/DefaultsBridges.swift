@@ -151,10 +151,7 @@ public final class DefaultsUrlBridge: DefaultsBridge<URL> {
     }
 
     public override func get(key: String, userDefaults: UserDefaults) -> URL? {
-        guard let object = userDefaults.object(forKey: key) else {
-            return nil
-        }
-        return deserialize(object)
+        return userDefaults.url(forKey: key)
     }
 
     public override func isSerialized() -> Bool {

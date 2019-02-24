@@ -55,7 +55,13 @@ extension Data: DefaultsSerializable {
 }
 
 extension URL: DefaultsSerializable {
-    public static var _defaults: DefaultsBridge<URL> { return DefaultsUrlBridge() }
+    public static var _defaults: DefaultsBridge<URL> {
+        #if os(Linux)
+            return DefaultsKeyedArchiverBridge()
+        #else
+            return DefaultsUrlBridge()
+        #endif
+    }
     public static var _defaultsArray: DefaultsBridge<[URL]> { return DefaultsKeyedArchiverBridge() }
 }
 
