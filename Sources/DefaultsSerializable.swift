@@ -24,13 +24,6 @@
 
 import Foundation
 
-public protocol DefaultsBridgeType {
-    associatedtype T
-
-    func save(key: String, value: T?, userDefaults: UserDefaults)
-    func get(key: String, userDefaults: UserDefaults) -> T?
-}
-
 public protocol DefaultsSerializable {
     associatedtype T
 
