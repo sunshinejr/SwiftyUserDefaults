@@ -34,7 +34,7 @@ matrix:
       name: Swift 5.0 compatibility
       env:
         - CACHE_NAME=LINUX_SWIFT5_0
-        - SWIFT_VERSION=swift-5.0-DEVELOPMENT-SNAPSHOT-2019-02-17-a
+        - SWIFT_VERSION=5.0-dev
       before_install:
         - eval "$(curl -sL https://swiftenv.fuller.li/install.sh)"
       script:
@@ -73,18 +73,7 @@ matrix:
         - TVOS_SIMULATOR='name=Apple TV 4K (at 1080p)'
         - TVOS_SDK=appletvsimulator11.4
         - WATCHOS_SIMULATOR='name=Apple Watch - 42mm'
-        - WATCHOS_SDK=watchsimulator4.3
-    - os: linux
-      sudo: required
-      dist: trusty    
-      name: Swift 4.1 compatibility
-      env:
-        - CACHE_NAME=LINUX_SWIFT4_1
-        - SWIFT_VERSION=4.1
-      before_install:
-        - eval "$(curl -sL https://swiftenv.fuller.li/install.sh)"
-      script:
-        - swift test            
+        - WATCHOS_SDK=watchsimulator4.3    
 
 notifications:
   email: false
