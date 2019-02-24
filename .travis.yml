@@ -32,10 +32,11 @@ matrix:
       sudo: required
       dist: trusty    
       name: Swift 5.0 compatibility
+      env:
+        - CACHE_NAME=LINUX_SWIFT5_0
+        - SWIFT_VERSION=swift-5.0-DEVELOPMENT-SNAPSHOT-2019-02-23-a
       before_install:
         - eval "$(curl -sL https://swiftenv.fuller.li/install.sh)"
-        - swiftenv install 5.0-DEVELOPMENT-SNAPSHOT-2019-02-05-a
-        - swiftenv global 5.0-DEVELOPMENT-SNAPSHOT-2019-02-05-a
       script:
         - swift test
     - os: osx
@@ -54,10 +55,11 @@ matrix:
       sudo: required
       dist: trusty    
       name: Swift 4.2 compatibility
+      env:
+        - CACHE_NAME=LINUX_SWIFT4_2
+        - SWIFT_VERSION=4.2
       before_install:
         - eval "$(curl -sL https://swiftenv.fuller.li/install.sh)"
-        - swiftenv install 4.2
-        - swiftenv global 4.2
       script:
         - swift test              
     - os: osx
@@ -76,10 +78,11 @@ matrix:
       sudo: required
       dist: trusty    
       name: Swift 4.1 compatibility
+      env:
+        - CACHE_NAME=LINUX_SWIFT4_1
+        - SWIFT_VERSION=4.1
       before_install:
         - eval "$(curl -sL https://swiftenv.fuller.li/install.sh)"
-        - swiftenv install 4.1
-        - swiftenv global 4.1
       script:
         - swift test            
 
