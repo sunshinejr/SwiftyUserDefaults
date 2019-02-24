@@ -26,6 +26,7 @@ import Quick
 import Nimble
 import SwiftyUserDefaults
 
+#if canImport(UIKit) || canImport(AppKit)
 #if canImport(UIKit)
     import UIKit.UIColor
     public typealias Color = UIColor
@@ -52,3 +53,4 @@ final class DefaultsUIColorSerializableSpec: QuickSpec, DefaultsSerializableSpec
         }
     }
 }
+#endif
