@@ -38,12 +38,23 @@ public final class DefaultsObserver<T: DefaultsSerializable>: NSObject, Defaults
         public let newValue: T.T?
         public let oldValue: T.T?
 
-        init(dict: [NSKeyValueChangeKey: Any], defaultValue: T.T?) {
+        init(dict: [NSKeyValueChangeKey: Any], key: DefaultsKey<T>) {
             kind = NSKeyValueChange(rawValue: dict[.kindKey] as! UInt)!
             indexes = dict[.indexesKey] as? IndexSet
             isPrior = dict[.notificationIsPriorKey] as? Bool ?? false
-            oldValue = dict[.oldKey] as? T.T ?? defaultValue
-            newValue = dict[.newKey] as? T.T
+            oldValue = Update.deserialize(dict[.oldKey], for: key) ?? key.defaultValue
+            newValue = Update.deserialize(dict[.newKey], for: key)
+        }
+
+        private static func deserialize(_ value: Any?, for key: DefaultsKey<T>) -> T.T? {
+            guard let value = value else { return nil }
+
+            let bridge = T._defaults
+            if bridge.isSerialized() {
+                return bridge.deserialize(value)
+            } else {
+                return value as? T.T
+            }
         }
     }
 
@@ -70,7 +81,7 @@ public final class DefaultsObserver<T: DefaultsSerializable>: NSObject, Defaults
             return
         }
 
-        let update = Update(dict: change, defaultValue: key.defaultValue)
+        let update = Update(dict: change, key: key)
         handler(update)
     }
 
