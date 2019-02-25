@@ -22,12 +22,24 @@
 // SOFTWARE.
 //
 
-import Foundation
+import Quick
 
-public protocol DefaultsSerializable {
-    // swiftlint:disable:next type_name
-    associatedtype T
+final class DefaultsIntSpec: QuickSpec, DefaultsSerializableSpec {
+    typealias Serializable = Int
 
-    static var _defaults: DefaultsBridge<T> { get }
-    static var _defaultsArray: DefaultsBridge<[T]> { get }
+    var customValue: Int = 2
+    var defaultValue: Int = 1
+
+    override func spec() {
+        given("Int") {
+            self.testValues()
+            self.testOptionalValues()
+            self.testOptionalValuesWithoutDefaultValue()
+            self.testObserving()
+            self.testPlistRegisteringValues(valueStrings: ["0": 0,
+                                                           "1": 1,
+                                                           "2": 2,
+                                                           "111111": 111111])
+        }
+    }
 }

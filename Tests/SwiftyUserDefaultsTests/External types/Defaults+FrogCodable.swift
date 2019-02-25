@@ -24,18 +24,19 @@
 
 import Quick
 
-final class DefaultsBestFroggiesEnumSerializableSpec: QuickSpec, DefaultsSerializableSpec {
+final class DefaultsFrogCodableSpec: QuickSpec, DefaultsSerializableSpec {
 
-    typealias Serializable = BestFroggiesEnum
+    typealias Serializable = FrogCodable
 
-    var customValue: BestFroggiesEnum = .Andy
-    var defaultValue: BestFroggiesEnum = .Dandy
+    var customValue: FrogCodable = FrogCodable(name: "custom")
+    var defaultValue: FrogCodable = FrogCodable(name: "default")
 
     override func spec() {
-        given("BestFroggiesEnum") {
+        given("FrogCodable") {
             self.testValues()
             self.testOptionalValues()
             self.testOptionalValuesWithoutDefaultValue()
+            self.testObserving()
         }
     }
 }

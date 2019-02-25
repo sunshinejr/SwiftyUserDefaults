@@ -26,8 +26,9 @@ Read [migration guide from version 4.0.0-alpha.1 to 4.0.0-alpha.3](MigrationGuid
     <a href="#rawrepresentable">RawRepresentable</a> &bull;
     <a href="#extending-existing-types">Extending existing types</a> &bull;
     <a href="#custom-types">Custom types</a> &bull;
+    <a href="#kvo">KVO</a> &bull;
     <a href="#launch-arguments">Launch arguments</a> &bull;
-    <a href="#utils">Utils</a> &bull;    
+    <a href="#utils">Utils</a> &bull;
     <a href="#installation">Installation</a>
 </p>
 
@@ -247,6 +248,16 @@ final class DefaultsFrogBridge: DefaultsBridge<FrogCustomSerializable> {
     override func save(key: String, value: FrogCustomSerializable?, userDefaults: UserDefaults) {
         userDefaults.set(value?.name, forKey: key)
     }
+
+    public override func isSerialized() -> Bool {
+        return true
+    }
+
+    public override func deserialize(_ object: Any) -> FrogCustomSerializable? {
+        guard let name = object as? String else { return nil }
+
+        return FrogCustomSerializable(name: name)
+    }
 }
 
 final class DefaultsFrogArrayBridge: DefaultsBridge<[FrogCustomSerializable]> {
@@ -259,6 +270,16 @@ final class DefaultsFrogArrayBridge: DefaultsBridge<[FrogCustomSerializable]> {
     override func save(key: String, value: [FrogCustomSerializable]?, userDefaults: UserDefaults) {
         let values = value?.map { $0.name }
         userDefaults.set(values, forKey: key)
+    }
+
+    public override func isSerialized() -> Bool {
+        return true
+    }
+
+    public override func deserialize(_ object: Any) -> [FrogCustomSerializable]? {
+        guard let names = object as? [String] else { return nil }
+
+        return names.map(FrogCustomSerializable.init)
     }
 }
 
@@ -280,6 +301,23 @@ extension Data: DefaultsSerializable {
 ```
 
 Also, take a look at our source code (or tests) to see more examples of bridges. If you find yourself confused with all these bridges, please [create an issue](https://github.com/radex/SwiftyUserDefaults/issues/new) and we will figure something out.
+
+## KVO
+
+KVO is supported for all the types that are `DefaultsSerializable`. However, if you have a custom type, it needs to have correctly defined bridges and serialization in them.
+
+To observe a value:
+```swift
+let nameKey = DefaultsKey<String>("name", defaultValue: "")
+Defaults.observe(key: nameKey) { update in
+	// here you can access `oldValue`/`newValue` and few other properties
+}
+```
+
+By default we are using `[.old, .new]` options for observing, but you can provide your own:
+```swift
+Defaults.observe(key: nameKey, options: [.initial, .old, .new]) { _ in }
+```
 
 ## Launch arguments
 

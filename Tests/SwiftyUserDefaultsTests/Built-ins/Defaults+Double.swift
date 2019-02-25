@@ -24,21 +24,23 @@
 
 import Quick
 
-final class DefaultsIntSpec: QuickSpec, DefaultsSerializableSpec {
-    typealias Serializable = Int
+final class DefaultsDoubleSpec: QuickSpec, DefaultsSerializableSpec {
 
-    var customValue: Int = 2
-    var defaultValue: Int = 1
+    typealias Serializable = Double
+
+    var customValue: Double = 2.0
+    var defaultValue: Double = 1.0
 
     override func spec() {
-        given("Int") {
+        given("Double") {
             self.testValues()
             self.testOptionalValues()
             self.testOptionalValuesWithoutDefaultValue()
-            self.testPlistRegisteringValues(valueStrings: ["0": 0,
-                                                           "1": 1,
-                                                           "2": 2,
-                                                           "111111": 111111])
+            self.testObserving()
+            self.testPlistRegisteringValues(valueStrings: ["0": 0.0,
+                                                           "1": 1.0,
+                                                           "2": 2.0,
+                                                           "31.0": 31.0])
         }
     }
 }

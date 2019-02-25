@@ -1,4 +1,9 @@
-//
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>FILEHEADER</key>
+    <string>
 // SwiftyUserDefaults
 //
 // Copyright (c) 2015-present Radosław Pietruszewski, Łukasz Mróz
@@ -20,23 +25,6 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
-//
-
-import Quick
-import Foundation
-
-final class DefaultsDictionarySpec: QuickSpec, DefaultsSerializableSpec {
-
-    typealias Serializable = [String: AnyHashable]
-
-    var customValue: [String: AnyHashable] = ["a": "b"]
-    var defaultValue: [String: AnyHashable] = ["c": "d", "e": 1]
-
-    override func spec() {
-        given("Dictionary") {
-            self.testValues()
-            self.testOptionalValues()
-            self.testOptionalValuesWithoutDefaultValue()
-        }
-    }
-}
+//</string>
+</dict>
+</plist>

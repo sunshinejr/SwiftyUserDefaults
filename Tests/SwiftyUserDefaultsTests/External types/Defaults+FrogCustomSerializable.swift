@@ -23,20 +23,20 @@
 //
 
 import Quick
-import Foundation
 
-final class DefaultsDataSpec: QuickSpec, DefaultsSerializableSpec {
+final class DefaultsFrogCustomSerializableSpec: QuickSpec, DefaultsSerializableSpec {
 
-    typealias Serializable = Data
+    typealias Serializable = FrogCustomSerializable
 
-    var customValue: Data = "custom data".data(using: .utf8)!
-    var defaultValue: Data = "default data".data(using: .utf8)!
+    var customValue: FrogCustomSerializable = FrogCustomSerializable(name: "custom")
+    var defaultValue: FrogCustomSerializable = FrogCustomSerializable(name: "default")
 
     override func spec() {
-        given("Data") {
+        given("FrogCustomSerializable") {
             self.testValues()
             self.testOptionalValues()
             self.testOptionalValuesWithoutDefaultValue()
+            self.testObserving()
         }
     }
 }

@@ -240,7 +240,7 @@ extension DefaultsSerializableSpec where Serializable.T: Equatable, Serializable
                 defaults[key] = nil
                 expect(defaults[key]).to(beNil())
             }
-            
+
             then("compare optional value to non-optional value") {
                 let key = DefaultsKey<Serializable?>("test")
                 expect(defaults[key] == nil).to(beTrue())
@@ -290,6 +290,19 @@ extension DefaultsSerializableSpec where Serializable.T: Equatable, Serializable
                     }
                 }
             }
+
+            then("read values to optional keys with default values") {
+                precondition(!valueStrings.isEmpty, "`valueStrings` cannot be empty as we need strings:values to test fetching them from plist")
+
+                for (key, value) in transformToProperKeyValue() {
+                    let (stringValue, expectedParsedValue) = value
+                    let defaultsKey = DefaultsKey<Serializable?>(key, defaultValue: self.defaultValue)
+                    precondition(defaults.hasKey(defaultsKey), "UserDefaults didn't pick up the process arguments")
+
+                    let expectedValue = expectedParsedValue ?? self.defaultValue
+                    expect(defaults[defaultsKey]).to(equal(expectedValue), description: "key: \(key), stringValue: \(stringValue)")
+                }
+            }
         }
 
         func injectPlistArguments(to userDefaults: UserDefaults) {
@@ -315,5 +328,178 @@ extension DefaultsSerializableSpec where Serializable.T: Equatable, Serializable
                     result[argumentKey] = (value, expectedParsedValue)
             }
         }
+    }
+
+    func testObserving() {
+        #if !os(Linux)
+        given("key-value observing") {
+            var defaults: UserDefaults!
+
+            beforeEach {
+                let suiteName = UUID().uuidString
+                defaults = UserDefaults(suiteName: suiteName)
+            }
+
+            when("optional key without default value") {
+                then("receive updates") {
+                    let key = DefaultsKey<Serializable?>("test")
+
+                    var update: DefaultsObserver<Serializable?>.Update?
+                    let observer = defaults.observe(key: key) { receivedUpdate in
+                        update = receivedUpdate
+                    }
+
+                    defaults[key] = self.customValue
+
+                    expect(update?.oldValue).toEventually(beNil())
+                    expect(update?.newValue).toEventually(equal(self.customValue))
+                }
+
+                then("receives initial update") {
+                    let key = DefaultsKey<Serializable?>("test")
+
+                    var update: DefaultsObserver<Serializable?>.Update?
+                    let observer = defaults.observe(key: key, options: [.initial, .old, .new]) { receivedUpdate in
+                        update = receivedUpdate
+                    }
+
+                    expect(update).toEventuallyNot(beNil())
+                    expect(update?.oldValue).toEventually(beNil())
+                    expect(update?.newValue).toEventually(beNil())
+                }
+
+                then("receives nil update") {
+                    let key = DefaultsKey<Serializable?>("test")
+
+                    var update: DefaultsObserver<Serializable?>.Update?
+                    let observer = defaults.observe(key: key) { receivedUpdate in
+                        update = receivedUpdate
+                    }
+                    defaults[key] = self.defaultValue
+                    defaults[key] = nil
+
+                    expect(update).toEventuallyNot(beNil())
+                    expect(update?.oldValue).toEventually(equal(self.defaultValue))
+                    expect(update?.newValue).toEventually(beNil())
+                }
+
+                then("remove observer on dispose") {
+                    let key = DefaultsKey<Serializable?>("test")
+
+                    var update: DefaultsObserver<Serializable?>.Update?
+                    let observer = defaults.observe(key: key) { receivedUpdate in
+                        update = receivedUpdate
+                    }
+
+                    observer.dispose()
+                    defaults[key] = self.customValue
+
+                    expect(update?.oldValue).toEventually(beNil())
+                    expect(update?.newValue).toEventually(beNil())
+                }
+            }
+
+            when("optional key with default value") {
+                then("receive updates") {
+                    let key = DefaultsKey<Serializable?>("test", defaultValue: self.defaultValue)
+
+                    var update: DefaultsObserver<Serializable?>.Update?
+                    let observer = defaults.observe(key: key) { receivedUpdate in
+                        update = receivedUpdate
+                    }
+
+                    defaults[key] = self.customValue
+
+                    expect(update?.oldValue).toEventually(equal(self.defaultValue))
+                    expect(update?.newValue).toEventually(equal(self.customValue))
+                }
+
+                then("receives initial update") {
+                    let key = DefaultsKey<Serializable?>("test", defaultValue: self.defaultValue)
+
+                    var update: DefaultsObserver<Serializable?>.Update?
+                    let observer = defaults.observe(key: key, options: [.initial, .old, .new]) { receivedUpdate in
+                        update = receivedUpdate
+                    }
+
+                    expect(update?.oldValue).toEventually(equal(self.defaultValue))
+                    expect(update?.newValue).toEventually(equal(self.defaultValue))
+                }
+
+                then("receives nil update") {
+                    let key = DefaultsKey<Serializable?>("test", defaultValue: self.defaultValue)
+
+                    var update: DefaultsObserver<Serializable?>.Update?
+                    let observer = defaults.observe(key: key) { receivedUpdate in
+                        update = receivedUpdate
+                    }
+                    defaults[key] = self.defaultValue
+                    defaults[key] = nil
+
+                    expect(update).toEventuallyNot(beNil())
+                    expect(update?.oldValue).toEventually(equal(self.defaultValue))
+                    expect(update?.newValue).toEventually(equal(self.defaultValue))
+                }
+
+                then("remove observer on dispose") {
+                    let key = DefaultsKey<Serializable?>("test", defaultValue: self.defaultValue)
+
+                    var update: DefaultsObserver<Serializable?>.Update?
+                    let observer = defaults.observe(key: key) { receivedUpdate in
+                        update = receivedUpdate
+                    }
+
+                    observer.dispose()
+                    defaults[key] = self.customValue
+
+                    expect(update?.oldValue).toEventually(beNil())
+                    expect(update?.newValue).toEventually(beNil())
+                }
+            }
+
+            when("non-optional key") {
+                then("receive updates") {
+                    let key = DefaultsKey<Serializable>("test", defaultValue: self.defaultValue)
+
+                    var update: DefaultsObserver<Serializable>.Update?
+                    let observer = defaults.observe(key: key) { receivedUpdate in
+                        update = receivedUpdate
+                    }
+
+                    defaults[key] = self.customValue
+
+                    expect(update?.oldValue).toEventually(equal(self.defaultValue))
+                    expect(update?.newValue).toEventually(equal(self.customValue))
+                }
+
+                then("receives initial update") {
+                    let key = DefaultsKey<Serializable>("test", defaultValue: self.defaultValue)
+
+                    var update: DefaultsObserver<Serializable>.Update?
+                    let observer = defaults.observe(key: key, options: [.initial, .old, .new]) { receivedUpdate in
+                        update = receivedUpdate
+                    }
+
+                    expect(update?.oldValue).toEventually(equal(self.defaultValue))
+                    expect(update?.newValue).toEventually(equal(self.defaultValue))
+                }
+
+                then("remove observer on dispose") {
+                    let key = DefaultsKey<Serializable>("test", defaultValue: self.defaultValue)
+
+                    var update: DefaultsObserver<Serializable>.Update?
+                    let observer = defaults.observe(key: key) { receivedUpdate in
+                        update = receivedUpdate
+                    }
+
+                    observer.dispose()
+                    defaults[key] = self.customValue
+
+                    expect(update?.oldValue).toEventually(beNil())
+                    expect(update?.newValue).toEventually(beNil())
+                }
+            }
+        }
+        #endif
     }
 }

@@ -24,16 +24,42 @@
 
 import Foundation
 
-open class DefaultsBridge<T>: DefaultsBridgeType {
+/// Class important for saving and getting values from UserDefaults. Be careful when you
+/// subclass your own!
+open class DefaultsBridge<T> {
 
     public init() {}
 
+    /// This method provides a way of saving your data in UserDefaults. Usually needed
+    /// when you want to create your custom Bridge, so you'll have to override it.
     open func save(key: String, value: T?, userDefaults: UserDefaults) {
         fatalError("This Bridge wasn't subclassed! Please do so before using it in your type.")
     }
 
+    /// This method provides a way of saving your data in UserDefaults. Usually needed
+    /// when you want to create your custom Bridge, so you'll have to override it.
     open func get(key: String, userDefaults: UserDefaults) -> T? {
         fatalError("This Bridge wasn't subclassed! Please do so before using it in your type.")
+    }
+
+    /// Override this function if your data is represented differently in UserDefaults
+    /// and you map it in save/get methods.
+    ///
+    /// For instance, if you store it as Data in UserDefaults, but your type is not Data in your
+    /// defaults key, then you need to `return true` here and provide `deserialize(_:)` method as well.
+    ///
+    /// Similar if you store your array of type as e.g. `[String]` but the type you use is actually `[SomeClassThatHasOnlyOneStringProperty]`.
+    ///
+    /// See `DefaultsRawRepresentableBridge` or `DefaultsCodableBridge` for examples.
+    open func isSerialized() -> Bool {
+        return false
+    }
+
+    /// Override this function if you've returned `true` in `isSerialized()` method.
+    ///
+    /// See `isSerialized()` method description for more details.
+    open func deserialize(_ object: Any) -> T? {
+        fatalError("You set `isSerialized` to true, now you have to implement `deserialize` method.")
     }
 }
 
@@ -58,11 +84,11 @@ public final class DefaultsArrayBridge<T: Collection>: DefaultsBridge<T> {
 }
 
 public final class DefaultsStringBridge: DefaultsBridge<String> {
-    public override func save(key: String, value: T?, userDefaults: UserDefaults) {
+    public override func save(key: String, value: String?, userDefaults: UserDefaults) {
         userDefaults.set(value, forKey: key)
     }
 
-    public override func get(key: String, userDefaults: UserDefaults) -> T? {
+    public override func get(key: String, userDefaults: UserDefaults) -> String? {
         return userDefaults.string(forKey: key)
     }
 }
@@ -145,6 +171,27 @@ public final class DefaultsUrlBridge: DefaultsBridge<URL> {
     public override func get(key: String, userDefaults: UserDefaults) -> URL? {
         return userDefaults.url(forKey: key)
     }
+
+    public override func isSerialized() -> Bool {
+        return true
+    }
+
+    public override func deserialize(_ object: Any) -> URL? {
+        if let object = object as? URL {
+            return object
+        }
+
+        if let object = object as? Data {
+            return NSKeyedUnarchiver.unarchiveObject(with: object) as? URL
+        }
+
+        if let object = object as? NSString {
+            let path = object.expandingTildeInPath
+            return URL(fileURLWithPath: path)
+        }
+
+        return nil
+    }
 }
 
 public final class DefaultsCodableBridge<T: Codable>: DefaultsBridge<T> {
@@ -158,14 +205,30 @@ public final class DefaultsCodableBridge<T: Codable>: DefaultsBridge<T> {
     }
 
     public override func get(key: String, userDefaults: UserDefaults) -> T? {
-        return userDefaults.decodable(forKey: key) as T?
+        guard let data = userDefaults.data(forKey: key) else {
+            return nil
+        }
+        return deserialize(data)
+    }
+
+    public override func isSerialized() -> Bool {
+        return true
+    }
+
+    public override func deserialize(_ object: Any) -> T? {
+        guard let data = object as? Data else { return nil }
+
+        return try? JSONDecoder().decode(T.self, from: data)
     }
 }
 
 public final class DefaultsKeyedArchiverBridge<T>: DefaultsBridge<T> {
 
     public override func get(key: String, userDefaults: UserDefaults) -> T? {
-        return userDefaults.data(forKey: key).flatMap(NSKeyedUnarchiver.unarchiveObject) as? T
+        guard let data = userDefaults.data(forKey: key) else {
+            return nil
+        }
+        return deserialize(data)
     }
 
     public override func save(key: String, value: T?, userDefaults: UserDefaults) {
@@ -181,28 +244,62 @@ public final class DefaultsKeyedArchiverBridge<T>: DefaultsBridge<T> {
             fatalError("Shouldn't really happen. We do not support macOS 10.10, if it happened to you please report your use-case on GitHub issues.")
         }
     }
+
+    public override func isSerialized() -> Bool {
+        return true
+    }
+
+    public override func deserialize(_ object: Any) -> T? {
+        guard let data = object as? Data else { return nil }
+
+        return NSKeyedUnarchiver.unarchiveObject(with: data) as? T
+    }
 }
 
 public final class DefaultsRawRepresentableBridge<T: RawRepresentable>: DefaultsBridge<T> {
 
     public override func get(key: String, userDefaults: UserDefaults) -> T? {
-        return userDefaults.object(forKey: key).flatMap { T(rawValue: $0 as! T.RawValue) }
+        guard let object = userDefaults.object(forKey: key) else { return nil }
+
+        return deserialize(object)
     }
 
     public override func save(key: String, value: T?, userDefaults: UserDefaults) {
         userDefaults.set(value?.rawValue, forKey: key)
+    }
+
+    public override func isSerialized() -> Bool {
+        return true
+    }
+
+    public override func deserialize(_ object: Any) -> T? {
+        guard let rawValue = object as? T.RawValue else { return nil }
+
+        return T(rawValue: rawValue)
     }
 }
 
 public final class DefaultsRawRepresentableArrayBridge<T: Collection>: DefaultsBridge<T> where T.Element: RawRepresentable {
 
     public override func get(key: String, userDefaults: UserDefaults) -> T? {
-        return userDefaults.array(forKey: key)?.compactMap { T.Element(rawValue: $0 as! T.Element.RawValue) } as? T
+        guard let object = userDefaults.array(forKey: key) else { return nil }
+
+        return deserialize(object)
     }
 
     public override func save(key: String, value: T?, userDefaults: UserDefaults) {
         let raw = value?.map { $0.rawValue }
 
         userDefaults.set(raw, forKey: key)
+    }
+
+    public override func isSerialized() -> Bool {
+        return true
+    }
+
+    public override func deserialize(_ object: Any) -> T? {
+        guard let rawValue = object as? [T.Element.RawValue] else { return nil }
+
+        return rawValue.compactMap { T.Element(rawValue: $0) } as? T
     }
 }

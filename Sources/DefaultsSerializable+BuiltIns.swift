@@ -55,7 +55,13 @@ extension Data: DefaultsSerializable {
 }
 
 extension URL: DefaultsSerializable {
-    public static var _defaults: DefaultsBridge<URL> { return DefaultsUrlBridge() }
+    public static var _defaults: DefaultsBridge<URL> {
+        #if os(Linux)
+            return DefaultsKeyedArchiverBridge()
+        #else
+            return DefaultsUrlBridge()
+        #endif
+    }
     public static var _defaultsArray: DefaultsBridge<[URL]> { return DefaultsKeyedArchiverBridge() }
 }
 
@@ -75,7 +81,7 @@ extension DefaultsSerializable where Self: NSCoding {
 }
 
 extension Dictionary: DefaultsSerializable where Key == String {
-    
+
     public typealias T = [Key: Value]
 
     public static var _defaults: DefaultsBridge<[Key: Value]> { return DefaultsObjectBridge() }
@@ -87,6 +93,7 @@ extension Array: DefaultsSerializable where Element: DefaultsSerializable {
     public typealias T = [Element]
 
     public static var _defaults: DefaultsBridge<[Element]> {
+        // swiftlint:disable:next force_cast
         return Element._defaultsArray as! DefaultsBridge<[Element]>
     }
 
@@ -98,7 +105,9 @@ extension Array: DefaultsSerializable where Element: DefaultsSerializable {
 extension Optional: DefaultsSerializable where Wrapped: DefaultsSerializable {
     public typealias T = Wrapped
 
+    // swiftlint:disable:next force_cast
     public static var _defaults: DefaultsBridge<Wrapped> { return Wrapped._defaults as! DefaultsBridge<Wrapped> }
 
+    // swiftlint:disable:next force_cast
     public static var _defaultsArray: DefaultsBridge<[Wrapped]> { return Wrapped._defaultsArray as! DefaultsBridge<[Wrapped]> }
 }

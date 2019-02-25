@@ -36,6 +36,7 @@ final class DefaultsBoolSpec: QuickSpec, DefaultsSerializableSpec {
             self.testValues()
             self.testOptionalValues()
             self.testOptionalValuesWithoutDefaultValue()
+            self.testObserving()
             self.testPlistRegisteringValues(valueStrings: ["YES": true,
                                                            "yes": true,
                                                            "TRUE": true,

@@ -3,6 +3,7 @@ matrix:
   include: 
     - os: osx
       osx_image: xcode10.2
+      name: Danger
       env:
         - CACHE_NAME=SWIFT5_0
         - SWIFT_VERSION=5.0
@@ -12,8 +13,35 @@ matrix:
         - TVOS_SDK=appletvsimulator12.2
         - WATCHOS_SIMULATOR='name=Apple Watch Series 4 - 44mm'
         - WATCHOS_SDK=watchsimulator5.2
+      before_install:
+        - brew install danger/tap/danger-swift
+      script: DEBUG="*" danger-swift ci  
+    - os: osx
+      osx_image: xcode10.2
+      name: Swift 5.0 compatibility
+      env:
+        - CACHE_NAME=SWIFT5_0
+        - SWIFT_VERSION=5.0
+        - IOS_SIMULATOR='name=iPhone 6s,OS=12.2'
+        - IOS_SDK=iphonesimulator12.2
+        - TVOS_SIMULATOR='name=Apple TV 4K (at 1080p)'
+        - TVOS_SDK=appletvsimulator12.2
+        - WATCHOS_SIMULATOR='name=Apple Watch Series 4 - 44mm'
+        - WATCHOS_SDK=watchsimulator5.2      
+    # - os: linux
+    #   sudo: required
+    #   dist: trusty    
+    #   name: Swift 5.0 compatibility
+    #   env:
+    #     - CACHE_NAME=LINUX_SWIFT5_0
+    #     - SWIFT_VERSION=5.0-dev
+    #   before_install:
+    #     - eval "$(curl -sL https://swiftenv.fuller.li/install.sh)"
+    #   script:
+    #     - swift test
     - os: osx
       osx_image: xcode10.1
+      name: Swift 4.2 compatibility
       env:
         - CACHE_NAME=SWIFT4_2
         - SWIFT_VERSION=4.2
@@ -22,9 +50,21 @@ matrix:
         - TVOS_SIMULATOR='name=Apple TV 4K (at 1080p)'
         - TVOS_SDK=appletvsimulator12.1
         - WATCHOS_SIMULATOR='name=Apple Watch - 42mm'
-        - WATCHOS_SDK=watchsimulator5.1        
+        - WATCHOS_SDK=watchsimulator5.1
+    # - os: linux
+    #   sudo: required
+    #   dist: trusty    
+    #   name: Swift 4.2 compatibility
+    #   env:
+    #     - CACHE_NAME=LINUX_SWIFT4_2
+    #     - SWIFT_VERSION=4.2
+    #   before_install:
+    #     - eval "$(curl -sL https://swiftenv.fuller.li/install.sh)"
+    #   script:
+    #     - swift test              
     - os: osx
       osx_image: xcode9.4
+      name: Swift 4.1 compatibility
       env: 
         - CACHE_NAME=SWIFT4_1
         - SWIFT_VERSION=4.0 # it's in fact 4.1
@@ -33,7 +73,7 @@ matrix:
         - TVOS_SIMULATOR='name=Apple TV 4K (at 1080p)'
         - TVOS_SDK=appletvsimulator11.4
         - WATCHOS_SIMULATOR='name=Apple Watch - 42mm'
-        - WATCHOS_SDK=watchsimulator4.3  
+        - WATCHOS_SDK=watchsimulator4.3    
 
 notifications:
   email: false
@@ -54,8 +94,6 @@ before_install:
   - gem install cocoapods -v 1.6.0
   - gem install xcpretty
   - brew install xcodegen
-  # - npm install -g danger
-  # - brew install danger/tap/danger-swift
 
 script:
   - set -o pipefail
@@ -83,6 +121,3 @@ script:
   - scripts/cocoapods_integration_step.sh
   - scripts/carthage_integration_step.sh
   - scripts/spm_integration_step.sh
-  
-  # there is a problem with danger-swift currently, commenting it for now
-  # - DEBUG="*" danger process danger-swift

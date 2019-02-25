@@ -22,32 +22,22 @@
 // SOFTWARE.
 //
 
+import XCTest
 import Quick
-import Nimble
-import SwiftyUserDefaults
 
-#if canImport(UIKit)
-    import UIKit.UIColor
-    public typealias Color = UIColor
-#elseif canImport(AppKit)
-    import AppKit.NSColor
-    public typealias Color = NSColor
-#endif
+@testable import SwiftyUserDefaultsTests
 
-extension Color: DefaultsSerializable {}
-
-final class DefaultsUIColorSerializableSpec: QuickSpec, DefaultsSerializableSpec {
-
-    typealias Serializable = Color
-
-    var customValue: Color = .green
-    var defaultValue: Color = .blue
-
-    override func spec() {
-        given("NSColor") {
-            self.testValues()
-            self.testOptionalValues()
-            self.testOptionalValuesWithoutDefaultValue()
-        }
-    }
-}
+QCKMain([
+    DefaultsBoolSpec.self,
+    DefaultsDataSpec.self,
+    DefaultsDateSpec.self,
+    DefaultsDictionarySpec.self,
+    DefaultsDoubleSpec.self,
+    DefaultsIntSpec.self,
+    DefaultsStringSpec.self,
+    DefaultsUrlSpec.self,
+    DefaultsBestFroggiesEnumSerializableSpec.self,
+    DefaultsFrogCodableSpec.self,
+    DefaultsFrogCustomSerializableSpec.self,
+    DefaultsFrogSerializableSpec.self
+])

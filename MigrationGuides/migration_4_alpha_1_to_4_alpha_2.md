@@ -18,11 +18,29 @@ For instance, this is a bridge for single value data storing/retrieving using `N
 public final class DefaultsKeyedArchiverBridge<T>: DefaultsBridge<T> {
 
     public override func get(key: String, userDefaults: UserDefaults) -> T? {
-        return userDefaults.data(forKey: key).flatMap(NSKeyedUnarchiver.unarchiveObject) as? T
+        guard let data = userDefaults.data(forKey: key) else {
+            return nil
+        }
+        return deserialize(data)
     }
 
     public override func save(key: String, value: T?, userDefaults: UserDefaults) {
+        guard let value = value else {
+            userDefaults.removeObject(forKey: key)
+            return
+        }
+
         userDefaults.set(NSKeyedArchiver.archivedData(withRootObject: value), forKey: key)
+    }
+
+    public override func isSerialized() -> Bool {
+        return true
+    }
+
+    public override func deserialize(_ object: Any) -> T? {
+        guard let data = object as? Data else { return nil }
+
+        return NSKeyedUnarchiver.unarchiveObject(with: data) as? T
     }
 }
 ```
@@ -62,6 +80,16 @@ final class DefaultsFrogBridge: DefaultsBridge<FrogCustomSerializable> {
     override func save(key: String, value: FrogCustomSerializable?, userDefaults: UserDefaults) {
         userDefaults.set(value?.name, forKey: key)
     }
+
+    public override func isSerialized() -> Bool {
+        return true
+    }
+
+    public override func deserialize(_ object: Any) -> FrogCustomSerializable? {
+        guard let name = object as? String else { return nil }
+
+        return FrogCustomSerializable(name: name)
+    }
 }
 
 final class DefaultsFrogArrayBridge: DefaultsBridge<[FrogCustomSerializable]> {
@@ -75,6 +103,16 @@ final class DefaultsFrogArrayBridge: DefaultsBridge<[FrogCustomSerializable]> {
         let values = value?.map { $0.name }
         userDefaults.set(values, forKey: key)
     }
+
+    public override func isSerialized() -> Bool {
+        return true
+    }
+
+    public override func deserialize(_ object: Any) -> [FrogCustomSerializable]? {
+        guard let names = object as? [String] else { return nil }
+
+        return names.map(FrogCustomSerializable.init)
+    }
 }
 ```
 
@@ -83,9 +121,7 @@ and then provide them in your custom type:
 struct FrogCustomSerializable: DefaultsSerializable, Equatable {
 
     static var _defaults: DefaultsBridge<FrogCustomSerializable> { return DefaultsFrogBridge() }
-
     static var _defaultsArray: DefaultsBridge<[FrogCustomSerializable]> { return DefaultsFrogArrayBridge() }
-
 
     let name: String
 }

@@ -23,23 +23,34 @@
 //
 
 import Quick
+import Nimble
+import SwiftyUserDefaults
 
-final class DefaultsDoubleSpec: QuickSpec, DefaultsSerializableSpec {
+#if canImport(UIKit) || canImport(AppKit)
+#if canImport(UIKit)
+    import UIKit.UIColor
+    public typealias Color = UIColor
+#elseif canImport(AppKit)
+    import AppKit.NSColor
+    public typealias Color = NSColor
+#endif
 
-    typealias Serializable = Double
+extension Color: DefaultsSerializable {}
 
-    var customValue: Double = 2.0
-    var defaultValue: Double = 1.0
+final class DefaultsUIColorSerializableSpec: QuickSpec, DefaultsSerializableSpec {
+
+    typealias Serializable = Color
+
+    var customValue: Color = .green
+    var defaultValue: Color = .blue
 
     override func spec() {
-        given("Double") {
+        given("NSColor") {
             self.testValues()
             self.testOptionalValues()
             self.testOptionalValuesWithoutDefaultValue()
-            self.testPlistRegisteringValues(valueStrings: ["0": 0.0,
-                                                           "1": 1.0,
-                                                           "2": 2.0,
-                                                           "31.0": 31.0])
+            self.testObserving()
         }
     }
 }
+#endif

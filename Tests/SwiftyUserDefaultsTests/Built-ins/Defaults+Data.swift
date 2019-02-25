@@ -22,12 +22,22 @@
 // SOFTWARE.
 //
 
+import Quick
 import Foundation
 
-public protocol DefaultsSerializable {
-    // swiftlint:disable:next type_name
-    associatedtype T
+final class DefaultsDataSpec: QuickSpec, DefaultsSerializableSpec {
 
-    static var _defaults: DefaultsBridge<T> { get }
-    static var _defaultsArray: DefaultsBridge<[T]> { get }
+    typealias Serializable = Data
+
+    var customValue: Data = "custom data".data(using: .utf8)!
+    var defaultValue: Data = "default data".data(using: .utf8)!
+
+    override func spec() {
+        given("Data") {
+            self.testValues()
+            self.testOptionalValues()
+            self.testOptionalValuesWithoutDefaultValue()
+            self.testObserving()
+        }
+    }
 }

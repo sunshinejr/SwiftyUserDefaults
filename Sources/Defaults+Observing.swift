@@ -24,10 +24,11 @@
 
 import Foundation
 
-public protocol DefaultsSerializable {
-    // swiftlint:disable:next type_name
-    associatedtype T
+#if !os(Linux)
+public extension UserDefaults {
 
-    static var _defaults: DefaultsBridge<T> { get }
-    static var _defaultsArray: DefaultsBridge<[T]> { get }
+    func observe<T: DefaultsSerializable>(key: DefaultsKey<T>, options: NSKeyValueObservingOptions = [.old, .new], handler: @escaping (DefaultsObserver<T>.Update) -> Void) -> DefaultsDisposable {
+        return DefaultsObserver(key: key, userDefaults: self, options: options, handler: handler)
+    }
 }
+#endif

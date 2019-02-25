@@ -25,18 +25,19 @@
 import Quick
 import Foundation
 
-final class DefaultsDateSpec: QuickSpec, DefaultsSerializableSpec {
+final class DefaultsDictionarySpec: QuickSpec, DefaultsSerializableSpec {
 
-    typealias Serializable = Date
+    typealias Serializable = [String: AnyHashable]
 
-    var customValue: Date = Date(timeIntervalSince1970: 50)
-    var defaultValue: Date = Date()
+    var customValue: [String: AnyHashable] = ["a": "b"]
+    var defaultValue: [String: AnyHashable] = ["c": "d", "e": 1]
 
     override func spec() {
-        given("Date") {
+        given("Dictionary") {
             self.testValues()
             self.testOptionalValues()
             self.testOptionalValuesWithoutDefaultValue()
+            self.testObserving()
         }
     }
 }

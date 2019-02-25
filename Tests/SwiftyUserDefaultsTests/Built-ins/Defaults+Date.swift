@@ -25,18 +25,19 @@
 import Quick
 import Foundation
 
-final class DefaultsUrlSpec: QuickSpec, DefaultsSerializableSpec {
+final class DefaultsDateSpec: QuickSpec, DefaultsSerializableSpec {
 
-    typealias Serializable = URL
+    typealias Serializable = Date
 
-    var customValue: URL = URL(string: "https://google.com")!
-    var defaultValue: URL = URL(string: "https://github.com")!
+    var customValue: Date = Date(timeIntervalSince1970: 50)
+    var defaultValue: Date = Date()
 
     override func spec() {
-        given("URL") {
+        given("Date") {
             self.testValues()
             self.testOptionalValues()
             self.testOptionalValuesWithoutDefaultValue()
+            self.testObserving()
         }
     }
 }
