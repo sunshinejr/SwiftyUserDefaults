@@ -24,22 +24,40 @@
 
 import Foundation
 
+/// Class important for saving and getting values from UserDefaults. Be careful when you
+/// subclass your own!
 open class DefaultsBridge<T> {
 
     public init() {}
 
+    /// This method provides a way of saving your data in UserDefaults. Usually needed
+    /// when you want to create your custom Bridge, so you'll have to override it.
     open func save(key: String, value: T?, userDefaults: UserDefaults) {
         fatalError("This Bridge wasn't subclassed! Please do so before using it in your type.")
     }
 
+    /// This method provides a way of saving your data in UserDefaults. Usually needed
+    /// when you want to create your custom Bridge, so you'll have to override it.
     open func get(key: String, userDefaults: UserDefaults) -> T? {
         fatalError("This Bridge wasn't subclassed! Please do so before using it in your type.")
     }
 
+    /// Override this function if your data is represented differently in UserDefaults
+    /// and you map it in save/get methods.
+    ///
+    /// For instance, if you store it as Data in UserDefaults, but your type is not Data in your
+    /// defaults key, then you need to `return true` here and provide `deserialize(_:)` method as well.
+    ///
+    /// Similar if you store your array of type as e.g. `[String]` but the type you use is actually `[SomeClassThatHasOnlyOneStringProperty]`.
+    ///
+    /// See `DefaultsRawRepresentableBridge` or `DefaultsCodableBridge` for examples.
     open func isSerialized() -> Bool {
         return false
     }
 
+    /// Override this function if you've returned `true` in `isSerialized()` method.
+    ///
+    /// See `isSerialized()` method description for more details.
     open func deserialize(_ object: Any) -> T? {
         fatalError("You set `isSerialized` to true, now you have to implement `deserialize` method.")
     }
