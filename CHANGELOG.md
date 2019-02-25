@@ -3,7 +3,7 @@
 ### 4.0.0-beta.1 (2019-02-25)
 
 * Added support for launch arguments/plist for `Bool`, `Double`, `Int`, `String` values. [@sunshinejr](https://github.com/sunshinejr)
-* Added support for KVO! [DivineDominion](https://github.com/DivineDominion), [toshi0383](ttps://github.com/toshi0383), [@sunshinejr](https://github.com/sunshinejr)
+* Added support for KVO! [DivineDominion](https://github.com/DivineDominion), [toshi0383](https://github.com/toshi0383), [@sunshinejr](https://github.com/sunshinejr)
 * Brought back dictionary support for `[String: Any]`/`[String: String]` and corresponding array version of it `[[String: Any]]`/`[[String: String]]`. [@sunshinejr](https://github.com/sunshinejr)
 
 ### 4.0.0-alpha.3 (2019-02-19)
