@@ -44,7 +44,7 @@ public final class DefaultsObserver<T: DefaultsSerializable>: NSObject, Defaults
             indexes = dict[.indexesKey] as? IndexSet
             isPrior = dict[.notificationIsPriorKey] as? Bool ?? false
             oldValue = Update.deserialize(dict[.oldKey], for: key) ?? key.defaultValue
-            newValue = Update.deserialize(dict[.newKey], for: key)
+            newValue = Update.deserialize(dict[.newKey], for: key) ?? key.defaultValue
         }
 
         private static func deserialize(_ value: Any?, for key: DefaultsKey<T>) -> T.T? {
