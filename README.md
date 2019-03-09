@@ -16,7 +16,7 @@ Read [documentation for stable version 3.0.1](https://github.com/radex/SwiftyUse
 Read [migration guide from version 3.x to 4.x](MigrationGuides/migration_3_to_4.md)<br />
 Read [migration guide from version 4.0.0-alpha.1 to 4.0.0-alpha.3](MigrationGuides/migration_4_alpha_1_to_4_alpha_2.md)
 
-# Version 4 - beta 1
+# Version 4 - beta 2
 
 <p align="center">
     <a href="#features">Features</a> &bull;
@@ -380,7 +380,7 @@ let hasKey = Defaults.hasKey(.skipLogin)
 If you're using CocoaPods, just add this line to your Podfile:
 
 ```ruby
-pod 'SwiftyUserDefaults', '4.0.0-beta.1'
+pod 'SwiftyUserDefaults', '4.0.0-beta.2'
 ```
 
 Install by running this command in your terminal:
@@ -400,7 +400,7 @@ import SwiftyUserDefaults
 Just add to your Cartfile:
 
 ```ruby
-github "radex/SwiftyUserDefaults" "4.0.0-beta.1"
+github "radex/SwiftyUserDefaults" "4.0.0-beta.2"
 ```
 
 ### Swift Package Manager
@@ -411,7 +411,7 @@ let package = Package(
     name: "MyPackage",
     products: [...],
     dependencies: [
-        .package(url: "https://github.com/radex/SwiftyUserDefaults.git", .exact("4.0.0-beta.1")),
+        .package(url: "https://github.com/radex/SwiftyUserDefaults.git", .exact("4.0.0-beta.2")),
     ],
     targets: [...]
 )

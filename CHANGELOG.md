@@ -1,5 +1,9 @@
 ### Next
 
+### 4.0.0-beta.2 (2019-03-09)
+
+* Regenerated the project as a potential fix to Carthage linking problems in beta 1. [@sunshinejr](https://github.com/sunshinejr)
+
 ### 4.0.0-beta.1 (2019-02-25)
 
 * Added support for launch arguments/plist for `Bool`, `Double`, `Int`, `String` values. [@sunshinejr](https://github.com/sunshinejr)
