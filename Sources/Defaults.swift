@@ -46,6 +46,17 @@ public extension UserDefaults {
         removeObject(forKey: key._key)
     }
 
+    /// Encodes passed `encodable` and saves the resulting data into the user defaults for the key `key`.
+    /// Any error encoding will result in an assertion failure.
+    func set<T: Encodable>(encodable: T, forKey key: String) {
+        do {
+            let data = try JSONEncoder().encode(encodable)
+            set(data, forKey: key)
+        } catch {
+            assertionFailure("Failure encoding encodable of type \(T.self): \(error.localizedDescription)")
+        }
+    }
+
     /// Removes all keys and values from user defaults
     /// Use with caution!
     /// - Note: This method only removes keys on the receiver `UserDefaults` object.
@@ -67,14 +78,5 @@ internal extension UserDefaults {
         guard let decodableData = data(forKey: key) else { return nil }
 
         return try? JSONDecoder().decode(T.self, from: decodableData)
-    }
-
-    func set<T: Encodable>(encodable: T, forKey key: String) {
-        let encoder = JSONEncoder()
-        if let data = try? encoder.encode(encodable) {
-            set(data, forKey: key)
-        } else {
-            assertionFailure("Encodable \(T.self) is not _actually_ encodable to any data...Please fix 😭")
-        }
     }
 }
