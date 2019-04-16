@@ -37,10 +37,17 @@ extension DefaultsKey: DefaultsKeyable {
 
 public extension UserDefaults {
     func register(defaultsKeys: [DefaultsKeyable]) {
-        let defaults: [String : Any] = defaultsKeys
+        self.register(defaults: defaultsKeys.dictionaryWithDefaultValues())
+    }
+}
+
+public extension Array where Element == DefaultsKeyable {
+    /// - returns: Dictionary with pairs of `DefaultsKey` keys and default values. Does not contain keys
+    ///   where the default value is `nil`.
+    func dictionaryWithDefaultValues() -> [String : Any] {
+        return self
             .filter { $0._defaultValue != nil }
             .mapDictionary { ($0._key, $0._defaultValue!) }
-        self.register(defaults: defaults)
     }
 }
 
