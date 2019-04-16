@@ -39,6 +39,11 @@ extension Int: DefaultsSerializable {
     public static var _defaultsArray: DefaultsBridge<[Int]> { return DefaultsArrayBridge() }
 }
 
+extension UInt: DefaultsSerializable {
+    public static var _defaults: DefaultsBridge<UInt> { return DefaultsUIntBridge() }
+    public static var _defaultsArray: DefaultsBridge<[UInt]> { return DefaultsArrayBridge() }
+}
+
 extension Double: DefaultsSerializable {
     public static var _defaults: DefaultsBridge<Double> { return DefaultsDoubleBridge() }
     public static var _defaultsArray: DefaultsBridge<[Double]> { return DefaultsArrayBridge() }

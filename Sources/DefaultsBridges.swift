@@ -113,6 +113,26 @@ public final class DefaultsIntBridge: DefaultsBridge<Int> {
     }
 }
 
+public final class DefaultsUIntBridge: DefaultsBridge<UInt> {
+    public override func save(key: String, value: UInt?, userDefaults: UserDefaults) {
+        userDefaults.set(value, forKey: key)
+    }
+
+    public override func get(key: String, userDefaults: UserDefaults) -> UInt? {
+        if let int = userDefaults.number(forKey: key)?.uintValue {
+            return int
+        }
+
+        // Fallback for launch arguments
+        if let string = userDefaults.object(forKey: key) as? String,
+            let int = UInt(string) {
+            return int
+        }
+
+        return nil
+    }
+}
+
 public final class DefaultsDoubleBridge: DefaultsBridge<Double> {
     public override func save(key: String, value: Double?, userDefaults: UserDefaults) {
         userDefaults.set(value, forKey: key)

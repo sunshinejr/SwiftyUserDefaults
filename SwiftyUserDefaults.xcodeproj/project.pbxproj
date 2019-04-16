@@ -17,6 +17,7 @@
 		311F24C3509BE924078AD67E /* DefaultsObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9701991125BC1345631E831E /* DefaultsObserver.swift */; };
 		499B0191487C22E03028ED3C /* Defaults+Int.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041FE3F6B58F219CAAE0AD64 /* Defaults+Int.swift */; };
 		4B604921053C4F31217DCE9E /* Defaults+Observing.swift in Sources */ = {isa = PBXBuildFile; fileRef = F910BE3FABE99289E0545D95 /* Defaults+Observing.swift */; };
+		50B63B382265CE8E00CCB151 /* Defaults+UInt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50B63B372265CE8E00CCB151 /* Defaults+UInt.swift */; };
 		7EE5BB8911DFD47B6D6ED8E5 /* Defaults+Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F97C9DDE34857798EA6519B /* Defaults+Date.swift */; };
 		80C1C495919531D69B34BA6F /* Defaults+Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78703A0F180A4B7C450CD191 /* Defaults+Data.swift */; };
 		88573499C0B9C4F466D7EC2D /* DefaultsSerializable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F98C7EF97445788836162CD0 /* DefaultsSerializable.swift */; };
@@ -55,6 +56,7 @@
 		2EFFE22277FA6C163E34F4D2 /* DefaultsSerializableSpec.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = DefaultsSerializableSpec.swift; path = Tests/SwiftyUserDefaultsTests/TestHelpers/DefaultsSerializableSpec.swift; sourceTree = "<group>"; };
 		2F97C9DDE34857798EA6519B /* Defaults+Date.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Defaults+Date.swift"; path = "Tests/SwiftyUserDefaultsTests/Built-ins/Defaults+Date.swift"; sourceTree = "<group>"; };
 		3D8980553F1615D4ACB4AA43 /* Defaults+Dictionary.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Defaults+Dictionary.swift"; path = "Tests/SwiftyUserDefaultsTests/Built-ins/Defaults+Dictionary.swift"; sourceTree = "<group>"; };
+		50B63B372265CE8E00CCB151 /* Defaults+UInt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Defaults+UInt.swift"; path = "Tests/Defaults+UInt.swift"; sourceTree = "<group>"; };
 		63C197A55B797D98D9603C98 /* UserDefaults+PropertyList.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "UserDefaults+PropertyList.swift"; path = "Tests/SwiftyUserDefaultsTests/TestHelpers/UserDefaults+PropertyList.swift"; sourceTree = "<group>"; };
 		6494A812C2386E7351405E72 /* Defaults+URL.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Defaults+URL.swift"; path = "Tests/SwiftyUserDefaultsTests/Built-ins/Defaults+URL.swift"; sourceTree = "<group>"; };
 		6C48B95D407E4F720507F3D8 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; name = Info.plist; path = Sources/Info.plist; sourceTree = "<group>"; };
@@ -163,12 +165,13 @@
 			children = (
 				6494A812C2386E7351405E72 /* Defaults+URL.swift */,
 				041FE3F6B58F219CAAE0AD64 /* Defaults+Int.swift */,
+				50B63B372265CE8E00CCB151 /* Defaults+UInt.swift */,
+				A574FF49CBCEBCCEAE9BD42E /* Defaults+String.swift */,
 				E57735ECA0C2F413E8EBC2E4 /* Defaults+Bool.swift */,
 				8790CE5B53F91DAD51975EDC /* Defaults+Double.swift */,
 				3D8980553F1615D4ACB4AA43 /* Defaults+Dictionary.swift */,
 				78703A0F180A4B7C450CD191 /* Defaults+Data.swift */,
 				2F97C9DDE34857798EA6519B /* Defaults+Date.swift */,
-				A574FF49CBCEBCCEAE9BD42E /* Defaults+String.swift */,
 			);
 			name = "Built-ins";
 			sourceTree = "<group>";
@@ -264,6 +267,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 			);
 			mainGroup = 360E42BFF4D0B60A2966BBFB;
@@ -322,6 +326,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				50B63B382265CE8E00CCB151 /* Defaults+UInt.swift in Sources */,
 				EA37551964DBE6344BC4178A /* Defaults+URL.swift in Sources */,
 				499B0191487C22E03028ED3C /* Defaults+Int.swift in Sources */,
 				89AF35E8D3CF0B18777540CC /* Defaults+Bool.swift in Sources */,
