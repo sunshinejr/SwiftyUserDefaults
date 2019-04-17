@@ -93,7 +93,7 @@ env:
 before_install:
   - gem install cocoapods -v 1.6.0
   - gem install xcpretty
-  - brew install xcodegen
+  - git clone https://github.com/yonaskolb/XcodeGen.git && cd XcodeGen && make
 
 script:
   - set -o pipefail
