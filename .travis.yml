@@ -7,6 +7,7 @@ matrix:
       env:
         - CACHE_NAME=SWIFT5_0
         - SWIFT_VERSION=5.0
+        - XCODEGEN_VERSION=2.5.0
         - IOS_SIMULATOR='name=iPhone 6s,OS=12.2'
         - IOS_SDK=iphonesimulator12.2
         - TVOS_SIMULATOR='name=Apple TV 4K (at 1080p)'
@@ -22,6 +23,7 @@ matrix:
       env:
         - CACHE_NAME=SWIFT5_0
         - SWIFT_VERSION=5.0
+        - XCODEGEN_VERSION=2.5.0
         - IOS_SIMULATOR='name=iPhone 6s,OS=12.2'
         - IOS_SDK=iphonesimulator12.2
         - TVOS_SIMULATOR='name=Apple TV 4K (at 1080p)'
@@ -45,6 +47,7 @@ matrix:
       env:
         - CACHE_NAME=SWIFT4_2
         - SWIFT_VERSION=4.2
+        - XCODEGEN_VERSION=2.3.0
         - IOS_SIMULATOR='name=iPhone 6s,OS=12.1'
         - IOS_SDK=iphonesimulator12.1
         - TVOS_SIMULATOR='name=Apple TV 4K (at 1080p)'
@@ -68,6 +71,7 @@ matrix:
       env: 
         - CACHE_NAME=SWIFT4_1
         - SWIFT_VERSION=4.0 # it's in fact 4.1
+        - XCODEGEN_VERSION=2.3.0
         - IOS_SIMULATOR='name=iPhone 6s,OS=11.4'
         - IOS_SDK=iphonesimulator11.4
         - TVOS_SIMULATOR='name=Apple TV 4K (at 1080p)'
@@ -93,7 +97,7 @@ env:
 before_install:
   - gem install cocoapods -v 1.6.0
   - gem install xcpretty
-  - git clone https://github.com/yonaskolb/XcodeGen.git && cd XcodeGen && git checkout 2.3.0 && make
+  - git clone https://github.com/yonaskolb/XcodeGen.git && cd XcodeGen && git checkout $XCODEGEN_VERSION && make && cd ../
 
 script:
   - set -o pipefail
