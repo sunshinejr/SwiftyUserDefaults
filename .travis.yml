@@ -71,7 +71,7 @@ matrix:
       env: 
         - CACHE_NAME=SWIFT4_1
         - SWIFT_VERSION=4.0 # it's in fact 4.1
-        - XCODEGEN_VERSION=2.3.0
+        - XCODEGEN_VERSION=2.2.0
         - IOS_SIMULATOR='name=iPhone 6s,OS=11.4'
         - IOS_SDK=iphonesimulator11.4
         - TVOS_SIMULATOR='name=Apple TV 4K (at 1080p)'
