@@ -38,7 +38,7 @@ open class DefaultsKeys {
 open class DefaultsKey<ValueType: DefaultsSerializable>: DefaultsKeys {
 
     public let _key: String
-    internal let defaultValue: ValueType.T?
+    public let defaultValue: ValueType.T?
 
     public init(_ key: String, defaultValue: ValueType.T) {
         self._key = key
