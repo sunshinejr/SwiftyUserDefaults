@@ -63,42 +63,42 @@ open class DefaultsBridge<T> {
     }
 }
 
-public final class DefaultsObjectBridge<T>: DefaultsBridge<T> {
-    public override func save(key: String, value: T?, userDefaults: UserDefaults) {
+open class DefaultsObjectBridge<T>: DefaultsBridge<T> {
+    open override func save(key: String, value: T?, userDefaults: UserDefaults) {
         userDefaults.set(value, forKey: key)
     }
 
-    public override func get(key: String, userDefaults: UserDefaults) -> T? {
+    open override func get(key: String, userDefaults: UserDefaults) -> T? {
         return userDefaults.object(forKey: key) as? T
     }
 }
 
-public final class DefaultsArrayBridge<T: Collection>: DefaultsBridge<T> {
-    public override func save(key: String, value: T?, userDefaults: UserDefaults) {
+open class DefaultsArrayBridge<T: Collection>: DefaultsBridge<T> {
+    open override func save(key: String, value: T?, userDefaults: UserDefaults) {
         userDefaults.set(value, forKey: key)
     }
 
-    public override func get(key: String, userDefaults: UserDefaults) -> T? {
+    open override func get(key: String, userDefaults: UserDefaults) -> T? {
         return userDefaults.array(forKey: key) as? T
     }
 }
 
-public final class DefaultsStringBridge: DefaultsBridge<String> {
-    public override func save(key: String, value: String?, userDefaults: UserDefaults) {
+open class DefaultsStringBridge: DefaultsBridge<String> {
+    open override func save(key: String, value: String?, userDefaults: UserDefaults) {
         userDefaults.set(value, forKey: key)
     }
 
-    public override func get(key: String, userDefaults: UserDefaults) -> String? {
+    open override func get(key: String, userDefaults: UserDefaults) -> String? {
         return userDefaults.string(forKey: key)
     }
 }
 
-public final class DefaultsIntBridge: DefaultsBridge<Int> {
-    public override func save(key: String, value: Int?, userDefaults: UserDefaults) {
+open class DefaultsIntBridge: DefaultsBridge<Int> {
+    open override func save(key: String, value: Int?, userDefaults: UserDefaults) {
         userDefaults.set(value, forKey: key)
     }
 
-    public override func get(key: String, userDefaults: UserDefaults) -> Int? {
+    open override func get(key: String, userDefaults: UserDefaults) -> Int? {
         if let int = userDefaults.number(forKey: key)?.intValue {
             return int
         }
@@ -113,12 +113,12 @@ public final class DefaultsIntBridge: DefaultsBridge<Int> {
     }
 }
 
-public final class DefaultsDoubleBridge: DefaultsBridge<Double> {
-    public override func save(key: String, value: Double?, userDefaults: UserDefaults) {
+open class DefaultsDoubleBridge: DefaultsBridge<Double> {
+    open override func save(key: String, value: Double?, userDefaults: UserDefaults) {
         userDefaults.set(value, forKey: key)
     }
 
-    public override func get(key: String, userDefaults: UserDefaults) -> Double? {
+    open override func get(key: String, userDefaults: UserDefaults) -> Double? {
         if let double = userDefaults.number(forKey: key)?.doubleValue {
             return double
         }
@@ -133,12 +133,12 @@ public final class DefaultsDoubleBridge: DefaultsBridge<Double> {
     }
 }
 
-public final class DefaultsBoolBridge: DefaultsBridge<Bool> {
-    public override func save(key: String, value: Bool?, userDefaults: UserDefaults) {
+open class DefaultsBoolBridge: DefaultsBridge<Bool> {
+    open override func save(key: String, value: Bool?, userDefaults: UserDefaults) {
         userDefaults.set(value, forKey: key)
     }
 
-    public override func get(key: String, userDefaults: UserDefaults) -> Bool? {
+    open override func get(key: String, userDefaults: UserDefaults) -> Bool? {
         // @warning we use number(forKey:) instead of bool(forKey:), because
         // bool(forKey:) will always return value, even if it's not set
         //
@@ -153,30 +153,30 @@ public final class DefaultsBoolBridge: DefaultsBridge<Bool> {
     }
 }
 
-public final class DefaultsDataBridge: DefaultsBridge<Data> {
-    public override func save(key: String, value: Data?, userDefaults: UserDefaults) {
+open class DefaultsDataBridge: DefaultsBridge<Data> {
+    open override func save(key: String, value: Data?, userDefaults: UserDefaults) {
         userDefaults.set(value, forKey: key)
     }
 
-    public override func get(key: String, userDefaults: UserDefaults) -> Data? {
+    open override func get(key: String, userDefaults: UserDefaults) -> Data? {
         return userDefaults.data(forKey: key)
     }
 }
 
-public final class DefaultsUrlBridge: DefaultsBridge<URL> {
-    public override func save(key: String, value: URL?, userDefaults: UserDefaults) {
+open class DefaultsUrlBridge: DefaultsBridge<URL> {
+    open override func save(key: String, value: URL?, userDefaults: UserDefaults) {
         userDefaults.set(value, forKey: key)
     }
 
-    public override func get(key: String, userDefaults: UserDefaults) -> URL? {
+    open override func get(key: String, userDefaults: UserDefaults) -> URL? {
         return userDefaults.url(forKey: key)
     }
 
-    public override func isSerialized() -> Bool {
+    open override func isSerialized() -> Bool {
         return true
     }
 
-    public override func deserialize(_ object: Any) -> URL? {
+    open override func deserialize(_ object: Any) -> URL? {
         if let object = object as? URL {
             return object
         }
@@ -194,9 +194,9 @@ public final class DefaultsUrlBridge: DefaultsBridge<URL> {
     }
 }
 
-public final class DefaultsCodableBridge<T: Codable>: DefaultsBridge<T> {
+open class DefaultsCodableBridge<T: Codable>: DefaultsBridge<T> {
 
-    public override func save(key: String, value: T?, userDefaults: UserDefaults) {
+    open override func save(key: String, value: T?, userDefaults: UserDefaults) {
         guard let value = value else {
             userDefaults.removeObject(forKey: key)
             return
@@ -204,34 +204,34 @@ public final class DefaultsCodableBridge<T: Codable>: DefaultsBridge<T> {
         userDefaults.set(encodable: value, forKey: key)
     }
 
-    public override func get(key: String, userDefaults: UserDefaults) -> T? {
+    open override func get(key: String, userDefaults: UserDefaults) -> T? {
         guard let data = userDefaults.data(forKey: key) else {
             return nil
         }
         return deserialize(data)
     }
 
-    public override func isSerialized() -> Bool {
+    open override func isSerialized() -> Bool {
         return true
     }
 
-    public override func deserialize(_ object: Any) -> T? {
+    open override func deserialize(_ object: Any) -> T? {
         guard let data = object as? Data else { return nil }
 
         return try? JSONDecoder().decode(T.self, from: data)
     }
 }
 
-public final class DefaultsKeyedArchiverBridge<T>: DefaultsBridge<T> {
+open class DefaultsKeyedArchiverBridge<T>: DefaultsBridge<T> {
 
-    public override func get(key: String, userDefaults: UserDefaults) -> T? {
+    open override func get(key: String, userDefaults: UserDefaults) -> T? {
         guard let data = userDefaults.data(forKey: key) else {
             return nil
         }
         return deserialize(data)
     }
 
-    public override func save(key: String, value: T?, userDefaults: UserDefaults) {
+    open override func save(key: String, value: T?, userDefaults: UserDefaults) {
         guard let value = value else {
             userDefaults.removeObject(forKey: key)
             return
@@ -245,59 +245,59 @@ public final class DefaultsKeyedArchiverBridge<T>: DefaultsBridge<T> {
         }
     }
 
-    public override func isSerialized() -> Bool {
+    open override func isSerialized() -> Bool {
         return true
     }
 
-    public override func deserialize(_ object: Any) -> T? {
+    open override func deserialize(_ object: Any) -> T? {
         guard let data = object as? Data else { return nil }
 
         return NSKeyedUnarchiver.unarchiveObject(with: data) as? T
     }
 }
 
-public final class DefaultsRawRepresentableBridge<T: RawRepresentable>: DefaultsBridge<T> {
+open class DefaultsRawRepresentableBridge<T: RawRepresentable>: DefaultsBridge<T> {
 
-    public override func get(key: String, userDefaults: UserDefaults) -> T? {
+    open override func get(key: String, userDefaults: UserDefaults) -> T? {
         guard let object = userDefaults.object(forKey: key) else { return nil }
 
         return deserialize(object)
     }
 
-    public override func save(key: String, value: T?, userDefaults: UserDefaults) {
+    open override func save(key: String, value: T?, userDefaults: UserDefaults) {
         userDefaults.set(value?.rawValue, forKey: key)
     }
 
-    public override func isSerialized() -> Bool {
+    open override func isSerialized() -> Bool {
         return true
     }
 
-    public override func deserialize(_ object: Any) -> T? {
+    open override func deserialize(_ object: Any) -> T? {
         guard let rawValue = object as? T.RawValue else { return nil }
 
         return T(rawValue: rawValue)
     }
 }
 
-public final class DefaultsRawRepresentableArrayBridge<T: Collection>: DefaultsBridge<T> where T.Element: RawRepresentable {
+open class DefaultsRawRepresentableArrayBridge<T: Collection>: DefaultsBridge<T> where T.Element: RawRepresentable {
 
-    public override func get(key: String, userDefaults: UserDefaults) -> T? {
+    open override func get(key: String, userDefaults: UserDefaults) -> T? {
         guard let object = userDefaults.array(forKey: key) else { return nil }
 
         return deserialize(object)
     }
 
-    public override func save(key: String, value: T?, userDefaults: UserDefaults) {
+    open override func save(key: String, value: T?, userDefaults: UserDefaults) {
         let raw = value?.map { $0.rawValue }
 
         userDefaults.set(raw, forKey: key)
     }
 
-    public override func isSerialized() -> Bool {
+    open override func isSerialized() -> Bool {
         return true
     }
 
-    public override func deserialize(_ object: Any) -> T? {
+    open override func deserialize(_ object: Any) -> T? {
         guard let rawValue = object as? [T.Element.RawValue] else { return nil }
 
         return rawValue.compactMap { T.Element(rawValue: $0) } as? T
