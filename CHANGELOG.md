@@ -1,6 +1,7 @@
 ### Next
 
 * Updated `DefaultsKey.defaultValue` access level to `public`. [@DivineDominion](https://github.com/DivineDominion)
+* Updated accesslevel of all bridges to `open` from `public`. [@fredpi](https://github.com/fredpi )
 
 ### 4.0.0-beta.2 (2019-03-09)
 
