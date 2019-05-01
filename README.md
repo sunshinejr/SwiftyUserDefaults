@@ -380,7 +380,7 @@ let hasKey = Defaults.hasKey(.skipLogin)
 If you're using CocoaPods, just add this line to your Podfile:
 
 ```ruby
-pod 'SwiftyUserDefaults', '~> 4.0.0'
+pod 'SwiftyUserDefaults', '~> 4.0'
 ```
 
 Install by running this command in your terminal:
@@ -400,7 +400,7 @@ import SwiftyUserDefaults
 Just add to your Cartfile:
 
 ```ruby
-github "radex/SwiftyUserDefaults" "4.0.0"
+github "radex/SwiftyUserDefaults" ~> 4.0
 ```
 
 ### Swift Package Manager
