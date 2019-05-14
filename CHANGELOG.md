@@ -1,4 +1,5 @@
 ### Next
+* Updated project to recommended settings of Xcode 10.2. [@philippec-ls](https://github.com/philippec-ls)
 
 ### 4.0.0 (2019-04-26)
 
