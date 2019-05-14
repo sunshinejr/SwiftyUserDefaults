@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "9999"
+   LastUpgradeVersion = "1020"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "SwiftyUserDefaults::SwiftyUserDefaults"
+               BlueprintIdentifier = "61A78F3463F2610F6773A31E"
                BuildableName = "SwiftyUserDefaults.framework"
                BlueprintName = "SwiftyUserDefaults"
                ReferencedContainer = "container:SwiftyUserDefaults.xcodeproj">
@@ -32,7 +32,7 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "SwiftyUserDefaults::SwiftyUserDefaultsTests"
+               BlueprintIdentifier = "B72688BB7DC2421580BAD9EF"
                BuildableName = "SwiftyUserDefaultsTests.xctest"
                BlueprintName = "SwiftyUserDefaultsTests"
                ReferencedContainer = "container:SwiftyUserDefaults.xcodeproj">
@@ -55,7 +55,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "SwiftyUserDefaults::SwiftyUserDefaults"
+            BlueprintIdentifier = "61A78F3463F2610F6773A31E"
             BuildableName = "SwiftyUserDefaults.framework"
             BlueprintName = "SwiftyUserDefaults"
             ReferencedContainer = "container:SwiftyUserDefaults.xcodeproj">
