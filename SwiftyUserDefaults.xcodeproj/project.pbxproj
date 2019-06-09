@@ -32,6 +32,9 @@
 		CC4CF6A63F6AA1B932D6757E /* DefaultsBridges.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20EBA39F1E25782FDC1CFC36 /* DefaultsBridges.swift */; };
 		D102C1011A4314AFF773DCD5 /* Defaults+StringToBool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11FDEA0BD7078D2633741F60 /* Defaults+StringToBool.swift */; };
 		EA37551964DBE6344BC4178A /* Defaults+URL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6494A812C2386E7351405E72 /* Defaults+URL.swift */; };
+		ED39909122B0204E0046F502 /* DefaultsKeyStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED39909022B0204E0046F502 /* DefaultsKeyStore.swift */; };
+		ED9D95BF22AD74630006FE67 /* DefaultsAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED9D95BD22AD74630006FE67 /* DefaultsAdapter.swift */; };
+		ED9D95C022AD74630006FE67 /* DefaultsType.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED9D95BE22AD74630006FE67 /* DefaultsType.swift */; };
 		F0340276AF034C710E8C81A7 /* DefaultsSerializable+BuiltIns.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB55DC75BF69CEA7DB03750E /* DefaultsSerializable+BuiltIns.swift */; };
 		F73433D64DE45C8219A51BED /* Defaults+BestFroggiesEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A5BEEC51B2A01157F9965F /* Defaults+BestFroggiesEnum.swift */; };
 /* End PBXBuildFile section */
@@ -71,6 +74,9 @@
 		CBE434F1CEE20652BC414284 /* Defaults+FrogCodable.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Defaults+FrogCodable.swift"; path = "Tests/SwiftyUserDefaultsTests/External types/Defaults+FrogCodable.swift"; sourceTree = "<group>"; };
 		D0EE0402DB7DB637D79FEC2B /* TestHelper.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = TestHelper.swift; path = Tests/SwiftyUserDefaultsTests/TestHelpers/TestHelper.swift; sourceTree = "<group>"; };
 		E57735ECA0C2F413E8EBC2E4 /* Defaults+Bool.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Defaults+Bool.swift"; path = "Tests/SwiftyUserDefaultsTests/Built-ins/Defaults+Bool.swift"; sourceTree = "<group>"; };
+		ED39909022B0204E0046F502 /* DefaultsKeyStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DefaultsKeyStore.swift; path = Sources/DefaultsKeyStore.swift; sourceTree = "<group>"; };
+		ED9D95BD22AD74630006FE67 /* DefaultsAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DefaultsAdapter.swift; path = Sources/DefaultsAdapter.swift; sourceTree = "<group>"; };
+		ED9D95BE22AD74630006FE67 /* DefaultsType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DefaultsType.swift; path = Sources/DefaultsType.swift; sourceTree = "<group>"; };
 		EE155E06F856DFEF78FD63F7 /* Defaults.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Defaults.swift; path = Sources/Defaults.swift; sourceTree = "<group>"; };
 		F067CFEA88F84E726E835422 /* SwiftyUserDefaultsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwiftyUserDefaultsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F15D6CCB785C552A0B39B16A /* Defaults+Color.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Defaults+Color.swift"; path = "Tests/SwiftyUserDefaultsTests/External types/Defaults+Color.swift"; sourceTree = "<group>"; };
@@ -122,6 +128,9 @@
 				85096B65E07A3BC7F856F0D1 /* OptionalType.swift */,
 				F98C7EF97445788836162CD0 /* DefaultsSerializable.swift */,
 				EE155E06F856DFEF78FD63F7 /* Defaults.swift */,
+				ED9D95BD22AD74630006FE67 /* DefaultsAdapter.swift */,
+				ED9D95BE22AD74630006FE67 /* DefaultsType.swift */,
+				ED39909022B0204E0046F502 /* DefaultsKeyStore.swift */,
 			);
 			name = Sources;
 			sourceTree = "<group>";
@@ -264,6 +273,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 			);
 			mainGroup = 360E42BFF4D0B60A2966BBFB;
@@ -348,11 +358,14 @@
 				D102C1011A4314AFF773DCD5 /* Defaults+StringToBool.swift in Sources */,
 				037280C1C6C68BDB8E3759E6 /* DefaultsKeys.swift in Sources */,
 				CC4CF6A63F6AA1B932D6757E /* DefaultsBridges.swift in Sources */,
+				ED39909122B0204E0046F502 /* DefaultsKeyStore.swift in Sources */,
+				ED9D95C022AD74630006FE67 /* DefaultsType.swift in Sources */,
 				A3CAE6734DDE8FD952CE2CF2 /* Defaults+Subscripts.swift in Sources */,
 				4B604921053C4F31217DCE9E /* Defaults+Observing.swift in Sources */,
 				311F24C3509BE924078AD67E /* DefaultsObserver.swift in Sources */,
 				F0340276AF034C710E8C81A7 /* DefaultsSerializable+BuiltIns.swift in Sources */,
 				1C21A8A584B33AF419FCE1A5 /* OptionalType.swift in Sources */,
+				ED9D95BF22AD74630006FE67 /* DefaultsAdapter.swift in Sources */,
 				88573499C0B9C4F466D7EC2D /* DefaultsSerializable.swift in Sources */,
 				9FA427F1D84703CE8EC6CD38 /* Defaults.swift in Sources */,
 			);
