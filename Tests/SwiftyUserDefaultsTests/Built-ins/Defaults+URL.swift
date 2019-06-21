@@ -31,6 +31,7 @@ final class DefaultsUrlSpec: QuickSpec, DefaultsSerializableSpec {
 
     var customValue: URL = URL(string: "https://google.com")!
     var defaultValue: URL = URL(string: "https://github.com")!
+    var keyStore = FrogKeyStore<Serializable>()
 
     override func spec() {
         given("URL") {

@@ -31,6 +31,7 @@ final class DefaultsDictionarySpec: QuickSpec, DefaultsSerializableSpec {
 
     var customValue: [String: AnyHashable] = ["a": "b"]
     var defaultValue: [String: AnyHashable] = ["c": "d", "e": 1]
+    var keyStore = FrogKeyStore<Serializable>()
 
     override func spec() {
         given("Dictionary") {

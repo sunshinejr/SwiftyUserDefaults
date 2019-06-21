@@ -43,6 +43,7 @@ final class DefaultsUIColorSerializableSpec: QuickSpec, DefaultsSerializableSpec
 
     var customValue: Color = .green
     var defaultValue: Color = .blue
+    var keyStore = FrogKeyStore<Serializable>()
 
     override func spec() {
         given("NSColor") {

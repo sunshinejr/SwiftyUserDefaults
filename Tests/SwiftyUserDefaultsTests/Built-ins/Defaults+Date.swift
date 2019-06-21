@@ -31,6 +31,7 @@ final class DefaultsDateSpec: QuickSpec, DefaultsSerializableSpec {
 
     var customValue: Date = Date(timeIntervalSince1970: 50)
     var defaultValue: Date = Date()
+    var keyStore = FrogKeyStore<Serializable>()
 
     override func spec() {
         given("Date") {
