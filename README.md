@@ -321,7 +321,7 @@ Defaults.observe(key: nameKey, options: [.initial, .old, .new]) { _ in }
 
 ## Launch arguments
 
-Do you like to customize your app/script/tests by UserDefaults? Now it's fully supported on our side, statically typed of course. 
+Do you like to customize your app/script/tests by UserDefaults? Now it's fully supported on our side, statically typed of course.
 
 _Note: for now we support only `Bool`, `Double`, `Int`, `String` values, but if you have any other requests for that feature, please open an issue or PR and we can talk about implementing it in new versions._
 
@@ -364,6 +364,38 @@ var Defaults = UserDefaults(suiteName: "com.my.app")!
 If you want to check if we've got a value for `DefaultsKey`:
 ```swift
 let hasKey = Defaults.hasKey(.skipLogin)
+```
+
+## KeyPath dynamicMemberLookup
+
+SwiftyUserDefaults makes KeyPath dynamicMemberLookup usable in Swift 5.1!
+
+```swift
+extension DefaultsKeyStore {
+    var username: DefaultsKey<String?> { return .init("username") }
+    var launchCount: DefaultsKey<Int> { return .init("launchCount", defaultValue: 0) }
+}
+```
+
+And just use it ;-)
+
+```swift
+// Get and set user defaults easily
+let username = Defaults.username
+Defaults.hotkeyEnabled = true
+
+// Modify value types in place
+Defaults.launchCount += 1
+Defaults.volume -= 0.1
+Defaults.strings += "… can easily be extended!"
+
+// Use and modify typed arrays
+Defaults.libraries.append("SwiftyUserDefaults")
+Defaults.libraries[0] += " 2.0"
+
+// Easily work with custom serialized types
+Defaults.color = NSColor.white
+Defaults.color?.whiteComponent // => 1.0
 ```
 
 ## Installation
