@@ -24,14 +24,54 @@
 
 import Foundation
 
+/// A UserDefaults wrapper. It makes KeyPath dynamicMemberLookup  usable with UserDefaults in Swift 5.1 or greater.
+/// If Swift 5.0 or less, It works as ordinary SwiftyUserDefaults.
+///
+/// - seealso: https://github.com/apple/swift-evolution/blob/master/proposals/0252-keypath-dynamic-member-lookup.md
+///
+/// Here is a example:
+///
+/// ```
+/// extension DefaultsKeyStore {
+///     var launchCount: DefaultsKey<Int> {
+///         return .init("launchCount", defaultValue: 0)
+///     }
+/// }
+///
+/// Defaults.launchCount += 1
+/// ```
 @dynamicMemberLookup
 public final class DefaultsAdapter<KeyStore: DefaultsKeyStoreType> {
 
     #if swift(>=5.1)
+    /// A namespace for hasKey functions. It returns `Bool` when accesses with KeyPath dynamicMemberLookup.
+    ///
+    /// Here is example:
+    ///
+    /// ```
+    /// print(Defaults.hasKey.launchCount) // it returns true / false
+    /// ```
     public let hasKey: HasKey
+
+    /// A namespace for remove functions. It returns `() -> Void` when accesses with KeyPath dynamicMemberLookup.
+    ///
+    /// Here is exmaple:
+    ///
+    /// ```
+    /// Defaults.remove.launchCount()
+    /// ```
     public let remove: Remove
 
     #if !os(Linux)
+    /// A namespace for observe functions. It returns `(NSKeyValueObservingOptions, @escaping (DefaultsObserver<T>.Update) -> Void) -> DefaultsDisposable` when accesses with KeyPath dynamicMemberLookup.
+    ///
+    /// Here is exmaple:
+    ///
+    /// ```
+    /// let observer = Defaults.observe.launchCount([.old, .new]) { update in
+    ///     print(update)
+    /// }
+    /// ```
     public let observe: Observe
     #endif
 
