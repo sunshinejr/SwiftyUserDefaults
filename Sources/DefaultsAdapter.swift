@@ -104,7 +104,7 @@ public final class DefaultsAdapter<KeyStore: DefaultsKeyStoreType> {
 
 extension DefaultsAdapter: DefaultsType {
 
-    public subscript<T>(key: DefaultsKey<T?>) -> T.T? where T : DefaultsSerializable {
+    public subscript<T: DefaultsSerializable>(key: DefaultsKey<T?>) -> T.T? {
         get {
             return defaults[key]
         }
@@ -113,7 +113,7 @@ extension DefaultsAdapter: DefaultsType {
         }
     }
 
-    public subscript<T>(key: DefaultsKey<T>) -> T.T where T : DefaultsSerializable, T == T.T {
+    public subscript<T: DefaultsSerializable>(key: DefaultsKey<T>) -> T.T where T == T.T {
         get {
             return defaults[key]
         }
@@ -122,11 +122,11 @@ extension DefaultsAdapter: DefaultsType {
         }
     }
 
-    public func hasKey<T>(_ key: DefaultsKey<T>) -> Bool where T : DefaultsSerializable {
+    public func hasKey<T: DefaultsSerializable>(_ key: DefaultsKey<T>) -> Bool {
         return defaults.hasKey(key)
     }
 
-    public func remove<T>(_ key: DefaultsKey<T>) where T : DefaultsSerializable {
+    public func remove<T: DefaultsSerializable>(_ key: DefaultsKey<T>) {
         defaults.remove(key)
     }
 
@@ -180,7 +180,6 @@ extension DefaultsAdapter {
 
     @dynamicMemberLookup
     public final class HasKey {
-        public typealias Root = KeyStore
 
         fileprivate let dependency: Dependency
 
@@ -191,7 +190,6 @@ extension DefaultsAdapter {
 
     @dynamicMemberLookup
     public final class Remove {
-        public typealias Root = KeyStore
 
         fileprivate let dependency: Dependency
 
@@ -203,7 +201,6 @@ extension DefaultsAdapter {
     #if !os(Linux)
     @dynamicMemberLookup
     public final class Observe {
-        public typealias Root = KeyStore
 
         fileprivate let dependency: Dependency
 
@@ -216,14 +213,14 @@ extension DefaultsAdapter {
 
 extension DefaultsAdapter.HasKey {
 
-    public subscript<T>(dynamicMember keyPath: KeyPath<Root, DefaultsKey<T>>) -> Bool {
+    public subscript<T>(dynamicMember keyPath: KeyPath<KeyStore, DefaultsKey<T>>) -> Bool {
         return dependency.defaults.hasKey(dependency.keyStore[keyPath: keyPath])
     }
 }
 
 extension DefaultsAdapter.Remove {
 
-    public subscript<T>(dynamicMember keyPath: KeyPath<Root, DefaultsKey<T>>) -> () -> Void {
+    public subscript<T>(dynamicMember keyPath: KeyPath<KeyStore, DefaultsKey<T>>) -> () -> Void {
         return { [dependency] in
             dependency.defaults.remove(dependency.keyStore[keyPath: keyPath])
         }
@@ -233,7 +230,7 @@ extension DefaultsAdapter.Remove {
 #if !os(Linux)
 extension DefaultsAdapter.Observe {
 
-    public subscript<T>(dynamicMember keyPath: KeyPath<Root, DefaultsKey<T>>) -> (NSKeyValueObservingOptions, @escaping (DefaultsObserver<T>.Update) -> Void) -> DefaultsDisposable {
+    public subscript<T>(dynamicMember keyPath: KeyPath<KeyStore, DefaultsKey<T>>) -> (NSKeyValueObservingOptions, @escaping (DefaultsObserver<T>.Update) -> Void) -> DefaultsDisposable {
         return { [dependency] options, handler  in
             dependency.defaults.observe(key: dependency.keyStore[keyPath: keyPath],
                                         options: options,
@@ -241,7 +238,7 @@ extension DefaultsAdapter.Observe {
         }
     }
 
-    public subscript<T>(dynamicMember keyPath: KeyPath<Root, DefaultsKey<T>>) -> (@escaping (DefaultsObserver<T>.Update) -> Void) -> DefaultsDisposable {
+    public subscript<T>(dynamicMember keyPath: KeyPath<KeyStore, DefaultsKey<T>>) -> (@escaping (DefaultsObserver<T>.Update) -> Void) -> DefaultsDisposable {
         return { [dependency] handler  in
             dependency.defaults.observe(key: dependency.keyStore[keyPath: keyPath],
                                         options: [.old, .new],

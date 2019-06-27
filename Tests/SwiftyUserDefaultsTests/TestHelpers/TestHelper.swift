@@ -117,7 +117,6 @@ struct FrogCustomSerializable: DefaultsSerializable, Equatable {
     let name: String
 }
 
-
 final class FrogKeyStore<Serializable: DefaultsSerializable & Equatable>: DefaultsKeyStoreType {
 
     #if swift(>=5.1)
