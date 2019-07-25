@@ -68,7 +68,7 @@ internal extension UserDefaults {
 
         return try? JSONDecoder().decode(T.self, from: decodableData)
     }
-    
+
     /// Encodes passed `encodable` and saves the resulting data into the user defaults for the key `key`.
     /// Any error encoding will result in an assertion failure.
     func set<T: Encodable>(encodable: T, forKey key: String) {
@@ -78,5 +78,5 @@ internal extension UserDefaults {
         } catch {
             assertionFailure("Failure encoding encodable of type \(T.self): \(error.localizedDescription)")
         }
-    }    
+    }
 }

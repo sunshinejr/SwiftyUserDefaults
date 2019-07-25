@@ -65,44 +65,36 @@ enum BestFroggiesEnum: String, DefaultsSerializable {
     case Dandy
 }
 
-final class DefaultsFrogBridge: DefaultsBridge<FrogCustomSerializable> {
-    override func get(key: String, userDefaults: UserDefaults) -> FrogCustomSerializable? {
+final class DefaultsFrogBridge: DefaultsBridge {
+    func get(key: String, userDefaults: UserDefaults) -> FrogCustomSerializable? {
         let name = userDefaults.string(forKey: key)
         return name.map(FrogCustomSerializable.init)
     }
 
-    override func save(key: String, value: FrogCustomSerializable?, userDefaults: UserDefaults) {
+    func save(key: String, value: FrogCustomSerializable?, userDefaults: UserDefaults) {
         userDefaults.set(value?.name, forKey: key)
     }
 
-    public override func isSerialized() -> Bool {
-        return true
-    }
-
-    public override func deserialize(_ object: Any) -> FrogCustomSerializable? {
+    func deserialize(_ object: Any) -> FrogCustomSerializable? {
         guard let name = object as? String else { return nil }
 
         return FrogCustomSerializable(name: name)
     }
 }
 
-final class DefaultsFrogArrayBridge: DefaultsBridge<[FrogCustomSerializable]> {
-    override func get(key: String, userDefaults: UserDefaults) -> [FrogCustomSerializable]? {
+final class DefaultsFrogArrayBridge: DefaultsBridge {
+    func get(key: String, userDefaults: UserDefaults) -> [FrogCustomSerializable]? {
         return userDefaults.array(forKey: key)?
             .compactMap { $0 as? String }
             .map(FrogCustomSerializable.init)
     }
 
-    override func save(key: String, value: [FrogCustomSerializable]?, userDefaults: UserDefaults) {
+    func save(key: String, value: [FrogCustomSerializable]?, userDefaults: UserDefaults) {
         let values = value?.map { $0.name }
         userDefaults.set(values, forKey: key)
     }
 
-    public override func isSerialized() -> Bool {
-        return true
-    }
-
-    public override func deserialize(_ object: Any) -> [FrogCustomSerializable]? {
+    func deserialize(_ object: Any) -> [FrogCustomSerializable]? {
         guard let names = object as? [String] else { return nil }
 
         return names.map(FrogCustomSerializable.init)
@@ -111,8 +103,8 @@ final class DefaultsFrogArrayBridge: DefaultsBridge<[FrogCustomSerializable]> {
 
 struct FrogCustomSerializable: DefaultsSerializable, Equatable {
 
-    static var _defaults: DefaultsBridge<FrogCustomSerializable> { return DefaultsFrogBridge() }
-    static var _defaultsArray: DefaultsBridge<[FrogCustomSerializable]> { return DefaultsFrogArrayBridge() }
+    static var _defaults: DefaultsFrogBridge { return DefaultsFrogBridge() }
+    static var _defaultsArray: DefaultsFrogArrayBridge { return DefaultsFrogArrayBridge() }
 
     let name: String
 }
