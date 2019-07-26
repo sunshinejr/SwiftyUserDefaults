@@ -73,16 +73,19 @@ extension DefaultsSerializable where Self: NSCoding {
 
 extension Dictionary: DefaultsSerializable where Key == String {
     public typealias T = [Key: Value]
-    public static var _defaults: DefaultsObjectBridge<T> { return DefaultsObjectBridge() }
-    public static var _defaultsArray: DefaultsArrayBridge<[T]> { return DefaultsArrayBridge() }
+    public typealias Bridge = DefaultsObjectBridge<T>
+    public typealias ArrayBridge = DefaultsArrayBridge<[T]>
+    public static var _defaults: Bridge { return Bridge() }
+    public static var _defaultsArray: ArrayBridge { return ArrayBridge() }
 }
-
 extension Array: DefaultsSerializable where Element: DefaultsSerializable {
     public typealias T = [Element.T]
-    public static var _defaults: Element.ArrayBridge {
+    public typealias Bridge = Element.ArrayBridge
+    public typealias ArrayBridge = DefaultsObjectBridge<[T]>
+    public static var _defaults: Bridge {
         return Element._defaultsArray
     }
-    public static var _defaultsArray: DefaultsObjectBridge<[T]> {
+    public static var _defaultsArray: ArrayBridge {
         fatalError("Multidimensional arrays are not supported yet")
     }
 }
