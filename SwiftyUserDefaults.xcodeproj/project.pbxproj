@@ -261,11 +261,11 @@
 			};
 			buildConfigurationList = E3B831884380EEF15D197700 /* Build configuration list for PBXProject "SwiftyUserDefaults" */;
 			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = English;
+			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
-				English,
 				en,
+				Base,
 			);
 			mainGroup = 360E42BFF4D0B60A2966BBFB;
 			productRefGroup = 030EF47B968BC320EF6F10A3 /* Products */;
