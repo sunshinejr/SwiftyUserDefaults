@@ -26,22 +26,9 @@ import Foundation
 
 // MARK: - Static keys
 
-/// Extend this protocol and add your user defaults keys as static constants
-/// so you can use the shortcut dot notation (e.g. `Defaults[.yourKey]`)
-/// extension DefaultsKeys {
-///     public static var yourKey: DefaultsKey<Bool> {
-///         return .init("yourKey", defaultValue: false)
-///     }
-/// }
-public protocol DefaultsKeys {
-//    associatedtype ValueType: DefaultsSerializable
-//    var _key: String {get}
-//    var defaultValue: ValueType.T? {get}
-}
-
-/// Base class for static user defaults keys. Specialize with value type
+/// Specialize with value type
 /// and pass key name to the initializer to create a key.
-public struct DefaultsKey<ValueType: DefaultsSerializable>: DefaultsKeys {
+public struct DefaultsKey<ValueType: DefaultsSerializable> {
 
     public let _key: String
     public let defaultValue: ValueType.T?

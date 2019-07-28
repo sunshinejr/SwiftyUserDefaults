@@ -41,7 +41,7 @@ import Foundation
 /// Defaults.launchCount += 1
 /// ```
 @dynamicMemberLookup
-public final class DefaultsAdapter<KeyStore: DefaultsKeyStoreType> {
+public struct DefaultsAdapter<KeyStore: DefaultsKeyStoreType> {
 
     #if swift(>=5.1)
     /// A namespace for hasKey functions. It returns `Bool` when accesses with KeyPath dynamicMemberLookup.
@@ -167,19 +167,15 @@ extension DefaultsAdapter {
 
 extension DefaultsAdapter {
 
-    fileprivate final class Dependency {
+    fileprivate struct Dependency {
 
         let defaults: UserDefaults
         let keyStore: KeyStore
 
-        init(defaults: UserDefaults, keyStore: KeyStore) {
-            self.defaults = defaults
-            self.keyStore = keyStore
-        }
     }
 
     @dynamicMemberLookup
-    public final class HasKey {
+    public struct HasKey {
 
         fileprivate let dependency: Dependency
 
@@ -189,7 +185,7 @@ extension DefaultsAdapter {
     }
 
     @dynamicMemberLookup
-    public final class Remove {
+    public struct Remove {
 
         fileprivate let dependency: Dependency
 
@@ -200,7 +196,7 @@ extension DefaultsAdapter {
 
     #if !os(Linux)
     @dynamicMemberLookup
-    public final class Observe {
+    public struct Observe {
 
         fileprivate let dependency: Dependency
 
