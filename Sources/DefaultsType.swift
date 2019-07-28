@@ -22,36 +22,27 @@
 // SOFTWARE.
 //
 
-import Quick
-import Nimble
-import SwiftyUserDefaults
+import Foundation
 
-#if canImport(UIKit) || canImport(AppKit)
-#if canImport(UIKit)
-    import UIKit.UIColor
-    public typealias Color = UIColor
-#elseif canImport(AppKit)
-    import AppKit.NSColor
-    public typealias Color = NSColor
-#endif
+public protocol DefaultsType {
+    func hasKey<T>(_ key: DefaultsKey<T>) -> Bool
+    func remove<T>(_ key: DefaultsKey<T>)
+    func removeAll()
+    subscript<T: DefaultsSerializable>(key: DefaultsKey<T?>) -> T.T? { get set }
+    subscript<T: DefaultsSerializable>(key: DefaultsKey<T>) -> T.T where T.T == T { get set }
 
-extension Color: DefaultsSerializable {}
+    #if !os(Linux)
+    func observe<T: DefaultsSerializable>(key: DefaultsKey<T>,
+                                          options: NSKeyValueObservingOptions,
+                                          handler: @escaping (DefaultsObserver<T>.Update) -> Void) -> DefaultsDisposable
+    #endif
+}
 
-final class DefaultsUIColorSerializableSpec: QuickSpec, DefaultsSerializableSpec {
-
-    typealias Serializable = Color
-
-    var customValue: Color = .green
-    var defaultValue: Color = .blue
-    var keyStore = FrogKeyStore<Serializable>()
-
-    override func spec() {
-        given("NSColor") {
-            self.testValues()
-            self.testOptionalValues()
-            self.testOptionalValuesWithoutDefaultValue()
-            self.testObserving()
-        }
+#if !os(Linux)
+extension DefaultsType {
+    public func observe<T: DefaultsSerializable>(key: DefaultsKey<T>,
+                                                 handler: @escaping (DefaultsObserver<T>.Update) -> Void) -> DefaultsDisposable {
+        return observe(key: key, options: [.old, .new], handler: handler)
     }
 }
 #endif

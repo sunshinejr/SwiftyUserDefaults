@@ -30,6 +30,7 @@ final class DefaultsBoolSpec: QuickSpec, DefaultsSerializableSpec {
 
     var customValue: Bool = true
     var defaultValue: Bool = false
+    var keyStore = FrogKeyStore<Serializable>()
 
     override func spec() {
         given("Bool") {

@@ -30,6 +30,7 @@ final class DefaultsDoubleSpec: QuickSpec, DefaultsSerializableSpec {
 
     var customValue: Double = 2.0
     var defaultValue: Double = 1.0
+    var keyStore = FrogKeyStore<Serializable>()
 
     override func spec() {
         given("Double") {
