@@ -50,12 +50,7 @@ public final class DefaultsObserver<T: DefaultsSerializable>: NSObject, Defaults
         private static func deserialize(_ value: Any?, for key: DefaultsKey<T>) -> T.T? {
             guard let value = value else { return nil }
 
-            let bridge = T._defaults
-            if bridge.isSerialized() {
-                return bridge.deserialize(value)
-            } else {
-                return value as? T.T
-            }
+            return T._defaults.deserialize(value) ?? (value as? T.T)
         }
     }
 

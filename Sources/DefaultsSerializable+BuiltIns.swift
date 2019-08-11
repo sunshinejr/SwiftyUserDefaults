@@ -24,90 +24,75 @@
 
 import Foundation
 
+extension DefaultsSerializable {
+    public static var _defaultsArray: DefaultsArrayBridge<[T]> { return DefaultsArrayBridge() }
+}
+
 extension Date: DefaultsSerializable {
-    public static var _defaults: DefaultsBridge<Date> { return DefaultsObjectBridge() }
-    public static var _defaultsArray: DefaultsBridge<[Date]> { return DefaultsArrayBridge() }
+    public static var _defaults: DefaultsObjectBridge<Date> { return DefaultsObjectBridge() }
 }
-
 extension String: DefaultsSerializable {
-    public static var _defaults: DefaultsBridge<String> { return DefaultsStringBridge() }
-    public static var _defaultsArray: DefaultsBridge<[String]> { return DefaultsArrayBridge() }
+    public static var _defaults: DefaultsStringBridge { return DefaultsStringBridge() }
 }
-
 extension Int: DefaultsSerializable {
-    public static var _defaults: DefaultsBridge<Int> { return DefaultsIntBridge() }
-    public static var _defaultsArray: DefaultsBridge<[Int]> { return DefaultsArrayBridge() }
+    public static var _defaults: DefaultsIntBridge { return DefaultsIntBridge() }
 }
-
 extension Double: DefaultsSerializable {
-    public static var _defaults: DefaultsBridge<Double> { return DefaultsDoubleBridge() }
-    public static var _defaultsArray: DefaultsBridge<[Double]> { return DefaultsArrayBridge() }
+    public static var _defaults: DefaultsDoubleBridge { return DefaultsDoubleBridge() }
 }
-
 extension Bool: DefaultsSerializable {
-    public static var _defaults: DefaultsBridge<Bool> { return DefaultsBoolBridge() }
-    public static var _defaultsArray: DefaultsBridge<[Bool]> { return DefaultsArrayBridge() }
+    public static var _defaults: DefaultsBoolBridge { return DefaultsBoolBridge() }
 }
-
 extension Data: DefaultsSerializable {
-    public static var _defaults: DefaultsBridge<Data> { return DefaultsDataBridge() }
-    public static var _defaultsArray: DefaultsBridge<[Data]> { return DefaultsArrayBridge() }
+    public static var _defaults: DefaultsDataBridge { return DefaultsDataBridge() }
 }
 
 extension URL: DefaultsSerializable {
-    public static var _defaults: DefaultsBridge<URL> {
-        #if os(Linux)
-            return DefaultsKeyedArchiverBridge()
-        #else
-            return DefaultsUrlBridge()
-        #endif
-    }
-    public static var _defaultsArray: DefaultsBridge<[URL]> { return DefaultsKeyedArchiverBridge() }
+    #if os(Linux)
+    public static var _defaults: DefaultsKeyedArchiverBridge<URL> { return DefaultsKeyedArchiverBridge() }
+    #else
+    public static var _defaults: DefaultsUrlBridge { return DefaultsUrlBridge() }
+    #endif
+    public static var _defaultsArray: DefaultsKeyedArchiverBridge<[URL]> { return DefaultsKeyedArchiverBridge() }
 }
 
-extension DefaultsSerializable where Self: Encodable, Self: Decodable {
-    public static var _defaults: DefaultsBridge<Self> { return DefaultsCodableBridge() }
-    public static var _defaultsArray: DefaultsBridge<[Self]> { return DefaultsCodableBridge() }
+extension DefaultsSerializable where Self: Codable {
+    public static var _defaults: DefaultsCodableBridge<Self> { return DefaultsCodableBridge() }
+    public static var _defaultsArray: DefaultsCodableBridge<[Self]> { return DefaultsCodableBridge() }
 }
 
 extension DefaultsSerializable where Self: RawRepresentable {
-    public static var _defaults: DefaultsBridge<Self> { return DefaultsRawRepresentableBridge() }
-    public static var _defaultsArray: DefaultsBridge<[Self]> { return DefaultsRawRepresentableArrayBridge() }
+    public static var _defaults: DefaultsRawRepresentableBridge<Self> { return DefaultsRawRepresentableBridge() }
+    public static var _defaultsArray: DefaultsRawRepresentableArrayBridge<[Self]> { return DefaultsRawRepresentableArrayBridge() }
 }
 
 extension DefaultsSerializable where Self: NSCoding {
-    public static var _defaults: DefaultsBridge<Self> { return DefaultsKeyedArchiverBridge() }
-    public static var _defaultsArray: DefaultsBridge<[Self]> { return DefaultsKeyedArchiverBridge() }
+    public static var _defaults: DefaultsKeyedArchiverBridge<Self> { return DefaultsKeyedArchiverBridge() }
+    public static var _defaultsArray: DefaultsKeyedArchiverBridge<[Self]> { return DefaultsKeyedArchiverBridge() }
 }
 
 extension Dictionary: DefaultsSerializable where Key == String {
-
     public typealias T = [Key: Value]
-
-    public static var _defaults: DefaultsBridge<[Key: Value]> { return DefaultsObjectBridge() }
-    public static var _defaultsArray: DefaultsBridge<[[Key: Value]]> { return DefaultsArrayBridge() }
+    public typealias Bridge = DefaultsObjectBridge<T>
+    public typealias ArrayBridge = DefaultsArrayBridge<[T]>
+    public static var _defaults: Bridge { return Bridge() }
+    public static var _defaultsArray: ArrayBridge { return ArrayBridge() }
 }
-
 extension Array: DefaultsSerializable where Element: DefaultsSerializable {
-
-    public typealias T = [Element]
-
-    public static var _defaults: DefaultsBridge<[Element]> {
-        // swiftlint:disable:next force_cast
-        return Element._defaultsArray as! DefaultsBridge<[Element]>
+    public typealias T = [Element.T]
+    public typealias Bridge = Element.ArrayBridge
+    public typealias ArrayBridge = DefaultsObjectBridge<[T]>
+    public static var _defaults: Bridge {
+        return Element._defaultsArray
     }
-
-    public static var _defaultsArray: DefaultsBridge<[[Element]]> {
+    public static var _defaultsArray: ArrayBridge {
         fatalError("Multidimensional arrays are not supported yet")
     }
 }
 
 extension Optional: DefaultsSerializable where Wrapped: DefaultsSerializable {
-    public typealias T = Wrapped
-
-    // swiftlint:disable:next force_cast
-    public static var _defaults: DefaultsBridge<Wrapped> { return Wrapped._defaults as! DefaultsBridge<Wrapped> }
-
-    // swiftlint:disable:next force_cast
-    public static var _defaultsArray: DefaultsBridge<[Wrapped]> { return Wrapped._defaultsArray as! DefaultsBridge<[Wrapped]> }
+    public typealias Bridge = Wrapped.Bridge
+    public typealias ArrayBridge = Wrapped.ArrayBridge
+    public static var _defaults: Wrapped.Bridge { return Wrapped._defaults }
+    public static var _defaultsArray: Wrapped.ArrayBridge { return Wrapped._defaultsArray }
 }

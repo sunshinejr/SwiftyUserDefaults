@@ -30,6 +30,7 @@ final class DefaultsFrogCodableSpec: QuickSpec, DefaultsSerializableSpec {
 
     var customValue: FrogCodable = FrogCodable(name: "custom")
     var defaultValue: FrogCodable = FrogCodable(name: "default")
+    var keyStore = FrogKeyStore<Serializable>()
 
     override func spec() {
         given("FrogCodable") {

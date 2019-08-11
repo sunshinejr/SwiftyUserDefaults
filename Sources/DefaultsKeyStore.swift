@@ -22,36 +22,10 @@
 // SOFTWARE.
 //
 
-import Quick
-import Nimble
-import SwiftyUserDefaults
+import Foundation
 
-#if canImport(UIKit) || canImport(AppKit)
-#if canImport(UIKit)
-    import UIKit.UIColor
-    public typealias Color = UIColor
-#elseif canImport(AppKit)
-    import AppKit.NSColor
-    public typealias Color = NSColor
-#endif
+public protocol DefaultsKeyStoreType {}
 
-extension Color: DefaultsSerializable {}
-
-final class DefaultsUIColorSerializableSpec: QuickSpec, DefaultsSerializableSpec {
-
-    typealias Serializable = Color
-
-    var customValue: Color = .green
-    var defaultValue: Color = .blue
-    var keyStore = FrogKeyStore<Serializable>()
-
-    override func spec() {
-        given("NSColor") {
-            self.testValues()
-            self.testOptionalValues()
-            self.testOptionalValuesWithoutDefaultValue()
-            self.testObserving()
-        }
-    }
+public struct DefaultsKeyStore: DefaultsKeyStoreType {
+    public init() {}
 }
-#endif

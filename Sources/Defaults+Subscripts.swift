@@ -31,7 +31,7 @@ public extension UserDefaults {
         get {
             if let value = T._defaults.get(key: key._key, userDefaults: self) {
                 return value
-            } else if let defaultValue = key.defaultValue as? T.T {
+            } else if let defaultValue = key.defaultValue {
                 return defaultValue
             } else {
                 return nil

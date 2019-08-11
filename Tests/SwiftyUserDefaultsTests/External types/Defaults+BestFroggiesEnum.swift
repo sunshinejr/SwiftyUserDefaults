@@ -30,6 +30,7 @@ final class DefaultsBestFroggiesEnumSerializableSpec: QuickSpec, DefaultsSeriali
 
     var customValue: BestFroggiesEnum = .Andy
     var defaultValue: BestFroggiesEnum = .Dandy
+    var keyStore = FrogKeyStore<Serializable>()
 
     override func spec() {
         given("BestFroggiesEnum") {
