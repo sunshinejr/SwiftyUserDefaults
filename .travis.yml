@@ -8,7 +8,7 @@ matrix:
         - CACHE_NAME=SWIFT5_1
         - SWIFT_VERSION=5.0
         - XCODEGEN_VERSION=2.5.0
-        - IOS_SIMULATOR='name=iPhone 6s,OS=13.0'
+        - IOS_SIMULATOR='name=iPhone Xs,OS=13.0'
         - IOS_SDK=iphonesimulator13.0
         - TVOS_SIMULATOR='name=Apple TV 4K (at 1080p)'
         - TVOS_SDK=appletvsimulator13.0
@@ -24,7 +24,7 @@ matrix:
         - CACHE_NAME=SWIFT5_1
         - SWIFT_VERSION=5.0
         - XCODEGEN_VERSION=2.5.0
-        - IOS_SIMULATOR='name=iPhone 6s,OS=13.0'
+        - IOS_SIMULATOR='name=iPhone Xs,OS=13.0'
         - IOS_SDK=iphonesimulator13.0
         - TVOS_SIMULATOR='name=Apple TV 4K (at 1080p)'
         - TVOS_SDK=appletvsimulator13.0
