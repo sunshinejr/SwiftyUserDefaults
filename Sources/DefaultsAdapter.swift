@@ -44,37 +44,6 @@ import Foundation
 public struct DefaultsAdapter<KeyStore: DefaultsKeyStoreType> {
 
     #if swift(>=5.1)
-    /// A namespace for hasKey functions. It returns `Bool` when accesses with KeyPath dynamicMemberLookup.
-    ///
-    /// Here is example:
-    ///
-    /// ```
-    /// print(Defaults.hasKey.launchCount) // it returns true / false
-    /// ```
-    public let hasKey: HasKey
-
-    /// A namespace for remove functions. It returns `() -> Void` when accesses with KeyPath dynamicMemberLookup.
-    ///
-    /// Here is exmaple:
-    ///
-    /// ```
-    /// Defaults.remove.launchCount()
-    /// ```
-    public let remove: Remove
-
-    #if !os(Linux)
-    /// A namespace for observe functions. It returns `(NSKeyValueObservingOptions, @escaping (DefaultsObserver<T>.Update) -> Void) -> DefaultsDisposable` when accesses with KeyPath dynamicMemberLookup.
-    ///
-    /// Here is exmaple:
-    ///
-    /// ```
-    /// let observer = Defaults.observe.launchCount([.old, .new]) { update in
-    ///     print(update)
-    /// }
-    /// ```
-    public let observe: Observe
-    #endif
-
     private let keyStore: KeyStore
     #endif
 
@@ -85,14 +54,6 @@ public struct DefaultsAdapter<KeyStore: DefaultsKeyStoreType> {
 
         #if swift(>=5.1)
         self.keyStore = keyStore
-        let dependency = Dependency(defaults: defaults, keyStore: keyStore)
-
-        self.hasKey = HasKey(dependency)
-        self.remove = Remove(dependency)
-
-        #if !os(Linux)
-        self.observe = Observe(dependency)
-        #endif
         #endif
     }
 
@@ -163,84 +124,23 @@ extension DefaultsAdapter {
             defaults[keyStore[keyPath: keyPath]] = newValue
         }
     }
-}
 
-extension DefaultsAdapter {
-
-    fileprivate struct Dependency {
-
-        let defaults: UserDefaults
-        let keyStore: KeyStore
-
+    public func hasKey<T: DefaultsSerializable>(_ keyPath: KeyPath<KeyStore, DefaultsKey<T>>) -> Bool {
+        return defaults.hasKey(keyStore[keyPath: keyPath])
     }
 
-    @dynamicMemberLookup
-    public struct HasKey {
-
-        fileprivate let dependency: Dependency
-
-        fileprivate init(_ dependency: Dependency) {
-            self.dependency = dependency
-        }
-    }
-
-    @dynamicMemberLookup
-    public struct Remove {
-
-        fileprivate let dependency: Dependency
-
-        fileprivate init(_ dependency: Dependency) {
-            self.dependency = dependency
-        }
+    public func remove<T: DefaultsSerializable>(_ keyPath: KeyPath<KeyStore, DefaultsKey<T>>) {
+        defaults.remove(keyStore[keyPath: keyPath])
     }
 
     #if !os(Linux)
-    @dynamicMemberLookup
-    public struct Observe {
-
-        fileprivate let dependency: Dependency
-
-        fileprivate init(_ dependency: Dependency) {
-            self.dependency = dependency
-        }
+    public func observe<T: DefaultsSerializable>(keyPath: KeyPath<KeyStore, DefaultsKey<T>>,
+                                                 options: NSKeyValueObservingOptions = [.old, .new],
+                                                 handler: @escaping (DefaultsObserver<T>.Update) -> Void) -> DefaultsDisposable {
+        return defaults.observe(key: keyStore[keyPath: keyPath],
+                                options: options,
+                                handler: handler)
     }
     #endif
 }
-
-extension DefaultsAdapter.HasKey {
-
-    public subscript<T>(dynamicMember keyPath: KeyPath<KeyStore, DefaultsKey<T>>) -> Bool {
-        return dependency.defaults.hasKey(dependency.keyStore[keyPath: keyPath])
-    }
-}
-
-extension DefaultsAdapter.Remove {
-
-    public subscript<T>(dynamicMember keyPath: KeyPath<KeyStore, DefaultsKey<T>>) -> () -> Void {
-        return { [dependency] in
-            dependency.defaults.remove(dependency.keyStore[keyPath: keyPath])
-        }
-    }
-}
-
-#if !os(Linux)
-extension DefaultsAdapter.Observe {
-
-    public subscript<T>(dynamicMember keyPath: KeyPath<KeyStore, DefaultsKey<T>>) -> (NSKeyValueObservingOptions, @escaping (DefaultsObserver<T>.Update) -> Void) -> DefaultsDisposable {
-        return { [dependency] options, handler  in
-            dependency.defaults.observe(key: dependency.keyStore[keyPath: keyPath],
-                                        options: options,
-                                        handler: handler)
-        }
-    }
-
-    public subscript<T>(dynamicMember keyPath: KeyPath<KeyStore, DefaultsKey<T>>) -> (@escaping (DefaultsObserver<T>.Update) -> Void) -> DefaultsDisposable {
-        return { [dependency] handler  in
-            dependency.defaults.observe(key: dependency.keyStore[keyPath: keyPath],
-                                        options: [.old, .new],
-                                        handler: handler)
-        }
-    }
-}
-#endif
 #endif
