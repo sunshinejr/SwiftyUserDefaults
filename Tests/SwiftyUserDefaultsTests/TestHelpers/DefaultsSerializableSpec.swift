@@ -104,7 +104,6 @@ extension DefaultsSerializableSpec where Serializable.T: Equatable, Serializable
                 let expectedValue = self.customValue
                 defaults.testValue = expectedValue
 
-
                 expect(defaults.testValue) == expectedValue
             }
             #endif
