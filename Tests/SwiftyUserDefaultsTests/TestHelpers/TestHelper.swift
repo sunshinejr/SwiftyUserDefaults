@@ -111,10 +111,8 @@ struct FrogCustomSerializable: DefaultsSerializable, Equatable {
 
 final class FrogKeyStore<Serializable: DefaultsSerializable & Equatable>: DefaultsKeyStoreType {
 
-    #if swift(>=5.1)
     lazy var testValue: DefaultsKey<Serializable> = { fatalError("not initialized yet") }()
     lazy var testArray: DefaultsKey<[Serializable]> = { fatalError("not initialized yet") }()
     lazy var testOptionalValue: DefaultsKey<Serializable?> = { fatalError("not initialized yet") }()
     lazy var testOptionalArray: DefaultsKey<[Serializable]?> = { fatalError("not initialized yet") }()
-    #endif
 }
