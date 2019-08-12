@@ -554,8 +554,7 @@ extension DefaultsSerializableSpec where Serializable.T: Equatable, Serializable
                     expect(update?.newValue).toEventually(beNil())
                 }
 
-                #if swift(>=5.1)
-                then("receives initial update with dynamicMemberLookup") {
+                then("receives initial update with keyPaths") {
                     self.keyStore.testOptionalValue = DefaultsKey<Serializable?>("test")
 
                     var update: DefaultsObserver<Serializable?>.Update?
@@ -567,7 +566,6 @@ extension DefaultsSerializableSpec where Serializable.T: Equatable, Serializable
                     expect(update?.oldValue).toEventually(beNil())
                     expect(update?.newValue).toEventually(beNil())
                 }
-                #endif
 
                 then("receives nil update") {
                     let key = DefaultsKey<Serializable?>("test")
@@ -677,8 +675,7 @@ extension DefaultsSerializableSpec where Serializable.T: Equatable, Serializable
                     expect(update?.newValue).toEventually(equal(self.defaultValue))
                 }
 
-                #if swift(>=5.1)
-                then("receives initial update with dynamicMemberLookup") {
+                then("receives initial update with keyPaths") {
                     self.keyStore.testOptionalValue = DefaultsKey<Serializable?>("test", defaultValue: self.defaultValue)
 
                     var update: DefaultsObserver<Serializable?>.Update?
@@ -689,7 +686,6 @@ extension DefaultsSerializableSpec where Serializable.T: Equatable, Serializable
                     expect(update?.oldValue).toEventually(equal(self.defaultValue))
                     expect(update?.newValue).toEventually(equal(self.defaultValue))
                 }
-                #endif
 
                 then("receives nil update") {
                     let key = DefaultsKey<Serializable?>("test", defaultValue: self.defaultValue)
@@ -800,8 +796,7 @@ extension DefaultsSerializableSpec where Serializable.T: Equatable, Serializable
                     expect(update?.newValue).toEventually(equal(self.defaultValue))
                 }
 
-                #if swift(>=5.1)
-                then("receives initial update with dynamicMemberLookup") {
+                then("receives initial update with keyPaths") {
                     self.keyStore.testValue = DefaultsKey<Serializable>("test", defaultValue: self.defaultValue)
 
                     var update: DefaultsObserver<Serializable>.Update?
@@ -812,7 +807,6 @@ extension DefaultsSerializableSpec where Serializable.T: Equatable, Serializable
                     expect(update?.oldValue).toEventually(equal(self.defaultValue))
                     expect(update?.newValue).toEventually(equal(self.defaultValue))
                 }
-                #endif
 
                 then("remove observer on dispose") {
                     let key = DefaultsKey<Serializable>("test", defaultValue: self.defaultValue)

@@ -43,18 +43,12 @@ import Foundation
 @dynamicMemberLookup
 public struct DefaultsAdapter<KeyStore: DefaultsKeyStoreType> {
 
-    #if swift(>=5.1)
     private let keyStore: KeyStore
-    #endif
-
     private let defaults: UserDefaults
 
     public init(defaults: UserDefaults, keyStore: KeyStore) {
         self.defaults = defaults
-
-        #if swift(>=5.1)
         self.keyStore = keyStore
-        #endif
     }
 
     @available(*, unavailable)
@@ -104,6 +98,27 @@ extension DefaultsAdapter: DefaultsType {
     #endif
 }
 
+extension DefaultsAdapter {
+
+    public func hasKey<T: DefaultsSerializable>(_ keyPath: KeyPath<KeyStore, DefaultsKey<T>>) -> Bool {
+        return defaults.hasKey(keyStore[keyPath: keyPath])
+    }
+
+    public func remove<T: DefaultsSerializable>(_ keyPath: KeyPath<KeyStore, DefaultsKey<T>>) {
+        defaults.remove(keyStore[keyPath: keyPath])
+    }
+
+    #if !os(Linux)
+    public func observe<T: DefaultsSerializable>(_ keyPath: KeyPath<KeyStore, DefaultsKey<T>>,
+                                                 options: NSKeyValueObservingOptions = [.old, .new],
+                                                 handler: @escaping (DefaultsObserver<T>.Update) -> Void) -> DefaultsDisposable {
+        return defaults.observe(keyStore[keyPath: keyPath],
+                                options: options,
+                                handler: handler)
+    }
+    #endif
+}
+
 #if swift(>=5.1)
 extension DefaultsAdapter {
 
@@ -124,23 +139,5 @@ extension DefaultsAdapter {
             defaults[keyStore[keyPath: keyPath]] = newValue
         }
     }
-
-    public func hasKey<T: DefaultsSerializable>(_ keyPath: KeyPath<KeyStore, DefaultsKey<T>>) -> Bool {
-        return defaults.hasKey(keyStore[keyPath: keyPath])
-    }
-
-    public func remove<T: DefaultsSerializable>(_ keyPath: KeyPath<KeyStore, DefaultsKey<T>>) {
-        defaults.remove(keyStore[keyPath: keyPath])
-    }
-
-    #if !os(Linux)
-    public func observe<T: DefaultsSerializable>(_ keyPath: KeyPath<KeyStore, DefaultsKey<T>>,
-                                                 options: NSKeyValueObservingOptions = [.old, .new],
-                                                 handler: @escaping (DefaultsObserver<T>.Update) -> Void) -> DefaultsDisposable {
-        return defaults.observe(keyStore[keyPath: keyPath],
-                                options: options,
-                                handler: handler)
-    }
-    #endif
 }
 #endif
