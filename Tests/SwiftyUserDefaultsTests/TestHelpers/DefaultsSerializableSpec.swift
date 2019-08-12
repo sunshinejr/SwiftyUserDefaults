@@ -515,7 +515,7 @@ extension DefaultsSerializableSpec where Serializable.T: Equatable, Serializable
                     let key = DefaultsKey<Serializable?>("test")
 
                     var update: DefaultsObserver<Serializable?>.Update?
-                    let observer = defaults.observe(key: key) { receivedUpdate in
+                    let observer = defaults.observe(key) { receivedUpdate in
                         update = receivedUpdate
                     }
 
@@ -530,7 +530,7 @@ extension DefaultsSerializableSpec where Serializable.T: Equatable, Serializable
                     self.keyStore.testOptionalValue = DefaultsKey<Serializable?>("test")
 
                     var update: DefaultsObserver<Serializable?>.Update?
-                    let observer = defaults.observe(keyPath: \.testOptionalValue) { receivedUpdate in
+                    let observer = defaults.observe(\.testOptionalValue) { receivedUpdate in
                         update = receivedUpdate
                     }
 
@@ -545,7 +545,7 @@ extension DefaultsSerializableSpec where Serializable.T: Equatable, Serializable
                     let key = DefaultsKey<Serializable?>("test")
 
                     var update: DefaultsObserver<Serializable?>.Update?
-                    let observer = defaults.observe(key: key, options: [.initial, .old, .new]) { receivedUpdate in
+                    let observer = defaults.observe(key, options: [.initial, .old, .new]) { receivedUpdate in
                         update = receivedUpdate
                     }
 
@@ -559,7 +559,7 @@ extension DefaultsSerializableSpec where Serializable.T: Equatable, Serializable
                     self.keyStore.testOptionalValue = DefaultsKey<Serializable?>("test")
 
                     var update: DefaultsObserver<Serializable?>.Update?
-                    let observer = defaults.observe(keyPath: \.testOptionalValue, options: [.initial, .old, .new]) { receivedUpdate in
+                    let observer = defaults.observe(\.testOptionalValue, options: [.initial, .old, .new]) { receivedUpdate in
                         update = receivedUpdate
                     }
 
@@ -573,7 +573,7 @@ extension DefaultsSerializableSpec where Serializable.T: Equatable, Serializable
                     let key = DefaultsKey<Serializable?>("test")
 
                     var update: DefaultsObserver<Serializable?>.Update?
-                    let observer = defaults.observe(key: key) { receivedUpdate in
+                    let observer = defaults.observe(key) { receivedUpdate in
                         update = receivedUpdate
                     }
                     defaults[key] = self.defaultValue
@@ -589,7 +589,7 @@ extension DefaultsSerializableSpec where Serializable.T: Equatable, Serializable
                     self.keyStore.testOptionalValue = DefaultsKey<Serializable?>("test")
 
                     var update: DefaultsObserver<Serializable?>.Update?
-                    let observer = defaults.observe(keyPath: \.testOptionalValue) { receivedUpdate in
+                    let observer = defaults.observe(\.testOptionalValue) { receivedUpdate in
                         update = receivedUpdate
                     }
                     defaults.testOptionalValue = self.defaultValue
@@ -605,7 +605,7 @@ extension DefaultsSerializableSpec where Serializable.T: Equatable, Serializable
                     let key = DefaultsKey<Serializable?>("test")
 
                     var update: DefaultsObserver<Serializable?>.Update?
-                    let observer = defaults.observe(key: key) { receivedUpdate in
+                    let observer = defaults.observe(key) { receivedUpdate in
                         update = receivedUpdate
                     }
 
@@ -621,7 +621,7 @@ extension DefaultsSerializableSpec where Serializable.T: Equatable, Serializable
                     self.keyStore.testOptionalValue = DefaultsKey<Serializable?>("test")
 
                     var update: DefaultsObserver<Serializable?>.Update?
-                    let observer = defaults.observe(keyPath: \.testOptionalValue) { receivedUpdate in
+                    let observer = defaults.observe(\.testOptionalValue) { receivedUpdate in
                         update = receivedUpdate
                     }
 
@@ -639,7 +639,7 @@ extension DefaultsSerializableSpec where Serializable.T: Equatable, Serializable
                     let key = DefaultsKey<Serializable?>("test", defaultValue: self.defaultValue)
 
                     var update: DefaultsObserver<Serializable?>.Update?
-                    let observer = defaults.observe(key: key) { receivedUpdate in
+                    let observer = defaults.observe(key) { receivedUpdate in
                         update = receivedUpdate
                     }
 
@@ -654,7 +654,7 @@ extension DefaultsSerializableSpec where Serializable.T: Equatable, Serializable
                     self.keyStore.testOptionalValue = DefaultsKey<Serializable?>("test", defaultValue: self.defaultValue)
 
                     var update: DefaultsObserver<Serializable?>.Update?
-                    let observer = defaults.observe(keyPath: \.testOptionalValue) { receivedUpdate in
+                    let observer = defaults.observe(\.testOptionalValue) { receivedUpdate in
                         update = receivedUpdate
                     }
 
@@ -669,7 +669,7 @@ extension DefaultsSerializableSpec where Serializable.T: Equatable, Serializable
                     let key = DefaultsKey<Serializable?>("test", defaultValue: self.defaultValue)
 
                     var update: DefaultsObserver<Serializable?>.Update?
-                    let observer = defaults.observe(key: key, options: [.initial, .old, .new]) { receivedUpdate in
+                    let observer = defaults.observe(key, options: [.initial, .old, .new]) { receivedUpdate in
                         update = receivedUpdate
                     }
 
@@ -682,7 +682,7 @@ extension DefaultsSerializableSpec where Serializable.T: Equatable, Serializable
                     self.keyStore.testOptionalValue = DefaultsKey<Serializable?>("test", defaultValue: self.defaultValue)
 
                     var update: DefaultsObserver<Serializable?>.Update?
-                    let observer = defaults.observe(keyPath: \.testOptionalValue, options: [.initial, .old, .new]) { receivedUpdate in
+                    let observer = defaults.observe(\.testOptionalValue, options: [.initial, .old, .new]) { receivedUpdate in
                         update = receivedUpdate
                     }
 
@@ -695,7 +695,7 @@ extension DefaultsSerializableSpec where Serializable.T: Equatable, Serializable
                     let key = DefaultsKey<Serializable?>("test", defaultValue: self.defaultValue)
 
                     var update: DefaultsObserver<Serializable?>.Update?
-                    let observer = defaults.observe(key: key) { receivedUpdate in
+                    let observer = defaults.observe(key) { receivedUpdate in
                         update = receivedUpdate
                     }
                     defaults[key] = self.defaultValue
@@ -711,7 +711,7 @@ extension DefaultsSerializableSpec where Serializable.T: Equatable, Serializable
                     self.keyStore.testOptionalValue = DefaultsKey<Serializable?>("test", defaultValue: self.defaultValue)
 
                     var update: DefaultsObserver<Serializable?>.Update?
-                    let observer = defaults.observe(keyPath: \.testOptionalValue) { receivedUpdate in
+                    let observer = defaults.observe(\.testOptionalValue) { receivedUpdate in
                         update = receivedUpdate
                     }
                     defaults.testOptionalValue = self.defaultValue
@@ -727,7 +727,7 @@ extension DefaultsSerializableSpec where Serializable.T: Equatable, Serializable
                     let key = DefaultsKey<Serializable?>("test", defaultValue: self.defaultValue)
 
                     var update: DefaultsObserver<Serializable?>.Update?
-                    let observer = defaults.observe(key: key) { receivedUpdate in
+                    let observer = defaults.observe(key) { receivedUpdate in
                         update = receivedUpdate
                     }
 
@@ -743,7 +743,7 @@ extension DefaultsSerializableSpec where Serializable.T: Equatable, Serializable
                     self.keyStore.testOptionalValue = DefaultsKey<Serializable?>("test", defaultValue: self.defaultValue)
 
                     var update: DefaultsObserver<Serializable?>.Update?
-                    let observer = defaults.observe(keyPath: \.testOptionalValue) { receivedUpdate in
+                    let observer = defaults.observe(\.testOptionalValue) { receivedUpdate in
                         update = receivedUpdate
                     }
 
@@ -762,7 +762,7 @@ extension DefaultsSerializableSpec where Serializable.T: Equatable, Serializable
                     let key = DefaultsKey<Serializable>("test", defaultValue: self.defaultValue)
 
                     var update: DefaultsObserver<Serializable>.Update?
-                    let observer = defaults.observe(key: key) { receivedUpdate in
+                    let observer = defaults.observe(key) { receivedUpdate in
                         update = receivedUpdate
                     }
 
@@ -777,7 +777,7 @@ extension DefaultsSerializableSpec where Serializable.T: Equatable, Serializable
                     self.keyStore.testValue = DefaultsKey<Serializable>("test", defaultValue: self.defaultValue)
 
                     var update: DefaultsObserver<Serializable>.Update?
-                    let observer = defaults.observe(keyPath: \.testValue) { receivedUpdate in
+                    let observer = defaults.observe(\.testValue) { receivedUpdate in
                         update = receivedUpdate
                     }
 
@@ -792,7 +792,7 @@ extension DefaultsSerializableSpec where Serializable.T: Equatable, Serializable
                     let key = DefaultsKey<Serializable>("test", defaultValue: self.defaultValue)
 
                     var update: DefaultsObserver<Serializable>.Update?
-                    let observer = defaults.observe(key: key, options: [.initial, .old, .new]) { receivedUpdate in
+                    let observer = defaults.observe(key, options: [.initial, .old, .new]) { receivedUpdate in
                         update = receivedUpdate
                     }
 
@@ -805,7 +805,7 @@ extension DefaultsSerializableSpec where Serializable.T: Equatable, Serializable
                     self.keyStore.testValue = DefaultsKey<Serializable>("test", defaultValue: self.defaultValue)
 
                     var update: DefaultsObserver<Serializable>.Update?
-                    let observer = defaults.observe(keyPath: \.testValue, options: [.initial, .old, .new]) { receivedUpdate in
+                    let observer = defaults.observe(\.testValue, options: [.initial, .old, .new]) { receivedUpdate in
                         update = receivedUpdate
                     }
 
@@ -818,7 +818,7 @@ extension DefaultsSerializableSpec where Serializable.T: Equatable, Serializable
                     let key = DefaultsKey<Serializable>("test", defaultValue: self.defaultValue)
 
                     var update: DefaultsObserver<Serializable>.Update?
-                    let observer = defaults.observe(key: key) { receivedUpdate in
+                    let observer = defaults.observe(key) { receivedUpdate in
                         update = receivedUpdate
                     }
 
@@ -834,7 +834,7 @@ extension DefaultsSerializableSpec where Serializable.T: Equatable, Serializable
                     self.keyStore.testValue = DefaultsKey<Serializable>("test", defaultValue: self.defaultValue)
 
                     var update: DefaultsObserver<Serializable>.Update?
-                    let observer = defaults.observe(keyPath: \.testValue) { receivedUpdate in
+                    let observer = defaults.observe(\.testValue) { receivedUpdate in
                         update = receivedUpdate
                     }
 

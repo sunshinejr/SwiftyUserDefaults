@@ -96,10 +96,10 @@ extension DefaultsAdapter: DefaultsType {
     }
 
     #if !os(Linux)
-    public func observe<T: DefaultsSerializable>(key: DefaultsKey<T>,
-                                                 options: NSKeyValueObservingOptions,
+    public func observe<T: DefaultsSerializable>(_ key: DefaultsKey<T>,
+                                                 options: NSKeyValueObservingOptions = [.new, .old],
                                                  handler: @escaping (DefaultsObserver<T>.Update) -> Void) -> DefaultsDisposable {
-        return defaults.observe(key: key, options: options, handler: handler)
+        return defaults.observe(key, options: options, handler: handler)
     }
     #endif
 }
@@ -134,10 +134,10 @@ extension DefaultsAdapter {
     }
 
     #if !os(Linux)
-    public func observe<T: DefaultsSerializable>(keyPath: KeyPath<KeyStore, DefaultsKey<T>>,
+    public func observe<T: DefaultsSerializable>(_ keyPath: KeyPath<KeyStore, DefaultsKey<T>>,
                                                  options: NSKeyValueObservingOptions = [.old, .new],
                                                  handler: @escaping (DefaultsObserver<T>.Update) -> Void) -> DefaultsDisposable {
-        return defaults.observe(key: keyStore[keyPath: keyPath],
+        return defaults.observe(keyStore[keyPath: keyPath],
                                 options: options,
                                 handler: handler)
     }
