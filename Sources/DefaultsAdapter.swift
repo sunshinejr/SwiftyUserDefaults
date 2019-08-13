@@ -32,7 +32,7 @@ import Foundation
 /// Here is a example:
 ///
 /// ```
-/// extension DefaultsKeyStore {
+/// extension DefaultsKeys {
 ///     var launchCount: DefaultsKey<Int> {
 ///         return .init("launchCount", defaultValue: 0)
 ///     }
@@ -41,7 +41,7 @@ import Foundation
 /// Defaults.launchCount += 1
 /// ```
 @dynamicMemberLookup
-public struct DefaultsAdapter<KeyStore: DefaultsKeyStoreType> {
+public struct DefaultsAdapter<KeyStore: DefaultsKeyStore> {
 
     private let keyStore: KeyStore
     private let defaults: UserDefaults

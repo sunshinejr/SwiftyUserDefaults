@@ -24,8 +24,8 @@
 
 import Foundation
 
-public protocol DefaultsKeyStoreType {}
+public protocol DefaultsKeyStore {}
 
-public struct DefaultsKeyStore: DefaultsKeyStoreType {
+public struct DefaultsKeys: DefaultsKeyStore {
     public init() {}
 }
