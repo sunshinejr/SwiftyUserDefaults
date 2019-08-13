@@ -5,18 +5,18 @@
         "package": "Nimble",
         "repositoryURL": "https://github.com/Quick/Nimble.git",
         "state": {
-          "branch": "master",
-          "revision": "5cd29174d148fd386108d30eac59eaf45d556598",
-          "version": null
+          "branch": null,
+          "revision": "f8657642dfdec9973efc79cc68bcef43a653a2bc",
+          "version": "8.0.2"
         }
       },
       {
         "package": "Quick",
-        "repositoryURL": "https://github.com/sunshinejr/Quick.git",
+        "repositoryURL": "https://github.com/Quick/Quick.git",
         "state": {
-          "branch": "feature/update_nimble",
-          "revision": "abd88afe40a38b7900af02df98417c867bad6671",
-          "version": null
+          "branch": null,
+          "revision": "94df9b449508344667e5afc7e80f8bcbff1e4c37",
+          "version": "2.1.0"
         }
       }
     ]
