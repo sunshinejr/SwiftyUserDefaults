@@ -32,17 +32,8 @@ public protocol DefaultsType {
     subscript<T: DefaultsSerializable>(key: DefaultsKey<T>) -> T.T where T.T == T { get set }
 
     #if !os(Linux)
-    func observe<T: DefaultsSerializable>(key: DefaultsKey<T>,
+    func observe<T: DefaultsSerializable>(_ key: DefaultsKey<T>,
                                           options: NSKeyValueObservingOptions,
                                           handler: @escaping (DefaultsObserver<T>.Update) -> Void) -> DefaultsDisposable
     #endif
 }
-
-#if !os(Linux)
-extension DefaultsType {
-    public func observe<T: DefaultsSerializable>(key: DefaultsKey<T>,
-                                                 handler: @escaping (DefaultsObserver<T>.Update) -> Void) -> DefaultsDisposable {
-        return observe(key: key, options: [.old, .new], handler: handler)
-    }
-}
-#endif

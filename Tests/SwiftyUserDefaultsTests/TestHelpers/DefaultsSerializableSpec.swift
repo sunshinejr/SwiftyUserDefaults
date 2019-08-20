@@ -64,29 +64,29 @@ extension DefaultsSerializableSpec where Serializable.T: Equatable, Serializable
 
             then("get a default value") {
                 let key = DefaultsKey<Serializable>("test", defaultValue: self.defaultValue)
-                let value = defaults[key]
-                expect(value) == self.defaultValue
+
+                expect(defaults[key]) == self.defaultValue
             }
 
             #if swift(>=5.1)
             then("get a default value with dynamicMemberLookup") {
                 self.keyStore.testValue = DefaultsKey<Serializable>("test", defaultValue: self.defaultValue)
-                let value = defaults.testValue
-                expect(value) == self.defaultValue
+
+                expect(defaults.testValue) == self.defaultValue
             }
             #endif
 
             then("get a default array value") {
                 let key = DefaultsKey<[Serializable]>("test", defaultValue: [self.defaultValue])
-                let value = defaults[key]
-                expect(value) == [self.defaultValue]
+
+                expect(defaults[key]) == [self.defaultValue]
             }
 
             #if swift(>=5.1)
             then("get a default array value with dynamicMemberLookup") {
                 self.keyStore.testArray = DefaultsKey<[Serializable]>("test", defaultValue: [self.defaultValue])
-                let value = defaults.testArray
-                expect(value) == [self.defaultValue]
+
+                expect(defaults.testArray) == [self.defaultValue]
             }
             #endif
 
@@ -95,9 +95,7 @@ extension DefaultsSerializableSpec where Serializable.T: Equatable, Serializable
                 let expectedValue = self.customValue
                 defaults[key] = expectedValue
 
-                let value = defaults[key]
-
-                expect(value) == expectedValue
+                expect(defaults[key]) == expectedValue
             }
 
             #if swift(>=5.1)
@@ -106,9 +104,7 @@ extension DefaultsSerializableSpec where Serializable.T: Equatable, Serializable
                 let expectedValue = self.customValue
                 defaults.testValue = expectedValue
 
-                let value = defaults.testValue
-
-                expect(value) == expectedValue
+                expect(defaults.testValue) == expectedValue
             }
             #endif
 
@@ -117,9 +113,7 @@ extension DefaultsSerializableSpec where Serializable.T: Equatable, Serializable
                 let expectedValue = [self.customValue]
                 defaults[key] = expectedValue
 
-                let value = defaults[key]
-
-                expect(value) == expectedValue
+                expect(defaults[key]) == expectedValue
             }
 
             #if swift(>=5.1)
@@ -128,9 +122,7 @@ extension DefaultsSerializableSpec where Serializable.T: Equatable, Serializable
                 let expectedValue = [self.customValue]
                 defaults.testArray = expectedValue
 
-                let value = defaults.testArray
-
-                expect(value) == expectedValue
+                expect(defaults.testArray) == expectedValue
             }
             #endif
 
@@ -148,9 +140,9 @@ extension DefaultsSerializableSpec where Serializable.T: Equatable, Serializable
                 self.keyStore.testValue = DefaultsKey<Serializable>("test", defaultValue: self.defaultValue)
                 defaults.testValue = self.customValue
 
-                defaults.remove.testValue()
+                removeObject("test")
 
-                expect(defaults.hasKey.testValue) == false
+                expect(defaults.hasKey(\.testValue)) == false
                 expect(defaults.testValue) == self.defaultValue
             }
             #endif
@@ -169,9 +161,9 @@ extension DefaultsSerializableSpec where Serializable.T: Equatable, Serializable
                 self.keyStore.testOptionalArray = DefaultsKey<[Serializable]?>("test", defaultValue: [self.defaultValue])
                 defaults.testOptionalArray = [self.customValue]
 
-                defaults.remove.testOptionalArray()
+                defaults.remove(\.testOptionalArray)
 
-                expect(defaults.hasKey.testOptionalArray) == false
+                expect(defaults.hasKey(\.testOptionalArray)) == false
                 expect(defaults.testOptionalArray) == [self.defaultValue]
             }
             #endif
@@ -203,29 +195,29 @@ extension DefaultsSerializableSpec where Serializable.T: Equatable, Serializable
 
             then("get a default value") {
                 let key = DefaultsKey<Serializable?>("test", defaultValue: self.defaultValue)
-                let value = defaults[key]
-                expect(value) == self.defaultValue
+
+                expect(defaults[key]) == self.defaultValue
             }
 
             #if swift(>=5.1)
             then("get a default value with dynamicMemberLookup") {
                 self.keyStore.testOptionalValue = DefaultsKey<Serializable?>("test", defaultValue: self.defaultValue)
-                let value = defaults.testOptionalValue
-                expect(value) == self.defaultValue
+
+                expect(defaults.testOptionalValue) == self.defaultValue
             }
             #endif
 
             then("get a default array value") {
                 let key = DefaultsKey<[Serializable]?>("test", defaultValue: [self.defaultValue])
-                let value = defaults[key]
-                expect(value) == [self.defaultValue]
+
+                expect(defaults[key]) == [self.defaultValue]
             }
 
             #if swift(>=5.1)
             then("get a default array value with dynamicMemberLookup") {
                 self.keyStore.testOptionalArray = DefaultsKey<[Serializable]?>("test", defaultValue: [self.defaultValue])
-                let value = defaults.testOptionalArray
-                expect(value) == [self.defaultValue]
+
+                expect(defaults.testOptionalArray) == [self.defaultValue]
             }
             #endif
 
@@ -234,9 +226,7 @@ extension DefaultsSerializableSpec where Serializable.T: Equatable, Serializable
                 let expectedValue = self.customValue
                 defaults[key] = expectedValue
 
-                let value = defaults[key]
-
-                expect(value) == expectedValue
+                expect(defaults[key]) == expectedValue
             }
 
             #if swift(>=5.1)
@@ -245,9 +235,7 @@ extension DefaultsSerializableSpec where Serializable.T: Equatable, Serializable
                 let expectedValue = self.customValue
                 defaults.testOptionalValue = expectedValue
 
-                let value = defaults.testOptionalValue
-
-                expect(value) == expectedValue
+                expect(defaults.testOptionalValue) == expectedValue
             }
             #endif
 
@@ -256,9 +244,7 @@ extension DefaultsSerializableSpec where Serializable.T: Equatable, Serializable
                 let expectedValue = [self.customValue]
                 defaults[key] = expectedValue
 
-                let value = defaults[key]
-
-                expect(value) == expectedValue
+                expect(defaults[key]) == expectedValue
             }
 
             #if swift(>=5.1)
@@ -267,9 +253,7 @@ extension DefaultsSerializableSpec where Serializable.T: Equatable, Serializable
                 let expectedValue = [self.customValue]
                 defaults.testOptionalArray = expectedValue
 
-                let value = defaults.testOptionalArray
-
-                expect(value) == expectedValue
+                expect(defaults.testOptionalArray) == expectedValue
             }
             #endif
 
@@ -339,9 +323,7 @@ extension DefaultsSerializableSpec where Serializable.T: Equatable, Serializable
                 let expectedValue = self.customValue
                 defaults[key] = expectedValue
 
-                let value = defaults[key]
-
-                expect(value) == expectedValue
+                expect(defaults[key]) == expectedValue
             }
 
             #if swift(>=5.1)
@@ -350,9 +332,7 @@ extension DefaultsSerializableSpec where Serializable.T: Equatable, Serializable
                 let expectedValue = self.customValue
                 defaults.testOptionalValue = expectedValue
 
-                let value = defaults.testOptionalValue
-
-                expect(value) == expectedValue
+                expect(defaults.testOptionalValue) == expectedValue
             }
             #endif
 
@@ -361,9 +341,7 @@ extension DefaultsSerializableSpec where Serializable.T: Equatable, Serializable
                 let expectedValue = [self.customValue]
                 defaults[key] = expectedValue
 
-                let value = defaults[key]
-
-                expect(value) == expectedValue
+                expect(defaults[key]) == expectedValue
             }
 
             #if swift(>=5.1)
@@ -372,9 +350,7 @@ extension DefaultsSerializableSpec where Serializable.T: Equatable, Serializable
                 let expectedValue = [self.customValue]
                 defaults.testOptionalArray = expectedValue
 
-                let value = defaults.testOptionalArray
-
-                expect(value) == expectedValue
+                expect(defaults.testOptionalArray) == expectedValue
             }
             #endif
 
@@ -538,7 +514,7 @@ extension DefaultsSerializableSpec where Serializable.T: Equatable, Serializable
                     let key = DefaultsKey<Serializable?>("test")
 
                     var update: DefaultsObserver<Serializable?>.Update?
-                    let observer = defaults.observe(key: key) { receivedUpdate in
+                    let observer = defaults.observe(key) { receivedUpdate in
                         update = receivedUpdate
                     }
 
@@ -553,7 +529,7 @@ extension DefaultsSerializableSpec where Serializable.T: Equatable, Serializable
                     self.keyStore.testOptionalValue = DefaultsKey<Serializable?>("test")
 
                     var update: DefaultsObserver<Serializable?>.Update?
-                    let observer = defaults.observe.testOptionalValue { receivedUpdate in
+                    let observer = defaults.observe(\.testOptionalValue) { receivedUpdate in
                         update = receivedUpdate
                     }
 
@@ -568,7 +544,7 @@ extension DefaultsSerializableSpec where Serializable.T: Equatable, Serializable
                     let key = DefaultsKey<Serializable?>("test")
 
                     var update: DefaultsObserver<Serializable?>.Update?
-                    let observer = defaults.observe(key: key, options: [.initial, .old, .new]) { receivedUpdate in
+                    let observer = defaults.observe(key, options: [.initial, .old, .new]) { receivedUpdate in
                         update = receivedUpdate
                     }
 
@@ -577,12 +553,11 @@ extension DefaultsSerializableSpec where Serializable.T: Equatable, Serializable
                     expect(update?.newValue).toEventually(beNil())
                 }
 
-                #if swift(>=5.1)
-                then("receives initial update with dynamicMemberLookup") {
+                then("receives initial update with keyPaths") {
                     self.keyStore.testOptionalValue = DefaultsKey<Serializable?>("test")
 
                     var update: DefaultsObserver<Serializable?>.Update?
-                    let observer = defaults.observe.testOptionalValue([.initial, .old, .new]) { receivedUpdate in
+                    let observer = defaults.observe(\.testOptionalValue, options: [.initial, .old, .new]) { receivedUpdate in
                         update = receivedUpdate
                     }
 
@@ -590,13 +565,12 @@ extension DefaultsSerializableSpec where Serializable.T: Equatable, Serializable
                     expect(update?.oldValue).toEventually(beNil())
                     expect(update?.newValue).toEventually(beNil())
                 }
-                #endif
 
                 then("receives nil update") {
                     let key = DefaultsKey<Serializable?>("test")
 
                     var update: DefaultsObserver<Serializable?>.Update?
-                    let observer = defaults.observe(key: key) { receivedUpdate in
+                    let observer = defaults.observe(key) { receivedUpdate in
                         update = receivedUpdate
                     }
                     defaults[key] = self.defaultValue
@@ -612,7 +586,7 @@ extension DefaultsSerializableSpec where Serializable.T: Equatable, Serializable
                     self.keyStore.testOptionalValue = DefaultsKey<Serializable?>("test")
 
                     var update: DefaultsObserver<Serializable?>.Update?
-                    let observer = defaults.observe.testOptionalValue { receivedUpdate in
+                    let observer = defaults.observe(\.testOptionalValue) { receivedUpdate in
                         update = receivedUpdate
                     }
                     defaults.testOptionalValue = self.defaultValue
@@ -628,7 +602,7 @@ extension DefaultsSerializableSpec where Serializable.T: Equatable, Serializable
                     let key = DefaultsKey<Serializable?>("test")
 
                     var update: DefaultsObserver<Serializable?>.Update?
-                    let observer = defaults.observe(key: key) { receivedUpdate in
+                    let observer = defaults.observe(key) { receivedUpdate in
                         update = receivedUpdate
                     }
 
@@ -644,7 +618,7 @@ extension DefaultsSerializableSpec where Serializable.T: Equatable, Serializable
                     self.keyStore.testOptionalValue = DefaultsKey<Serializable?>("test")
 
                     var update: DefaultsObserver<Serializable?>.Update?
-                    let observer = defaults.observe.testOptionalValue { receivedUpdate in
+                    let observer = defaults.observe(\.testOptionalValue) { receivedUpdate in
                         update = receivedUpdate
                     }
 
@@ -662,7 +636,7 @@ extension DefaultsSerializableSpec where Serializable.T: Equatable, Serializable
                     let key = DefaultsKey<Serializable?>("test", defaultValue: self.defaultValue)
 
                     var update: DefaultsObserver<Serializable?>.Update?
-                    let observer = defaults.observe(key: key) { receivedUpdate in
+                    let observer = defaults.observe(key) { receivedUpdate in
                         update = receivedUpdate
                     }
 
@@ -677,7 +651,7 @@ extension DefaultsSerializableSpec where Serializable.T: Equatable, Serializable
                     self.keyStore.testOptionalValue = DefaultsKey<Serializable?>("test", defaultValue: self.defaultValue)
 
                     var update: DefaultsObserver<Serializable?>.Update?
-                    let observer = defaults.observe.testOptionalValue { receivedUpdate in
+                    let observer = defaults.observe(\.testOptionalValue) { receivedUpdate in
                         update = receivedUpdate
                     }
 
@@ -692,7 +666,7 @@ extension DefaultsSerializableSpec where Serializable.T: Equatable, Serializable
                     let key = DefaultsKey<Serializable?>("test", defaultValue: self.defaultValue)
 
                     var update: DefaultsObserver<Serializable?>.Update?
-                    let observer = defaults.observe(key: key, options: [.initial, .old, .new]) { receivedUpdate in
+                    let observer = defaults.observe(key, options: [.initial, .old, .new]) { receivedUpdate in
                         update = receivedUpdate
                     }
 
@@ -700,25 +674,23 @@ extension DefaultsSerializableSpec where Serializable.T: Equatable, Serializable
                     expect(update?.newValue).toEventually(equal(self.defaultValue))
                 }
 
-                #if swift(>=5.1)
-                then("receives initial update with dynamicMemberLookup") {
+                then("receives initial update with keyPaths") {
                     self.keyStore.testOptionalValue = DefaultsKey<Serializable?>("test", defaultValue: self.defaultValue)
 
                     var update: DefaultsObserver<Serializable?>.Update?
-                    let observer = defaults.observe.testOptionalValue([.initial, .old, .new]) { receivedUpdate in
+                    let observer = defaults.observe(\.testOptionalValue, options: [.initial, .old, .new]) { receivedUpdate in
                         update = receivedUpdate
                     }
 
                     expect(update?.oldValue).toEventually(equal(self.defaultValue))
                     expect(update?.newValue).toEventually(equal(self.defaultValue))
                 }
-                #endif
 
                 then("receives nil update") {
                     let key = DefaultsKey<Serializable?>("test", defaultValue: self.defaultValue)
 
                     var update: DefaultsObserver<Serializable?>.Update?
-                    let observer = defaults.observe(key: key) { receivedUpdate in
+                    let observer = defaults.observe(key) { receivedUpdate in
                         update = receivedUpdate
                     }
                     defaults[key] = self.defaultValue
@@ -734,7 +706,7 @@ extension DefaultsSerializableSpec where Serializable.T: Equatable, Serializable
                     self.keyStore.testOptionalValue = DefaultsKey<Serializable?>("test", defaultValue: self.defaultValue)
 
                     var update: DefaultsObserver<Serializable?>.Update?
-                    let observer = defaults.observe.testOptionalValue { receivedUpdate in
+                    let observer = defaults.observe(\.testOptionalValue) { receivedUpdate in
                         update = receivedUpdate
                     }
                     defaults.testOptionalValue = self.defaultValue
@@ -750,7 +722,7 @@ extension DefaultsSerializableSpec where Serializable.T: Equatable, Serializable
                     let key = DefaultsKey<Serializable?>("test", defaultValue: self.defaultValue)
 
                     var update: DefaultsObserver<Serializable?>.Update?
-                    let observer = defaults.observe(key: key) { receivedUpdate in
+                    let observer = defaults.observe(key) { receivedUpdate in
                         update = receivedUpdate
                     }
 
@@ -766,7 +738,7 @@ extension DefaultsSerializableSpec where Serializable.T: Equatable, Serializable
                     self.keyStore.testOptionalValue = DefaultsKey<Serializable?>("test", defaultValue: self.defaultValue)
 
                     var update: DefaultsObserver<Serializable?>.Update?
-                    let observer = defaults.observe.testOptionalValue { receivedUpdate in
+                    let observer = defaults.observe(\.testOptionalValue) { receivedUpdate in
                         update = receivedUpdate
                     }
 
@@ -785,7 +757,7 @@ extension DefaultsSerializableSpec where Serializable.T: Equatable, Serializable
                     let key = DefaultsKey<Serializable>("test", defaultValue: self.defaultValue)
 
                     var update: DefaultsObserver<Serializable>.Update?
-                    let observer = defaults.observe(key: key) { receivedUpdate in
+                    let observer = defaults.observe(key) { receivedUpdate in
                         update = receivedUpdate
                     }
 
@@ -800,7 +772,7 @@ extension DefaultsSerializableSpec where Serializable.T: Equatable, Serializable
                     self.keyStore.testValue = DefaultsKey<Serializable>("test", defaultValue: self.defaultValue)
 
                     var update: DefaultsObserver<Serializable>.Update?
-                    let observer = defaults.observe.testValue { receivedUpdate in
+                    let observer = defaults.observe(\.testValue) { receivedUpdate in
                         update = receivedUpdate
                     }
 
@@ -815,7 +787,7 @@ extension DefaultsSerializableSpec where Serializable.T: Equatable, Serializable
                     let key = DefaultsKey<Serializable>("test", defaultValue: self.defaultValue)
 
                     var update: DefaultsObserver<Serializable>.Update?
-                    let observer = defaults.observe(key: key, options: [.initial, .old, .new]) { receivedUpdate in
+                    let observer = defaults.observe(key, options: [.initial, .old, .new]) { receivedUpdate in
                         update = receivedUpdate
                     }
 
@@ -823,25 +795,23 @@ extension DefaultsSerializableSpec where Serializable.T: Equatable, Serializable
                     expect(update?.newValue).toEventually(equal(self.defaultValue))
                 }
 
-                #if swift(>=5.1)
-                then("receives initial update with dynamicMemberLookup") {
+                then("receives initial update with keyPaths") {
                     self.keyStore.testValue = DefaultsKey<Serializable>("test", defaultValue: self.defaultValue)
 
                     var update: DefaultsObserver<Serializable>.Update?
-                    let observer = defaults.observe.testValue([.initial, .old, .new]) { receivedUpdate in
+                    let observer = defaults.observe(\.testValue, options: [.initial, .old, .new]) { receivedUpdate in
                         update = receivedUpdate
                     }
 
                     expect(update?.oldValue).toEventually(equal(self.defaultValue))
                     expect(update?.newValue).toEventually(equal(self.defaultValue))
                 }
-                #endif
 
                 then("remove observer on dispose") {
                     let key = DefaultsKey<Serializable>("test", defaultValue: self.defaultValue)
 
                     var update: DefaultsObserver<Serializable>.Update?
-                    let observer = defaults.observe(key: key) { receivedUpdate in
+                    let observer = defaults.observe(key) { receivedUpdate in
                         update = receivedUpdate
                     }
 
@@ -857,7 +827,7 @@ extension DefaultsSerializableSpec where Serializable.T: Equatable, Serializable
                     self.keyStore.testValue = DefaultsKey<Serializable>("test", defaultValue: self.defaultValue)
 
                     var update: DefaultsObserver<Serializable>.Update?
-                    let observer = defaults.observe.testValue { receivedUpdate in
+                    let observer = defaults.observe(\.testValue) { receivedUpdate in
                         update = receivedUpdate
                     }
 
