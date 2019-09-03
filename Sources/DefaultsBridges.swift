@@ -311,11 +311,11 @@ public struct DefaultsOptionalBridge<Bridge: DefaultsBridge>: DefaultsBridge {
     }
 
     public func get(key: String, userDefaults: UserDefaults) -> T? {
-        bridge.get(key: key, userDefaults: userDefaults)
+        return bridge.get(key: key, userDefaults: userDefaults)
     }
 
     public func save(key: String, value: T?, userDefaults: UserDefaults) {
-        return bridge.save(key: key, value: value as? Bridge.T, userDefaults: userDefaults)
+        bridge.save(key: key, value: value as? Bridge.T, userDefaults: userDefaults)
     }
 
     public func deserialize(_ object: Any) -> T? {
