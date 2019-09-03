@@ -55,6 +55,9 @@ extension DefaultsBridge {
 }
 
 public struct DefaultsObjectBridge<T>: DefaultsBridge {
+
+    public init() {}
+
     public func save(key: String, value: T?, userDefaults: UserDefaults) {
         userDefaults.set(value, forKey: key)
     }
@@ -65,6 +68,9 @@ public struct DefaultsObjectBridge<T>: DefaultsBridge {
 }
 
 public struct DefaultsArrayBridge<T: Collection>: DefaultsBridge {
+
+    public init() {}
+
     public func save(key: String, value: T?, userDefaults: UserDefaults) {
         userDefaults.set(value, forKey: key)
     }
@@ -75,6 +81,9 @@ public struct DefaultsArrayBridge<T: Collection>: DefaultsBridge {
 }
 
 public struct DefaultsStringBridge: DefaultsBridge {
+
+    public init() {}
+
     public func save(key: String, value: String?, userDefaults: UserDefaults) {
         userDefaults.set(value, forKey: key)
     }
@@ -85,6 +94,9 @@ public struct DefaultsStringBridge: DefaultsBridge {
 }
 
 public struct DefaultsIntBridge: DefaultsBridge {
+
+    public init() {}
+
     public func save(key: String, value: Int?, userDefaults: UserDefaults) {
         userDefaults.set(value, forKey: key)
     }
@@ -105,6 +117,9 @@ public struct DefaultsIntBridge: DefaultsBridge {
 }
 
 public struct DefaultsDoubleBridge: DefaultsBridge {
+
+    public init() {}
+
     public func save(key: String, value: Double?, userDefaults: UserDefaults) {
         userDefaults.set(value, forKey: key)
     }
@@ -125,6 +140,9 @@ public struct DefaultsDoubleBridge: DefaultsBridge {
 }
 
 public struct DefaultsBoolBridge: DefaultsBridge {
+
+    public init() {}
+
     public func save(key: String, value: Bool?, userDefaults: UserDefaults) {
         userDefaults.set(value, forKey: key)
     }
@@ -145,6 +163,9 @@ public struct DefaultsBoolBridge: DefaultsBridge {
 }
 
 public struct DefaultsDataBridge: DefaultsBridge {
+
+    public init() {}
+
     public func save(key: String, value: Data?, userDefaults: UserDefaults) {
         userDefaults.set(value, forKey: key)
     }
@@ -155,6 +176,9 @@ public struct DefaultsDataBridge: DefaultsBridge {
 }
 
 public struct DefaultsUrlBridge: DefaultsBridge {
+
+    public init() {}
+
     public func save(key: String, value: URL?, userDefaults: UserDefaults) {
         userDefaults.set(value, forKey: key)
     }
@@ -182,6 +206,9 @@ public struct DefaultsUrlBridge: DefaultsBridge {
 }
 
 public struct DefaultsCodableBridge<T: Codable>: DefaultsBridge {
+
+    public init() {}
+
     public func save(key: String, value: T?, userDefaults: UserDefaults) {
         guard let value = value else {
             userDefaults.removeObject(forKey: key)
@@ -205,6 +232,9 @@ public struct DefaultsCodableBridge<T: Codable>: DefaultsBridge {
 }
 
 public struct DefaultsKeyedArchiverBridge<T>: DefaultsBridge {
+
+    public init() {}
+
     public func save(key: String, value: T?, userDefaults: UserDefaults) {
         guard let value = value else {
             userDefaults.removeObject(forKey: key)
@@ -232,6 +262,9 @@ public struct DefaultsKeyedArchiverBridge<T>: DefaultsBridge {
 }
 
 public struct DefaultsRawRepresentableBridge<T: RawRepresentable>: DefaultsBridge {
+
+    public init() {}
+
     public func save(key: String, value: T?, userDefaults: UserDefaults) {
         userDefaults.set(value?.rawValue, forKey: key)
     }
@@ -248,6 +281,9 @@ public struct DefaultsRawRepresentableBridge<T: RawRepresentable>: DefaultsBridg
 }
 
 public struct DefaultsRawRepresentableArrayBridge<T: Collection>: DefaultsBridge where T.Element: RawRepresentable {
+
+    public init() {}
+
     public func save(key: String, value: T?, userDefaults: UserDefaults) {
         let raw = value?.map { $0.rawValue }
         userDefaults.set(raw, forKey: key)
@@ -273,6 +309,7 @@ public struct DefaultsOptionalBridge<Bridge: DefaultsBridge>: DefaultsBridge {
     init(bridge: Bridge) {
         self.bridge = bridge
     }
+
     public func get(key: String, userDefaults: UserDefaults) -> T? {
         bridge.get(key: key, userDefaults: userDefaults)
     }
@@ -295,6 +332,7 @@ public struct DefaultsOptionalArrayBridge<Bridge: DefaultsBridge>: DefaultsBridg
     init(bridge: Bridge) {
         self.bridge = bridge
     }
+    
     public func get(key: String, userDefaults: UserDefaults) -> T? {
         bridge.get(key: key, userDefaults: userDefaults)
     }
