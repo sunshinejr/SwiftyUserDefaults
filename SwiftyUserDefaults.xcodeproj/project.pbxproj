@@ -120,6 +120,7 @@
 				B134969522555B348C06FD6C /* SwiftyUserDefaults.h */,
 				11FDEA0BD7078D2633741F60 /* Defaults+StringToBool.swift */,
 				706E690EF2E4010781480303 /* DefaultsKeys.swift */,
+				ED9D95BD22AD74630006FE67 /* DefaultsAdapter.swift */,
 				20EBA39F1E25782FDC1CFC36 /* DefaultsBridges.swift */,
 				BF92C9F82ABF7807D4D4DDDD /* Defaults+Subscripts.swift */,
 				F910BE3FABE99289E0545D95 /* Defaults+Observing.swift */,
@@ -128,7 +129,6 @@
 				85096B65E07A3BC7F856F0D1 /* OptionalType.swift */,
 				F98C7EF97445788836162CD0 /* DefaultsSerializable.swift */,
 				EE155E06F856DFEF78FD63F7 /* Defaults.swift */,
-				ED9D95BD22AD74630006FE67 /* DefaultsAdapter.swift */,
 				ED9D95BE22AD74630006FE67 /* DefaultsType.swift */,
 				ED39909022B0204E0046F502 /* DefaultsKeyStore.swift */,
 			);
