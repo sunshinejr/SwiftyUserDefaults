@@ -47,4 +47,3 @@ extension Optional: OptionalType, OptionalTypeCheck {
         return self == nil
     }
 }
-

@@ -65,7 +65,6 @@ extension DefaultsSerializable where Self: RawRepresentable {
     public static var _defaultsArray: DefaultsRawRepresentableArrayBridge<[Self]> { return DefaultsRawRepresentableArrayBridge() }
 }
 
-
 extension DefaultsSerializable where Self: NSCoding {
     public static var _defaults: DefaultsKeyedArchiverBridge<Self> { return DefaultsKeyedArchiverBridge() }
     public static var _defaultsArray: DefaultsKeyedArchiverBridge<[Self]> { return DefaultsKeyedArchiverBridge() }

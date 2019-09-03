@@ -332,7 +332,7 @@ public struct DefaultsOptionalArrayBridge<Bridge: DefaultsBridge>: DefaultsBridg
     init(bridge: Bridge) {
         self.bridge = bridge
     }
-    
+
     public func get(key: String, userDefaults: UserDefaults) -> T? {
         return bridge.get(key: key, userDefaults: userDefaults)
     }
