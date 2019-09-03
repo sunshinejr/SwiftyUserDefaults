@@ -22,14 +22,31 @@
 // SOFTWARE.
 //
 
-@propertyWrapper
-final class SwiftyUserDefault<T: DefaultsSerializable> where T.T == T {
-    let key: DefaultsKey<T>
-    let cached: Bool
+public struct SwiftyUserDefaultOptions: OptionSet {
 
-    var wrappedValue: T {
+    public static let cached = SwiftyUserDefaultOptions(rawValue: 1 << 0)
+    public static let observed = SwiftyUserDefaultOptions(rawValue: 1 << 2)
+
+    public let rawValue: Int
+
+    public init(rawValue: Int) {
+        self.rawValue = rawValue
+    }
+}
+
+@propertyWrapper
+public final class SwiftyUserDefault<T: DefaultsSerializable> where T.T == T {
+
+    public let key: DefaultsKey<T>
+    public let options: SwiftyUserDefaultOptions
+
+    public var wrappedValue: T {
         get {
-            return _value ?? Defaults[key]
+            if options.contains(.cached) {
+                return _value ?? Defaults[key]
+            } else {
+                return Defaults[key]
+            }
         }
         set {
             _value = newValue
@@ -37,26 +54,25 @@ final class SwiftyUserDefault<T: DefaultsSerializable> where T.T == T {
         }
     }
 
-
     private var _value: T.T?
     private var observation: DefaultsDisposable?
 
-    init<KeyStore>(keyPath: KeyPath<KeyStore, DefaultsKey<T>>, adapter: DefaultsAdapter<KeyStore>, cached: Bool = false, observed: Bool) {
+    public init<KeyStore>(keyPath: KeyPath<KeyStore, DefaultsKey<T>>, adapter: DefaultsAdapter<KeyStore>, options: SwiftyUserDefaultOptions = []) {
         self.key = adapter.keyStore[keyPath: keyPath]
-        self.cached = cached
+        self.options = options
 
-        if observed {
+        if options.contains(.observed) {
             observation = adapter.observe(key) { update in
                 self._value = update.newValue
             }
         }
     }
 
-    init(keyPath: KeyPath<DefaultsKeys, DefaultsKey<T>>, cached: Bool = false, observed: Bool) {
+    public init(keyPath: KeyPath<DefaultsKeys, DefaultsKey<T>>, options: SwiftyUserDefaultOptions = []) {
         self.key = Defaults.keyStore[keyPath: keyPath]
-        self.cached = cached
+        self.options = options
 
-        if observed {
+        if options.contains(.observed) {
             observation = Defaults.observe(key) { update in
                 self._value = update.newValue
             }
