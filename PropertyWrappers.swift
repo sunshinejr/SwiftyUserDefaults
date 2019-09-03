@@ -23,7 +23,7 @@
 //
 
 @propertyWrapper
-struct SwiftyUserDefault<T: DefaultsSerializable> where T.T == T {
+final class SwiftyUserDefault<T: DefaultsSerializable> where T.T == T {
     let key: DefaultsKey<T>
     let cached: Bool
 
@@ -39,14 +39,31 @@ struct SwiftyUserDefault<T: DefaultsSerializable> where T.T == T {
 
 
     private var _value: T.T?
+    private var observation: DefaultsDisposable?
 
-    init<KeyStore>(keyPath: KeyPath<KeyStore, DefaultsKey<T>>, keyStore: KeyStore, cached: Bool = false) {
-        self.key = keyStore[keyPath: keyPath]
+    init<KeyStore>(keyPath: KeyPath<KeyStore, DefaultsKey<T>>, adapter: DefaultsAdapter<KeyStore>, cached: Bool = false, observed: Bool) {
+        self.key = adapter.keyStore[keyPath: keyPath]
         self.cached = cached
+
+        if observed {
+            observation = adapter.observe(key) { update in
+                self._value = update.newValue
+            }
+        }
     }
 
-    init(keyPath: KeyPath<DefaultsKeys, DefaultsKey<T>>, cached: Bool = false) {
-        self.key = DefaultsKeys()[keyPath: keyPath]
+    init(keyPath: KeyPath<DefaultsKeys, DefaultsKey<T>>, cached: Bool = false, observed: Bool) {
+        self.key = Defaults.keyStore[keyPath: keyPath]
         self.cached = cached
+
+        if observed {
+            observation = Defaults.observe(key) { update in
+                self._value = update.newValue
+            }
+        }
+    }
+
+    deinit {
+        observation?.dispose()
     }
 }
