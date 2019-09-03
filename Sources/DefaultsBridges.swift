@@ -302,7 +302,7 @@ public struct DefaultsRawRepresentableArrayBridge<T: Collection>: DefaultsBridge
 
 public struct DefaultsOptionalBridge<Bridge: DefaultsBridge>: DefaultsBridge {
 
-    public typealias T = Optional<Bridge.T>
+    public typealias T = Bridge.T?
 
     private let bridge: Bridge
 
@@ -318,14 +318,14 @@ public struct DefaultsOptionalBridge<Bridge: DefaultsBridge>: DefaultsBridge {
         bridge.save(key: key, value: value as? Bridge.T, userDefaults: userDefaults)
     }
 
-    public func deserialize(_ object: Any) -> Optional<Bridge.T>? {
+    public func deserialize(_ object: Any) -> T? {
         return bridge.deserialize(object) ?? nil
     }
 }
 
 public struct DefaultsOptionalArrayBridge<Bridge: DefaultsBridge>: DefaultsBridge where Bridge.T: Collection {
 
-    public typealias T = Optional<Bridge.T>
+    public typealias T = Bridge.T?
 
     private let bridge: Bridge
 
@@ -334,14 +334,14 @@ public struct DefaultsOptionalArrayBridge<Bridge: DefaultsBridge>: DefaultsBridg
     }
     
     public func get(key: String, userDefaults: UserDefaults) -> T? {
-        bridge.get(key: key, userDefaults: userDefaults)
+        return bridge.get(key: key, userDefaults: userDefaults)
     }
 
     public func save(key: String, value: T?, userDefaults: UserDefaults) {
-        bridge.save(key: key, value: value as? Bridge.T, userDefaults: userDefaults)
+        return bridge.save(key: key, value: value as? Bridge.T, userDefaults: userDefaults)
     }
 
-    public func deserialize(_ object: Any) -> Optional<Bridge.T>? {
+    public func deserialize(_ object: Any) -> T? {
         return bridge.deserialize(object) ?? nil
     }
 }

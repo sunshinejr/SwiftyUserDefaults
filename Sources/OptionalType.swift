@@ -39,7 +39,7 @@ extension Optional: OptionalType, OptionalTypeCheck {
         return self
     }
 
-    public static var empty: Self {
+    public static var empty: Optional {
         return nil
     }
 
