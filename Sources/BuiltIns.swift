@@ -27,7 +27,6 @@ import Foundation
 extension DefaultsSerializable {
     public static var _defaultsArray: DefaultsArrayBridge<[T]> { return DefaultsArrayBridge() }
 }
-
 extension Date: DefaultsSerializable {
     public static var _defaults: DefaultsObjectBridge<Date> { return DefaultsObjectBridge() }
 }
@@ -65,6 +64,7 @@ extension DefaultsSerializable where Self: RawRepresentable {
     public static var _defaults: DefaultsRawRepresentableBridge<Self> { return DefaultsRawRepresentableBridge() }
     public static var _defaultsArray: DefaultsRawRepresentableArrayBridge<[Self]> { return DefaultsRawRepresentableArrayBridge() }
 }
+
 
 extension DefaultsSerializable where Self: NSCoding {
     public static var _defaults: DefaultsKeyedArchiverBridge<Self> { return DefaultsKeyedArchiverBridge() }

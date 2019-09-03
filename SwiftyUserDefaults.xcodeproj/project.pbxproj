@@ -36,7 +36,7 @@
 		ED39909122B0204E0046F502 /* DefaultsKeyStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED39909022B0204E0046F502 /* DefaultsKeyStore.swift */; };
 		ED9D95BF22AD74630006FE67 /* DefaultsAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED9D95BD22AD74630006FE67 /* DefaultsAdapter.swift */; };
 		ED9D95C022AD74630006FE67 /* DefaultsType.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED9D95BE22AD74630006FE67 /* DefaultsType.swift */; };
-		F0340276AF034C710E8C81A7 /* DefaultsSerializable+BuiltIns.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB55DC75BF69CEA7DB03750E /* DefaultsSerializable+BuiltIns.swift */; };
+		F0340276AF034C710E8C81A7 /* BuiltIns.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB55DC75BF69CEA7DB03750E /* BuiltIns.swift */; };
 		F73433D64DE45C8219A51BED /* Defaults+BestFroggiesEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A5BEEC51B2A01157F9965F /* Defaults+BestFroggiesEnum.swift */; };
 /* End PBXBuildFile section */
 
@@ -72,7 +72,7 @@
 		A5A5BEEC51B2A01157F9965F /* Defaults+BestFroggiesEnum.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Defaults+BestFroggiesEnum.swift"; path = "Tests/SwiftyUserDefaultsTests/External types/Defaults+BestFroggiesEnum.swift"; sourceTree = "<group>"; };
 		B134969522555B348C06FD6C /* SwiftyUserDefaults.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SwiftyUserDefaults.h; path = Sources/SwiftyUserDefaults.h; sourceTree = "<group>"; };
 		BF92C9F82ABF7807D4D4DDDD /* Defaults+Subscripts.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Defaults+Subscripts.swift"; path = "Sources/Defaults+Subscripts.swift"; sourceTree = "<group>"; };
-		CB55DC75BF69CEA7DB03750E /* DefaultsSerializable+BuiltIns.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "DefaultsSerializable+BuiltIns.swift"; path = "Sources/DefaultsSerializable+BuiltIns.swift"; sourceTree = "<group>"; };
+		CB55DC75BF69CEA7DB03750E /* BuiltIns.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BuiltIns.swift; path = Sources/BuiltIns.swift; sourceTree = "<group>"; };
 		CBE434F1CEE20652BC414284 /* Defaults+FrogCodable.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Defaults+FrogCodable.swift"; path = "Tests/SwiftyUserDefaultsTests/External types/Defaults+FrogCodable.swift"; sourceTree = "<group>"; };
 		D0EE0402DB7DB637D79FEC2B /* TestHelper.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = TestHelper.swift; path = Tests/SwiftyUserDefaultsTests/TestHelpers/TestHelper.swift; sourceTree = "<group>"; };
 		E57735ECA0C2F413E8EBC2E4 /* Defaults+Bool.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Defaults+Bool.swift"; path = "Tests/SwiftyUserDefaultsTests/Built-ins/Defaults+Bool.swift"; sourceTree = "<group>"; };
@@ -120,6 +120,7 @@
 			children = (
 				6C48B95D407E4F720507F3D8 /* Info.plist */,
 				B134969522555B348C06FD6C /* SwiftyUserDefaults.h */,
+				CB55DC75BF69CEA7DB03750E /* BuiltIns.swift */,
 				11FDEA0BD7078D2633741F60 /* Defaults+StringToBool.swift */,
 				706E690EF2E4010781480303 /* DefaultsKeys.swift */,
 				ED9D95BD22AD74630006FE67 /* DefaultsAdapter.swift */,
@@ -127,7 +128,6 @@
 				BF92C9F82ABF7807D4D4DDDD /* Defaults+Subscripts.swift */,
 				F910BE3FABE99289E0545D95 /* Defaults+Observing.swift */,
 				9701991125BC1345631E831E /* DefaultsObserver.swift */,
-				CB55DC75BF69CEA7DB03750E /* DefaultsSerializable+BuiltIns.swift */,
 				85096B65E07A3BC7F856F0D1 /* OptionalType.swift */,
 				F98C7EF97445788836162CD0 /* DefaultsSerializable.swift */,
 				EE155E06F856DFEF78FD63F7 /* Defaults.swift */,
@@ -368,7 +368,7 @@
 				A3CAE6734DDE8FD952CE2CF2 /* Defaults+Subscripts.swift in Sources */,
 				4B604921053C4F31217DCE9E /* Defaults+Observing.swift in Sources */,
 				311F24C3509BE924078AD67E /* DefaultsObserver.swift in Sources */,
-				F0340276AF034C710E8C81A7 /* DefaultsSerializable+BuiltIns.swift in Sources */,
+				F0340276AF034C710E8C81A7 /* BuiltIns.swift in Sources */,
 				1C21A8A584B33AF419FCE1A5 /* OptionalType.swift in Sources */,
 				ED9D95BF22AD74630006FE67 /* DefaultsAdapter.swift in Sources */,
 				88573499C0B9C4F466D7EC2D /* DefaultsSerializable.swift in Sources */,
