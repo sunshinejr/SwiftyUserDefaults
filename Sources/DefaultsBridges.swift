@@ -263,3 +263,47 @@ public struct DefaultsRawRepresentableArrayBridge<T: Collection>: DefaultsBridge
         return rawValue.compactMap { T.Element(rawValue: $0) } as? T
     }
 }
+
+public struct DefaultsOptionalBridge<Bridge: DefaultsBridge>: DefaultsBridge {
+
+    public typealias T = Optional<Bridge.T>
+
+    private let bridge: Bridge
+
+    init(bridge: Bridge) {
+        self.bridge = bridge
+    }
+    public func get(key: String, userDefaults: UserDefaults) -> T? {
+        bridge.get(key: key, userDefaults: userDefaults)
+    }
+
+    public func save(key: String, value: T?, userDefaults: UserDefaults) {
+        bridge.save(key: key, value: value as? Bridge.T, userDefaults: userDefaults)
+    }
+
+    public func deserialize(_ object: Any) -> Optional<Bridge.T>? {
+        return bridge.deserialize(object) ?? nil
+    }
+}
+
+public struct DefaultsOptionalArrayBridge<Bridge: DefaultsBridge>: DefaultsBridge where Bridge.T: Collection {
+
+    public typealias T = Optional<Bridge.T>
+
+    private let bridge: Bridge
+
+    init(bridge: Bridge) {
+        self.bridge = bridge
+    }
+    public func get(key: String, userDefaults: UserDefaults) -> T? {
+        bridge.get(key: key, userDefaults: userDefaults)
+    }
+
+    public func save(key: String, value: T?, userDefaults: UserDefaults) {
+        bridge.save(key: key, value: value as? Bridge.T, userDefaults: userDefaults)
+    }
+
+    public func deserialize(_ object: Any) -> Optional<Bridge.T>? {
+        return bridge.deserialize(object) ?? nil
+    }
+}
