@@ -59,7 +59,7 @@ public struct DefaultsAdapter<KeyStore: DefaultsKeyStore> {
 
 extension DefaultsAdapter: DefaultsType {
 
-    public subscript<T: DefaultsSerializable>(key: DefaultsKey<T?>) -> T.T? {
+    public subscript<T: DefaultsSerializable>(key: DefaultsKey<T>) -> T.T where T: OptionalType, T.T == T {
         get {
             return defaults[key]
         }
@@ -68,7 +68,7 @@ extension DefaultsAdapter: DefaultsType {
         }
     }
 
-    public subscript<T: DefaultsSerializable>(key: DefaultsKey<T>) -> T.T where T == T.T {
+    public subscript<T: DefaultsSerializable>(key: DefaultsKey<T>) -> T.T where T.T == T {
         get {
             return defaults[key]
         }
@@ -122,7 +122,7 @@ extension DefaultsAdapter {
 #if swift(>=5.1)
 extension DefaultsAdapter {
 
-    public subscript<T: DefaultsSerializable>(dynamicMember keyPath: KeyPath<KeyStore, DefaultsKey<T?>>) -> T.T? {
+    public subscript<T: DefaultsSerializable>(dynamicMember keyPath: KeyPath<KeyStore, DefaultsKey<T>>) -> T.T where T: OptionalType, T.T == T {
         get {
             return defaults[keyStore[keyPath: keyPath]]
         }

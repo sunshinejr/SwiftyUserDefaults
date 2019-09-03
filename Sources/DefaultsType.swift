@@ -28,7 +28,7 @@ public protocol DefaultsType {
     func hasKey<T>(_ key: DefaultsKey<T>) -> Bool
     func remove<T>(_ key: DefaultsKey<T>)
     func removeAll()
-    subscript<T: DefaultsSerializable>(key: DefaultsKey<T?>) -> T.T? { get set }
+    subscript<T: DefaultsSerializable>(key: DefaultsKey<T>) -> T.T where T: OptionalType, T.T == T { get set }
     subscript<T: DefaultsSerializable>(key: DefaultsKey<T>) -> T.T where T.T == T { get set }
 
     #if !os(Linux)
