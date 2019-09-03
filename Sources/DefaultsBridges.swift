@@ -315,7 +315,7 @@ public struct DefaultsOptionalBridge<Bridge: DefaultsBridge>: DefaultsBridge {
     }
 
     public func save(key: String, value: T?, userDefaults: UserDefaults) {
-        bridge.save(key: key, value: value as? Bridge.T, userDefaults: userDefaults)
+        return bridge.save(key: key, value: value as? Bridge.T, userDefaults: userDefaults)
     }
 
     public func deserialize(_ object: Any) -> T? {
@@ -338,7 +338,7 @@ public struct DefaultsOptionalArrayBridge<Bridge: DefaultsBridge>: DefaultsBridg
     }
 
     public func save(key: String, value: T?, userDefaults: UserDefaults) {
-        return bridge.save(key: key, value: value as? Bridge.T, userDefaults: userDefaults)
+        bridge.save(key: key, value: value as? Bridge.T, userDefaults: userDefaults)
     }
 
     public func deserialize(_ object: Any) -> T? {
