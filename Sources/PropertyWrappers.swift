@@ -22,6 +22,7 @@
 // SOFTWARE.
 //
 
+#if swift(>=5.1)
 public struct SwiftyUserDefaultOptions: OptionSet {
 
     public static let cached = SwiftyUserDefaultOptions(rawValue: 1 << 0)
@@ -83,3 +84,4 @@ public final class SwiftyUserDefault<T: DefaultsSerializable> where T.T == T {
         observation?.dispose()
     }
 }
+#endif
