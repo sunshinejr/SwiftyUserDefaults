@@ -4,7 +4,7 @@
 
 * Introduced `DefaultsAdapter` thats the main object for user defaults and the `Defaults` global variable. [@marty-suzuki](https://github.com/marty-suzuki)
 * Thanks to `DefaultsAdapter`, if you are using Swift 5.1 you can use dyanmic member lookup! This allows you to use 
-`Defaults.yourKey` instead of `Defaults[.yourKey]`. [@marty-suzuki](https://github.com/marty-suzuki)
+`Defaults.yourKey` instead of `Defaults[.yourKey]`. In case you are not using Swift 5.1, you would need to transition to `Defaults[\.yourKey]` instead of `Defaults[.yourKey]`. [@marty-suzuki](https://github.com/marty-suzuki)
 * There is a new protocol, `DefaultsKeyStore` that `DefaultsKeys` conform to. This key store is then accepted by the `DefaultsAdapter` so you can have multiple key stores for multiple adapters! [@marty-suzuki](https://github.com/marty-suzuki)
 * Unfortunately the above means that you need to declare your keys as a computed properties instead of static stored ones.[@marty-suzuki](https://github.com/marty-suzuki)
 * `DefaultsBridge` is now a struct, not a class. You need to use composition instead of inheritance to compose them. [@Z-JaDe](https://github.com/Z-JaDe)
