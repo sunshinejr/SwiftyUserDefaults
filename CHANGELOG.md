@@ -1,4 +1,15 @@
 ### Next
+
+### 5.0.0-beta.1 (2019-09-05)
+
+* Introduced `DefaultsAdapter` thats the main object for user defaults and the `Defaults` global variable. [@marty-suzuki](https://github.com/marty-suzuki)
+* Thanks to `DefaultsAdapter`, if you are using Swift 5.1 you can use dyanmic member lookup! This allows you to use 
+`Defaults.yourKey` instead of `Defaults[.yourKey]`. [@marty-suzuki](https://github.com/marty-suzuki)
+* There is a new protocol, `DefaultsKeyStore` that `DefaultsKeys` conform to. This key store is then accepted by the `DefaultsAdapter` so you can have multiple key stores for multiple adapters! [@marty-suzuki](https://github.com/marty-suzuki)
+* Unfortunately the above means that you need to declare your keys as a computed properties instead of static stored ones.[@marty-suzuki](https://github.com/marty-suzuki)
+* `DefaultsBridge` is now a struct, not a class. You need to use composition instead of inheritance to compose them. [@Z-JaDe](https://github.com/Z-JaDe)
+* `DefaultsBridge` changed a little bit, there is no `isSerialized` property anymore, if you create your own bridge you need to provide `deserialize()` method as well. [@Z-JaDe](https://github.com/Z-JaDe)
+* Added `@SwiftyUserDefault` property wrapper for Swift 5.1 users! It uses key paths and has options to cache/observe your defaults as well. [@sunshinejr](https://github.com/sunshinejr)
 * Updated project to recommended settings of Xcode 10.2. [@philippec-ls](https://github.com/philippec-ls)
 
 ### 4.0.0 (2019-04-26)
