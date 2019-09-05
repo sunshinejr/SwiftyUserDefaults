@@ -48,12 +48,6 @@ public protocol DefaultsBridge {
     func deserialize(_ object: Any) -> T?
 }
 
-extension DefaultsBridge {
-    public func deserialize(_ object: Any) -> T? {
-        return nil
-    }
-}
-
 public struct DefaultsObjectBridge<T>: DefaultsBridge {
 
     public init() {}
@@ -64,6 +58,10 @@ public struct DefaultsObjectBridge<T>: DefaultsBridge {
 
     public func get(key: String, userDefaults: UserDefaults) -> T? {
         return userDefaults.object(forKey: key) as? T
+    }
+
+    public func deserialize(_ object: Any) -> T? {
+        return nil
     }
 }
 
@@ -78,6 +76,10 @@ public struct DefaultsArrayBridge<T: Collection>: DefaultsBridge {
     public func get(key: String, userDefaults: UserDefaults) -> T? {
         return userDefaults.array(forKey: key) as? T
     }
+
+    public func deserialize(_ object: Any) -> T? {
+        return nil
+    }
 }
 
 public struct DefaultsStringBridge: DefaultsBridge {
@@ -90,6 +92,10 @@ public struct DefaultsStringBridge: DefaultsBridge {
 
     public func get(key: String, userDefaults: UserDefaults) -> String? {
         return userDefaults.string(forKey: key)
+    }
+
+    public func deserialize(_ object: Any) -> T? {
+        return nil
     }
 }
 
@@ -112,6 +118,10 @@ public struct DefaultsIntBridge: DefaultsBridge {
             return int
         }
 
+        return nil
+    }
+
+    public func deserialize(_ object: Any) -> T? {
         return nil
     }
 }
@@ -137,6 +147,10 @@ public struct DefaultsDoubleBridge: DefaultsBridge {
 
         return nil
     }
+
+    public func deserialize(_ object: Any) -> T? {
+        return nil
+    }
 }
 
 public struct DefaultsBoolBridge: DefaultsBridge {
@@ -160,6 +174,10 @@ public struct DefaultsBoolBridge: DefaultsBridge {
         // For instance, few of the string("YES", "true", "NO", "false") convert to Bool from a property list
         return (userDefaults.object(forKey: key) as? String)?.bool
     }
+
+    public func deserialize(_ object: Any) -> T? {
+        return nil
+    }
 }
 
 public struct DefaultsDataBridge: DefaultsBridge {
@@ -172,6 +190,10 @@ public struct DefaultsDataBridge: DefaultsBridge {
 
     public func get(key: String, userDefaults: UserDefaults) -> Data? {
         return userDefaults.data(forKey: key)
+    }
+
+    public func deserialize(_ object: Any) -> T? {
+        return nil
     }
 }
 
