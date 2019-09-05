@@ -119,10 +119,9 @@ extension DefaultsAdapter {
     #endif
 }
 
-#if swift(>=5.1)
 extension DefaultsAdapter {
 
-    public subscript<T: DefaultsSerializable>(dynamicMember keyPath: KeyPath<KeyStore, DefaultsKey<T>>) -> T.T where T: OptionalType, T.T == T {
+    public subscript<T: DefaultsSerializable>(keyPath: KeyPath<KeyStore, DefaultsKey<T>>) -> T.T where T: OptionalType, T.T == T {
         get {
             return defaults[keyStore[keyPath: keyPath]]
         }
@@ -131,7 +130,7 @@ extension DefaultsAdapter {
         }
     }
 
-    public subscript<T: DefaultsSerializable>(dynamicMember keyPath: KeyPath<KeyStore, DefaultsKey<T>>) -> T.T where T.T == T {
+    public subscript<T: DefaultsSerializable>(keyPath: KeyPath<KeyStore, DefaultsKey<T>>) -> T.T where T.T == T {
         get {
             return defaults[keyStore[keyPath: keyPath]]
         }
@@ -140,4 +139,25 @@ extension DefaultsAdapter {
         }
     }
 }
-#endif
+
+// Weird flex, but needed for the dynamicMemberLookup :shrug:
+extension DefaultsAdapter {
+
+    public subscript<T: DefaultsSerializable>(dynamicMember keyPath: KeyPath<KeyStore, DefaultsKey<T>>) -> T.T where T: OptionalType, T.T == T {
+        get {
+            return self[keyPath]
+        }
+        set {
+            self[keyPath] = newValue
+        }
+    }
+
+    public subscript<T: DefaultsSerializable>(dynamicMember keyPath: KeyPath<KeyStore, DefaultsKey<T>>) -> T.T where T.T == T {
+        get {
+            return self[keyPath]
+        }
+        set {
+            self[keyPath] = newValue
+        }
+    }
+}
