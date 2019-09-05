@@ -43,8 +43,8 @@ import Foundation
 @dynamicMemberLookup
 public struct DefaultsAdapter<KeyStore: DefaultsKeyStore> {
 
-    private let keyStore: KeyStore
-    private let defaults: UserDefaults
+    internal let keyStore: KeyStore
+    internal let defaults: UserDefaults
 
     public init(defaults: UserDefaults, keyStore: KeyStore) {
         self.defaults = defaults
@@ -59,7 +59,7 @@ public struct DefaultsAdapter<KeyStore: DefaultsKeyStore> {
 
 extension DefaultsAdapter: DefaultsType {
 
-    public subscript<T: DefaultsSerializable>(key: DefaultsKey<T?>) -> T.T? {
+    public subscript<T: DefaultsSerializable>(key: DefaultsKey<T>) -> T.T where T: OptionalType, T.T == T {
         get {
             return defaults[key]
         }
@@ -68,7 +68,7 @@ extension DefaultsAdapter: DefaultsType {
         }
     }
 
-    public subscript<T: DefaultsSerializable>(key: DefaultsKey<T>) -> T.T where T == T.T {
+    public subscript<T: DefaultsSerializable>(key: DefaultsKey<T>) -> T.T where T.T == T {
         get {
             return defaults[key]
         }
@@ -122,7 +122,7 @@ extension DefaultsAdapter {
 #if swift(>=5.1)
 extension DefaultsAdapter {
 
-    public subscript<T: DefaultsSerializable>(dynamicMember keyPath: KeyPath<KeyStore, DefaultsKey<T?>>) -> T.T? {
+    public subscript<T: DefaultsSerializable>(dynamicMember keyPath: KeyPath<KeyStore, DefaultsKey<T>>) -> T.T where T: OptionalType, T.T == T {
         get {
             return defaults[keyStore[keyPath: keyPath]]
         }

@@ -35,7 +35,7 @@ protocol DefaultsSerializableSpec {
     var keyStore: FrogKeyStore<Serializable> { get }
 }
 
-extension DefaultsSerializableSpec where Serializable.T: Equatable, Serializable.T == Serializable {
+extension DefaultsSerializableSpec where Serializable.T: Equatable, Serializable.T == Serializable, Serializable.ArrayBridge.T == [Serializable.T] {
 
     func testValues() {
         when("key-default value") {

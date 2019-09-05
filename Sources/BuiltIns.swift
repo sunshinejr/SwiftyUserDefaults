@@ -27,7 +27,6 @@ import Foundation
 extension DefaultsSerializable {
     public static var _defaultsArray: DefaultsArrayBridge<[T]> { return DefaultsArrayBridge() }
 }
-
 extension Date: DefaultsSerializable {
     public static var _defaults: DefaultsObjectBridge<Date> { return DefaultsObjectBridge() }
 }
@@ -91,8 +90,9 @@ extension Array: DefaultsSerializable where Element: DefaultsSerializable {
 }
 
 extension Optional: DefaultsSerializable where Wrapped: DefaultsSerializable {
-    public typealias Bridge = Wrapped.Bridge
-    public typealias ArrayBridge = Wrapped.ArrayBridge
-    public static var _defaults: Wrapped.Bridge { return Wrapped._defaults }
-    public static var _defaultsArray: Wrapped.ArrayBridge { return Wrapped._defaultsArray }
+    public typealias Bridge = DefaultsOptionalBridge<Wrapped.Bridge>
+    public typealias ArrayBridge = DefaultsOptionalBridge<Wrapped.ArrayBridge>
+
+    public static var _defaults: DefaultsOptionalBridge<Wrapped.Bridge> { return DefaultsOptionalBridge(bridge: Wrapped._defaults) }
+    public static var _defaultsArray: DefaultsOptionalBridge<Wrapped.ArrayBridge> { return DefaultsOptionalBridge(bridge: Wrapped._defaultsArray) }
 }
