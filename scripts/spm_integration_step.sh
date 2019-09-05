@@ -27,6 +27,6 @@ let package = Package(
     ]
 )
 " > Package.swift
-swift build
+swift build -Xswiftc "-target" -Xswiftc "x86_64-apple-macosx10.11"
 cd ../
 rm -rf $PROJECT_NAME
