@@ -43,8 +43,8 @@ import Foundation
 @dynamicMemberLookup
 public struct DefaultsAdapter<KeyStore: DefaultsKeyStore> {
 
-    internal let keyStore: KeyStore
-    internal let defaults: UserDefaults
+    public let defaults: UserDefaults
+    public let keyStore: KeyStore
 
     public init(defaults: UserDefaults, keyStore: KeyStore) {
         self.defaults = defaults
