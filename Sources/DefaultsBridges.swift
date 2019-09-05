@@ -94,7 +94,7 @@ public struct DefaultsStringBridge: DefaultsBridge {
         return userDefaults.string(forKey: key)
     }
 
-    public func deserialize(_ object: Any) -> T? {
+    public func deserialize(_ object: Any) -> String? {
         return nil
     }
 }
@@ -121,7 +121,7 @@ public struct DefaultsIntBridge: DefaultsBridge {
         return nil
     }
 
-    public func deserialize(_ object: Any) -> T? {
+    public func deserialize(_ object: Any) -> Int? {
         return nil
     }
 }
@@ -148,7 +148,7 @@ public struct DefaultsDoubleBridge: DefaultsBridge {
         return nil
     }
 
-    public func deserialize(_ object: Any) -> T? {
+    public func deserialize(_ object: Any) -> Double? {
         return nil
     }
 }
@@ -175,7 +175,7 @@ public struct DefaultsBoolBridge: DefaultsBridge {
         return (userDefaults.object(forKey: key) as? String)?.bool
     }
 
-    public func deserialize(_ object: Any) -> T? {
+    public func deserialize(_ object: Any) -> Bool? {
         return nil
     }
 }
@@ -192,7 +192,7 @@ public struct DefaultsDataBridge: DefaultsBridge {
         return userDefaults.data(forKey: key)
     }
 
-    public func deserialize(_ object: Any) -> T? {
+    public func deserialize(_ object: Any) -> Data? {
         return nil
     }
 }
