@@ -1,5 +1,6 @@
 #!/bin/sh
 
+SWIFT_VERSION=$1
 PROJECT_NAME="TestSPM"
 FRAMEWORK_NAME="SwiftyUserDefaults"
 
@@ -12,7 +13,7 @@ mkdir $PROJECT_NAME
 cd $PROJECT_NAME
 
 swift package init
-echo "// swift-tools-version:4.2
+echo "// swift-tools-version:$SWIFT_VERSION
 
 import PackageDescription
 

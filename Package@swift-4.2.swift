@@ -23,5 +23,5 @@ let package = Package(
             name: "SwiftyUserDefaultsTests",
             dependencies: ["SwiftyUserDefaults", "Quick", "Nimble"]),
     ],
-    swiftLanguageVersions: [.v4_2]
+    swiftLanguageVersions: [.v4.0, .v4_2]
 )
