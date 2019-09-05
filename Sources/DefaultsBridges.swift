@@ -341,7 +341,7 @@ public struct DefaultsOptionalBridge<Bridge: DefaultsBridge>: DefaultsBridge {
     }
 
     public func deserialize(_ object: Any) -> T? {
-        return bridge.deserialize(object) ?? nil
+        return bridge.deserialize(object)
     }
 }
 
@@ -364,6 +364,6 @@ public struct DefaultsOptionalArrayBridge<Bridge: DefaultsBridge>: DefaultsBridg
     }
 
     public func deserialize(_ object: Any) -> T? {
-        return bridge.deserialize(object) ?? nil
+        return bridge.deserialize(object)
     }
 }
