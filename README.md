@@ -27,13 +27,13 @@ Read [migration guide from version 4.x to 5.x](MigrationGuides/migration_4_to_5.
     <a href="#nscoding">NSCoding</a> &bull;
     <a href="#rawrepresentable">RawRepresentable</a> &bull;
     <a href="#extending-existing-types">Extending existing types</a> &bull;
-    <a href="#custom-types">Custom types</a> &bull;
+    <a href="#custom-types">Custom types</a>
 </p>
 <p align="center">
     <a href="#kvo">KVO</a> &bull;
+    <a href="#launch-arguments">Launch arguments</a> &bull;    
     <a href="#property-wrappers">Property wrappers</a> &bull;    
     <a href="#keypath-dynamicMemberLookup">dynamicMemberLookup</a> &bull;
-    <a href="#launch-arguments">Launch arguments</a> &bull;
     <a href="#utils">Utils</a> &bull;
     <a href="#installation">Installation</a>
 </p>
@@ -353,31 +353,6 @@ func testExample() {
 ./script -skipLogin true -loginTries 3 -lastGameTime 61.3 -nickname sunshinejr
 ```
 
-## Utils
-
-### Remove all keys
-
-To reset user defaults, use `removeAll` method.
-
-```swift
-Defaults.removeAll()
-```
-
-### Shared user defaults
-
-If you're sharing your user defaults between different apps or an app and its extensions, you can use SwiftyUserDefaults by overriding the `Defaults` shortcut with your own. Just add in your app:
-
-```swift
-var Defaults = UserDefaults(suiteName: "com.my.app")!
-```
-
-### Check key
-
-If you want to check if we've got a value for `DefaultsKey`:
-```swift
-let hasKey = Defaults.hasKey(\.skipLogin)
-```
-
 ## Property wrappers
 
 SwiftyUserDefaults provides property wrappers for Swift 5.1! The property wrapper, `@SwiftyUserDefault`, provides an option to use it with key path and options: caching or observing.
@@ -439,6 +414,31 @@ Defaults.libraries[0] += " 2.0"
 // Easily work with custom serialized types
 Defaults.color = NSColor.white
 Defaults.color?.whiteComponent // => 1.0
+```
+
+## Utils
+
+### Remove all keys
+
+To reset user defaults, use `removeAll` method.
+
+```swift
+Defaults.removeAll()
+```
+
+### Shared user defaults
+
+If you're sharing your user defaults between different apps or an app and its extensions, you can use SwiftyUserDefaults by overriding the `Defaults` shortcut with your own. Just add in your app:
+
+```swift
+var Defaults = UserDefaults(suiteName: "com.my.app")!
+```
+
+### Check key
+
+If you want to check if we've got a value for `DefaultsKey`:
+```swift
+let hasKey = Defaults.hasKey(\.skipLogin)
 ```
 
 ## Installation
