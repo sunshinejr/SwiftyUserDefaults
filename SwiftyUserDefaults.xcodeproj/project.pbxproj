@@ -19,6 +19,7 @@
 		4B604921053C4F31217DCE9E /* Defaults+Observing.swift in Sources */ = {isa = PBXBuildFile; fileRef = F910BE3FABE99289E0545D95 /* Defaults+Observing.swift */; };
 		7EE5BB8911DFD47B6D6ED8E5 /* Defaults+Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F97C9DDE34857798EA6519B /* Defaults+Date.swift */; };
 		80C1C495919531D69B34BA6F /* Defaults+Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78703A0F180A4B7C450CD191 /* Defaults+Data.swift */; };
+		858E15D0231FEC2F00DC1418 /* PropertyWrappers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 858E15CF231FEC2F00DC1418 /* PropertyWrappers.swift */; };
 		88573499C0B9C4F466D7EC2D /* DefaultsSerializable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F98C7EF97445788836162CD0 /* DefaultsSerializable.swift */; };
 		89AF35E8D3CF0B18777540CC /* Defaults+Bool.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57735ECA0C2F413E8EBC2E4 /* Defaults+Bool.swift */; };
 		8ED3B92CC68C3F2B7448D868 /* Defaults+FrogCodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBE434F1CEE20652BC414284 /* Defaults+FrogCodable.swift */; };
@@ -32,7 +33,10 @@
 		CC4CF6A63F6AA1B932D6757E /* DefaultsBridges.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20EBA39F1E25782FDC1CFC36 /* DefaultsBridges.swift */; };
 		D102C1011A4314AFF773DCD5 /* Defaults+StringToBool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11FDEA0BD7078D2633741F60 /* Defaults+StringToBool.swift */; };
 		EA37551964DBE6344BC4178A /* Defaults+URL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6494A812C2386E7351405E72 /* Defaults+URL.swift */; };
-		F0340276AF034C710E8C81A7 /* DefaultsSerializable+BuiltIns.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB55DC75BF69CEA7DB03750E /* DefaultsSerializable+BuiltIns.swift */; };
+		ED39909122B0204E0046F502 /* DefaultsKeyStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED39909022B0204E0046F502 /* DefaultsKeyStore.swift */; };
+		ED9D95BF22AD74630006FE67 /* DefaultsAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED9D95BD22AD74630006FE67 /* DefaultsAdapter.swift */; };
+		ED9D95C022AD74630006FE67 /* DefaultsType.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED9D95BE22AD74630006FE67 /* DefaultsType.swift */; };
+		F0340276AF034C710E8C81A7 /* BuiltIns.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB55DC75BF69CEA7DB03750E /* BuiltIns.swift */; };
 		F73433D64DE45C8219A51BED /* Defaults+BestFroggiesEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A5BEEC51B2A01157F9965F /* Defaults+BestFroggiesEnum.swift */; };
 /* End PBXBuildFile section */
 
@@ -61,16 +65,20 @@
 		706E690EF2E4010781480303 /* DefaultsKeys.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = DefaultsKeys.swift; path = Sources/DefaultsKeys.swift; sourceTree = "<group>"; };
 		78703A0F180A4B7C450CD191 /* Defaults+Data.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Defaults+Data.swift"; path = "Tests/SwiftyUserDefaultsTests/Built-ins/Defaults+Data.swift"; sourceTree = "<group>"; };
 		85096B65E07A3BC7F856F0D1 /* OptionalType.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = OptionalType.swift; path = Sources/OptionalType.swift; sourceTree = "<group>"; };
+		858E15CF231FEC2F00DC1418 /* PropertyWrappers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PropertyWrappers.swift; path = Sources/PropertyWrappers.swift; sourceTree = "<group>"; };
 		8790CE5B53F91DAD51975EDC /* Defaults+Double.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Defaults+Double.swift"; path = "Tests/SwiftyUserDefaultsTests/Built-ins/Defaults+Double.swift"; sourceTree = "<group>"; };
 		9701991125BC1345631E831E /* DefaultsObserver.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = DefaultsObserver.swift; path = Sources/DefaultsObserver.swift; sourceTree = "<group>"; };
 		A574FF49CBCEBCCEAE9BD42E /* Defaults+String.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Defaults+String.swift"; path = "Tests/SwiftyUserDefaultsTests/Built-ins/Defaults+String.swift"; sourceTree = "<group>"; };
 		A5A5BEEC51B2A01157F9965F /* Defaults+BestFroggiesEnum.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Defaults+BestFroggiesEnum.swift"; path = "Tests/SwiftyUserDefaultsTests/External types/Defaults+BestFroggiesEnum.swift"; sourceTree = "<group>"; };
 		B134969522555B348C06FD6C /* SwiftyUserDefaults.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SwiftyUserDefaults.h; path = Sources/SwiftyUserDefaults.h; sourceTree = "<group>"; };
 		BF92C9F82ABF7807D4D4DDDD /* Defaults+Subscripts.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Defaults+Subscripts.swift"; path = "Sources/Defaults+Subscripts.swift"; sourceTree = "<group>"; };
-		CB55DC75BF69CEA7DB03750E /* DefaultsSerializable+BuiltIns.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "DefaultsSerializable+BuiltIns.swift"; path = "Sources/DefaultsSerializable+BuiltIns.swift"; sourceTree = "<group>"; };
+		CB55DC75BF69CEA7DB03750E /* BuiltIns.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BuiltIns.swift; path = Sources/BuiltIns.swift; sourceTree = "<group>"; };
 		CBE434F1CEE20652BC414284 /* Defaults+FrogCodable.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Defaults+FrogCodable.swift"; path = "Tests/SwiftyUserDefaultsTests/External types/Defaults+FrogCodable.swift"; sourceTree = "<group>"; };
 		D0EE0402DB7DB637D79FEC2B /* TestHelper.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = TestHelper.swift; path = Tests/SwiftyUserDefaultsTests/TestHelpers/TestHelper.swift; sourceTree = "<group>"; };
 		E57735ECA0C2F413E8EBC2E4 /* Defaults+Bool.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Defaults+Bool.swift"; path = "Tests/SwiftyUserDefaultsTests/Built-ins/Defaults+Bool.swift"; sourceTree = "<group>"; };
+		ED39909022B0204E0046F502 /* DefaultsKeyStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DefaultsKeyStore.swift; path = Sources/DefaultsKeyStore.swift; sourceTree = "<group>"; };
+		ED9D95BD22AD74630006FE67 /* DefaultsAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DefaultsAdapter.swift; path = Sources/DefaultsAdapter.swift; sourceTree = "<group>"; };
+		ED9D95BE22AD74630006FE67 /* DefaultsType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DefaultsType.swift; path = Sources/DefaultsType.swift; sourceTree = "<group>"; };
 		EE155E06F856DFEF78FD63F7 /* Defaults.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Defaults.swift; path = Sources/Defaults.swift; sourceTree = "<group>"; };
 		F067CFEA88F84E726E835422 /* SwiftyUserDefaultsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwiftyUserDefaultsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F15D6CCB785C552A0B39B16A /* Defaults+Color.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Defaults+Color.swift"; path = "Tests/SwiftyUserDefaultsTests/External types/Defaults+Color.swift"; sourceTree = "<group>"; };
@@ -112,16 +120,20 @@
 			children = (
 				6C48B95D407E4F720507F3D8 /* Info.plist */,
 				B134969522555B348C06FD6C /* SwiftyUserDefaults.h */,
+				CB55DC75BF69CEA7DB03750E /* BuiltIns.swift */,
 				11FDEA0BD7078D2633741F60 /* Defaults+StringToBool.swift */,
 				706E690EF2E4010781480303 /* DefaultsKeys.swift */,
+				ED9D95BD22AD74630006FE67 /* DefaultsAdapter.swift */,
 				20EBA39F1E25782FDC1CFC36 /* DefaultsBridges.swift */,
 				BF92C9F82ABF7807D4D4DDDD /* Defaults+Subscripts.swift */,
 				F910BE3FABE99289E0545D95 /* Defaults+Observing.swift */,
 				9701991125BC1345631E831E /* DefaultsObserver.swift */,
-				CB55DC75BF69CEA7DB03750E /* DefaultsSerializable+BuiltIns.swift */,
 				85096B65E07A3BC7F856F0D1 /* OptionalType.swift */,
 				F98C7EF97445788836162CD0 /* DefaultsSerializable.swift */,
 				EE155E06F856DFEF78FD63F7 /* Defaults.swift */,
+				ED9D95BE22AD74630006FE67 /* DefaultsType.swift */,
+				ED39909022B0204E0046F502 /* DefaultsKeyStore.swift */,
+				858E15CF231FEC2F00DC1418 /* PropertyWrappers.swift */,
 			);
 			name = Sources;
 			sourceTree = "<group>";
@@ -257,14 +269,16 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0930;
-				LastUpgradeCheck = 0930;
+				LastUpgradeCheck = 1020;
 			};
 			buildConfigurationList = E3B831884380EEF15D197700 /* Build configuration list for PBXProject "SwiftyUserDefaults" */;
 			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = English;
+			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
+				Base,
 			);
 			mainGroup = 360E42BFF4D0B60A2966BBFB;
 			productRefGroup = 030EF47B968BC320EF6F10A3 /* Products */;
@@ -345,14 +359,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				858E15D0231FEC2F00DC1418 /* PropertyWrappers.swift in Sources */,
 				D102C1011A4314AFF773DCD5 /* Defaults+StringToBool.swift in Sources */,
 				037280C1C6C68BDB8E3759E6 /* DefaultsKeys.swift in Sources */,
 				CC4CF6A63F6AA1B932D6757E /* DefaultsBridges.swift in Sources */,
+				ED39909122B0204E0046F502 /* DefaultsKeyStore.swift in Sources */,
+				ED9D95C022AD74630006FE67 /* DefaultsType.swift in Sources */,
 				A3CAE6734DDE8FD952CE2CF2 /* Defaults+Subscripts.swift in Sources */,
 				4B604921053C4F31217DCE9E /* Defaults+Observing.swift in Sources */,
 				311F24C3509BE924078AD67E /* DefaultsObserver.swift in Sources */,
-				F0340276AF034C710E8C81A7 /* DefaultsSerializable+BuiltIns.swift in Sources */,
+				F0340276AF034C710E8C81A7 /* BuiltIns.swift in Sources */,
 				1C21A8A584B33AF419FCE1A5 /* OptionalType.swift in Sources */,
+				ED9D95BF22AD74630006FE67 /* DefaultsAdapter.swift in Sources */,
 				88573499C0B9C4F466D7EC2D /* DefaultsSerializable.swift in Sources */,
 				9FA427F1D84703CE8EC6CD38 /* Defaults.swift in Sources */,
 			);
@@ -374,6 +392,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -422,7 +441,7 @@
 				SDKROOT = macosx;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2,3,4";
 			};
 			name = Release;
@@ -431,6 +450,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -486,7 +506,7 @@
 				SDKROOT = macosx;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2,3,4";
 			};
 			name = Debug;
@@ -519,7 +539,6 @@
 				PRODUCT_BUNDLE_IDENTIFIER = io.radex.SwiftyUserDefaultsTests;
 				SDKROOT = macosx;
 				SUPPORTED_PLATFORMS = "macosx iphoneos iphonesimulator appletvos appletvsimulator watchos watchsimulator";
-				SWIFT_VERSION = 4.0;
 				TVOS_DEPLOYMENT_TARGET = 9.0;
 				WATCHOS_DEPLOYMENT_TARGET = 2.0;
 			};
@@ -546,7 +565,6 @@
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
 				SUPPORTED_PLATFORMS = "macosx iphoneos iphonesimulator appletvos appletvsimulator watchos watchsimulator";
-				SWIFT_VERSION = 4.0;
 				TVOS_DEPLOYMENT_TARGET = 9.0;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -575,7 +593,6 @@
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
 				SUPPORTED_PLATFORMS = "macosx iphoneos iphonesimulator appletvos appletvsimulator watchos watchsimulator";
-				SWIFT_VERSION = 4.0;
 				TVOS_DEPLOYMENT_TARGET = 9.0;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -611,7 +628,6 @@
 				PRODUCT_BUNDLE_IDENTIFIER = io.radex.SwiftyUserDefaultsTests;
 				SDKROOT = macosx;
 				SUPPORTED_PLATFORMS = "macosx iphoneos iphonesimulator appletvos appletvsimulator watchos watchsimulator";
-				SWIFT_VERSION = 4.0;
 				TVOS_DEPLOYMENT_TARGET = 9.0;
 				WATCHOS_DEPLOYMENT_TARGET = 2.0;
 			};

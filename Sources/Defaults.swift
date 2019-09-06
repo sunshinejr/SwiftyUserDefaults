@@ -29,20 +29,20 @@ import Foundation
 /// **Pro-Tip:** If you want to use shared user defaults, just
 ///  redefine this global shortcut in your app target, like so:
 ///  ~~~
-///  var Defaults = UserDefaults(suiteName: "com.my.app")!
+///  var Defaults = DefaultsAdapter(defaults: UserDefaults(suiteName: "com.my.app")!, keyStore: MyCustomDefaultsKeyStore())
 ///  ~~~
 
-public let Defaults = UserDefaults.standard
+public var Defaults = DefaultsAdapter<DefaultsKeys>(defaults: .standard, keyStore: .init())
 
-public extension UserDefaults {
+extension UserDefaults: DefaultsType {
 
     /// Returns `true` if `key` exists
-    func hasKey<T>(_ key: DefaultsKey<T>) -> Bool {
+    public func hasKey<T>(_ key: DefaultsKey<T>) -> Bool {
         return object(forKey: key._key) != nil
     }
 
     /// Removes value for `key`
-    func remove<T>(_ key: DefaultsKey<T>) {
+    public func remove<T>(_ key: DefaultsKey<T>) {
         removeObject(forKey: key._key)
     }
 
@@ -50,7 +50,7 @@ public extension UserDefaults {
     /// Use with caution!
     /// - Note: This method only removes keys on the receiver `UserDefaults` object.
     ///         System-defined keys will still be present afterwards.
-    func removeAll() {
+    public func removeAll() {
         for (key, _) in dictionaryRepresentation() {
             removeObject(forKey: key)
         }
@@ -68,7 +68,7 @@ internal extension UserDefaults {
 
         return try? JSONDecoder().decode(T.self, from: decodableData)
     }
-    
+
     /// Encodes passed `encodable` and saves the resulting data into the user defaults for the key `key`.
     /// Any error encoding will result in an assertion failure.
     func set<T: Encodable>(encodable: T, forKey key: String) {
@@ -78,5 +78,5 @@ internal extension UserDefaults {
         } catch {
             assertionFailure("Failure encoding encodable of type \(T.self): \(error.localizedDescription)")
         }
-    }    
+    }
 }

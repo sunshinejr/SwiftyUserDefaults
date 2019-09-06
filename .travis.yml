@@ -2,27 +2,43 @@ language: generic
 matrix:
   include: 
     - os: osx
-      osx_image: xcode10.2
+      osx_image: xcode11
       name: Danger
       env:
-        - CACHE_NAME=SWIFT5_0
+        - CACHE_NAME=SWIFT5_1
         - SWIFT_VERSION=5.0
+        - SWIFT_TOOLS_VERSION=5.1
         - XCODEGEN_VERSION=2.5.0
-        - IOS_SIMULATOR='name=iPhone 6s,OS=12.2'
-        - IOS_SDK=iphonesimulator12.2
+        - IOS_SIMULATOR='name=iPhone Xs,OS=13.0'
+        - IOS_SDK=iphonesimulator13.0
         - TVOS_SIMULATOR='name=Apple TV 4K (at 1080p)'
-        - TVOS_SDK=appletvsimulator12.2
+        - TVOS_SDK=appletvsimulator13.0
         - WATCHOS_SIMULATOR='name=Apple Watch Series 4 - 44mm'
-        - WATCHOS_SDK=watchsimulator5.2
+        - WATCHOS_SDK=watchsimulator6.0  
       before_install:
         - brew install danger/tap/danger-swift
       script: DEBUG="*" danger-swift ci  
+    - os: osx
+      osx_image: xcode11
+      name: Swift 5.1 compatibility
+      env:
+        - CACHE_NAME=SWIFT5_1
+        - SWIFT_VERSION=5.0
+        - SWIFT_TOOLS_VERSION=5.1
+        - XCODEGEN_VERSION=2.5.0
+        - IOS_SIMULATOR='name=iPhone Xs,OS=13.0'
+        - IOS_SDK=iphonesimulator13.0
+        - TVOS_SIMULATOR='name=Apple TV 4K (at 1080p)'
+        - TVOS_SDK=appletvsimulator13.0
+        - WATCHOS_SIMULATOR='name=Apple Watch Series 4 - 44mm'
+        - WATCHOS_SDK=watchsimulator6.0         
     - os: osx
       osx_image: xcode10.2
       name: Swift 5.0 compatibility
       env:
         - CACHE_NAME=SWIFT5_0
         - SWIFT_VERSION=5.0
+        - SWIFT_TOOLS_VERSION=5.0        
         - XCODEGEN_VERSION=2.5.0
         - IOS_SIMULATOR='name=iPhone 6s,OS=12.2'
         - IOS_SDK=iphonesimulator12.2
@@ -47,6 +63,7 @@ matrix:
       env:
         - CACHE_NAME=SWIFT4_2
         - SWIFT_VERSION=4.2
+        - SWIFT_TOOLS_VERSION=4.2        
         - XCODEGEN_VERSION=2.3.0
         - IOS_SIMULATOR='name=iPhone 6s,OS=12.1'
         - IOS_SDK=iphonesimulator12.1
@@ -70,7 +87,8 @@ matrix:
       name: Swift 4.1 compatibility
       env: 
         - CACHE_NAME=SWIFT4_1
-        - SWIFT_VERSION=4.0 # it's in fact 4.1
+        - SWIFT_VERSION=4.0
+        - SWIFT_TOOLS_VERSION=4.0      
         - XCODEGEN_VERSION=2.3.0
         - IOS_SIMULATOR='name=iPhone 6s,OS=12.1'
         - IOS_SDK=iphonesimulator12.1
@@ -101,10 +119,8 @@ before_install:
 
 script:
   - set -o pipefail
-  - if [[ "$SWIFT_VERSION" == "5.0" ]]; then mv Cartfile_5.0.private Cartfile.private; fi
-  - if [[ "$SWIFT_VERSION" == "5.0" ]]; then mv Cartfile_5.0.resolved Cartfile.resolved; fi
-  - if [[ "$SWIFT_VERSION" == "5.0" ]]; then mv Package_5.0.swift Package.swift; fi
-  - if [[ "$SWIFT_VERSION" == "5.0" ]]; then mv Package_5.0.resolved Package.resolved; fi
+  - if [[ "$SWIFT_VERSION" != "5.0" ]]; then mv Cartfile_4.2.private Cartfile.private; fi
+  - if [[ "$SWIFT_VERSION" != "5.0" ]]; then mv Cartfile_4.2.resolved Cartfile.resolved; fi
   - carthage update --no-use-binaries --cache-builds --verbose
   - xcodebuild -version
   - xcodebuild -showsdks
@@ -112,7 +128,7 @@ script:
   - xcodebuild -project "$PROJECT" -scheme 'SwiftyUserDefaults' -sdk $IOS_SDK  -destination "$IOS_SIMULATOR" ONLY_ACTIVE_ARCH=NO CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO SWIFT_VERSION=$SWIFT_VERSION build | xcpretty
   - xcodebuild -project "$PROJECT" -scheme 'SwiftyUserDefaults' -sdk $TVOS_SDK -destination "$TVOS_SIMULATOR" ONLY_ACTIVE_ARCH=NO CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO SWIFT_VERSION=$SWIFT_VERSION build | xcpretty
   - xcodebuild -project "$PROJECT" -scheme 'SwiftyUserDefaults' -sdk $WATCHOS_SDK -destination "$WATCHOS_SIMULATOR" ONLY_ACTIVE_ARCH=NO CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO SWIFT_VERSION=$SWIFT_VERSION build | xcpretty
-  - xcodebuild -project "$PROJECT" -scheme 'SwiftyUserDefaults' ONLY_ACTIVE_ARCH=NO CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO build | xcpretty
+  - xcodebuild -project "$PROJECT" -scheme 'SwiftyUserDefaults' ONLY_ACTIVE_ARCH=NO CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO SWIFT_VERSION=$SWIFT_VERSION build | xcpretty
   
   # - xcodebuild -project "$PROJECT" -scheme 'SwiftyUserDefaults' -sdk $IOS_SDK  -destination "$IOS_SIMULATOR" ONLY_ACTIVE_ARCH=NO CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO SWIFT_VERSION=$SWIFT_VERSION test | xcpretty
   # - xcodebuild -project "$PROJECT" -scheme 'SwiftyUserDefaults' -sdk $TVOS_SDK -destination "$TVOS_SIMULATOR" ONLY_ACTIVE_ARCH=NO CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO SWIFT_VERSION=$SWIFT_VERSION test | xcpretty
@@ -124,4 +140,4 @@ script:
 
   - scripts/cocoapods_integration_step.sh
   - scripts/carthage_integration_step.sh
-  - scripts/spm_integration_step.sh
+  - scripts/spm_integration_step.sh $SWIFT_VERSION

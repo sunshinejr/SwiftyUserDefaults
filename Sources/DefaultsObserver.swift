@@ -29,7 +29,8 @@ public protocol DefaultsDisposable {
 }
 
 #if !os(Linux)
-public final class DefaultsObserver<T: DefaultsSerializable>: NSObject, DefaultsDisposable {
+
+public final class DefaultsObserver<T: DefaultsSerializable>: NSObject, DefaultsDisposable where T == T.T {
 
     public struct Update {
         public let kind: NSKeyValueChange
@@ -47,15 +48,21 @@ public final class DefaultsObserver<T: DefaultsSerializable>: NSObject, Defaults
             newValue = Update.deserialize(dict[.newKey], for: key) ?? key.defaultValue
         }
 
-        private static func deserialize(_ value: Any?, for key: DefaultsKey<T>) -> T.T? {
+        private static func deserialize<T: DefaultsSerializable>(_ value: Any?, for key: DefaultsKey<T>) -> T.T? where T.T == T {
             guard let value = value else { return nil }
 
-            let bridge = T._defaults
-            if bridge.isSerialized() {
-                return bridge.deserialize(value)
+            let deserialized =  T._defaults.deserialize(value)
+
+            let ret: T.T?
+            if key.isOptional, let _deserialized = deserialized, let __deserialized = _deserialized as? OptionalTypeCheck, !__deserialized.isNil {
+                ret = __deserialized as? T.T
+            } else if !key.isOptional {
+                ret = deserialized ?? value as? T.T
             } else {
-                return value as? T.T
+                ret = value as? T.T
             }
+
+            return ret
         }
     }
 

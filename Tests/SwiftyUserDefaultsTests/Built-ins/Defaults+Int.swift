@@ -25,10 +25,12 @@
 import Quick
 
 final class DefaultsIntSpec: QuickSpec, DefaultsSerializableSpec {
+
     typealias Serializable = Int
 
     var customValue: Int = 2
     var defaultValue: Int = 1
+    var keyStore = FrogKeyStore<Serializable>()
 
     override func spec() {
         given("Int") {

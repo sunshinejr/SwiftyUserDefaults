@@ -27,14 +27,15 @@ import Foundation
 // DefaultsKey
 public extension UserDefaults {
 
-    subscript<T: DefaultsSerializable>(key: DefaultsKey<T?>) -> T.T? {
+    subscript<T: DefaultsSerializable>(key: DefaultsKey<T>) -> T.T where T: OptionalType, T.T == T {
         get {
-            if let value = T._defaults.get(key: key._key, userDefaults: self) {
-                return value
-            } else if let defaultValue = key.defaultValue as? T.T {
+            if let value = T._defaults.get(key: key._key, userDefaults: self), let _value = value as? T.T.Wrapped {
+                // swiftlint:disable:next force_cast
+                return _value as! T
+            } else if let defaultValue = key.defaultValue {
                 return defaultValue
             } else {
-                return nil
+                return T.T.empty
             }
         }
         set {

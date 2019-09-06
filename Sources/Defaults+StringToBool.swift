@@ -37,4 +37,3 @@ internal extension String {
         }
     }
 }
-

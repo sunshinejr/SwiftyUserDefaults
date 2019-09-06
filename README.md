@@ -8,15 +8,17 @@
 ![Swift version](https://img.shields.io/badge/swift-4.1-orange.svg)
 ![Swift version](https://img.shields.io/badge/swift-4.2-orange.svg)
 ![Swift version](https://img.shields.io/badge/swift-5.0-orange.svg)
+![Swift version](https://img.shields.io/badge/swift-5.1-orange.svg)
 
 #### Modern Swift API for `NSUserDefaults`
 ###### SwiftyUserDefaults makes user defaults enjoyable to use by combining expressive Swifty API with the benefits of static typing. Define your keys in one place, use value types easily, and get extra safety and convenient compile-time checks for free.
 
 Read [documentation for stable version 3.0.1](https://github.com/radex/SwiftyUserDefaults/blob/14b629b035bf6355b46ece22c3851068a488a895/README.md)<br />
 Read [migration guide from version 3.x to 4.x](MigrationGuides/migration_3_to_4.md)<br />
-Read [migration guide from version 4.0.0-alpha.1 to 4.0.0-alpha.3](MigrationGuides/migration_4_alpha_1_to_4_alpha_2.md)
+Read [migration guide from version 4.0.0-alpha.1 to 4.0.0-alpha.3](MigrationGuides/migration_4_alpha_1_to_4_alpha_2.md)<br />
+Read [migration guide from version 4.x to 5.x](MigrationGuides/migration_4_to_5.md)<br />
 
-# Version 4
+# Version 5.0.0-beta.1
 
 <p align="center">
     <a href="#features">Features</a> &bull;
@@ -25,9 +27,13 @@ Read [migration guide from version 4.0.0-alpha.1 to 4.0.0-alpha.3](MigrationGuid
     <a href="#nscoding">NSCoding</a> &bull;
     <a href="#rawrepresentable">RawRepresentable</a> &bull;
     <a href="#extending-existing-types">Extending existing types</a> &bull;
-    <a href="#custom-types">Custom types</a> &bull;
+    <a href="#custom-types">Custom types</a>
+</p>
+<p align="center">
     <a href="#kvo">KVO</a> &bull;
-    <a href="#launch-arguments">Launch arguments</a> &bull;
+    <a href="#launch-arguments">Launch arguments</a> &bull;    
+    <a href="#property-wrappers">Property wrappers</a> &bull;    
+    <a href="#keypath-dynamicMemberLookup">dynamicMemberLookup</a> &bull;
     <a href="#utils">Utils</a> &bull;
     <a href="#installation">Installation</a>
 </p>
@@ -40,8 +46,8 @@ Define your keys!
 
 ```swift
 extension DefaultsKeys {
-    static let username = DefaultsKey<String?>("username")
-    static let launchCount = DefaultsKey<Int>("launchCount", defaultValue: 0)
+    var username: DefaultsKey<String?> { return .init("username") }
+    var launchCount: DefaultsKey<Int> { return .init("launchCount", defaultValue: 0) }
 }
 ```
 
@@ -49,24 +55,29 @@ And just use it ;-)
 
 ```swift
 // Get and set user defaults easily
-let username = Defaults[.username]
-Defaults[.hotkeyEnabled] = true
+let username = Defaults[\.username]
+Defaults[\.hotkeyEnabled] = true
 
 // Modify value types in place
-Defaults[.launchCount] += 1
-Defaults[.volume] -= 0.1
-Defaults[.strings] += "… can easily be extended!"
+Defaults[\.launchCount] += 1
+Defaults[\.volume] -= 0.1
+Defaults[\.strings] += "… can easily be extended!"
 
 // Use and modify typed arrays
-Defaults[.libraries].append("SwiftyUserDefaults")
-Defaults[.libraries][0] += " 2.0"
+Defaults[\.libraries].append("SwiftyUserDefaults")
+Defaults[\.libraries][0] += " 2.0"
 
 // Easily work with custom serialized types
-Defaults[.color] = NSColor.white
-Defaults[.color]?.whiteComponent // => 1.0
+Defaults[\.color] = NSColor.white
+Defaults[\.color]?.whiteComponent // => 1.0
 ```
 
-The convenient dot syntax is only available if you define your keys by extending magic `DefaultsKeys` class. You can also just pass the `DefaultsKey` value in square brackets.
+If you use Swift 5.1 - good news! You can also use keyPath `dynamicMemberLookup`:
+```swift
+Defaults.color = NSColor.white
+```
+
+See more at the <a href="#keypath-dynamicMemberLookup">KeyPath dynamicMemberLookup</a> section.
 
 ## Usage
 
@@ -95,16 +106,16 @@ For extra convenience, define your keys by extending magic `DefaultsKeys` class 
 
 ```swift
 extension DefaultsKeys {
-    static let username = DefaultsKey<String?>("username")
-    static let launchCount = DefaultsKey<Int>("launchCount", defaultValue: 0)
+    var username: DefaultsKey<String?> { return .init("username") }
+    var launchCount: DefaultsKey<Int> { return .init("launchCount", defaultValue: 0) }
 }
 ```
 
 And use the shortcut dot syntax:
 
 ```swift
-Defaults[.username] = "joe"
-Defaults[.launchCount] += 1
+Defaults[\.username] = "joe"
+Defaults[\.launchCount] += 1
 ```
 
 ### Supported types
@@ -201,27 +212,36 @@ If you want to add your own custom type that we don't support yet, we've got you
 
 For instance, this is a bridge for single value data storing/retrieving using `NSKeyedArchiver`/`NSKeyedUnarchiver`:
 ```swift
-public final class DefaultsKeyedArchiverBridge<T>: DefaultsBridge<T> {
+public struct DefaultsKeyedArchiverBridge<T>: DefaultsBridge {
 
-    public override func get(key: String, userDefaults: UserDefaults) -> T? {
+    public func get(key: String, userDefaults: UserDefaults) -> T? {
         return userDefaults.data(forKey: key).flatMap(NSKeyedUnarchiver.unarchiveObject) as? T
     }
 
-    public override func save(key: String, value: T?, userDefaults: UserDefaults) {
+    public func save(key: String, value: T?, userDefaults: UserDefaults) {
         userDefaults.set(NSKeyedArchiver.archivedData(withRootObject: value), forKey: key)
     }
+
+    public func deserialize(_ object: Any) -> T? {
+        guard let data = object as? Data else { return nil }
+        return NSKeyedUnarchiver.unarchiveObject(with: data) as? T
+    }    
 }
 ```
 
 Bridge for default storing/retrieving array values:
 ```swift
-public final class DefaultsArrayBridge<T: Collection>: DefaultsBridge<T> {
-    public override func save(key: String, value: T?, userDefaults: UserDefaults) {
+public struct DefaultsArrayBridge<T: Collection>: DefaultsBridge {
+    public func save(key: String, value: T?, userDefaults: UserDefaults) {
         userDefaults.set(value, forKey: key)
     }
 
-    public override func get(key: String, userDefaults: UserDefaults) -> T? {
+    public func get(key: String, userDefaults: UserDefaults) -> T? {
         return userDefaults.array(forKey: key) as? T
+    }
+
+    public func deserialize(_ object: Any) -> T? {
+        return nil
     }
 }
 ```
@@ -239,44 +259,36 @@ struct FrogCustomSerializable: DefaultsSerializable {
 
 Unfortunately, if you find yourself in a situation where you need a custom bridge, you'll probably need to write your own:
 ```swift
-final class DefaultsFrogBridge: DefaultsBridge<FrogCustomSerializable> {
-    override func get(key: String, userDefaults: UserDefaults) -> FrogCustomSerializable? {
+final class DefaultsFrogBridge: DefaultsBridge {
+    func get(key: String, userDefaults: UserDefaults) -> FrogCustomSerializable? {
         let name = userDefaults.string(forKey: key)
         return name.map(FrogCustomSerializable.init)
     }
 
-    override func save(key: String, value: FrogCustomSerializable?, userDefaults: UserDefaults) {
+    func save(key: String, value: FrogCustomSerializable?, userDefaults: UserDefaults) {
         userDefaults.set(value?.name, forKey: key)
     }
 
-    public override func isSerialized() -> Bool {
-        return true
-    }
-
-    public override func deserialize(_ object: Any) -> FrogCustomSerializable? {
+    func deserialize(_ object: Any) -> FrogCustomSerializable? {
         guard let name = object as? String else { return nil }
 
         return FrogCustomSerializable(name: name)
     }
 }
 
-final class DefaultsFrogArrayBridge: DefaultsBridge<[FrogCustomSerializable]> {
-    override func get(key: String, userDefaults: UserDefaults) -> [FrogCustomSerializable]? {
+final class DefaultsFrogArrayBridge: DefaultsBridge {
+    func get(key: String, userDefaults: UserDefaults) -> [FrogCustomSerializable]? {
         return userDefaults.array(forKey: key)?
             .compactMap { $0 as? String }
             .map(FrogCustomSerializable.init)
     }
 
-    override func save(key: String, value: [FrogCustomSerializable]?, userDefaults: UserDefaults) {
+    func save(key: String, value: [FrogCustomSerializable]?, userDefaults: UserDefaults) {
         let values = value?.map { $0.name }
         userDefaults.set(values, forKey: key)
     }
 
-    public override func isSerialized() -> Bool {
-        return true
-    }
-
-    public override func deserialize(_ object: Any) -> [FrogCustomSerializable]? {
+    func deserialize(_ object: Any) -> [FrogCustomSerializable]? {
         guard let names = object as? [String] else { return nil }
 
         return names.map(FrogCustomSerializable.init)
@@ -285,8 +297,8 @@ final class DefaultsFrogArrayBridge: DefaultsBridge<[FrogCustomSerializable]> {
 
 struct FrogCustomSerializable: DefaultsSerializable, Equatable {
 
-    static var _defaults: DefaultsBridge<FrogCustomSerializable> { return DefaultsFrogBridge() }
-    static var _defaultsArray: DefaultsBridge<[FrogCustomSerializable]> { return DefaultsFrogArrayBridge() }
+    static var _defaults: DefaultsFrogBridge { return DefaultsFrogBridge() }
+    static var _defaultsArray: DefaultsFrogArrayBridge { return DefaultsFrogArrayBridge() }
 
     let name: String
 }
@@ -295,8 +307,8 @@ struct FrogCustomSerializable: DefaultsSerializable, Equatable {
 To support existing types with different bridges, you can extend it similarly:
 ```swift
 extension Data: DefaultsSerializable {
-    public static var _defaults: DefaultsBridge<Data> { return DefaultsDataBridge() }
-    public static var _defaultsArray: DefaultsBridge<[Data]> { return DefaultsArrayBridge() }
+    public static var _defaultsArray: DefaultsArrayBridge<[T]> { return DefaultsArrayBridge() }
+    public static var _defaults: DefaultsDataBridge { return DefaultsDataBridge() }
 }
 ```
 
@@ -321,7 +333,7 @@ Defaults.observe(key: nameKey, options: [.initial, .old, .new]) { _ in }
 
 ## Launch arguments
 
-Do you like to customize your app/script/tests by UserDefaults? Now it's fully supported on our side, statically typed of course. 
+Do you like to customize your app/script/tests by UserDefaults? Now it's fully supported on our side, statically typed of course.
 
 _Note: for now we support only `Bool`, `Double`, `Int`, `String` values, but if you have any other requests for that feature, please open an issue or PR and we can talk about implementing it in new versions._
 
@@ -339,6 +351,69 @@ func testExample() {
 ### Or pass them as command line arguments!
 ```bash
 ./script -skipLogin true -loginTries 3 -lastGameTime 61.3 -nickname sunshinejr
+```
+
+## Property wrappers
+
+SwiftyUserDefaults provides property wrappers for Swift 5.1! The property wrapper, `@SwiftyUserDefault`, provides an option to use it with key path and options: caching or observing.
+
+*Caching* means that we will store the value for you and do not hit the `UserDefaults` for value almost never, only for the first value fetch.
+
+*Observing* means we will observe, via KVO, your property so you don't have to worry if it was saved somewhere else and you use caching.
+
+Now usage! Given keys:
+```swift
+extension DefaultsKeys {
+    var userColorScheme: DefaultsKey<String> { .init("userColorScheme", defaultValue: "default") }
+    var userThemeName: DefaultsKey<String?> { .init("userThemeName") }
+    var userLastLoginDate: DefaultsKey<Date?> { .init("userLastLoginDate") }
+}
+```
+
+You can declare a `Test` struct:
+```swift
+struct Settings {
+    @SwiftyUserDefault(keyPath: \.userColorScheme)
+    var userColorScheme: String
+
+    @SwiftyUserDefault(keyPath: \.userThemeName, options: .cached)
+    var userThemeName: String?
+
+    @SwiftyUserDefault(keyPath: \.userLastLoginDate, options: [.cached, .observed])
+    var userLastLoginDate: Date?
+}
+```
+
+## KeyPath dynamicMemberLookup
+
+SwiftyUserDefaults makes KeyPath dynamicMemberLookup usable in Swift 5.1!
+
+```swift
+extension DefaultsKeys {
+    var username: DefaultsKey<String?> { return .init("username") }
+    var launchCount: DefaultsKey<Int> { return .init("launchCount", defaultValue: 0) }
+}
+```
+
+And just use it ;-)
+
+```swift
+// Get and set user defaults easily
+let username = Defaults.username
+Defaults.hotkeyEnabled = true
+
+// Modify value types in place
+Defaults.launchCount += 1
+Defaults.volume -= 0.1
+Defaults.strings += "… can easily be extended!"
+
+// Use and modify typed arrays
+Defaults.libraries.append("SwiftyUserDefaults")
+Defaults.libraries[0] += " 2.0"
+
+// Easily work with custom serialized types
+Defaults.color = NSColor.white
+Defaults.color?.whiteComponent // => 1.0
 ```
 
 ## Utils
@@ -363,7 +438,7 @@ var Defaults = UserDefaults(suiteName: "com.my.app")!
 
 If you want to check if we've got a value for `DefaultsKey`:
 ```swift
-let hasKey = Defaults.hasKey(.skipLogin)
+let hasKey = Defaults.hasKey(\.skipLogin)
 ```
 
 ## Installation
@@ -380,7 +455,7 @@ let hasKey = Defaults.hasKey(.skipLogin)
 If you're using CocoaPods, just add this line to your Podfile:
 
 ```ruby
-pod 'SwiftyUserDefaults', '~> 4.0'
+pod 'SwiftyUserDefaults', '5.0.0-beta.1'
 ```
 
 Install by running this command in your terminal:
@@ -400,7 +475,7 @@ import SwiftyUserDefaults
 Just add to your Cartfile:
 
 ```ruby
-github "radex/SwiftyUserDefaults" ~> 4.0
+github "radex/SwiftyUserDefaults" == "5.0.0-beta.1"
 ```
 
 ### Swift Package Manager
@@ -411,7 +486,7 @@ let package = Package(
     name: "MyPackage",
     products: [...],
     dependencies: [
-        .package(url: "https://github.com/radex/SwiftyUserDefaults.git", .upToNextMajor(from: "4.0.0"),
+        .package(url: "https://github.com/radex/SwiftyUserDefaults.git", .exact("5.0.0-beta.1"),
     ],
     targets: [...]
 )
