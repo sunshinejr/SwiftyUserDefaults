@@ -28,7 +28,11 @@ Read [migration guide from version 4.x to 5.x](MigrationGuides/migration_4_to_5.
     <a href="#rawrepresentable">RawRepresentable</a> &bull;
     <a href="#extending-existing-types">Extending existing types</a> &bull;
     <a href="#custom-types">Custom types</a> &bull;
+</p>
+<p align="center">
     <a href="#kvo">KVO</a> &bull;
+    <a href="#property-wrappers">Property wrappers</a> &bull;    
+    <a href="#keypath-dynamicMemberLookup">dynamicMemberLookup</a> &bull;
     <a href="#launch-arguments">Launch arguments</a> &bull;
     <a href="#utils">Utils</a> &bull;
     <a href="#installation">Installation</a>
@@ -372,6 +376,37 @@ var Defaults = UserDefaults(suiteName: "com.my.app")!
 If you want to check if we've got a value for `DefaultsKey`:
 ```swift
 let hasKey = Defaults.hasKey(\.skipLogin)
+```
+
+## Property wrappers
+
+SwiftyUserDefaults provides property wrappers for Swift 5.1! The property wrapper, `@SwiftyUserDefault`, provides an option to use it with key path and options: caching or observing.
+
+*Caching* means that we will store the value for you and do not hit the `UserDefaults` for value almost never, only for the first value fetch.
+
+*Observing* means we will observe, via KVO, your property so you don't have to worry if it was saved somewhere else and you use caching.
+
+Now usage! Given keys:
+```swift
+extension DefaultsKeys {
+    var userColorScheme: DefaultsKey<String> { .init("userColorScheme", defaultValue: "default") }
+    var userThemeName: DefaultsKey<String?> { .init("userThemeName") }
+    var userLastLoginDate: DefaultsKey<Date?> { .init("userLastLoginDate") }
+}
+```
+
+You can declare a `Test` struct:
+```swift
+struct Settings {
+    @SwiftyUserDefault(keyPath: \.userColorScheme)
+    var userColorScheme: String
+
+    @SwiftyUserDefault(keyPath: \.userThemeName, options: .cached)
+    var userThemeName: String?
+
+    @SwiftyUserDefault(keyPath: \.userLastLoginDate, options: [.cached, .observed])
+    var userLastLoginDate: Date?
+}
 ```
 
 ## KeyPath dynamicMemberLookup
