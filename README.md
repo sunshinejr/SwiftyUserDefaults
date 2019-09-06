@@ -8,13 +8,14 @@
 ![Swift version](https://img.shields.io/badge/swift-4.1-orange.svg)
 ![Swift version](https://img.shields.io/badge/swift-4.2-orange.svg)
 ![Swift version](https://img.shields.io/badge/swift-5.0-orange.svg)
+![Swift version](https://img.shields.io/badge/swift-5.1-orange.svg)
 
 #### Modern Swift API for `NSUserDefaults`
 ###### SwiftyUserDefaults makes user defaults enjoyable to use by combining expressive Swifty API with the benefits of static typing. Define your keys in one place, use value types easily, and get extra safety and convenient compile-time checks for free.
 
 Read [documentation for stable version 3.0.1](https://github.com/radex/SwiftyUserDefaults/blob/14b629b035bf6355b46ece22c3851068a488a895/README.md)<br />
 Read [migration guide from version 3.x to 4.x](MigrationGuides/migration_3_to_4.md)<br />
-Read [migration guide from version 4.0.0-alpha.1 to 4.0.0-alpha.3](MigrationGuides/migration_4_alpha_1_to_4_alpha_2.md)
+Read [migration guide from version 4.0.0-alpha.1 to 4.0.0-alpha.3](MigrationGuides/migration_4_alpha_1_to_4_alpha_2.md)<br />
 Read [migration guide from version 4.x to 5.x](MigrationGuides/migration_4_to_5.md)<br />
 
 # Version 5.0.0-beta.1
