@@ -440,6 +440,13 @@ final class Test {
             .sink { value in
                 // 
             }
+
+        // or
+
+        colorSchemeObserver = Defaults.publisher(for: \.colorSchemeObserver, options: [.initial, .new]) // by default you won't get initial value
+            .sink { value in
+                // 
+            }
     }
 }
 ```
