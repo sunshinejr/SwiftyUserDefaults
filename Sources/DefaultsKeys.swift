@@ -24,45 +24,8 @@
 
 import Foundation
 
-// MARK: - Static keys
+public protocol DefaultsKeyStore {}
 
-/// Specialize with value type
-/// and pass key name to the initializer to create a key.
-public struct DefaultsKey<ValueType: DefaultsSerializable> {
-
-    public let _key: String
-    public let defaultValue: ValueType.T?
-    internal var isOptional: Bool
-
-    public init(_ key: String, defaultValue: ValueType.T) {
-        self._key = key
-        self.defaultValue = defaultValue
-        self.isOptional = false
-    }
-
-    // Couldn't figure out a way of how to pass a nil/none value from extension, thus this initializer.
-    // Used for creating an optional key (without defaultValue)
-    private init(key: String) {
-        self._key = key
-        self.defaultValue = nil
-        self.isOptional = true
-    }
-
-    @available(*, unavailable, message: "This key needs a `defaultValue` parameter. If this type does not have a default value, consider using an optional key.")
-    public init(_ key: String) {
-        fatalError()
-    }
-}
-
-public extension DefaultsKey where ValueType: DefaultsSerializable, ValueType: OptionalType, ValueType.Wrapped: DefaultsSerializable {
-
-    init(_ key: String) {
-        self.init(key: key)
-    }
-
-    init(_ key: String, defaultValue: ValueType.T) {
-        self._key = key
-        self.defaultValue = defaultValue
-        self.isOptional = true
-    }
+public struct DefaultsKeys: DefaultsKeyStore {
+    public init() {}
 }

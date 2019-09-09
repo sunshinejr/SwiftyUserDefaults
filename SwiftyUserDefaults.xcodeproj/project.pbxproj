@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		037280C1C6C68BDB8E3759E6 /* DefaultsKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 706E690EF2E4010781480303 /* DefaultsKeys.swift */; };
+		037280C1C6C68BDB8E3759E6 /* DefaultsKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 706E690EF2E4010781480303 /* DefaultsKey.swift */; };
 		0E71124AE86362E623F9C4DA /* Defaults+FrogCustomSerializable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F86AA1AB9F6F553C03DBF0F9 /* Defaults+FrogCustomSerializable.swift */; };
 		171A4CE31F41418FF55DA46D /* TestHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0EE0402DB7DB637D79FEC2B /* TestHelper.swift */; };
 		18B46EAC09475D8404C7DF3A /* DefaultsSerializableSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EFFE22277FA6C163E34F4D2 /* DefaultsSerializableSpec.swift */; };
@@ -34,7 +34,7 @@
 		CC4CF6A63F6AA1B932D6757E /* DefaultsBridges.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20EBA39F1E25782FDC1CFC36 /* DefaultsBridges.swift */; };
 		D102C1011A4314AFF773DCD5 /* Defaults+StringToBool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11FDEA0BD7078D2633741F60 /* Defaults+StringToBool.swift */; };
 		EA37551964DBE6344BC4178A /* Defaults+URL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6494A812C2386E7351405E72 /* Defaults+URL.swift */; };
-		ED39909122B0204E0046F502 /* DefaultsKeyStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED39909022B0204E0046F502 /* DefaultsKeyStore.swift */; };
+		ED39909122B0204E0046F502 /* DefaultsKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED39909022B0204E0046F502 /* DefaultsKeys.swift */; };
 		ED9D95BF22AD74630006FE67 /* DefaultsAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED9D95BD22AD74630006FE67 /* DefaultsAdapter.swift */; };
 		ED9D95C022AD74630006FE67 /* DefaultsType.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED9D95BE22AD74630006FE67 /* DefaultsType.swift */; };
 		F0340276AF034C710E8C81A7 /* BuiltIns.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB55DC75BF69CEA7DB03750E /* BuiltIns.swift */; };
@@ -63,7 +63,7 @@
 		63C197A55B797D98D9603C98 /* UserDefaults+PropertyList.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "UserDefaults+PropertyList.swift"; path = "Tests/SwiftyUserDefaultsTests/TestHelpers/UserDefaults+PropertyList.swift"; sourceTree = "<group>"; };
 		6494A812C2386E7351405E72 /* Defaults+URL.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Defaults+URL.swift"; path = "Tests/SwiftyUserDefaultsTests/Built-ins/Defaults+URL.swift"; sourceTree = "<group>"; };
 		6C48B95D407E4F720507F3D8 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; name = Info.plist; path = Sources/Info.plist; sourceTree = "<group>"; };
-		706E690EF2E4010781480303 /* DefaultsKeys.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = DefaultsKeys.swift; path = Sources/DefaultsKeys.swift; sourceTree = "<group>"; };
+		706E690EF2E4010781480303 /* DefaultsKey.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = DefaultsKey.swift; path = Sources/DefaultsKey.swift; sourceTree = "<group>"; };
 		78703A0F180A4B7C450CD191 /* Defaults+Data.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Defaults+Data.swift"; path = "Tests/SwiftyUserDefaultsTests/Built-ins/Defaults+Data.swift"; sourceTree = "<group>"; };
 		85096B65E07A3BC7F856F0D1 /* OptionalType.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = OptionalType.swift; path = Sources/OptionalType.swift; sourceTree = "<group>"; };
 		85747DE32326A6B6007A1866 /* Defaults+Combine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Defaults+Combine.swift"; path = "Sources/Defaults+Combine.swift"; sourceTree = "<group>"; };
@@ -78,7 +78,7 @@
 		CBE434F1CEE20652BC414284 /* Defaults+FrogCodable.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Defaults+FrogCodable.swift"; path = "Tests/SwiftyUserDefaultsTests/External types/Defaults+FrogCodable.swift"; sourceTree = "<group>"; };
 		D0EE0402DB7DB637D79FEC2B /* TestHelper.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = TestHelper.swift; path = Tests/SwiftyUserDefaultsTests/TestHelpers/TestHelper.swift; sourceTree = "<group>"; };
 		E57735ECA0C2F413E8EBC2E4 /* Defaults+Bool.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Defaults+Bool.swift"; path = "Tests/SwiftyUserDefaultsTests/Built-ins/Defaults+Bool.swift"; sourceTree = "<group>"; };
-		ED39909022B0204E0046F502 /* DefaultsKeyStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DefaultsKeyStore.swift; path = Sources/DefaultsKeyStore.swift; sourceTree = "<group>"; };
+		ED39909022B0204E0046F502 /* DefaultsKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DefaultsKeys.swift; path = Sources/DefaultsKeys.swift; sourceTree = "<group>"; };
 		ED9D95BD22AD74630006FE67 /* DefaultsAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DefaultsAdapter.swift; path = Sources/DefaultsAdapter.swift; sourceTree = "<group>"; };
 		ED9D95BE22AD74630006FE67 /* DefaultsType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DefaultsType.swift; path = Sources/DefaultsType.swift; sourceTree = "<group>"; };
 		EE155E06F856DFEF78FD63F7 /* Defaults.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Defaults.swift; path = Sources/Defaults.swift; sourceTree = "<group>"; };
@@ -128,8 +128,8 @@
 				BF92C9F82ABF7807D4D4DDDD /* Defaults+Subscripts.swift */,
 				ED9D95BD22AD74630006FE67 /* DefaultsAdapter.swift */,
 				20EBA39F1E25782FDC1CFC36 /* DefaultsBridges.swift */,
-				706E690EF2E4010781480303 /* DefaultsKeys.swift */,
-				ED39909022B0204E0046F502 /* DefaultsKeyStore.swift */,
+				706E690EF2E4010781480303 /* DefaultsKey.swift */,
+				ED39909022B0204E0046F502 /* DefaultsKeys.swift */,
 				9701991125BC1345631E831E /* DefaultsObserver.swift */,
 				F98C7EF97445788836162CD0 /* DefaultsSerializable.swift */,
 				ED9D95BE22AD74630006FE67 /* DefaultsType.swift */,
@@ -364,10 +364,10 @@
 			files = (
 				858E15D0231FEC2F00DC1418 /* PropertyWrappers.swift in Sources */,
 				D102C1011A4314AFF773DCD5 /* Defaults+StringToBool.swift in Sources */,
-				037280C1C6C68BDB8E3759E6 /* DefaultsKeys.swift in Sources */,
+				037280C1C6C68BDB8E3759E6 /* DefaultsKey.swift in Sources */,
 				85747DE42326A6B6007A1866 /* Defaults+Combine.swift in Sources */,
 				CC4CF6A63F6AA1B932D6757E /* DefaultsBridges.swift in Sources */,
-				ED39909122B0204E0046F502 /* DefaultsKeyStore.swift in Sources */,
+				ED39909122B0204E0046F502 /* DefaultsKeys.swift in Sources */,
 				ED9D95C022AD74630006FE67 /* DefaultsType.swift in Sources */,
 				A3CAE6734DDE8FD952CE2CF2 /* Defaults+Subscripts.swift in Sources */,
 				4B604921053C4F31217DCE9E /* Defaults+Observing.swift in Sources */,
