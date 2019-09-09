@@ -28,11 +28,11 @@ Migration guides: [from 4.x to 5.x](MigrationGuides/migration_4_to_5.md), [from 
     <a href="#custom-types">Custom types</a>
 </p>
 <p align="center">
+    <a href="#property-wrappers">Property wrappers</a> &bull;
+    <a href="#combine-publishers">Combine publishers</a> &bull;    
     <a href="#kvo">KVO</a> &bull;
-    <a href="#launch-arguments">Launch arguments</a> &bull;    
-    <a href="#property-wrappers">Property wrappers</a> &bull;    
     <a href="#keypath-dynamicMemberLookup">dynamicMemberLookup</a> &bull;
-    <a href="#combine-publishers">Combine publishers</a> &bull;
+    <a href="#launch-arguments">Launch arguments</a> &bull;
     <a href="#utils">Utils</a> &bull;
     <a href="#installation">Installation</a>
 </p>
@@ -313,45 +313,6 @@ extension Data: DefaultsSerializable {
 
 Also, take a look at our source code (or tests) to see more examples of bridges. If you find yourself confused with all these bridges, please [create an issue](https://github.com/radex/SwiftyUserDefaults/issues/new) and we will figure something out.
 
-## KVO
-
-KVO is supported for all the types that are `DefaultsSerializable`. However, if you have a custom type, it needs to have correctly defined bridges and serialization in them.
-
-To observe a value:
-```swift
-let nameKey = DefaultsKey<String>("name", defaultValue: "")
-Defaults.observe(key: nameKey) { update in
-	// here you can access `oldValue`/`newValue` and few other properties
-}
-```
-
-By default we are using `[.old, .new]` options for observing, but you can provide your own:
-```swift
-Defaults.observe(key: nameKey, options: [.initial, .old, .new]) { _ in }
-```
-
-## Launch arguments
-
-Do you like to customize your app/script/tests by UserDefaults? Now it's fully supported on our side, statically typed of course.
-
-_Note: for now we support only `Bool`, `Double`, `Int`, `String` values, but if you have any other requests for that feature, please open an issue or PR and we can talk about implementing it in new versions._
-
-### You can pass your arguments in your schema:
-<img src="https://i.imgur.com/SDpOBpK.png" alt="Pass launch arguments in Xcode Schema editor." />
-
-### Or you can use launch arguments in XCUIApplication:
-```swift
-func testExample() {
-    let app = XCUIApplication()
-    app.launchArguments = ["-skipLogin", "true", "-loginTries", "3", "-lastGameTime", "61.3", "-nickname", "sunshinejr"]
-    app.launch()
-}
-```
-### Or pass them as command line arguments!
-```bash
-./script -skipLogin true -loginTries 3 -lastGameTime 61.3 -nickname sunshinejr
-```
-
 ## Property wrappers
 
 SwiftyUserDefaults provides property wrappers for Swift 5.1! The property wrapper, `@SwiftyUserDefault`, provides an option to use it with key path and options: caching or observing.
@@ -382,39 +343,6 @@ struct Settings {
     var userLastLoginDate: Date?
 }
 ```
-
-## KeyPath dynamicMemberLookup
-
-SwiftyUserDefaults makes KeyPath dynamicMemberLookup usable in Swift 5.1!
-
-```swift
-extension DefaultsKeys {
-    var username: DefaultsKey<String?> { return .init("username") }
-    var launchCount: DefaultsKey<Int> { return .init("launchCount", defaultValue: 0) }
-}
-```
-
-And just use it ;-)
-
-```swift
-// Get and set user defaults easily
-let username = Defaults.username
-Defaults.hotkeyEnabled = true
-
-// Modify value types in place
-Defaults.launchCount += 1
-Defaults.volume -= 0.1
-Defaults.strings += "… can easily be extended!"
-
-// Use and modify typed arrays
-Defaults.libraries.append("SwiftyUserDefaults")
-Defaults.libraries[0] += " 2.0"
-
-// Easily work with custom serialized types
-Defaults.color = NSColor.white
-Defaults.color?.whiteComponent // => 1.0
-```
-
 
 ## Combine publishers
 
@@ -449,6 +377,77 @@ final class Test {
             }
     }
 }
+```
+
+## KVO
+
+KVO is supported for all the types that are `DefaultsSerializable`. However, if you have a custom type, it needs to have correctly defined bridges and serialization in them.
+
+To observe a value:
+```swift
+let nameKey = DefaultsKey<String>("name", defaultValue: "")
+Defaults.observe(key: nameKey) { update in
+	// here you can access `oldValue`/`newValue` and few other properties
+}
+```
+
+By default we are using `[.old, .new]` options for observing, but you can provide your own:
+```swift
+Defaults.observe(key: nameKey, options: [.initial, .old, .new]) { _ in }
+```
+
+## KeyPath dynamicMemberLookup
+
+SwiftyUserDefaults makes KeyPath dynamicMemberLookup usable in Swift 5.1!
+
+```swift
+extension DefaultsKeys {
+    var username: DefaultsKey<String?> { return .init("username") }
+    var launchCount: DefaultsKey<Int> { return .init("launchCount", defaultValue: 0) }
+}
+```
+
+And just use it ;-)
+
+```swift
+// Get and set user defaults easily
+let username = Defaults.username
+Defaults.hotkeyEnabled = true
+
+// Modify value types in place
+Defaults.launchCount += 1
+Defaults.volume -= 0.1
+Defaults.strings += "… can easily be extended!"
+
+// Use and modify typed arrays
+Defaults.libraries.append("SwiftyUserDefaults")
+Defaults.libraries[0] += " 2.0"
+
+// Easily work with custom serialized types
+Defaults.color = NSColor.white
+Defaults.color?.whiteComponent // => 1.0
+```
+
+## Launch arguments
+
+Do you like to customize your app/script/tests by UserDefaults? Now it's fully supported on our side, statically typed of course.
+
+_Note: for now we support only `Bool`, `Double`, `Int`, `String` values, but if you have any other requests for that feature, please open an issue or PR and we can talk about implementing it in new versions._
+
+### You can pass your arguments in your schema:
+<img src="https://i.imgur.com/SDpOBpK.png" alt="Pass launch arguments in Xcode Schema editor." />
+
+### Or you can use launch arguments in XCUIApplication:
+```swift
+func testExample() {
+    let app = XCUIApplication()
+    app.launchArguments = ["-skipLogin", "true", "-loginTries", "3", "-lastGameTime", "61.3", "-nickname", "sunshinejr"]
+    app.launch()
+}
+```
+### Or pass them as command line arguments!
+```bash
+./script -skipLogin true -loginTries 3 -lastGameTime 61.3 -nickname sunshinejr
 ```
 
 ## Utils
