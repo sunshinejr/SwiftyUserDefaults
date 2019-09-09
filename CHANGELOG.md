@@ -1,5 +1,7 @@
 ### Next
 
+* Added extensions for `Combine`! If you can `import Combine` and use it, check the `publisher(for:)` method on `DefaultsAdapter`. [@sunshinejr](https://github.com/sunshinejr)
+
 ### 5.0.0-beta.1 (2019-09-05)
 
 * Introduced `DefaultsAdapter` thats the main object for user defaults and the `Defaults` global variable. [@marty-suzuki](https://github.com/marty-suzuki)
