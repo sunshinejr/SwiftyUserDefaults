@@ -213,7 +213,6 @@ extension DefaultsAdapter {
 
         return SwiftyUserDefaultsPublisher { subscriber -> Cancellable? in
             let disposable = defaults.observe(key, options: options) { update in
-                NSLog("optional publisher")
                 if let newValue = update.newValue {
                     _ = subscriber.receive(newValue)
                 } else {
@@ -238,7 +237,6 @@ extension DefaultsAdapter {
 
         return SwiftyUserDefaultsPublisher { subscriber -> Cancellable? in
             let disposable = defaults.observe(key, options: options) { update in
-                NSLog("non-optional publisher")
                 if let newValue = update.newValue {
                     _ = subscriber.receive(newValue)
                 }
