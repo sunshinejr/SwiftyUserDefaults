@@ -687,6 +687,21 @@ extension DefaultsSerializableSpec where Serializable.T: Equatable, Serializable
                         expect(updates).toEventuallyNot(equal([self.customValue]))
                         expect(updates).toEventually(beEmpty())
                     }
+
+                    then("remove observer when publisher not retained") {
+                        self.keyStore.testOptionalValue = DefaultsKey<Serializable?>("test")
+
+                        var updates = [Serializable?]()
+                        _ = defaults.publisher(for: \.testOptionalValue)
+                            .sink { value in
+                                updates.append(value)
+                            }
+
+                        defaults.testOptionalValue = self.customValue
+
+                        expect(updates).toEventuallyNot(equal([self.customValue]))
+                        expect(updates).toEventually(beEmpty())
+                    }
                 }
                 #endif
             }
@@ -863,6 +878,21 @@ extension DefaultsSerializableSpec where Serializable.T: Equatable, Serializable
                         expect(updates).toEventuallyNot(equal([self.customValue]))
                         expect(updates).toEventually(beEmpty())
                     }
+
+                    then("remove observer when publisher not retained") {
+                        self.keyStore.testOptionalValue = DefaultsKey<Serializable?>("test", defaultValue: self.defaultValue)
+
+                        var updates = [Serializable?]()
+                        _ = defaults.publisher(for: \.testOptionalValue)
+                            .sink { value in
+                                updates.append(value)
+                            }
+
+                        defaults.testOptionalValue = self.customValue
+
+                        expect(updates).toEventuallyNot(equal([self.customValue]))
+                        expect(updates).toEventually(beEmpty())
+                    }
                 }
                 #endif
             }
@@ -984,6 +1014,21 @@ extension DefaultsSerializableSpec where Serializable.T: Equatable, Serializable
                             }
 
                         cancellable.cancel()
+                        defaults.testValue = self.customValue
+
+                        expect(updates).toEventuallyNot(equal([self.customValue]))
+                        expect(updates).toEventually(beEmpty())
+                    }
+
+                    then("remove observer when publisher not retained") {
+                        self.keyStore.testValue = DefaultsKey<Serializable>("test", defaultValue: self.defaultValue)
+
+                        var updates = [Serializable?]()
+                        _ = defaults.publisher(for: \.testValue)
+                            .sink { value in
+                                updates.append(value)
+                            }
+
                         defaults.testValue = self.customValue
 
                         expect(updates).toEventuallyNot(equal([self.customValue]))
