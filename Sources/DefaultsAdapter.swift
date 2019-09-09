@@ -63,40 +63,19 @@ extension DefaultsAdapter: DefaultsType {
         return defaults.hasKey(key)
     }
 
-    public func remove<T: DefaultsSerializable>(_ key: DefaultsKey<T>) {
-        defaults.remove(key)
-    }
-
-    public func removeAll() {
-        defaults.removeAll()
-    }
-
-    #if !os(Linux)
-    public func observe<T: DefaultsSerializable>(_ key: DefaultsKey<T>,
-                                                 options: NSKeyValueObservingOptions = [.new, .old],
-                                                 handler: @escaping (DefaultsObserver<T>.Update) -> Void) -> DefaultsDisposable {
-        return defaults.observe(key, options: options, handler: handler)
-    }
-    #endif
-}
-
-extension DefaultsAdapter {
-
     public func hasKey<T: DefaultsSerializable>(_ keyPath: KeyPath<KeyStore, DefaultsKey<T>>) -> Bool {
         return defaults.hasKey(keyStore[keyPath: keyPath])
+    }
+
+    public func remove<T: DefaultsSerializable>(_ key: DefaultsKey<T>) {
+        defaults.remove(key)
     }
 
     public func remove<T: DefaultsSerializable>(_ keyPath: KeyPath<KeyStore, DefaultsKey<T>>) {
         defaults.remove(keyStore[keyPath: keyPath])
     }
 
-    #if !os(Linux)
-    public func observe<T: DefaultsSerializable>(_ keyPath: KeyPath<KeyStore, DefaultsKey<T>>,
-                                                 options: NSKeyValueObservingOptions = [.old, .new],
-                                                 handler: @escaping (DefaultsObserver<T>.Update) -> Void) -> DefaultsDisposable {
-        return defaults.observe(keyStore[keyPath: keyPath],
-                                options: options,
-                                handler: handler)
+    public func removeAll() {
+        defaults.removeAll()
     }
-    #endif
 }

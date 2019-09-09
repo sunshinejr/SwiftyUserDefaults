@@ -25,6 +25,24 @@
 import Foundation
 
 #if !os(Linux)
+
+public extension DefaultsAdapter {
+
+    func observe<T: DefaultsSerializable>(_ key: DefaultsKey<T>,
+                                                 options: NSKeyValueObservingOptions = [.new, .old],
+                                                 handler: @escaping (DefaultsObserver<T>.Update) -> Void) -> DefaultsDisposable {
+        return defaults.observe(key, options: options, handler: handler)
+    }
+
+    func observe<T: DefaultsSerializable>(_ keyPath: KeyPath<KeyStore, DefaultsKey<T>>,
+                                                 options: NSKeyValueObservingOptions = [.old, .new],
+                                                 handler: @escaping (DefaultsObserver<T>.Update) -> Void) -> DefaultsDisposable {
+        return defaults.observe(keyStore[keyPath: keyPath],
+                                options: options,
+                                handler: handler)
+    }
+}
+
 public extension UserDefaults {
 
     func observe<T: DefaultsSerializable>(_ key: DefaultsKey<T>, options: NSKeyValueObservingOptions = [.old, .new], handler: @escaping (DefaultsObserver<T>.Update) -> Void) -> DefaultsDisposable {
