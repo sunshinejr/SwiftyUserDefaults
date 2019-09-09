@@ -588,6 +588,22 @@ extension DefaultsSerializableSpec where Serializable.T: Equatable, Serializable
                     expect(update?.newValue).toEventually(beNil())
                 }
 
+                #if canImport(Combine)
+                if #available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *) {
+                    then("receives initial update with publishers") {
+                        self.keyStore.testOptionalValue = DefaultsKey<Serializable?>("test")
+
+                        var update: Serializable? = self.defaultValue
+                        let cancellable = defaults.publisher(for: \.testOptionalValue, options: [.initial, .old, .new])
+                            .sink { value in
+                                update = value
+                            }
+
+                        expect(update).toEventually(beNil())
+                    }
+                }
+                #endif
+
                 then("receives nil update") {
                     let key = DefaultsKey<Serializable?>("test")
 
@@ -787,6 +803,22 @@ extension DefaultsSerializableSpec where Serializable.T: Equatable, Serializable
                     expect(update?.newValue).toEventually(equal(self.defaultValue))
                 }
 
+                #if canImport(Combine)
+                if #available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *) {
+                    then("receives initial update with publishers") {
+                        self.keyStore.testOptionalValue = DefaultsKey<Serializable?>("test", defaultValue: self.defaultValue)
+
+                        var update: Serializable?
+                        let cancellable = defaults.publisher(for: \.testOptionalValue, options: [.initial, .old, .new])
+                            .sink { value in
+                                update = value
+                            }
+
+                        expect(update).toEventually(equal(self.defaultValue))
+                    }
+                }
+                #endif
+
                 then("receives nil update") {
                     let key = DefaultsKey<Serializable?>("test", defaultValue: self.defaultValue)
 
@@ -985,6 +1017,22 @@ extension DefaultsSerializableSpec where Serializable.T: Equatable, Serializable
                     expect(update?.oldValue).toEventually(equal(self.defaultValue))
                     expect(update?.newValue).toEventually(equal(self.defaultValue))
                 }
+
+                #if canImport(Combine)
+                if #available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *) {
+                    then("receives initial update with publishers") {
+                        self.keyStore.testValue = DefaultsKey<Serializable>("test", defaultValue: self.defaultValue)
+
+                        var update: Serializable?
+                        let cancellable = defaults.publisher(for: \.testValue, options: [.initial, .old, .new])
+                            .sink { value in
+                                update = value
+                            }
+
+                        expect(update).toEventually(equal(self.defaultValue))
+                    }
+                }
+                #endif
 
                 then("remove observer on dispose") {
                     let key = DefaultsKey<Serializable>("test", defaultValue: self.defaultValue)
