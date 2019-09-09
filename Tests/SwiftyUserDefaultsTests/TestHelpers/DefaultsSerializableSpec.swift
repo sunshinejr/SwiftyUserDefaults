@@ -676,31 +676,39 @@ extension DefaultsSerializableSpec where Serializable.T: Equatable, Serializable
                         self.keyStore.testOptionalValue = DefaultsKey<Serializable?>("test")
 
                         var updates = [Serializable?]()
+                        var completion: Subscribers.Completion<Never>?
                         let cancellable = defaults.publisher(for: \.testOptionalValue)
-                            .sink { value in
+                            .sink(receiveCompletion: { receivedCompletion in
+                                completion = receivedCompletion
+                            }, receiveValue: { value in
                                 updates.append(value)
-                            }
+                            })
 
                         cancellable.cancel()
                         defaults.testOptionalValue = self.customValue
 
                         expect(updates).toEventuallyNot(equal([self.customValue]))
                         expect(updates).toEventually(beEmpty())
+                        expect(completion).toEventually(equal(.finished))
                     }
 
                     then("remove observer when publisher not retained") {
                         self.keyStore.testOptionalValue = DefaultsKey<Serializable?>("test")
 
                         var updates = [Serializable?]()
+                        var completion: Subscribers.Completion<Never>?
                         _ = defaults.publisher(for: \.testOptionalValue)
-                            .sink { value in
+                            .sink(receiveCompletion: { receivedCompletion in
+                                completion = receivedCompletion
+                            }, receiveValue: { value in
                                 updates.append(value)
-                            }
+                            })
 
                         defaults.testOptionalValue = self.customValue
 
                         expect(updates).toEventuallyNot(equal([self.customValue]))
                         expect(updates).toEventually(beEmpty())
+                        expect(completion).toEventually(equal(.finished))
                     }
                 }
                 #endif
@@ -867,31 +875,39 @@ extension DefaultsSerializableSpec where Serializable.T: Equatable, Serializable
                         self.keyStore.testOptionalValue = DefaultsKey<Serializable?>("test", defaultValue: self.defaultValue)
 
                         var updates = [Serializable?]()
+                        var completion: Subscribers.Completion<Never>?
                         let cancellable = defaults.publisher(for: \.testValue)
-                            .sink { value in
+                            .sink(receiveCompletion: { receivedCompletion in
+                                completion = receivedCompletion
+                            }, receiveValue: { value in
                                 updates.append(value)
-                            }
+                            })
 
                         cancellable.cancel()
                         defaults.testOptionalValue = self.customValue
 
                         expect(updates).toEventuallyNot(equal([self.customValue]))
                         expect(updates).toEventually(beEmpty())
+                        expect(completion).toEventually(equal(.finished))
                     }
 
                     then("remove observer when publisher not retained") {
                         self.keyStore.testOptionalValue = DefaultsKey<Serializable?>("test", defaultValue: self.defaultValue)
 
                         var updates = [Serializable?]()
+                        var completion: Subscribers.Completion<Never>?
                         _ = defaults.publisher(for: \.testOptionalValue)
-                            .sink { value in
+                            .sink(receiveCompletion: { receivedCompletion in
+                                completion = receivedCompletion
+                            }, receiveValue: { value in
                                 updates.append(value)
-                            }
+                            })
 
                         defaults.testOptionalValue = self.customValue
 
                         expect(updates).toEventuallyNot(equal([self.customValue]))
                         expect(updates).toEventually(beEmpty())
+                        expect(completion).toEventually(equal(.finished))
                     }
                 }
                 #endif
@@ -1008,26 +1024,33 @@ extension DefaultsSerializableSpec where Serializable.T: Equatable, Serializable
                         self.keyStore.testValue = DefaultsKey<Serializable>("test", defaultValue: self.defaultValue)
 
                         var updates = [Serializable]()
+                        var completion: Subscribers.Completion<Never>?
                         let cancellable = defaults.publisher(for: \.testValue)
-                            .sink { value in
+                            .sink(receiveCompletion: { receivedCompletion in
+                                completion = receivedCompletion
+                            }, receiveValue: { value in
                                 updates.append(value)
-                            }
+                            })
 
                         cancellable.cancel()
                         defaults.testValue = self.customValue
 
                         expect(updates).toEventuallyNot(equal([self.customValue]))
                         expect(updates).toEventually(beEmpty())
+                        expect(completion).toEventually(equal(.finished))
                     }
 
                     then("remove observer when publisher not retained") {
                         self.keyStore.testValue = DefaultsKey<Serializable>("test", defaultValue: self.defaultValue)
 
                         var updates = [Serializable?]()
+                        var completion: Subscribers.Completion<Never>?
                         _ = defaults.publisher(for: \.testValue)
-                            .sink { value in
+                            .sink(receiveCompletion: { receivedCompletion in
+                                completion = receivedCompletion
+                            }, receiveValue: { value in
                                 updates.append(value)
-                            }
+                            })
 
                         defaults.testValue = self.customValue
 
