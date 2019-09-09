@@ -1,5 +1,7 @@
 ### Next
 
+### 5.0.0-beta.2 (2019-09-09)
+
 * Added extensions for `Combine`! If you can `import Combine` and use it, check the `publisher(for:)` method on `DefaultsAdapter`. [@sunshinejr](https://github.com/sunshinejr)
 
 ### 5.0.0-beta.1 (2019-09-05)
