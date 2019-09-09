@@ -47,7 +47,7 @@ extension DefaultsSerializableSpec where Serializable.T: Equatable, Serializable
             var removeObject: ((String) -> Void)!
 
             beforeEach {
-                let userDefaults = UserDefaults()
+                let userDefaults = UserDefaults(suiteName: UUID().uuidString)!
                 defaults = DefaultsAdapter(defaults: userDefaults,
                                            keyStore: self.keyStore)
                 userDefaults.cleanObjects()
