@@ -59,24 +59,6 @@ public struct DefaultsAdapter<KeyStore: DefaultsKeyStore> {
 
 extension DefaultsAdapter: DefaultsType {
 
-    public subscript<T: DefaultsSerializable>(key: DefaultsKey<T>) -> T.T where T: OptionalType, T.T == T {
-        get {
-            return defaults[key]
-        }
-        set {
-            defaults[key] = newValue
-        }
-    }
-
-    public subscript<T: DefaultsSerializable>(key: DefaultsKey<T>) -> T.T where T.T == T {
-        get {
-            return defaults[key]
-        }
-        set {
-            defaults[key] = newValue
-        }
-    }
-
     public func hasKey<T: DefaultsSerializable>(_ key: DefaultsKey<T>) -> Bool {
         return defaults.hasKey(key)
     }
@@ -117,47 +99,4 @@ extension DefaultsAdapter {
                                 handler: handler)
     }
     #endif
-}
-
-extension DefaultsAdapter {
-
-    public subscript<T: DefaultsSerializable>(keyPath: KeyPath<KeyStore, DefaultsKey<T>>) -> T.T where T: OptionalType, T.T == T {
-        get {
-            return defaults[keyStore[keyPath: keyPath]]
-        }
-        set {
-            defaults[keyStore[keyPath: keyPath]] = newValue
-        }
-    }
-
-    public subscript<T: DefaultsSerializable>(keyPath: KeyPath<KeyStore, DefaultsKey<T>>) -> T.T where T.T == T {
-        get {
-            return defaults[keyStore[keyPath: keyPath]]
-        }
-        set {
-            defaults[keyStore[keyPath: keyPath]] = newValue
-        }
-    }
-}
-
-// Weird flex, but needed for the dynamicMemberLookup :shrug:
-extension DefaultsAdapter {
-
-    public subscript<T: DefaultsSerializable>(dynamicMember keyPath: KeyPath<KeyStore, DefaultsKey<T>>) -> T.T where T: OptionalType, T.T == T {
-        get {
-            return self[keyPath]
-        }
-        set {
-            self[keyPath] = newValue
-        }
-    }
-
-    public subscript<T: DefaultsSerializable>(dynamicMember keyPath: KeyPath<KeyStore, DefaultsKey<T>>) -> T.T where T.T == T {
-        get {
-            return self[keyPath]
-        }
-        set {
-            self[keyPath] = newValue
-        }
-    }
 }

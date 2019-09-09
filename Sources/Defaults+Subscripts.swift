@@ -24,7 +24,66 @@
 
 import Foundation
 
-// DefaultsKey
+extension DefaultsAdapter {
+
+    public subscript<T: DefaultsSerializable>(key: DefaultsKey<T>) -> T.T where T: OptionalType, T.T == T {
+        get {
+            return defaults[key]
+        }
+        set {
+            defaults[key] = newValue
+        }
+    }
+
+    public subscript<T: DefaultsSerializable>(key: DefaultsKey<T>) -> T.T where T.T == T {
+        get {
+            return defaults[key]
+        }
+        set {
+            defaults[key] = newValue
+        }
+    }
+
+    public subscript<T: DefaultsSerializable>(keyPath: KeyPath<KeyStore, DefaultsKey<T>>) -> T.T where T: OptionalType, T.T == T {
+        get {
+            return defaults[keyStore[keyPath: keyPath]]
+        }
+        set {
+            defaults[keyStore[keyPath: keyPath]] = newValue
+        }
+    }
+
+    public subscript<T: DefaultsSerializable>(keyPath: KeyPath<KeyStore, DefaultsKey<T>>) -> T.T where T.T == T {
+        get {
+            return defaults[keyStore[keyPath: keyPath]]
+        }
+        set {
+            defaults[keyStore[keyPath: keyPath]] = newValue
+        }
+    }
+
+    // Weird flex, but needed these two for the dynamicMemberLookup :shrug:
+
+    public subscript<T: DefaultsSerializable>(dynamicMember keyPath: KeyPath<KeyStore, DefaultsKey<T>>) -> T.T where T: OptionalType, T.T == T {
+        get {
+            return self[keyPath]
+        }
+        set {
+            self[keyPath] = newValue
+        }
+    }
+
+    public subscript<T: DefaultsSerializable>(dynamicMember keyPath: KeyPath<KeyStore, DefaultsKey<T>>) -> T.T where T.T == T {
+        get {
+            return self[keyPath]
+        }
+        set {
+            self[keyPath] = newValue
+        }
+    }
+}
+
+
 public extension UserDefaults {
 
     subscript<T: DefaultsSerializable>(key: DefaultsKey<T>) -> T.T where T: OptionalType, T.T == T {
