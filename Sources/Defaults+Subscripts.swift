@@ -83,7 +83,6 @@ public extension DefaultsAdapter {
     }
 }
 
-
 public extension UserDefaults {
 
     subscript<T: DefaultsSerializable>(key: DefaultsKey<T>) -> T.T where T: OptionalType, T.T == T {

@@ -112,4 +112,3 @@ internal class SwiftyUserDefaultsPublisher<Output>: Publisher {
 }
 
 #endif
-
