@@ -27,6 +27,10 @@ import Quick
 import Nimble
 @testable import SwiftyUserDefaults
 
+#if canImport(Combine)
+import Combine
+#endif
+
 protocol DefaultsSerializableSpec {
     associatedtype Serializable: DefaultsSerializable & Equatable
 
@@ -540,6 +544,24 @@ extension DefaultsSerializableSpec where Serializable.T: Equatable, Serializable
                 }
                 #endif
 
+                #if canImport(Combine)
+                if #available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *) {
+                    then("receive updates with publisher") {
+                        self.keyStore.testOptionalValue = DefaultsKey<Serializable?>("test")
+
+                        var update: Serializable?
+                        let cancellable = defaults.publisher(for: \.testOptionalValue)
+                            .sink { value in
+                                update = value
+                            }
+
+                        defaults.testOptionalValue = self.customValue
+
+                        expect(update).toEventually(equal(self.customValue))
+                    }
+                }
+                #endif
+
                 then("receives initial update") {
                     let key = DefaultsKey<Serializable?>("test")
 
@@ -598,6 +620,24 @@ extension DefaultsSerializableSpec where Serializable.T: Equatable, Serializable
                 }
                 #endif
 
+                #if canImport(Combine)
+                if #available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *) {
+                    then("receives nil update with publisher") {
+                        self.keyStore.testOptionalValue = DefaultsKey<Serializable?>("test")
+
+                        var update: Serializable? = self.defaultValue
+                        let cancellable = defaults.publisher(for: \.testOptionalValue)
+                            .sink { value in
+                                update = value
+                            }
+                        defaults.testOptionalValue = self.defaultValue
+                        defaults.testOptionalValue = nil
+
+                        expect(update).toEventually(beNil())
+                    }
+                }
+                #endif
+
                 then("remove observer on dispose") {
                     let key = DefaultsKey<Serializable?>("test")
 
@@ -627,6 +667,25 @@ extension DefaultsSerializableSpec where Serializable.T: Equatable, Serializable
 
                     expect(update?.oldValue).toEventually(beNil())
                     expect(update?.newValue).toEventually(beNil())
+                }
+                #endif
+
+                #if canImport(Combine)
+                if #available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *) {
+                    then("remove observer on dispose with publisher") {
+                        self.keyStore.testOptionalValue = DefaultsKey<Serializable?>("test")
+
+                        var update: Serializable? = self.defaultValue
+                        let cancellable = defaults.publisher(for: \.testOptionalValue)
+                            .sink { value in
+                                update = value
+                            }
+
+                        cancellable.cancel()
+                        defaults.testOptionalValue = self.customValue
+
+                        expect(update).toEventuallyNot(equal(self.customValue))
+                    }
                 }
                 #endif
             }
