@@ -562,8 +562,8 @@ extension DefaultsSerializableSpec where Serializable.T: Equatable, Serializable
                 }
                 #endif
 
-                then("receives initial update") {
-                    let key = DefaultsKey<Serializable?>("test")
+                then("receives initial update being nil") {
+                    let key = DefaultsKey<Serializable?>("test1")
 
                     var update: DefaultsObserver<Serializable?>.Update?
                     let observer = defaults.observe(key, options: [.initial, .old, .new]) { receivedUpdate in
@@ -575,8 +575,22 @@ extension DefaultsSerializableSpec where Serializable.T: Equatable, Serializable
                     expect(update?.newValue).toEventually(beNil())
                 }
 
-                then("receives initial update with keyPaths") {
-                    self.keyStore.testOptionalValue = DefaultsKey<Serializable?>("test")
+                then("receives initial update being non-nil") {
+                    let key = DefaultsKey<Serializable?>("test1")
+                    defaults[key] = self.customValue
+
+                    var update: DefaultsObserver<Serializable?>.Update?
+                    let observer = defaults.observe(key, options: [.initial, .old, .new]) { receivedUpdate in
+                        update = receivedUpdate
+                    }
+
+                    expect(update).toEventuallyNot(beNil())
+                    expect(update?.oldValue).toEventually(beNil())
+                    expect(update?.newValue).toEventually(equal(self.customValue))
+                }
+
+                then("receives initial update being nil with keyPaths") {
+                    self.keyStore.testOptionalValue = DefaultsKey<Serializable?>("test2")
 
                     var update: DefaultsObserver<Serializable?>.Update?
                     let observer = defaults.observe(\.testOptionalValue, options: [.initial, .old, .new]) { receivedUpdate in
@@ -588,18 +602,45 @@ extension DefaultsSerializableSpec where Serializable.T: Equatable, Serializable
                     expect(update?.newValue).toEventually(beNil())
                 }
 
+                then("receives initial update being non-nil with keyPaths") {
+                    self.keyStore.testOptionalValue = DefaultsKey<Serializable?>("test2")
+                    defaults[\.testOptionalValue] = self.customValue
+
+                    var update: DefaultsObserver<Serializable?>.Update?
+                    let observer = defaults.observe(\.testOptionalValue, options: [.initial, .old, .new]) { receivedUpdate in
+                        update = receivedUpdate
+                    }
+
+                    expect(update).toEventuallyNot(beNil())
+                    expect(update?.oldValue).toEventually(beNil())
+                    expect(update?.newValue).toEventually(equal(self.customValue))
+                }
+
                 #if canImport(Combine)
                 if #available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *) {
-                    then("receives initial update with publishers") {
-                        self.keyStore.testOptionalValue = DefaultsKey<Serializable?>("test")
+                    then("receives initial update being nil with publishers") {
+                        self.keyStore.testOptionalValue = DefaultsKey<Serializable?>("test3")
 
-                        var update: Serializable? = self.defaultValue
+                        var update: Serializable? = self.customValue
                         let cancellable = defaults.publisher(for: \.testOptionalValue, options: [.initial, .old, .new])
                             .sink { value in
                                 update = value
                             }
 
                         expect(update).toEventually(beNil())
+                    }
+
+                    then("receives initial update being non-nil with publishers") {
+                        self.keyStore.testOptionalValue = DefaultsKey<Serializable?>("test3")
+                        defaults[\.testOptionalValue] = self.customValue
+
+                        var update: Serializable?
+                        let cancellable = defaults.publisher(for: \.testOptionalValue, options: [.initial, .old, .new])
+                            .sink { value in
+                                update = value
+                            }
+
+                        expect(update).toEventually(equal(self.customValue))
                     }
                 }
                 #endif
@@ -779,7 +820,7 @@ extension DefaultsSerializableSpec where Serializable.T: Equatable, Serializable
                 }
                 #endif
 
-                then("receives initial update") {
+                then("receives initial update being default value") {
                     let key = DefaultsKey<Serializable?>("test", defaultValue: self.defaultValue)
 
                     var update: DefaultsObserver<Serializable?>.Update?
@@ -791,7 +832,20 @@ extension DefaultsSerializableSpec where Serializable.T: Equatable, Serializable
                     expect(update?.newValue).toEventually(equal(self.defaultValue))
                 }
 
-                then("receives initial update with keyPaths") {
+                then("receives initial update being custom value") {
+                    let key = DefaultsKey<Serializable?>("test", defaultValue: self.defaultValue)
+                    defaults[key] = self.customValue
+
+                    var update: DefaultsObserver<Serializable?>.Update?
+                    let observer = defaults.observe(key, options: [.initial, .old, .new]) { receivedUpdate in
+                        update = receivedUpdate
+                    }
+
+                    expect(update?.oldValue).toEventually(equal(self.defaultValue))
+                    expect(update?.newValue).toEventually(equal(self.customValue))
+                }
+
+                then("receives initial update being default value with keyPaths") {
                     self.keyStore.testOptionalValue = DefaultsKey<Serializable?>("test", defaultValue: self.defaultValue)
 
                     var update: DefaultsObserver<Serializable?>.Update?
@@ -803,9 +857,22 @@ extension DefaultsSerializableSpec where Serializable.T: Equatable, Serializable
                     expect(update?.newValue).toEventually(equal(self.defaultValue))
                 }
 
+                then("receives initial update being custom value with keyPaths") {
+                    self.keyStore.testOptionalValue = DefaultsKey<Serializable?>("test", defaultValue: self.defaultValue)
+                    defaults[\.testOptionalValue] = self.customValue
+
+                    var update: DefaultsObserver<Serializable?>.Update?
+                    let observer = defaults.observe(\.testOptionalValue, options: [.initial, .old, .new]) { receivedUpdate in
+                        update = receivedUpdate
+                    }
+
+                    expect(update?.oldValue).toEventually(equal(self.defaultValue))
+                    expect(update?.newValue).toEventually(equal(self.customValue))
+                }
+
                 #if canImport(Combine)
                 if #available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *) {
-                    then("receives initial update with publishers") {
+                    then("receives initial update being default value with publishers") {
                         self.keyStore.testOptionalValue = DefaultsKey<Serializable?>("test", defaultValue: self.defaultValue)
 
                         var update: Serializable?
@@ -815,6 +882,19 @@ extension DefaultsSerializableSpec where Serializable.T: Equatable, Serializable
                             }
 
                         expect(update).toEventually(equal(self.defaultValue))
+                    }
+
+                    then("receives initial update being custom value with publishers") {
+                        self.keyStore.testOptionalValue = DefaultsKey<Serializable?>("test", defaultValue: self.defaultValue)
+                        defaults[\.testOptionalValue] = self.customValue
+
+                        var update: Serializable?
+                        let cancellable = defaults.publisher(for: \.testOptionalValue, options: [.initial, .old, .new])
+                            .sink { value in
+                                update = value
+                            }
+
+                        expect(update).toEventually(equal(self.customValue))
                     }
                 }
                 #endif
@@ -994,7 +1074,7 @@ extension DefaultsSerializableSpec where Serializable.T: Equatable, Serializable
                 }
                 #endif
 
-                then("receives initial update") {
+                then("receives initial update being default value") {
                     let key = DefaultsKey<Serializable>("test", defaultValue: self.defaultValue)
 
                     var update: DefaultsObserver<Serializable>.Update?
@@ -1006,7 +1086,20 @@ extension DefaultsSerializableSpec where Serializable.T: Equatable, Serializable
                     expect(update?.newValue).toEventually(equal(self.defaultValue))
                 }
 
-                then("receives initial update with keyPaths") {
+                then("receives initial update being custom value") {
+                    let key = DefaultsKey<Serializable>("test", defaultValue: self.defaultValue)
+                    defaults[key] = self.customValue
+
+                    var update: DefaultsObserver<Serializable>.Update?
+                    let observer = defaults.observe(key, options: [.initial, .old, .new]) { receivedUpdate in
+                        update = receivedUpdate
+                    }
+
+                    expect(update?.oldValue).toEventually(equal(self.defaultValue))
+                    expect(update?.newValue).toEventually(equal(self.customValue))
+                }
+
+                then("receives initial update being default value with keyPaths") {
                     self.keyStore.testValue = DefaultsKey<Serializable>("test", defaultValue: self.defaultValue)
 
                     var update: DefaultsObserver<Serializable>.Update?
@@ -1018,9 +1111,22 @@ extension DefaultsSerializableSpec where Serializable.T: Equatable, Serializable
                     expect(update?.newValue).toEventually(equal(self.defaultValue))
                 }
 
+                then("receives initial update being custom value with keyPaths") {
+                    self.keyStore.testValue = DefaultsKey<Serializable>("test", defaultValue: self.defaultValue)
+                    defaults[\.testValue] = self.customValue
+
+                    var update: DefaultsObserver<Serializable>.Update?
+                    let observer = defaults.observe(\.testValue, options: [.initial, .old, .new]) { receivedUpdate in
+                        update = receivedUpdate
+                    }
+
+                    expect(update?.oldValue).toEventually(equal(self.defaultValue))
+                    expect(update?.newValue).toEventually(equal(self.customValue))
+                }
+
                 #if canImport(Combine)
                 if #available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *) {
-                    then("receives initial update with publishers") {
+                    then("receives initial update being default value with publishers") {
                         self.keyStore.testValue = DefaultsKey<Serializable>("test", defaultValue: self.defaultValue)
 
                         var update: Serializable?
@@ -1030,6 +1136,19 @@ extension DefaultsSerializableSpec where Serializable.T: Equatable, Serializable
                             }
 
                         expect(update).toEventually(equal(self.defaultValue))
+                    }
+
+                    then("receives initial update being custom value with publishers") {
+                        self.keyStore.testValue = DefaultsKey<Serializable>("test", defaultValue: self.defaultValue)
+                        defaults[\.testValue] = self.customValue
+
+                        var update: Serializable?
+                        let cancellable = defaults.publisher(for: \.testValue, options: [.initial, .old, .new])
+                            .sink { value in
+                                update = value
+                            }
+
+                        expect(update).toEventually(equal(self.customValue))
                     }
                 }
                 #endif
