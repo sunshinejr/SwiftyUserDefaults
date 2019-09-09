@@ -205,9 +205,12 @@ internal class SwiftyUserDefaultsPublisher<Output>: Publisher {
 extension DefaultsAdapter {
 
     func publisher<T: DefaultsSerializable>(for keyPath: KeyPath<KeyStore, DefaultsKey<T>>, options: NSKeyValueObservingOptions = [.old, .new]) -> AnyPublisher<T, Never> where T: OptionalType, T.T == T {
-        let key = keyStore[keyPath: keyPath]
+        return publisher(for: keyStore[keyPath: keyPath], options: options)
+    }
+
+    func publisher<T: DefaultsSerializable>(for key: DefaultsKey<T>, options: NSKeyValueObservingOptions = [.old, .new]) -> AnyPublisher<T, Never> where T: OptionalType, T.T == T {
         let defaults = self.defaults
-        
+
         return SwiftyUserDefaultsPublisher { subscriber -> Cancellable? in
             let disposable = defaults.observe(key, options: options) { update in
                 NSLog("optional publisher")
@@ -227,7 +230,10 @@ extension DefaultsAdapter {
     }
 
     func publisher<T: DefaultsSerializable>(for keyPath: KeyPath<KeyStore, DefaultsKey<T>>, options: NSKeyValueObservingOptions = [.old, .new]) -> AnyPublisher<T, Never> where T.T == T {
-        let key = keyStore[keyPath: keyPath]
+        return publisher(for: keyStore[keyPath: keyPath], options: options)
+    }
+
+    func publisher<T: DefaultsSerializable>(for key: DefaultsKey<T>, options: NSKeyValueObservingOptions = [.old, .new]) -> AnyPublisher<T, Never> where T.T == T {
         let defaults = self.defaults
 
         return SwiftyUserDefaultsPublisher { subscriber -> Cancellable? in
