@@ -786,11 +786,11 @@ extension DefaultsSerializableSpec where Serializable.T: Equatable, Serializable
                     let observer = defaults.observe(\.testOptionalValue) { receivedUpdate in
                         update = receivedUpdate
                     }
-                    defaults.testOptionalValue = self.defaultValue
+                    defaults.testOptionalValue = self.customValue
                     defaults.testOptionalValue = nil
 
                     expect(update).toEventuallyNot(beNil())
-                    expect(update?.oldValue).toEventually(equal(self.defaultValue))
+                    expect(update?.oldValue).toEventually(equal(self.customValue))
                     expect(update?.newValue).toEventually(equal(self.defaultValue))
                 }
                 #endif
@@ -954,7 +954,7 @@ extension DefaultsSerializableSpec where Serializable.T: Equatable, Serializable
                 }
 
                 #if swift(>=5.1)
-                then("receives initial update with dynamicMemberLookup") {
+                then("remove observer on dispose with dynamicMemberLookup") {
                     self.keyStore.testValue = DefaultsKey<Serializable>("test", defaultValue: self.defaultValue)
 
                     var update: DefaultsObserver<Serializable>.Update?
