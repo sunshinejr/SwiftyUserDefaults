@@ -32,6 +32,7 @@ Migration guides: [from 4.x to 5.x](MigrationGuides/migration_4_to_5.md), [from 
     <a href="#launch-arguments">Launch arguments</a> &bull;    
     <a href="#property-wrappers">Property wrappers</a> &bull;    
     <a href="#keypath-dynamicMemberLookup">dynamicMemberLookup</a> &bull;
+    <a href="#combine-publishers">Combine publishers</a> &bull;
     <a href="#utils">Utils</a> &bull;
     <a href="#installation">Installation</a>
 </p>
@@ -412,6 +413,42 @@ Defaults.libraries[0] += " 2.0"
 // Easily work with custom serialized types
 Defaults.color = NSColor.white
 Defaults.color?.whiteComponent // => 1.0
+```
+
+
+## Combine publishers
+
+SwiftyUserDefaults provides Combine extensions as well! If you can `import Combine` and use it, check the method on `DefaultsAdapter.publisher(for:)`. This allows you to observe the changes on given key and by specifing observing options as well!
+
+Usage. Given keys:
+```swift
+extension DefaultsKeys {
+    var userColorScheme: DefaultsKey<String> { .init("userColorScheme", defaultValue: "default") }
+    var userThemeName: DefaultsKey<String?> { .init("userThemeName") }
+    var userLastLoginDate: DefaultsKey<Date?> { .init("userLastLoginDate") }
+}
+```
+
+You can declare a `Test` class:
+```swift
+final class Test {
+
+    private var colorSchemeObserver: Cancellable?
+
+    func obserColorScheme() {
+        colorSchemeObserver = Defaults.publisher(for: \.colorSchemeObserver)
+            .sink { value in
+                // 
+            }
+
+        // or
+
+        colorSchemeObserver = Defaults.publisher(for: \.colorSchemeObserver, options: [.initial, .new]) // by default you won't get initial value
+            .sink { value in
+                // 
+            }
+    }
+}
 ```
 
 ## Utils

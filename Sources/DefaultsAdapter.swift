@@ -41,7 +41,7 @@ import Foundation
 /// Defaults.launchCount += 1
 /// ```
 @dynamicMemberLookup
-public struct DefaultsAdapter<KeyStore: DefaultsKeyStore> {
+public struct DefaultsAdapter<KeyStore: DefaultsKeyStore>: DefaultsType {
 
     public let defaults: UserDefaults
     public let keyStore: KeyStore
@@ -55,109 +55,24 @@ public struct DefaultsAdapter<KeyStore: DefaultsKeyStore> {
     public subscript(dynamicMember member: String) -> Never {
         fatalError()
     }
-}
-
-extension DefaultsAdapter: DefaultsType {
-
-    public subscript<T: DefaultsSerializable>(key: DefaultsKey<T>) -> T.T where T: OptionalType, T.T == T {
-        get {
-            return defaults[key]
-        }
-        set {
-            defaults[key] = newValue
-        }
-    }
-
-    public subscript<T: DefaultsSerializable>(key: DefaultsKey<T>) -> T.T where T.T == T {
-        get {
-            return defaults[key]
-        }
-        set {
-            defaults[key] = newValue
-        }
-    }
 
     public func hasKey<T: DefaultsSerializable>(_ key: DefaultsKey<T>) -> Bool {
         return defaults.hasKey(key)
+    }
+
+    public func hasKey<T: DefaultsSerializable>(_ keyPath: KeyPath<KeyStore, DefaultsKey<T>>) -> Bool {
+        return defaults.hasKey(keyStore[keyPath: keyPath])
     }
 
     public func remove<T: DefaultsSerializable>(_ key: DefaultsKey<T>) {
         defaults.remove(key)
     }
 
-    public func removeAll() {
-        defaults.removeAll()
-    }
-
-    #if !os(Linux)
-    public func observe<T: DefaultsSerializable>(_ key: DefaultsKey<T>,
-                                                 options: NSKeyValueObservingOptions = [.new, .old],
-                                                 handler: @escaping (DefaultsObserver<T>.Update) -> Void) -> DefaultsDisposable {
-        return defaults.observe(key, options: options, handler: handler)
-    }
-    #endif
-}
-
-extension DefaultsAdapter {
-
-    public func hasKey<T: DefaultsSerializable>(_ keyPath: KeyPath<KeyStore, DefaultsKey<T>>) -> Bool {
-        return defaults.hasKey(keyStore[keyPath: keyPath])
-    }
-
     public func remove<T: DefaultsSerializable>(_ keyPath: KeyPath<KeyStore, DefaultsKey<T>>) {
         defaults.remove(keyStore[keyPath: keyPath])
     }
 
-    #if !os(Linux)
-    public func observe<T: DefaultsSerializable>(_ keyPath: KeyPath<KeyStore, DefaultsKey<T>>,
-                                                 options: NSKeyValueObservingOptions = [.old, .new],
-                                                 handler: @escaping (DefaultsObserver<T>.Update) -> Void) -> DefaultsDisposable {
-        return defaults.observe(keyStore[keyPath: keyPath],
-                                options: options,
-                                handler: handler)
-    }
-    #endif
-}
-
-extension DefaultsAdapter {
-
-    public subscript<T: DefaultsSerializable>(keyPath: KeyPath<KeyStore, DefaultsKey<T>>) -> T.T where T: OptionalType, T.T == T {
-        get {
-            return defaults[keyStore[keyPath: keyPath]]
-        }
-        set {
-            defaults[keyStore[keyPath: keyPath]] = newValue
-        }
-    }
-
-    public subscript<T: DefaultsSerializable>(keyPath: KeyPath<KeyStore, DefaultsKey<T>>) -> T.T where T.T == T {
-        get {
-            return defaults[keyStore[keyPath: keyPath]]
-        }
-        set {
-            defaults[keyStore[keyPath: keyPath]] = newValue
-        }
-    }
-}
-
-// Weird flex, but needed for the dynamicMemberLookup :shrug:
-extension DefaultsAdapter {
-
-    public subscript<T: DefaultsSerializable>(dynamicMember keyPath: KeyPath<KeyStore, DefaultsKey<T>>) -> T.T where T: OptionalType, T.T == T {
-        get {
-            return self[keyPath]
-        }
-        set {
-            self[keyPath] = newValue
-        }
-    }
-
-    public subscript<T: DefaultsSerializable>(dynamicMember keyPath: KeyPath<KeyStore, DefaultsKey<T>>) -> T.T where T.T == T {
-        get {
-            return self[keyPath]
-        }
-        set {
-            self[keyPath] = newValue
-        }
+    public func removeAll() {
+        defaults.removeAll()
     }
 }
