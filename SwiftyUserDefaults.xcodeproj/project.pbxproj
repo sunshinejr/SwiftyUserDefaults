@@ -120,23 +120,23 @@
 		1A0E1BA11455E9E44F192EAA /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				6C48B95D407E4F720507F3D8 /* Info.plist */,
-				B134969522555B348C06FD6C /* SwiftyUserDefaults.h */,
 				CB55DC75BF69CEA7DB03750E /* BuiltIns.swift */,
+				EE155E06F856DFEF78FD63F7 /* Defaults.swift */,
+				85747DE32326A6B6007A1866 /* Defaults+Combine.swift */,
+				F910BE3FABE99289E0545D95 /* Defaults+Observing.swift */,
 				11FDEA0BD7078D2633741F60 /* Defaults+StringToBool.swift */,
-				706E690EF2E4010781480303 /* DefaultsKeys.swift */,
+				BF92C9F82ABF7807D4D4DDDD /* Defaults+Subscripts.swift */,
 				ED9D95BD22AD74630006FE67 /* DefaultsAdapter.swift */,
 				20EBA39F1E25782FDC1CFC36 /* DefaultsBridges.swift */,
-				85747DE32326A6B6007A1866 /* Defaults+Combine.swift */,
-				BF92C9F82ABF7807D4D4DDDD /* Defaults+Subscripts.swift */,
-				F910BE3FABE99289E0545D95 /* Defaults+Observing.swift */,
-				9701991125BC1345631E831E /* DefaultsObserver.swift */,
-				85096B65E07A3BC7F856F0D1 /* OptionalType.swift */,
-				F98C7EF97445788836162CD0 /* DefaultsSerializable.swift */,
-				EE155E06F856DFEF78FD63F7 /* Defaults.swift */,
-				ED9D95BE22AD74630006FE67 /* DefaultsType.swift */,
+				706E690EF2E4010781480303 /* DefaultsKeys.swift */,
 				ED39909022B0204E0046F502 /* DefaultsKeyStore.swift */,
+				9701991125BC1345631E831E /* DefaultsObserver.swift */,
+				F98C7EF97445788836162CD0 /* DefaultsSerializable.swift */,
+				ED9D95BE22AD74630006FE67 /* DefaultsType.swift */,
+				6C48B95D407E4F720507F3D8 /* Info.plist */,
+				85096B65E07A3BC7F856F0D1 /* OptionalType.swift */,
 				858E15CF231FEC2F00DC1418 /* PropertyWrappers.swift */,
+				B134969522555B348C06FD6C /* SwiftyUserDefaults.h */,
 			);
 			name = Sources;
 			sourceTree = "<group>";
