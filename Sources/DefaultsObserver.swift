@@ -103,4 +103,5 @@ public final class DefaultsObserver<T: DefaultsSerializable>: NSObject, Defaults
         userDefaults.removeObserver(self, forKeyPath: key._key, context: nil)
     }
 }
+
 #endif

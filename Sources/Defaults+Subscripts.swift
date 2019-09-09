@@ -24,9 +24,9 @@
 
 import Foundation
 
-extension DefaultsAdapter {
+public extension DefaultsAdapter {
 
-    public subscript<T: DefaultsSerializable>(key: DefaultsKey<T>) -> T.T where T: OptionalType, T.T == T {
+    subscript<T: DefaultsSerializable>(key: DefaultsKey<T>) -> T.T where T: OptionalType, T.T == T {
         get {
             return defaults[key]
         }
@@ -35,7 +35,7 @@ extension DefaultsAdapter {
         }
     }
 
-    public subscript<T: DefaultsSerializable>(key: DefaultsKey<T>) -> T.T where T.T == T {
+    subscript<T: DefaultsSerializable>(key: DefaultsKey<T>) -> T.T where T.T == T {
         get {
             return defaults[key]
         }
@@ -44,7 +44,7 @@ extension DefaultsAdapter {
         }
     }
 
-    public subscript<T: DefaultsSerializable>(keyPath: KeyPath<KeyStore, DefaultsKey<T>>) -> T.T where T: OptionalType, T.T == T {
+    subscript<T: DefaultsSerializable>(keyPath: KeyPath<KeyStore, DefaultsKey<T>>) -> T.T where T: OptionalType, T.T == T {
         get {
             return defaults[keyStore[keyPath: keyPath]]
         }
@@ -53,7 +53,7 @@ extension DefaultsAdapter {
         }
     }
 
-    public subscript<T: DefaultsSerializable>(keyPath: KeyPath<KeyStore, DefaultsKey<T>>) -> T.T where T.T == T {
+    subscript<T: DefaultsSerializable>(keyPath: KeyPath<KeyStore, DefaultsKey<T>>) -> T.T where T.T == T {
         get {
             return defaults[keyStore[keyPath: keyPath]]
         }
@@ -64,7 +64,7 @@ extension DefaultsAdapter {
 
     // Weird flex, but needed these two for the dynamicMemberLookup :shrug:
 
-    public subscript<T: DefaultsSerializable>(dynamicMember keyPath: KeyPath<KeyStore, DefaultsKey<T>>) -> T.T where T: OptionalType, T.T == T {
+    subscript<T: DefaultsSerializable>(dynamicMember keyPath: KeyPath<KeyStore, DefaultsKey<T>>) -> T.T where T: OptionalType, T.T == T {
         get {
             return self[keyPath]
         }
@@ -73,7 +73,7 @@ extension DefaultsAdapter {
         }
     }
 
-    public subscript<T: DefaultsSerializable>(dynamicMember keyPath: KeyPath<KeyStore, DefaultsKey<T>>) -> T.T where T.T == T {
+    subscript<T: DefaultsSerializable>(dynamicMember keyPath: KeyPath<KeyStore, DefaultsKey<T>>) -> T.T where T.T == T {
         get {
             return self[keyPath]
         }

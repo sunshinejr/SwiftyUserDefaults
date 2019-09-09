@@ -49,4 +49,5 @@ public extension UserDefaults {
         return DefaultsObserver(key: key, userDefaults: self, options: options, handler: handler)
     }
 }
+
 #endif

@@ -101,7 +101,7 @@ internal class SwiftyUserDefaultsPublisher<Output>: Publisher {
 
     private let callback: (AnySubscriber<Output, Failure>) -> Cancellable?
 
-    init(callback: @escaping (AnySubscriber<Output, Failure>) -> Cancellable?) {
+    internal init(callback: @escaping (AnySubscriber<Output, Failure>) -> Cancellable?) {
         self.callback = callback
     }
 

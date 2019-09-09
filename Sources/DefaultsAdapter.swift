@@ -41,7 +41,7 @@ import Foundation
 /// Defaults.launchCount += 1
 /// ```
 @dynamicMemberLookup
-public struct DefaultsAdapter<KeyStore: DefaultsKeyStore> {
+public struct DefaultsAdapter<KeyStore: DefaultsKeyStore>: DefaultsType {
 
     public let defaults: UserDefaults
     public let keyStore: KeyStore
@@ -55,9 +55,6 @@ public struct DefaultsAdapter<KeyStore: DefaultsKeyStore> {
     public subscript(dynamicMember member: String) -> Never {
         fatalError()
     }
-}
-
-extension DefaultsAdapter: DefaultsType {
 
     public func hasKey<T: DefaultsSerializable>(_ key: DefaultsKey<T>) -> Bool {
         return defaults.hasKey(key)
