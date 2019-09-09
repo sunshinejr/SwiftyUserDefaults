@@ -29,7 +29,7 @@ import Foundation
 /// **Pro-Tip:** If you want to use shared user defaults, just
 ///  redefine this global shortcut in your app target, like so:
 ///  ~~~
-///  var Defaults = DefaultsAdapter(defaults: UserDefaults(suiteName: "com.my.app")!, keyStore: MyCustomDefaultsKeyStore())
+///  var Defaults = DefaultsAdapter(defaults: UserDefaults(suiteName: "com.my.app")!, keyStore: DefaultsKeys())
 ///  ~~~
 
 public var Defaults = DefaultsAdapter<DefaultsKeys>(defaults: .standard, keyStore: .init())
