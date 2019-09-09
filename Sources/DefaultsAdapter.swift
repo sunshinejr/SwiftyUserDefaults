@@ -204,12 +204,12 @@ internal class SwiftyUserDefaultsPublisher<Output>: Publisher {
 @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
 extension DefaultsAdapter {
 
-    func publisher<T: DefaultsSerializable>(for keyPath: KeyPath<KeyStore, DefaultsKey<T>>) -> AnyPublisher<T, Never> where T: OptionalType, T.T == T {
+    func publisher<T: DefaultsSerializable>(for keyPath: KeyPath<KeyStore, DefaultsKey<T>>, options: NSKeyValueObservingOptions = [.old, .new]) -> AnyPublisher<T, Never> where T: OptionalType, T.T == T {
         let key = keyStore[keyPath: keyPath]
         let defaults = self.defaults
         
         return SwiftyUserDefaultsPublisher { subscriber -> Cancellable? in
-            let disposable = defaults.observe(key) { update in
+            let disposable = defaults.observe(key, options: options) { update in
                 NSLog("optional publisher")
                 if let newValue = update.newValue {
                     _ = subscriber.receive(newValue)
@@ -226,12 +226,12 @@ extension DefaultsAdapter {
         .eraseToAnyPublisher()
     }
 
-    func publisher<T: DefaultsSerializable>(for keyPath: KeyPath<KeyStore, DefaultsKey<T>>) -> AnyPublisher<T, Never> where T.T == T {
+    func publisher<T: DefaultsSerializable>(for keyPath: KeyPath<KeyStore, DefaultsKey<T>>, options: NSKeyValueObservingOptions = [.old, .new]) -> AnyPublisher<T, Never> where T.T == T {
         let key = keyStore[keyPath: keyPath]
         let defaults = self.defaults
 
         return SwiftyUserDefaultsPublisher { subscriber -> Cancellable? in
-            let disposable = defaults.observe(key) { update in
+            let disposable = defaults.observe(key, options: options) { update in
                 NSLog("non-optional publisher")
                 if let newValue = update.newValue {
                     _ = subscriber.receive(newValue)
