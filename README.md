@@ -465,7 +465,7 @@ Defaults.removeAll()
 If you're sharing your user defaults between different apps or an app and its extensions, you can use SwiftyUserDefaults by overriding the `Defaults` shortcut with your own. Just add in your app:
 
 ```swift
-var Defaults = UserDefaults(suiteName: "com.my.app")!
+var Defaults = DefaultsAdapter<DefaultsKeys>(defaults: UserDefaults(suiteName: "com.my.app")!, keyStore: .init())
 ```
 
 ### Check key
