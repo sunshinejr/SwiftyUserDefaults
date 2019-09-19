@@ -34,5 +34,5 @@ let package = Package(
             targets: ["SwiftyUserDefaults"]),
     ],
     dependencies: resolveDependencies(),
-    targets: resolveTargets(),
+    targets: resolveTargets()
 )
