@@ -2,6 +2,26 @@
 // The swift-tools-version declares the minimum version of Swift required to build this package.
 
 import PackageDescription
+import class Foundation.ProcessInfo
+
+let shouldTest = ProcessInfo.processInfo.environment["TEST"] == "1"
+
+func resolveDependencies() -> [Package.Dependency] {
+    guard shouldTest else { return [] }
+
+    return [
+        .package(url: "https://github.com/Quick/Quick.git", .upToNextMajor(from: "2.0.0")),
+        .package(url: "https://github.com/Quick/Nimble.git", .upToNextMajor(from: "8.0.0")),
+    ]
+}
+
+func resolveTargets() -> [Target] {
+    let baseTarget = Target.target(name: "SwiftyUserDefaults", dependencies: [], path: "Sources")
+    let testTarget = Target.testTarget(name: "SwiftyUserDefaultsTests", dependencies: ["SwiftyUserDefaults", "Quick", "Nimble"])
+
+    return shouldTest ? [baseTarget, testTarget] : [baseTarget]
+}
+
 
 let package = Package(
     name: "SwiftyUserDefaults",
@@ -13,17 +33,6 @@ let package = Package(
             name: "SwiftyUserDefaults",
             targets: ["SwiftyUserDefaults"]),
     ],
-    dependencies: [
-        .package(url: "https://github.com/Quick/Quick.git", .upToNextMajor(from: "2.0.0")),
-        .package(url: "https://github.com/Quick/Nimble.git", .upToNextMajor(from: "8.0.0")),
-    ],
-    targets: [
-        .target(
-            name: "SwiftyUserDefaults",
-            dependencies: [],
-            path: "Sources"),
-        .testTarget(
-            name: "SwiftyUserDefaultsTests",
-            dependencies: ["SwiftyUserDefaults", "Quick", "Nimble"]),
-    ]
+    dependencies: resolveDependencies(),
+    targets: resolveTargets(),
 )
