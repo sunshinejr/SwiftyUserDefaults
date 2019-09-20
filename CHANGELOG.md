@@ -1,6 +1,7 @@
 ### Next
 
-* Fixed SPM integration so it no longer fetches testing libraries & doesn't create runtime crashes or Xcode Preview crashes anymore. [@sunshinejr](https://github.com/sunshinejr).
+* Fixed an issue with SPM integration - it no longer fetches testing libraries & doesn't create runtime crashes or Xcode Preview crashes anymore. [@sunshinejr](https://github.com/sunshinejr).
+* Fixed an issue where Carthage users using Xcode 11 couldn't install Moya 14. We added weak-linking for the xcodeproj so you might need additional steps for Xcode 10 + Carthage + Moya 14.* users. [@sunshinejr](https://github.com/sunshinejr).
 
 ### 5.0.0-beta.2 (2019-09-09)
 
