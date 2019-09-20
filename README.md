@@ -509,7 +509,16 @@ import SwiftyUserDefaults
 Just add to your Cartfile:
 
 ```ruby
-github "radex/SwiftyUserDefaults" == "5.0.0-beta.2"
+github "radex/SwiftyUserDefaults" "5.0.0-beta.2"
+```
+
+#### SwiftyUserDefaults 5+, Carthage and Xcode 10
+
+If you are using this specific stack (no SPM/CocoaPods, no Xcode 11), you need to do a little bit more in order to install SwiftyUserDefaults. This is because Xcode 10 doesn't see Combine as a framework and so it cannot "weakly link it". Below is a script that should get you through the installation process:
+```bash
+carthage update SwiftyUserDefaults --platform iOS --no-build
+./Carthage/Checkouts/SwiftyUserDefaults/scripts/carthage-xcode10-compat.sh
+carthage build SwiftyUserDefaults --platform iOS
 ```
 
 ### Swift Package Manager
