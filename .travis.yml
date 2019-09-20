@@ -135,7 +135,7 @@ script:
   # - xcodebuild -project "$PROJECT" -scheme 'SwiftyUserDefaults' ONLY_ACTIVE_ARCH=NO CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO test | xcpretty
   
   - swift build
-  - swift test
+  - TEST=1 swift test
   - pod lib lint
 
   - scripts/cocoapods_integration_step.sh
