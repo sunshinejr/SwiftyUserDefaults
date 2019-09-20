@@ -29,9 +29,7 @@ let package = Package(
         .macOS(.v10_11), .iOS(.v8), .tvOS(.v9), .watchOS(.v2)
     ],
     products: [
-        .library(
-            name: "SwiftyUserDefaults",
-            targets: ["SwiftyUserDefaults"]),
+        .library(name: "SwiftyUserDefaults", targets: ["SwiftyUserDefaults"]),
     ],
     dependencies: resolveDependencies(),
     targets: resolveTargets()
