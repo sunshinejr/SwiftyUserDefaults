@@ -1,7 +1,7 @@
 # SwiftyUserDefaults
 
 ![Platforms](https://img.shields.io/badge/platforms-ios%20%7C%20osx%20%7C%20watchos%20%7C%20tvos-lightgrey.svg)
-[![CI Status](https://api.travis-ci.org/radex/SwiftyUserDefaults.svg?branch=master)](https://travis-ci.org/radex/SwiftyUserDefaults)
+[![CI Status](https://api.travis-ci.org/sunshinejr/SwiftyUserDefaults.svg?branch=master)](https://travis-ci.org/sunshinejr/SwiftyUserDefaults)
 [![CocoaPods compatible](https://img.shields.io/badge/CocoaPods-compatible-4BC51D.svg?style=flat)](#cocoapods)
 [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](#carthage)
 [![SPM compatible](https://img.shields.io/badge/SPM-compatible-4BC51D.svg?style=flat)](#swift-package-manager)
@@ -13,7 +13,7 @@
 #### Modern Swift API for `NSUserDefaults`
 ###### SwiftyUserDefaults makes user defaults enjoyable to use by combining expressive Swifty API with the benefits of static typing. Define your keys in one place, use value types easily, and get extra safety and convenient compile-time checks for free.
 
-Previous versions' documentation: [Version 4.0.0](https://github.com/sunshinejr/SwiftyUserDefaults/blob/566ace16ee91242b61e2e9da6cdbe7dfdadd926c/README.md), [Version 3.0.1](https://github.com/radex/SwiftyUserDefaults/blob/14b629b035bf6355b46ece22c3851068a488a895/README.md)<br />
+Previous versions' documentation: [Version 4.0.0](https://github.com/sunshinejr/SwiftyUserDefaults/blob/566ace16ee91242b61e2e9da6cdbe7dfdadd926c/README.md), [Version 3.0.1](https://github.com/sunshinejr/SwiftyUserDefaults/blob/14b629b035bf6355b46ece22c3851068a488a895/README.md)<br />
 Migration guides: [from 4.x to 5.x](MigrationGuides/migration_4_to_5.md), [from 4.0.0-alpha.1 to 4.0.0-alpha.3](MigrationGuides/migration_4_alpha_1_to_4_alpha_2.md), [from 3.x to 4.x](MigrationGuides/migration_3_to_4.md)
 
 # Version 5.0.0-beta.3
@@ -311,7 +311,7 @@ extension Data: DefaultsSerializable {
 }
 ```
 
-Also, take a look at our source code (or tests) to see more examples of bridges. If you find yourself confused with all these bridges, please [create an issue](https://github.com/radex/SwiftyUserDefaults/issues/new) and we will figure something out.
+Also, take a look at our source code (or tests) to see more examples of bridges. If you find yourself confused with all these bridges, please [create an issue](https://github.com/sunshinejr/SwiftyUserDefaults/issues/new) and we will figure something out.
 
 ## Property wrappers
 
@@ -509,7 +509,7 @@ import SwiftyUserDefaults
 Just add to your Cartfile:
 
 ```ruby
-github "radex/SwiftyUserDefaults" "5.0.0-beta.3"
+github "sunshinejr/SwiftyUserDefaults" "5.0.0-beta.3"
 ```
 
 #### SwiftyUserDefaults 5+, Carthage and Xcode 10
@@ -529,7 +529,7 @@ let package = Package(
     name: "MyPackage",
     products: [...],
     dependencies: [
-        .package(url: "https://github.com/radex/SwiftyUserDefaults.git", .exact("5.0.0-beta.3"),
+        .package(url: "https://github.com/sunshinejr/SwiftyUserDefaults.git", .exact("5.0.0-beta.3"),
     ],
     targets: [...]
 )
