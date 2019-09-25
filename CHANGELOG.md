@@ -1,5 +1,7 @@
 ### Next
 
+### 5.0.0-beta.3 (2019-09-25)
+
 * Fixed an issue with SPM integration - it no longer fetches testing libraries & doesn't create runtime crashes or Xcode Preview crashes anymore. [@sunshinejr](https://github.com/sunshinejr).
 * Fixed an issue where Carthage users using Xcode 11 couldn't install SwiftyUserDefaults 5. We added weak-linking for the xcodeproj so you might need additional steps for Xcode 10 + Carthage + SwiftyUserDefaults 5.* users. [@sunshinejr](https://github.com/sunshinejr).
 
