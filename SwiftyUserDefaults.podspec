@@ -1,9 +1,9 @@
 Pod::Spec.new do |s|
   s.name = 'SwiftyUserDefaults'
-  s.version = '5.0.0-beta.2'
+  s.version = '5.0.0-beta.3'
   s.license = 'MIT'
   s.summary = 'Swifty API for NSUserDefaults'
-  s.homepage = 'https://github.com/radex/SwiftyUserDefaults'
+  s.homepage = 'https://github.com/sunshinejr/SwiftyUserDefaults'
   s.authors = { 'Radek Pietruszewski' => 'this.is@radex.io', 'Łukasz Mróz' => 'thesunshinejr@gmail.com' }
   s.source = { :git => 'https://github.com/radex/SwiftyUserDefaults.git', :tag => s.version }
   
