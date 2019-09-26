@@ -163,7 +163,7 @@ public struct DefaultsBoolBridge: DefaultsBridge {
 
     public func get(key: String, userDefaults: UserDefaults) -> Bool? {
         // @warning we use number(forKey:) instead of bool(forKey:), because
-        // bool(forKey:) will always return value, even if it's not set
+        // bool(forKey:) will always return a value, even if it's not set
         //
         // Now, let's see if there is value in defaults that converts to Bool first:
         if let bool = userDefaults.number(forKey: key)?.boolValue {
