@@ -26,7 +26,7 @@ import Foundation
 
 public extension DefaultsAdapter {
 
-    subscript<T: DefaultsSerializable>(key: DefaultsKey<T>) -> T.T where T: OptionalType, T.T == T {
+    subscript<T: DefaultsSerializable>(key key: DefaultsKey<T>) -> T.T where T: OptionalType, T.T == T {
         get {
             return defaults[key]
         }
@@ -35,7 +35,7 @@ public extension DefaultsAdapter {
         }
     }
 
-    subscript<T: DefaultsSerializable>(key: DefaultsKey<T>) -> T.T where T.T == T {
+    subscript<T: DefaultsSerializable>(key key: DefaultsKey<T>) -> T.T where T.T == T {
         get {
             return defaults[key]
         }

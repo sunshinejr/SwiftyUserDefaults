@@ -69,7 +69,7 @@ extension DefaultsSerializableSpec where Serializable.T: Equatable, Serializable
             then("get a default value") {
                 let key = DefaultsKey<Serializable>("test", defaultValue: self.defaultValue)
 
-                expect(defaults[key]) == self.defaultValue
+                expect(defaults[key: key]) == self.defaultValue
             }
 
             #if swift(>=5.1)
@@ -83,7 +83,7 @@ extension DefaultsSerializableSpec where Serializable.T: Equatable, Serializable
             then("get a default array value") {
                 let key = DefaultsKey<[Serializable]>("test", defaultValue: [self.defaultValue])
 
-                expect(defaults[key]) == [self.defaultValue]
+                expect(defaults[key: key]) == [self.defaultValue]
             }
 
             #if swift(>=5.1)
@@ -97,9 +97,9 @@ extension DefaultsSerializableSpec where Serializable.T: Equatable, Serializable
             then("save a value") {
                 let key = DefaultsKey<Serializable>("test", defaultValue: self.defaultValue)
                 let expectedValue = self.customValue
-                defaults[key] = expectedValue
+                defaults[key: key] = expectedValue
 
-                expect(defaults[key]) == expectedValue
+                expect(defaults[key: key]) == expectedValue
             }
 
             #if swift(>=5.1)
@@ -115,9 +115,9 @@ extension DefaultsSerializableSpec where Serializable.T: Equatable, Serializable
             then("save an array value") {
                 let key = DefaultsKey<[Serializable]>("test", defaultValue: [self.defaultValue])
                 let expectedValue = [self.customValue]
-                defaults[key] = expectedValue
+                defaults[key: key] = expectedValue
 
-                expect(defaults[key]) == expectedValue
+                expect(defaults[key: key]) == expectedValue
             }
 
             #if swift(>=5.1)
@@ -132,11 +132,11 @@ extension DefaultsSerializableSpec where Serializable.T: Equatable, Serializable
 
             then("remove a value") {
                 let key = DefaultsKey<Serializable>("test", defaultValue: self.defaultValue)
-                defaults[key] = self.customValue
+                defaults[key: key] = self.customValue
 
                 removeObject("test")
 
-                expect(defaults[key]) == self.defaultValue
+                expect(defaults[key: key]) == self.defaultValue
             }
 
             #if swift(>=5.1)
@@ -153,11 +153,11 @@ extension DefaultsSerializableSpec where Serializable.T: Equatable, Serializable
 
             then("remove an array value") {
                 let key = DefaultsKey<[Serializable]?>("test", defaultValue: [self.defaultValue])
-                defaults[key] = [self.customValue]
+                defaults[key: key] = [self.customValue]
 
                 removeObject("test")
 
-                expect(defaults[key]) == [self.defaultValue]
+                expect(defaults[key: key]) == [self.defaultValue]
             }
 
             #if swift(>=5.1)
@@ -200,7 +200,7 @@ extension DefaultsSerializableSpec where Serializable.T: Equatable, Serializable
             then("get a default value") {
                 let key = DefaultsKey<Serializable?>("test", defaultValue: self.defaultValue)
 
-                expect(defaults[key]) == self.defaultValue
+                expect(defaults[key: key]) == self.defaultValue
             }
 
             #if swift(>=5.1)
@@ -214,7 +214,7 @@ extension DefaultsSerializableSpec where Serializable.T: Equatable, Serializable
             then("get a default array value") {
                 let key = DefaultsKey<[Serializable]?>("test", defaultValue: [self.defaultValue])
 
-                expect(defaults[key]) == [self.defaultValue]
+                expect(defaults[key: key]) == [self.defaultValue]
             }
 
             #if swift(>=5.1)
@@ -228,9 +228,9 @@ extension DefaultsSerializableSpec where Serializable.T: Equatable, Serializable
             then("save a value") {
                 let key = DefaultsKey<Serializable?>("test", defaultValue: self.defaultValue)
                 let expectedValue = self.customValue
-                defaults[key] = expectedValue
+                defaults[key: key] = expectedValue
 
-                expect(defaults[key]) == expectedValue
+                expect(defaults[key: key]) == expectedValue
             }
 
             #if swift(>=5.1)
@@ -246,9 +246,9 @@ extension DefaultsSerializableSpec where Serializable.T: Equatable, Serializable
             then("save an array value") {
                 let key = DefaultsKey<[Serializable]?>("test", defaultValue: [self.defaultValue])
                 let expectedValue = [self.customValue]
-                defaults[key] = expectedValue
+                defaults[key: key] = expectedValue
 
-                expect(defaults[key]) == expectedValue
+                expect(defaults[key: key]) == expectedValue
             }
 
             #if swift(>=5.1)
@@ -264,9 +264,9 @@ extension DefaultsSerializableSpec where Serializable.T: Equatable, Serializable
             then("remove a value") {
                 let key = DefaultsKey<Serializable?>("test", defaultValue: self.defaultValue)
 
-                defaults[key] = nil
+                defaults[key: key] = nil
 
-                expect(defaults[key]) == self.defaultValue
+                expect(defaults[key: key]) == self.defaultValue
             }
 
             #if swift(>=5.1)
@@ -282,9 +282,9 @@ extension DefaultsSerializableSpec where Serializable.T: Equatable, Serializable
             then("remove an array value") {
                 let key = DefaultsKey<[Serializable]?>("test", defaultValue: [self.defaultValue])
 
-                defaults[key] = nil
+                defaults[key: key] = nil
 
-                expect(defaults[key]) == [self.defaultValue]
+                expect(defaults[key: key]) == [self.defaultValue]
             }
 
             #if swift(>=5.1)
@@ -325,9 +325,9 @@ extension DefaultsSerializableSpec where Serializable.T: Equatable, Serializable
             then("save a value") {
                 let key = DefaultsKey<Serializable?>("test")
                 let expectedValue = self.customValue
-                defaults[key] = expectedValue
+                defaults[key: key] = expectedValue
 
-                expect(defaults[key]) == expectedValue
+                expect(defaults[key: key]) == expectedValue
             }
 
             #if swift(>=5.1)
@@ -343,9 +343,9 @@ extension DefaultsSerializableSpec where Serializable.T: Equatable, Serializable
             then("save an array value") {
                 let key = DefaultsKey<[Serializable]?>("test")
                 let expectedValue = [self.customValue]
-                defaults[key] = expectedValue
+                defaults[key: key] = expectedValue
 
-                expect(defaults[key]) == expectedValue
+                expect(defaults[key: key]) == expectedValue
             }
 
             #if swift(>=5.1)
@@ -361,11 +361,11 @@ extension DefaultsSerializableSpec where Serializable.T: Equatable, Serializable
             then("remove a value") {
                 let key = DefaultsKey<Serializable?>("test")
 
-                defaults[key] = self.defaultValue
-                expect(defaults[key]) == self.defaultValue
+                defaults[key: key] = self.defaultValue
+                expect(defaults[key: key]) == self.defaultValue
 
-                defaults[key] = nil
-                expect(defaults[key]).to(beNil())
+                defaults[key: key] = nil
+                expect(defaults[key: key]).to(beNil())
             }
 
             #if swift(>=5.1)
@@ -383,11 +383,11 @@ extension DefaultsSerializableSpec where Serializable.T: Equatable, Serializable
             then("remove an array value") {
                 let key = DefaultsKey<[Serializable]?>("test")
 
-                defaults[key] = [self.defaultValue]
-                expect(defaults[key]) == [self.defaultValue]
+                defaults[key: key] = [self.defaultValue]
+                expect(defaults[key: key]) == [self.defaultValue]
 
-                defaults[key] = nil
-                expect(defaults[key]).to(beNil())
+                defaults[key: key] = nil
+                expect(defaults[key: key]).to(beNil())
             }
 
             #if swift(>=5.1)
@@ -404,8 +404,8 @@ extension DefaultsSerializableSpec where Serializable.T: Equatable, Serializable
 
             then("compare optional value to non-optional value") {
                 let key = DefaultsKey<Serializable?>("test")
-                expect(defaults[key] == nil).to(beTrue())
-                expect(defaults[key] != self.defaultValue).to(beTrue())
+                expect(defaults[key: key] == nil).to(beTrue())
+                expect(defaults[key: key] != self.defaultValue).to(beTrue())
             }
 
             #if swift(>=5.1)
@@ -442,7 +442,7 @@ extension DefaultsSerializableSpec where Serializable.T: Equatable, Serializable
                     precondition(defaults.hasKey(defaultsKey), "UserDefaults didn't pick up the process arguments")
 
                     let expectedValue = expectedParsedValue ?? self.defaultValue
-                    expect(defaults[defaultsKey]).to(equal(expectedValue), description: "key: \(key), stringValue: \(stringValue)")
+                    expect(defaults[key: defaultsKey]).to(equal(expectedValue), description: "key: \(key), stringValue: \(stringValue)")
                 }
             }
 
@@ -455,9 +455,9 @@ extension DefaultsSerializableSpec where Serializable.T: Equatable, Serializable
                     precondition(defaults.hasKey(defaultsKey), "UserDefaults didn't pick up the process arguments")
 
                     if let expectedValue = expectedParsedValue {
-                        expect(defaults[defaultsKey]).to(equal(expectedValue), description: "key: \(key), stringValue: \(stringValue)")
+                        expect(defaults[key: defaultsKey]).to(equal(expectedValue), description: "key: \(key), stringValue: \(stringValue)")
                     } else {
-                        expect(defaults[defaultsKey]).to(beNil(), description: "key: \(key), stringValue: \(stringValue)")
+                        expect(defaults[key: defaultsKey]).to(beNil(), description: "key: \(key), stringValue: \(stringValue)")
                     }
                 }
             }
@@ -471,7 +471,7 @@ extension DefaultsSerializableSpec where Serializable.T: Equatable, Serializable
                     precondition(defaults.hasKey(defaultsKey), "UserDefaults didn't pick up the process arguments")
 
                     let expectedValue = expectedParsedValue ?? self.defaultValue
-                    expect(defaults[defaultsKey]).to(equal(expectedValue), description: "key: \(key), stringValue: \(stringValue)")
+                    expect(defaults[key: defaultsKey]).to(equal(expectedValue), description: "key: \(key), stringValue: \(stringValue)")
                 }
             }
         }
@@ -522,7 +522,7 @@ extension DefaultsSerializableSpec where Serializable.T: Equatable, Serializable
                         update = receivedUpdate
                     }
 
-                    defaults[key] = self.customValue
+                    defaults[key: key] = self.customValue
 
                     expect(update?.oldValue).toEventually(beNil())
                     expect(update?.newValue).toEventually(equal(self.customValue))
@@ -577,7 +577,7 @@ extension DefaultsSerializableSpec where Serializable.T: Equatable, Serializable
 
                 then("receives initial update being non-nil") {
                     let key = DefaultsKey<Serializable?>("test1")
-                    defaults[key] = self.customValue
+                    defaults[key: key] = self.customValue
 
                     var update: DefaultsObserver<Serializable?>.Update?
                     let observer = defaults.observe(key, options: [.initial, .old, .new]) { receivedUpdate in
@@ -652,8 +652,8 @@ extension DefaultsSerializableSpec where Serializable.T: Equatable, Serializable
                     let observer = defaults.observe(key) { receivedUpdate in
                         update = receivedUpdate
                     }
-                    defaults[key] = self.defaultValue
-                    defaults[key] = nil
+                    defaults[key: key] = self.defaultValue
+                    defaults[key: key] = nil
 
                     expect(update).toEventuallyNot(beNil())
                     expect(update?.oldValue).toEventually(equal(self.defaultValue))
@@ -704,7 +704,7 @@ extension DefaultsSerializableSpec where Serializable.T: Equatable, Serializable
                     }
 
                     observer.dispose()
-                    defaults[key] = self.customValue
+                    defaults[key: key] = self.customValue
 
                     expect(update?.oldValue).toEventually(beNil())
                     expect(update?.newValue).toEventually(beNil())
@@ -780,7 +780,7 @@ extension DefaultsSerializableSpec where Serializable.T: Equatable, Serializable
                         update = receivedUpdate
                     }
 
-                    defaults[key] = self.customValue
+                    defaults[key: key] = self.customValue
 
                     expect(update?.oldValue).toEventually(equal(self.defaultValue))
                     expect(update?.newValue).toEventually(equal(self.customValue))
@@ -834,7 +834,7 @@ extension DefaultsSerializableSpec where Serializable.T: Equatable, Serializable
 
                 then("receives initial update being custom value") {
                     let key = DefaultsKey<Serializable?>("test", defaultValue: self.defaultValue)
-                    defaults[key] = self.customValue
+                    defaults[key: key] = self.customValue
 
                     var update: DefaultsObserver<Serializable?>.Update?
                     let observer = defaults.observe(key, options: [.initial, .old, .new]) { receivedUpdate in
@@ -906,8 +906,8 @@ extension DefaultsSerializableSpec where Serializable.T: Equatable, Serializable
                     let observer = defaults.observe(key) { receivedUpdate in
                         update = receivedUpdate
                     }
-                    defaults[key] = self.defaultValue
-                    defaults[key] = nil
+                    defaults[key: key] = self.defaultValue
+                    defaults[key: key] = nil
 
                     expect(update).toEventuallyNot(beNil())
                     expect(update?.oldValue).toEventually(equal(self.defaultValue))
@@ -958,7 +958,7 @@ extension DefaultsSerializableSpec where Serializable.T: Equatable, Serializable
                     }
 
                     observer.dispose()
-                    defaults[key] = self.customValue
+                    defaults[key: key] = self.customValue
 
                     expect(update?.oldValue).toEventually(beNil())
                     expect(update?.newValue).toEventually(beNil())
@@ -1034,7 +1034,7 @@ extension DefaultsSerializableSpec where Serializable.T: Equatable, Serializable
                         update = receivedUpdate
                     }
 
-                    defaults[key] = self.customValue
+                    defaults[key: key] = self.customValue
 
                     expect(update?.oldValue).toEventually(equal(self.defaultValue))
                     expect(update?.newValue).toEventually(equal(self.customValue))
@@ -1088,7 +1088,7 @@ extension DefaultsSerializableSpec where Serializable.T: Equatable, Serializable
 
                 then("receives initial update being custom value") {
                     let key = DefaultsKey<Serializable>("test", defaultValue: self.defaultValue)
-                    defaults[key] = self.customValue
+                    defaults[key: key] = self.customValue
 
                     var update: DefaultsObserver<Serializable>.Update?
                     let observer = defaults.observe(key, options: [.initial, .old, .new]) { receivedUpdate in
@@ -1162,7 +1162,7 @@ extension DefaultsSerializableSpec where Serializable.T: Equatable, Serializable
                     }
 
                     observer.dispose()
-                    defaults[key] = self.customValue
+                    defaults[key: key] = self.customValue
 
                     expect(update?.oldValue).toEventually(beNil())
                     expect(update?.newValue).toEventually(beNil())
