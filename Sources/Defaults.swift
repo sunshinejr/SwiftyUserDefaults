@@ -34,15 +34,15 @@ import Foundation
 
 public var Defaults = DefaultsAdapter<DefaultsKeys>(defaults: .standard, keyStore: .init())
 
-extension UserDefaults: DefaultsType {
+public extension UserDefaults {
 
     /// Returns `true` if `key` exists
-    public func hasKey<T>(_ key: DefaultsKey<T>) -> Bool {
+    func hasKey<T>(_ key: DefaultsKey<T>) -> Bool {
         return object(forKey: key._key) != nil
     }
 
     /// Removes value for `key`
-    public func remove<T>(_ key: DefaultsKey<T>) {
+    func remove<T>(_ key: DefaultsKey<T>) {
         removeObject(forKey: key._key)
     }
 
@@ -50,7 +50,7 @@ extension UserDefaults: DefaultsType {
     /// Use with caution!
     /// - Note: This method only removes keys on the receiver `UserDefaults` object.
     ///         System-defined keys will still be present afterwards.
-    public func removeAll() {
+    func removeAll() {
         for (key, _) in dictionaryRepresentation() {
             removeObject(forKey: key)
         }
