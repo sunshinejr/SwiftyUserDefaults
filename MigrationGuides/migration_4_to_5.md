@@ -15,6 +15,20 @@ instead of
 Defaults[.yourKey]
 ```
 
+Additionally when you want to access your key without a keyPath, but with a `DefaultsKey` as an argument, you would use:
+```swift
+let key = DefaultsKey<String?>("userThemeName")
+Defaults[key: key]
+```
+
+instead of
+```swift
+let key = DefaultsKey<String?>("userThemeName")
+Defaults[key]
+```
+
+We had to do this because otherwise the compiler crashed and indexing never finished... Track this issue here: https://bugs.swift.org/browse/SR-11529
+
 ### Changes to `DefaultsKeys`
 Now you can create your own key store and `DefaultsKeys` is a default object that conforms to `DefaultsKeyStore` and is passed to the global `Defaults`.
 
