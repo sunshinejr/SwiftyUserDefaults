@@ -41,7 +41,7 @@ import Foundation
 /// Defaults.launchCount += 1
 /// ```
 @dynamicMemberLookup
-public struct DefaultsAdapter<KeyStore: DefaultsKeyStore>: DefaultsType {
+public struct DefaultsAdapter<KeyStore: DefaultsKeyStore> {
 
     public let defaults: UserDefaults
     public let keyStore: KeyStore
