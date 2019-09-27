@@ -1,5 +1,7 @@
 ### Next
 
+### 5.0.0-beta.4 (2019-09-27)
+
 * Fixed an issue with Xcode freezing, never-finishing indexing/building the project when we used `Defaults[\.keyPath]` in conditional statement. Unfortunately we had to add `key` label to `Defaults[key: DefaultsKey<String?>...]` where you wouldn't have to add the label to the subscript before. [@sunshinejr](https://github.com/sunshinejr).
 
 ### 5.0.0-beta.3 (2019-09-25)
