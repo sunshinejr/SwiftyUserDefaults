@@ -93,8 +93,8 @@ Just create a `DefaultsKey` object, put the type of the value you want to store 
 You can now use the `Defaults` shortcut to access those values:
 
 ```swift
-Defaults[colorKey] = "red"
-Defaults[colorKey] // => "red", typed as String
+Defaults[key: colorKey] = "red"
+Defaults[key: colorKey] // => "red", typed as String
 ```
 
 The compiler won't let you set a wrong value type, and fetching conveniently returns `String`.
