@@ -1,5 +1,7 @@
 ### Next
 
+### 5.0.0-beta.5 (2019-10-05)
+
 * Removed Combine extensions for now. Due to problems with weak-linking the framework, it's too difficult to support it with ease using all package managers and also without breaking backwards-compatibility. Probably gonna introduce it once we only support Xcode 11. [@sunshinejr](https://github.com/sunshinejr)
 
 ### 5.0.0-beta.4 (2019-09-27)
