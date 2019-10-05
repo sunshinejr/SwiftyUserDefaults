@@ -19,7 +19,6 @@
 		4B604921053C4F31217DCE9E /* Defaults+Observing.swift in Sources */ = {isa = PBXBuildFile; fileRef = F910BE3FABE99289E0545D95 /* Defaults+Observing.swift */; };
 		7EE5BB8911DFD47B6D6ED8E5 /* Defaults+Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F97C9DDE34857798EA6519B /* Defaults+Date.swift */; };
 		80C1C495919531D69B34BA6F /* Defaults+Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78703A0F180A4B7C450CD191 /* Defaults+Data.swift */; };
-		85747DE42326A6B6007A1866 /* Defaults+Combine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85747DE32326A6B6007A1866 /* Defaults+Combine.swift */; };
 		858E15D0231FEC2F00DC1418 /* PropertyWrappers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 858E15CF231FEC2F00DC1418 /* PropertyWrappers.swift */; };
 		88573499C0B9C4F466D7EC2D /* DefaultsSerializable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F98C7EF97445788836162CD0 /* DefaultsSerializable.swift */; };
 		89AF35E8D3CF0B18777540CC /* Defaults+Bool.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57735ECA0C2F413E8EBC2E4 /* Defaults+Bool.swift */; };
@@ -65,7 +64,6 @@
 		706E690EF2E4010781480303 /* DefaultsKey.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = DefaultsKey.swift; path = Sources/DefaultsKey.swift; sourceTree = "<group>"; };
 		78703A0F180A4B7C450CD191 /* Defaults+Data.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Defaults+Data.swift"; path = "Tests/SwiftyUserDefaultsTests/Built-ins/Defaults+Data.swift"; sourceTree = "<group>"; };
 		85096B65E07A3BC7F856F0D1 /* OptionalType.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = OptionalType.swift; path = Sources/OptionalType.swift; sourceTree = "<group>"; };
-		85747DE32326A6B6007A1866 /* Defaults+Combine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Defaults+Combine.swift"; path = "Sources/Defaults+Combine.swift"; sourceTree = "<group>"; };
 		858E15CF231FEC2F00DC1418 /* PropertyWrappers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PropertyWrappers.swift; path = Sources/PropertyWrappers.swift; sourceTree = "<group>"; };
 		8790CE5B53F91DAD51975EDC /* Defaults+Double.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Defaults+Double.swift"; path = "Tests/SwiftyUserDefaultsTests/Built-ins/Defaults+Double.swift"; sourceTree = "<group>"; };
 		9701991125BC1345631E831E /* DefaultsObserver.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = DefaultsObserver.swift; path = Sources/DefaultsObserver.swift; sourceTree = "<group>"; };
@@ -120,7 +118,6 @@
 			children = (
 				CB55DC75BF69CEA7DB03750E /* BuiltIns.swift */,
 				EE155E06F856DFEF78FD63F7 /* Defaults.swift */,
-				85747DE32326A6B6007A1866 /* Defaults+Combine.swift */,
 				F910BE3FABE99289E0545D95 /* Defaults+Observing.swift */,
 				11FDEA0BD7078D2633741F60 /* Defaults+StringToBool.swift */,
 				BF92C9F82ABF7807D4D4DDDD /* Defaults+Subscripts.swift */,
@@ -362,7 +359,6 @@
 				858E15D0231FEC2F00DC1418 /* PropertyWrappers.swift in Sources */,
 				D102C1011A4314AFF773DCD5 /* Defaults+StringToBool.swift in Sources */,
 				037280C1C6C68BDB8E3759E6 /* DefaultsKey.swift in Sources */,
-				85747DE42326A6B6007A1866 /* Defaults+Combine.swift in Sources */,
 				CC4CF6A63F6AA1B932D6757E /* DefaultsBridges.swift in Sources */,
 				ED39909122B0204E0046F502 /* DefaultsKeys.swift in Sources */,
 				A3CAE6734DDE8FD952CE2CF2 /* Defaults+Subscripts.swift in Sources */,
@@ -437,9 +433,6 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
-				OTHER_LDFLAGS = $OTHER_LDFLAGS_XCODE11;
-				OTHER_LDFLAGS_XCODE10 = "";
-				OTHER_LDFLAGS_XCODE11 = "-weak_framework Combine";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
 				SWIFT_COMPILATION_MODE = wholemodule;
@@ -505,9 +498,6 @@
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				OTHER_LDFLAGS = $OTHER_LDFLAGS_XCODE11;
-				OTHER_LDFLAGS_XCODE10 = "";
-				OTHER_LDFLAGS_XCODE11 = "-weak_framework Combine";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;

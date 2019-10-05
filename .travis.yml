@@ -9,7 +9,7 @@ matrix:
         - SWIFT_VERSION=5.0
         - SWIFT_TOOLS_VERSION=5.1
         - XCODEGEN_VERSION=2.5.0
-        - IOS_SIMULATOR='name=iPhone Xs,OS=13.0'
+        - IOS_SIMULATOR='name=iPhone 11,OS=13.0'
         - IOS_SDK=iphonesimulator13.0
         - TVOS_SIMULATOR='name=Apple TV 4K (at 1080p)'
         - TVOS_SDK=appletvsimulator13.0
@@ -26,7 +26,7 @@ matrix:
         - SWIFT_VERSION=5.0
         - SWIFT_TOOLS_VERSION=5.1
         - XCODEGEN_VERSION=2.5.0
-        - IOS_SIMULATOR='name=iPhone Xs,OS=13.0'
+        - IOS_SIMULATOR='name=iPhone 11,OS=13.0'
         - IOS_SDK=iphonesimulator13.0
         - TVOS_SIMULATOR='name=Apple TV 4K (at 1080p)'
         - TVOS_SDK=appletvsimulator13.0

@@ -27,10 +27,6 @@ import Quick
 import Nimble
 @testable import SwiftyUserDefaults
 
-#if canImport(Combine)
-import Combine
-#endif
-
 protocol DefaultsSerializableSpec {
     associatedtype Serializable: DefaultsSerializable & Equatable
 
@@ -544,24 +540,6 @@ extension DefaultsSerializableSpec where Serializable.T: Equatable, Serializable
                 }
                 #endif
 
-                #if canImport(Combine)
-                if #available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *) {
-                    then("receive updates with publisher") {
-                        self.keyStore.testOptionalValue = DefaultsKey<Serializable?>("test")
-
-                        var update: Serializable?
-                        let cancellable = defaults.publisher(for: \.testOptionalValue)
-                            .sink { value in
-                                update = value
-                            }
-
-                        defaults.testOptionalValue = self.customValue
-
-                        expect(update).toEventually(equal(self.customValue))
-                    }
-                }
-                #endif
-
                 then("receives initial update being nil") {
                     let key = DefaultsKey<Serializable?>("test1")
 
@@ -616,35 +594,6 @@ extension DefaultsSerializableSpec where Serializable.T: Equatable, Serializable
                     expect(update?.newValue).toEventually(equal(self.customValue))
                 }
 
-                #if canImport(Combine)
-                if #available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *) {
-                    then("receives initial update being nil with publishers") {
-                        self.keyStore.testOptionalValue = DefaultsKey<Serializable?>("test3")
-
-                        var update: Serializable? = self.customValue
-                        let cancellable = defaults.publisher(for: \.testOptionalValue, options: [.initial, .old, .new])
-                            .sink { value in
-                                update = value
-                            }
-
-                        expect(update).toEventually(beNil())
-                    }
-
-                    then("receives initial update being non-nil with publishers") {
-                        self.keyStore.testOptionalValue = DefaultsKey<Serializable?>("test3")
-                        defaults[\.testOptionalValue] = self.customValue
-
-                        var update: Serializable?
-                        let cancellable = defaults.publisher(for: \.testOptionalValue, options: [.initial, .old, .new])
-                            .sink { value in
-                                update = value
-                            }
-
-                        expect(update).toEventually(equal(self.customValue))
-                    }
-                }
-                #endif
-
                 then("receives nil update") {
                     let key = DefaultsKey<Serializable?>("test")
 
@@ -674,24 +623,6 @@ extension DefaultsSerializableSpec where Serializable.T: Equatable, Serializable
                     expect(update).toEventuallyNot(beNil())
                     expect(update?.oldValue).toEventually(equal(self.defaultValue))
                     expect(update?.newValue).toEventually(beNil())
-                }
-                #endif
-
-                #if canImport(Combine)
-                if #available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *) {
-                    then("receives nil update with publisher") {
-                        self.keyStore.testOptionalValue = DefaultsKey<Serializable?>("test")
-
-                        var update: Serializable? = self.defaultValue
-                        let cancellable = defaults.publisher(for: \.testOptionalValue)
-                            .sink { value in
-                                update = value
-                            }
-                        defaults.testOptionalValue = self.defaultValue
-                        defaults.testOptionalValue = nil
-
-                        expect(update).toEventually(beNil())
-                    }
                 }
                 #endif
 
@@ -726,49 +657,6 @@ extension DefaultsSerializableSpec where Serializable.T: Equatable, Serializable
                     expect(update?.newValue).toEventually(beNil())
                 }
                 #endif
-
-                #if canImport(Combine)
-                if #available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *) {
-                    then("remove observer on dispose with publisher") {
-                        self.keyStore.testOptionalValue = DefaultsKey<Serializable?>("test")
-
-                        var updates = [Serializable?]()
-                        var completion: Subscribers.Completion<Never>?
-                        let cancellable = defaults.publisher(for: \.testOptionalValue)
-                            .sink(receiveCompletion: { receivedCompletion in
-                                completion = receivedCompletion
-                            }, receiveValue: { value in
-                                updates.append(value)
-                            })
-
-                        cancellable.cancel()
-                        defaults.testOptionalValue = self.customValue
-
-                        expect(updates).toEventuallyNot(equal([self.customValue]))
-                        expect(updates).toEventually(beEmpty())
-                        expect(completion).toEventually(equal(.finished))
-                    }
-
-                    then("remove observer when publisher not retained") {
-                        self.keyStore.testOptionalValue = DefaultsKey<Serializable?>("test")
-
-                        var updates = [Serializable?]()
-                        var completion: Subscribers.Completion<Never>?
-                        _ = defaults.publisher(for: \.testOptionalValue)
-                            .sink(receiveCompletion: { receivedCompletion in
-                                completion = receivedCompletion
-                            }, receiveValue: { value in
-                                updates.append(value)
-                            })
-
-                        defaults.testOptionalValue = self.customValue
-
-                        expect(updates).toEventuallyNot(equal([self.customValue]))
-                        expect(updates).toEventually(beEmpty())
-                        expect(completion).toEventually(equal(.finished))
-                    }
-                }
-                #endif
             }
 
             when("optional key with default value") {
@@ -799,24 +687,6 @@ extension DefaultsSerializableSpec where Serializable.T: Equatable, Serializable
 
                     expect(update?.oldValue).toEventually(equal(self.defaultValue))
                     expect(update?.newValue).toEventually(equal(self.customValue))
-                }
-                #endif
-
-                #if canImport(Combine)
-                if #available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *) {
-                    then("receive updates with publisher") {
-                        self.keyStore.testOptionalValue = DefaultsKey<Serializable?>("test", defaultValue: self.defaultValue)
-
-                        var update: Serializable?
-                        let cancellable = defaults.publisher(for: \.testOptionalValue)
-                            .sink { value in
-                                update = value
-                            }
-
-                        defaults.testOptionalValue = self.customValue
-
-                        expect(update).toEventually(equal(self.customValue))
-                    }
                 }
                 #endif
 
@@ -870,35 +740,6 @@ extension DefaultsSerializableSpec where Serializable.T: Equatable, Serializable
                     expect(update?.newValue).toEventually(equal(self.customValue))
                 }
 
-                #if canImport(Combine)
-                if #available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *) {
-                    then("receives initial update being default value with publishers") {
-                        self.keyStore.testOptionalValue = DefaultsKey<Serializable?>("test", defaultValue: self.defaultValue)
-
-                        var update: Serializable?
-                        let cancellable = defaults.publisher(for: \.testOptionalValue, options: [.initial, .old, .new])
-                            .sink { value in
-                                update = value
-                            }
-
-                        expect(update).toEventually(equal(self.defaultValue))
-                    }
-
-                    then("receives initial update being custom value with publishers") {
-                        self.keyStore.testOptionalValue = DefaultsKey<Serializable?>("test", defaultValue: self.defaultValue)
-                        defaults[\.testOptionalValue] = self.customValue
-
-                        var update: Serializable?
-                        let cancellable = defaults.publisher(for: \.testOptionalValue, options: [.initial, .old, .new])
-                            .sink { value in
-                                update = value
-                            }
-
-                        expect(update).toEventually(equal(self.customValue))
-                    }
-                }
-                #endif
-
                 then("receives nil update") {
                     let key = DefaultsKey<Serializable?>("test", defaultValue: self.defaultValue)
 
@@ -928,24 +769,6 @@ extension DefaultsSerializableSpec where Serializable.T: Equatable, Serializable
                     expect(update).toEventuallyNot(beNil())
                     expect(update?.oldValue).toEventually(equal(self.customValue))
                     expect(update?.newValue).toEventually(equal(self.defaultValue))
-                }
-                #endif
-
-                #if canImport(Combine)
-                if #available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *) {
-                    then("receives nil update with publisher") {
-                        self.keyStore.testOptionalValue = DefaultsKey<Serializable?>("test", defaultValue: self.defaultValue)
-
-                        var update: Serializable? = self.defaultValue
-                        let cancellable = defaults.publisher(for: \.testOptionalValue)
-                            .sink { value in
-                                update = value
-                            }
-                        defaults.testOptionalValue = self.customValue
-                        defaults.testOptionalValue = nil
-
-                        expect(update).toEventually(equal(self.defaultValue))
-                    }
                 }
                 #endif
 
@@ -980,49 +803,6 @@ extension DefaultsSerializableSpec where Serializable.T: Equatable, Serializable
                     expect(update?.newValue).toEventually(beNil())
                 }
                 #endif
-
-                #if canImport(Combine)
-                if #available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *) {
-                    then("remove observer on dispose with publisher") {
-                        self.keyStore.testOptionalValue = DefaultsKey<Serializable?>("test", defaultValue: self.defaultValue)
-
-                        var updates = [Serializable?]()
-                        var completion: Subscribers.Completion<Never>?
-                        let cancellable = defaults.publisher(for: \.testValue)
-                            .sink(receiveCompletion: { receivedCompletion in
-                                completion = receivedCompletion
-                            }, receiveValue: { value in
-                                updates.append(value)
-                            })
-
-                        cancellable.cancel()
-                        defaults.testOptionalValue = self.customValue
-
-                        expect(updates).toEventuallyNot(equal([self.customValue]))
-                        expect(updates).toEventually(beEmpty())
-                        expect(completion).toEventually(equal(.finished))
-                    }
-
-                    then("remove observer when publisher not retained") {
-                        self.keyStore.testOptionalValue = DefaultsKey<Serializable?>("test", defaultValue: self.defaultValue)
-
-                        var updates = [Serializable?]()
-                        var completion: Subscribers.Completion<Never>?
-                        _ = defaults.publisher(for: \.testOptionalValue)
-                            .sink(receiveCompletion: { receivedCompletion in
-                                completion = receivedCompletion
-                            }, receiveValue: { value in
-                                updates.append(value)
-                            })
-
-                        defaults.testOptionalValue = self.customValue
-
-                        expect(updates).toEventuallyNot(equal([self.customValue]))
-                        expect(updates).toEventually(beEmpty())
-                        expect(completion).toEventually(equal(.finished))
-                    }
-                }
-                #endif
             }
 
             when("non-optional key") {
@@ -1053,24 +833,6 @@ extension DefaultsSerializableSpec where Serializable.T: Equatable, Serializable
 
                     expect(update?.oldValue).toEventually(equal(self.defaultValue))
                     expect(update?.newValue).toEventually(equal(self.customValue))
-                }
-                #endif
-
-                #if canImport(Combine)
-                if #available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *) {
-                    then("receive updates with publisher") {
-                        self.keyStore.testValue = DefaultsKey<Serializable>("test", defaultValue: self.defaultValue)
-
-                        var update: Serializable?
-                        let cancellable = defaults.publisher(for: \.testValue)
-                            .sink { value in
-                                update = value
-                            }
-
-                        defaults.testValue = self.customValue
-
-                        expect(update).toEventually(equal(self.customValue))
-                    }
                 }
                 #endif
 
@@ -1124,35 +886,6 @@ extension DefaultsSerializableSpec where Serializable.T: Equatable, Serializable
                     expect(update?.newValue).toEventually(equal(self.customValue))
                 }
 
-                #if canImport(Combine)
-                if #available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *) {
-                    then("receives initial update being default value with publishers") {
-                        self.keyStore.testValue = DefaultsKey<Serializable>("test", defaultValue: self.defaultValue)
-
-                        var update: Serializable?
-                        let cancellable = defaults.publisher(for: \.testValue, options: [.initial, .old, .new])
-                            .sink { value in
-                                update = value
-                            }
-
-                        expect(update).toEventually(equal(self.defaultValue))
-                    }
-
-                    then("receives initial update being custom value with publishers") {
-                        self.keyStore.testValue = DefaultsKey<Serializable>("test", defaultValue: self.defaultValue)
-                        defaults[\.testValue] = self.customValue
-
-                        var update: Serializable?
-                        let cancellable = defaults.publisher(for: \.testValue, options: [.initial, .old, .new])
-                            .sink { value in
-                                update = value
-                            }
-
-                        expect(update).toEventually(equal(self.customValue))
-                    }
-                }
-                #endif
-
                 then("remove observer on dispose") {
                     let key = DefaultsKey<Serializable>("test", defaultValue: self.defaultValue)
 
@@ -1182,48 +915,6 @@ extension DefaultsSerializableSpec where Serializable.T: Equatable, Serializable
 
                     expect(update?.oldValue).toEventually(beNil())
                     expect(update?.newValue).toEventually(beNil())
-                }
-                #endif
-
-                #if canImport(Combine)
-                if #available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *) {
-                    then("remove observer on dispose with publisher") {
-                        self.keyStore.testValue = DefaultsKey<Serializable>("test", defaultValue: self.defaultValue)
-
-                        var updates = [Serializable]()
-                        var completion: Subscribers.Completion<Never>?
-                        let cancellable = defaults.publisher(for: \.testValue)
-                            .sink(receiveCompletion: { receivedCompletion in
-                                completion = receivedCompletion
-                            }, receiveValue: { value in
-                                updates.append(value)
-                            })
-
-                        cancellable.cancel()
-                        defaults.testValue = self.customValue
-
-                        expect(updates).toEventuallyNot(equal([self.customValue]))
-                        expect(updates).toEventually(beEmpty())
-                        expect(completion).toEventually(equal(.finished))
-                    }
-
-                    then("remove observer when publisher not retained") {
-                        self.keyStore.testValue = DefaultsKey<Serializable>("test", defaultValue: self.defaultValue)
-
-                        var updates = [Serializable?]()
-                        var completion: Subscribers.Completion<Never>?
-                        _ = defaults.publisher(for: \.testValue)
-                            .sink(receiveCompletion: { receivedCompletion in
-                                completion = receivedCompletion
-                            }, receiveValue: { value in
-                                updates.append(value)
-                            })
-
-                        defaults.testValue = self.customValue
-
-                        expect(updates).toEventuallyNot(equal([self.customValue]))
-                        expect(updates).toEventually(beEmpty())
-                    }
                 }
                 #endif
             }
