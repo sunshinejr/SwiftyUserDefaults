@@ -29,7 +29,6 @@ Migration guides: [from 4.x to 5.x](MigrationGuides/migration_4_to_5.md), [from 
 </p>
 <p align="center">
     <a href="#property-wrappers">Property wrappers</a> &bull;
-    <a href="#combine-publishers">Combine publishers</a> &bull;    
     <a href="#kvo">KVO</a> &bull;
     <a href="#keypath-dynamicMemberLookup">dynamicMemberLookup</a> &bull;
     <a href="#launch-arguments">Launch arguments</a> &bull;
@@ -344,41 +343,6 @@ struct Settings {
 }
 ```
 
-## Combine publishers
-
-SwiftyUserDefaults provides Combine extensions as well! If you can `import Combine` and use it, check the method on `DefaultsAdapter.publisher(for:)`. This allows you to observe the changes on given key and by specifing observing options as well!
-
-Usage. Given keys:
-```swift
-extension DefaultsKeys {
-    var userColorScheme: DefaultsKey<String> { .init("userColorScheme", defaultValue: "default") }
-    var userThemeName: DefaultsKey<String?> { .init("userThemeName") }
-    var userLastLoginDate: DefaultsKey<Date?> { .init("userLastLoginDate") }
-}
-```
-
-You can declare a `Test` class:
-```swift
-final class Test {
-
-    private var colorSchemeObserver: Cancellable?
-
-    func obserColorScheme() {
-        colorSchemeObserver = Defaults.publisher(for: \.colorSchemeObserver)
-            .sink { value in
-                // 
-            }
-
-        // or
-
-        colorSchemeObserver = Defaults.publisher(for: \.colorSchemeObserver, options: [.initial, .new]) // by default you won't get initial value
-            .sink { value in
-                // 
-            }
-    }
-}
-```
-
 ## KVO
 
 KVO is supported for all the types that are `DefaultsSerializable`. However, if you have a custom type, it needs to have correctly defined bridges and serialization in them.
@@ -510,15 +474,6 @@ Just add to your Cartfile:
 
 ```ruby
 github "sunshinejr/SwiftyUserDefaults" "5.0.0-beta.4"
-```
-
-#### SwiftyUserDefaults 5+, Carthage and Xcode 10
-
-If you are using this specific stack (no SPM/CocoaPods, no Xcode 11), you need to do a little bit more in order to install SwiftyUserDefaults. This is because Xcode 10 doesn't see Combine as a framework and so it cannot "weakly link it". Below is a script that should get you through the installation process:
-```bash
-carthage update SwiftyUserDefaults --platform iOS --no-build
-./Carthage/Checkouts/SwiftyUserDefaults/scripts/carthage-xcode10-compat.sh
-carthage build SwiftyUserDefaults --platform iOS
 ```
 
 ### Swift Package Manager
