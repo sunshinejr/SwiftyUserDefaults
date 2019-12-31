@@ -63,8 +63,8 @@ public final class SwiftyUserDefault<T: DefaultsSerializable> where T.T == T {
         self.options = options
 
         if options.contains(.observed) {
-            observation = adapter.observe(key) { update in
-                self._value = update.newValue
+            observation = adapter.observe(key) { [weak self] update in
+                self?._value = update.newValue
             }
         }
     }
@@ -74,8 +74,8 @@ public final class SwiftyUserDefault<T: DefaultsSerializable> where T.T == T {
         self.options = options
 
         if options.contains(.observed) {
-            observation = Defaults.observe(key) { update in
-                self._value = update.newValue
+            observation = Defaults.observe(key) { [weak self] update in
+                self?._value = update.newValue
             }
         }
     }
