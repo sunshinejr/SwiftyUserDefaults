@@ -24,11 +24,15 @@
 
 import Foundation
 
+public protocol RawKeyRepresentable {
+  var _key: String { get }
+}
+
 // MARK: - Static keys
 
 /// Specialize with value type
 /// and pass key name to the initializer to create a key.
-public struct DefaultsKey<ValueType: DefaultsSerializable> {
+public struct DefaultsKey<ValueType: DefaultsSerializable>: RawKeyRepresentable {
 
     public let _key: String
     public let defaultValue: ValueType.T?

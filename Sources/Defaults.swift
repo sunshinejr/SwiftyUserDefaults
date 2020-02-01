@@ -34,6 +34,8 @@ import Foundation
 
 public var Defaults = DefaultsAdapter<DefaultsKeys>(defaults: .standard, keyStore: .init())
 
+// MARK: - UserDefaults
+
 public extension UserDefaults {
 
     /// Returns `true` if `key` exists
@@ -78,5 +80,32 @@ internal extension UserDefaults {
         } catch {
             assertionFailure("Failure encoding encodable of type \(T.self): \(error.localizedDescription)")
         }
+    }
+}
+
+// MARK: - NSUbiquitousKeyValueStore
+
+extension NSUbiquitousKeyValueStore {
+
+    /// Returns `true` if `key` exists
+    func hasKey<T>(_ key: DefaultsKey<T>) -> Bool {
+        return object(forKey: key._key) != nil
+    }
+
+    /// Removes value for `key`
+    func remove<T>(_ key: DefaultsKey<T>) {
+        removeObject(forKey: key._key)
+        synchronize()
+    }
+
+    /// Removes all keys and values from user defaults
+    /// Use with caution!
+    /// - Note: This method only removes keys on the receiver `NSUbiquitousKeyValueStore` object.
+    ///         System-defined keys will still be present afterwards.
+    func removeAll() {
+        for (key, _) in dictionaryRepresentation {
+            removeObject(forKey: key)
+        }
+        synchronize()
     }
 }

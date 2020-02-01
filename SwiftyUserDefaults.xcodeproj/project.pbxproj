@@ -28,6 +28,8 @@
 		9FA427F1D84703CE8EC6CD38 /* Defaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE155E06F856DFEF78FD63F7 /* Defaults.swift */; };
 		A3CAE6734DDE8FD952CE2CF2 /* Defaults+Subscripts.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF92C9F82ABF7807D4D4DDDD /* Defaults+Subscripts.swift */; };
 		ACE14E08E7B3EECD55B932B3 /* Defaults+Dictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D8980553F1615D4ACB4AA43 /* Defaults+Dictionary.swift */; };
+		B01ABE9223E4798200E5E003 /* DefaultsSyncer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B01ABE9123E4798200E5E003 /* DefaultsSyncer.swift */; };
+		B056341D23E3C5DD006D08EE /* Defaults+Syncing.swift in Sources */ = {isa = PBXBuildFile; fileRef = B056341C23E3C5DD006D08EE /* Defaults+Syncing.swift */; };
 		B31C4E974609611EF7360E51 /* Defaults+Double.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8790CE5B53F91DAD51975EDC /* Defaults+Double.swift */; };
 		C1EF5E679553F49B4C163561 /* SwiftyUserDefaults.h in Headers */ = {isa = PBXBuildFile; fileRef = B134969522555B348C06FD6C /* SwiftyUserDefaults.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		CC4CF6A63F6AA1B932D6757E /* DefaultsBridges.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20EBA39F1E25782FDC1CFC36 /* DefaultsBridges.swift */; };
@@ -69,6 +71,8 @@
 		9701991125BC1345631E831E /* DefaultsObserver.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = DefaultsObserver.swift; path = Sources/DefaultsObserver.swift; sourceTree = "<group>"; };
 		A574FF49CBCEBCCEAE9BD42E /* Defaults+String.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Defaults+String.swift"; path = "Tests/SwiftyUserDefaultsTests/Built-ins/Defaults+String.swift"; sourceTree = "<group>"; };
 		A5A5BEEC51B2A01157F9965F /* Defaults+BestFroggiesEnum.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Defaults+BestFroggiesEnum.swift"; path = "Tests/SwiftyUserDefaultsTests/External types/Defaults+BestFroggiesEnum.swift"; sourceTree = "<group>"; };
+		B01ABE9123E4798200E5E003 /* DefaultsSyncer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DefaultsSyncer.swift; path = Sources/DefaultsSyncer.swift; sourceTree = "<group>"; };
+		B056341C23E3C5DD006D08EE /* Defaults+Syncing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Defaults+Syncing.swift"; path = "Sources/Defaults+Syncing.swift"; sourceTree = "<group>"; };
 		B134969522555B348C06FD6C /* SwiftyUserDefaults.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SwiftyUserDefaults.h; path = Sources/SwiftyUserDefaults.h; sourceTree = "<group>"; };
 		BF92C9F82ABF7807D4D4DDDD /* Defaults+Subscripts.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Defaults+Subscripts.swift"; path = "Sources/Defaults+Subscripts.swift"; sourceTree = "<group>"; };
 		CB55DC75BF69CEA7DB03750E /* BuiltIns.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BuiltIns.swift; path = Sources/BuiltIns.swift; sourceTree = "<group>"; };
@@ -131,6 +135,8 @@
 				85096B65E07A3BC7F856F0D1 /* OptionalType.swift */,
 				858E15CF231FEC2F00DC1418 /* PropertyWrappers.swift */,
 				B134969522555B348C06FD6C /* SwiftyUserDefaults.h */,
+				B056341C23E3C5DD006D08EE /* Defaults+Syncing.swift */,
+				B01ABE9123E4798200E5E003 /* DefaultsSyncer.swift */,
 			);
 			name = Sources;
 			sourceTree = "<group>";
@@ -165,7 +171,9 @@
 				1A0E1BA11455E9E44F192EAA /* Sources */,
 				C14BA19AA073B0F4B6ED9A3D /* Tests */,
 			);
+			indentWidth = 4;
 			sourceTree = "<group>";
+			tabWidth = 4;
 		};
 		5BF9A4C7B374362259AAD1B0 /* Built-ins */ = {
 			isa = PBXGroup;
@@ -357,8 +365,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				858E15D0231FEC2F00DC1418 /* PropertyWrappers.swift in Sources */,
+				B01ABE9223E4798200E5E003 /* DefaultsSyncer.swift in Sources */,
 				D102C1011A4314AFF773DCD5 /* Defaults+StringToBool.swift in Sources */,
 				037280C1C6C68BDB8E3759E6 /* DefaultsKey.swift in Sources */,
+				B056341D23E3C5DD006D08EE /* Defaults+Syncing.swift in Sources */,
 				CC4CF6A63F6AA1B932D6757E /* DefaultsBridges.swift in Sources */,
 				ED39909122B0204E0046F502 /* DefaultsKeys.swift in Sources */,
 				A3CAE6734DDE8FD952CE2CF2 /* Defaults+Subscripts.swift in Sources */,
