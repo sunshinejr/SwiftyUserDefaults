@@ -85,7 +85,7 @@ internal extension UserDefaults {
 
 // MARK: - NSUbiquitousKeyValueStore
 
-extension NSUbiquitousKeyValueStore {
+public extension NSUbiquitousKeyValueStore {
 
     /// Returns `true` if `key` exists
     func hasKey<T>(_ key: DefaultsKey<T>) -> Bool {
@@ -98,10 +98,8 @@ extension NSUbiquitousKeyValueStore {
         synchronize()
     }
 
-    /// Removes all keys and values from user defaults
+    /// Removes all keys and values from iCloud
     /// Use with caution!
-    /// - Note: This method only removes keys on the receiver `NSUbiquitousKeyValueStore` object.
-    ///         System-defined keys will still be present afterwards.
     func removeAll() {
         for (key, _) in dictionaryRepresentation {
             removeObject(forKey: key)
