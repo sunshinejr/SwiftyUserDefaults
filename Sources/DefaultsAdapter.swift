@@ -45,10 +45,12 @@ public struct DefaultsAdapter<KeyStore: DefaultsKeyStore> {
 
     public let defaults: UserDefaults
     public let keyStore: KeyStore
+    internal let syncer: DefaultsSyncer
 
     public init(defaults: UserDefaults, keyStore: KeyStore) {
         self.defaults = defaults
         self.keyStore = keyStore
+        self.syncer = DefaultsSyncer(defaults: defaults)
     }
 
     @available(*, unavailable)

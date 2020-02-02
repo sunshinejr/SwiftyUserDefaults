@@ -25,11 +25,9 @@
 #if !os(Linux)
 
 public extension DefaultsAdapter {
-
-    @available(macOS 10.11, iOS 9.0, *)
-    func syncKeys(_ keyPath: [(KeyStore) -> RawKeyRepresentable]) {
-        let keys = Set(keyPath.map { $0(keyStore)._key })
-        DefaultsSyncer.shared.syncedKeys = keys
+    func syncKeys(_ keys: [(KeyStore) -> RawKeyRepresentable]) {
+        let keys = Set(keys.map { $0(keyStore)._key })
+        syncer.syncedKeys = keys
     }
 }
 

@@ -25,19 +25,17 @@
 
 import Foundation
 
-// The OS requirment just to ignore dealing with unregistering notifications
-@available(macOS 10.11, iOS 9.0, *)
 internal class DefaultsSyncer {
-
-    var syncedKeys = Set<String>() {
-        didSet { syncFromICloud() }
-    }
 
     let defaults: UserDefaults
 
-    private init(defaults: UserDefaults) {
+    var syncedKeys = Set<String>() {
+        didSet { iCloudDefaultsDidUpdate() }
+    }
+
+    init(defaults: UserDefaults) {
         self.defaults = defaults
-        syncFromICloud()
+        iCloudDefaultsDidUpdate()
         NotificationCenter.default.addSafeObserver(self,
                                                    selector: #selector(iCloudDefaultsDidUpdate),
                                                    name: NSUbiquitousKeyValueStore.didChangeExternallyNotification)
@@ -48,16 +46,19 @@ internal class DefaultsSyncer {
 
     @objc
     private func iCloudDefaultsDidUpdate() {
-        NotificationCenter.default.removeObserver(self, name: UserDefaults.didChangeNotification, object: nil)
+        guard !syncedKeys.isEmpty else { return }
 
-        syncFromICloud()
+        // HouseKeeping
+        NotificationCenter.default.removeObserver(self,
+                                                  name: UserDefaults.didChangeNotification,
+                                                  object: nil)
+        defer {
+            NotificationCenter.default.addSafeObserver(self,
+                                                       selector: #selector(localDefaultsDidUpdate),
+                                                       name: UserDefaults.didChangeNotification)
+        }
 
-        NotificationCenter.default.addSafeObserver(self,
-                                                   selector: #selector(localDefaultsDidUpdate),
-                                                   name: UserDefaults.didChangeNotification)
-    }
-
-    private func syncFromICloud() {
+        // Implementation
         let allICloudKeys = Set(NSUbiquitousKeyValueStore.default.dictionaryRepresentation.keys)
         let updatedSyncedKeys = allICloudKeys.filter { syncedKeys.contains($0) }
         updatedSyncedKeys.forEach { key in
@@ -68,6 +69,7 @@ internal class DefaultsSyncer {
 
     @objc
     private func localDefaultsDidUpdate() {
+        guard !syncedKeys.isEmpty else { return }
         syncedKeys.forEach { key in
             let localValue = defaults.object(forKey: key)
             NSUbiquitousKeyValueStore.default.set(localValue, forKey: key)
@@ -76,11 +78,14 @@ internal class DefaultsSyncer {
         NSUbiquitousKeyValueStore.default.synchronize()
     }
 
-}
-
-@available(macOS 10.11, iOS 9.0, *)
-internal extension DefaultsSyncer {
-    static let shared = DefaultsSyncer(defaults: Defaults.defaults)
+    deinit {
+        NotificationCenter.default.removeObserver(self,
+                                                  name: UserDefaults.didChangeNotification,
+                                                  object: nil)
+        NotificationCenter.default.removeObserver(self,
+                                                  name: NSUbiquitousKeyValueStore.didChangeExternallyNotification,
+                                                  object: nil)
+    }
 }
 
 private extension NotificationCenter {
