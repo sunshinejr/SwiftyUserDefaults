@@ -35,7 +35,6 @@ internal class DefaultsSyncer {
 
     init(defaults: UserDefaults) {
         self.defaults = defaults
-        iCloudDefaultsDidUpdate()
         NotificationCenter.default.addSafeObserver(self,
                                                    selector: #selector(iCloudDefaultsDidUpdate),
                                                    name: NSUbiquitousKeyValueStore.didChangeExternallyNotification)
