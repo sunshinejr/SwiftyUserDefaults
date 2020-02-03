@@ -28,16 +28,12 @@ public extension DefaultsAdapter {
 
     func startSyncing(for keyPaths: PartialKeyPath<KeyStore>...) {
         let rawKeys = keyPaths.map { keyStore[keyPath: $0] }.compactMap { $0 as? RawKeyRepresentable }.map { $0._key }
-        rawKeys.forEach {
-            syncer.syncedKeys.insert($0)
-        }
+        syncer.syncedKeys.formUnion(rawKeys)
     }
 
     func stopSyncing(for keyPaths: PartialKeyPath<KeyStore>...) {
         let rawKeys = keyPaths.map { keyStore[keyPath: $0] }.compactMap { $0 as? RawKeyRepresentable }.map { $0._key }
-        rawKeys.forEach {
-            syncer.syncedKeys.remove($0)
-        }
+        syncer.syncedKeys.subtract(rawKeys)
     }
 
     func stopSyncingAll() {
