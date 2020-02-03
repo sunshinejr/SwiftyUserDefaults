@@ -22,7 +22,7 @@
 // SOFTWARE.
 //
 
-#if !os(Linux)
+#if !os(Linux) && !os(watchOS)
 
 public extension DefaultsAdapter {
 

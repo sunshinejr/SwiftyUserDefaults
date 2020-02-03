@@ -83,6 +83,8 @@ internal extension UserDefaults {
     }
 }
 
+#if !os(Linux) && !os(watchOS)
+
 // MARK: - NSUbiquitousKeyValueStore
 
 public extension NSUbiquitousKeyValueStore {
@@ -107,3 +109,5 @@ public extension NSUbiquitousKeyValueStore {
         synchronize()
     }
 }
+
+#endif
