@@ -24,7 +24,7 @@
 
 import Foundation
 
-public protocol RawKeyRepresentable {
+internal protocol RawKeyRepresentable {
   var _key: String { get }
 }
 

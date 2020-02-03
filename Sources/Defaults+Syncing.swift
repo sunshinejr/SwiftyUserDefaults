@@ -25,10 +25,25 @@
 #if !os(Linux)
 
 public extension DefaultsAdapter {
-    func syncKeys(_ keys: [(KeyStore) -> RawKeyRepresentable]) {
-        let keys = Set(keys.map { $0(keyStore)._key })
-        syncer.syncedKeys = keys
+
+    func startSyncing(for keyPaths: PartialKeyPath<KeyStore>...) {
+        let rawKeys = keyPaths.map { keyStore[keyPath: $0] }.compactMap { $0 as? RawKeyRepresentable }.map { $0._key }
+        rawKeys.forEach {
+            syncer.syncedKeys.insert($0)
+        }
     }
+
+    func stopSyncing(for keyPaths: PartialKeyPath<KeyStore>...) {
+        let rawKeys = keyPaths.map { keyStore[keyPath: $0] }.compactMap { $0 as? RawKeyRepresentable }.map { $0._key }
+        rawKeys.forEach {
+            syncer.syncedKeys.remove($0)
+        }
+    }
+
+    func stopSyncingAll() {
+        syncer.syncedKeys = []
+    }
+
 }
 
 #endif
