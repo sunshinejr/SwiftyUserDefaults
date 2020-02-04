@@ -36,6 +36,10 @@ public extension DefaultsAdapter {
         syncer.syncedKeys.subtract(rawKeys)
     }
 
+    func forceSync() {
+        syncer.forceSync()
+    }
+
     func stopSyncingAll() {
         syncer.syncedKeys = []
     }

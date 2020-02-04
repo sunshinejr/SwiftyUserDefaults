@@ -29,9 +29,7 @@ internal class DefaultsSyncer {
 
     let defaults: UserDefaults
 
-    var syncedKeys = Set<String>() {
-        didSet { iCloudDefaultsDidUpdate() }
-    }
+    var syncedKeys = Set<String>()
 
     init(defaults: UserDefaults) {
         self.defaults = defaults
@@ -41,6 +39,11 @@ internal class DefaultsSyncer {
         NotificationCenter.default.addSafeObserver(self,
                                                    selector: #selector(localDefaultsDidUpdate),
                                                    name: UserDefaults.didChangeNotification)
+    }
+
+    internal func forceSync() {
+        iCloudDefaultsDidUpdate()
+        localDefaultsDidUpdate()
     }
 
     @objc
