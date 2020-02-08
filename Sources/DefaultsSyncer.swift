@@ -25,14 +25,28 @@
 
 import Foundation
 
+internal protocol RemoteStore {
+    var dictionaryRepresentation: [String: Any] { get }
+
+    func object(forKey defaultName: String) -> Any?
+    func set(_ anObject: Any?, forKey aKey: String)
+    @discardableResult func synchronize() -> Bool
+}
+
+extension NSUbiquitousKeyValueStore: RemoteStore {
+}
+
 internal class DefaultsSyncer {
 
-    let defaults: UserDefaults
+    private let defaults: UserDefaults
+    private let remoteStore: RemoteStore
 
     var syncedKeys = Set<String>()
 
-    init(defaults: UserDefaults) {
+    init(defaults: UserDefaults, remoteStore: RemoteStore) {
         self.defaults = defaults
+        self.remoteStore = remoteStore
+
         NotificationCenter.default.addSafeObserver(self,
                                                    selector: #selector(iCloudDefaultsDidUpdate),
                                                    name: NSUbiquitousKeyValueStore.didChangeExternallyNotification)
@@ -61,10 +75,10 @@ internal class DefaultsSyncer {
         }
 
         // Implementation
-        let allICloudKeys = Set(NSUbiquitousKeyValueStore.default.dictionaryRepresentation.keys)
+        let allICloudKeys = Set(remoteStore.dictionaryRepresentation.keys)
         let updatedSyncedKeys = allICloudKeys.filter { syncedKeys.contains($0) }
         updatedSyncedKeys.forEach { key in
-            let iCloudValue = NSUbiquitousKeyValueStore.default.object(forKey: key)
+            let iCloudValue = remoteStore.object(forKey: key)
             defaults.set(iCloudValue, forKey: key)
         }
     }
@@ -74,10 +88,10 @@ internal class DefaultsSyncer {
         guard !syncedKeys.isEmpty else { return }
         syncedKeys.forEach { key in
             let localValue = defaults.object(forKey: key)
-            NSUbiquitousKeyValueStore.default.set(localValue, forKey: key)
+            remoteStore.set(localValue, forKey: key)
         }
         // request upload to ICloud
-        NSUbiquitousKeyValueStore.default.synchronize()
+        remoteStore.synchronize()
     }
 
     deinit {

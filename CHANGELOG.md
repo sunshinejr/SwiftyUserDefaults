@@ -1,4 +1,5 @@
 ### Next
+* Added support for iCloud syncing via `Defaults.syncKeys([])`. [@StevenMagdy](https://github.com/StevenMagdy)
 
 ### 5.3.0 (2021-02-24)
 * Renamed `OptionalType.empty` to `OptionalType.__swifty_empty`. Also removed the `OptionalType.wrapped` since it wasn't used in the framework anymore. Please note that this still shouldn't be something you rely on tho, we're gonna explore ways to remove the public `OptionalType` in a future releases. [@sunshinejr](https://github.com/sunshinejr)
