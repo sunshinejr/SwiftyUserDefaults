@@ -347,13 +347,21 @@ struct Settings {
 
 KVO is supported for all the types that are `DefaultsSerializable`. However, if you have a custom type, it needs to have correctly defined bridges and serialization in them.
 
-To observe a value:
+To observe a value for local DefaultsKey:
 ```swift
 let nameKey = DefaultsKey<String>("name", defaultValue: "")
 Defaults.observe(key: nameKey) { update in
 	// here you can access `oldValue`/`newValue` and few other properties
 }
 ```
+
+To observe a value for a key defined in DefaultsKeys extension:
+```swift
+Defaults.observe(\.nameKey) { update in
+	// here you can access `oldValue`/`newValue` and few other properties
+}
+```
+
 
 By default we are using `[.old, .new]` options for observing, but you can provide your own:
 ```swift
