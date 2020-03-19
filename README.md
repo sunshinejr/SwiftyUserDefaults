@@ -44,8 +44,8 @@ Define your keys!
 
 ```swift
 extension DefaultsKeys {
-    var username: DefaultsKey<String?> { return .init("username") }
-    var launchCount: DefaultsKey<Int> { return .init("launchCount", defaultValue: 0) }
+    var username: DefaultsKey<String?> { .init("username") }
+    var launchCount: DefaultsKey<Int> { .init("launchCount", defaultValue: 0) }
 }
 ```
 
@@ -104,8 +104,8 @@ For extra convenience, define your keys by extending magic `DefaultsKeys` class 
 
 ```swift
 extension DefaultsKeys {
-    var username: DefaultsKey<String?> { return .init("username") }
-    var launchCount: DefaultsKey<Int> { return .init("launchCount", defaultValue: 0) }
+    var username: DefaultsKey<String?> { .init("username") }
+    var launchCount: DefaultsKey<Int> { .init("launchCount", defaultValue: 0) }
 }
 ```
 
@@ -213,7 +213,7 @@ For instance, this is a bridge for single value data storing/retrieving using `N
 public struct DefaultsKeyedArchiverBridge<T>: DefaultsBridge {
 
     public func get(key: String, userDefaults: UserDefaults) -> T? {
-        return userDefaults.data(forKey: key).flatMap(NSKeyedUnarchiver.unarchiveObject) as? T
+        userDefaults.data(forKey: key).flatMap(NSKeyedUnarchiver.unarchiveObject) as? T
     }
 
     public func save(key: String, value: T?, userDefaults: UserDefaults) {
@@ -235,11 +235,11 @@ public struct DefaultsArrayBridge<T: Collection>: DefaultsBridge {
     }
 
     public func get(key: String, userDefaults: UserDefaults) -> T? {
-        return userDefaults.array(forKey: key) as? T
+        userDefaults.array(forKey: key) as? T
     }
 
     public func deserialize(_ object: Any) -> T? {
-        return nil
+        nil
     }
 }
 ```
@@ -248,8 +248,8 @@ Now, to use these bridges in our type we simply declare it as follows:
 ```swift
 struct FrogCustomSerializable: DefaultsSerializable {
 
-    static var _defaults: DefaultsBridge<FrogCustomSerializable> { return DefaultsKeyedArchiverBridge() }
-    static var _defaultsArray: DefaultsBridge<[FrogCustomSerializable]> { return DefaultsKeyedArchiverBridge() }
+    static var _defaults: DefaultsBridge<FrogCustomSerializable> { DefaultsKeyedArchiverBridge() }
+    static var _defaultsArray: DefaultsBridge<[FrogCustomSerializable]> { DefaultsKeyedArchiverBridge() }
 
     let name: String
 }
@@ -276,7 +276,7 @@ final class DefaultsFrogBridge: DefaultsBridge {
 
 final class DefaultsFrogArrayBridge: DefaultsBridge {
     func get(key: String, userDefaults: UserDefaults) -> [FrogCustomSerializable]? {
-        return userDefaults.array(forKey: key)?
+        userDefaults.array(forKey: key)?
             .compactMap { $0 as? String }
             .map(FrogCustomSerializable.init)
     }
@@ -295,8 +295,8 @@ final class DefaultsFrogArrayBridge: DefaultsBridge {
 
 struct FrogCustomSerializable: DefaultsSerializable, Equatable {
 
-    static var _defaults: DefaultsFrogBridge { return DefaultsFrogBridge() }
-    static var _defaultsArray: DefaultsFrogArrayBridge { return DefaultsFrogArrayBridge() }
+    static var _defaults: DefaultsFrogBridge { DefaultsFrogBridge() }
+    static var _defaultsArray: DefaultsFrogArrayBridge { DefaultsFrogArrayBridge() }
 
     let name: String
 }
@@ -305,8 +305,8 @@ struct FrogCustomSerializable: DefaultsSerializable, Equatable {
 To support existing types with different bridges, you can extend it similarly:
 ```swift
 extension Data: DefaultsSerializable {
-    public static var _defaultsArray: DefaultsArrayBridge<[T]> { return DefaultsArrayBridge() }
-    public static var _defaults: DefaultsDataBridge { return DefaultsDataBridge() }
+    public static var _defaultsArray: DefaultsArrayBridge<[T]> { DefaultsArrayBridge() }
+    public static var _defaults: DefaultsDataBridge { DefaultsDataBridge() }
 }
 ```
 
@@ -366,8 +366,8 @@ SwiftyUserDefaults makes KeyPath dynamicMemberLookup usable in Swift 5.1!
 
 ```swift
 extension DefaultsKeys {
-    var username: DefaultsKey<String?> { return .init("username") }
-    var launchCount: DefaultsKey<Int> { return .init("launchCount", defaultValue: 0) }
+    var username: DefaultsKey<String?> { .init("username") }
+    var launchCount: DefaultsKey<Int> { .init("launchCount", defaultValue: 0) }
 }
 ```
 
