@@ -70,13 +70,13 @@ internal extension UserDefaults {
     }
 
     /// Encodes passed `encodable` and saves the resulting data into the user defaults for the key `key`.
-    /// Any error encoding will result in an assertion failure.
+    /// Any error encoding will result in an fatal error.
     func set<T: Encodable>(encodable: T, forKey key: String) {
         do {
             let data = try JSONEncoder().encode(encodable)
             set(data, forKey: key)
         } catch {
-            assertionFailure("Failure encoding encodable of type \(T.self): \(error.localizedDescription)")
+            fatalError("Failure encoding encodable of type \(T.self): \(error.localizedDescription)")
         }
     }
 }
