@@ -1,5 +1,7 @@
 ### Next
 
+* Changed form assertionFailure to fatalError. [@funzin](https://github.com/funzin)
+
 ### 5.0.0 (2019-12-31)
 * 🚀
 
