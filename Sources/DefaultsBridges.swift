@@ -153,6 +153,33 @@ public struct DefaultsDoubleBridge: DefaultsBridge {
     }
 }
 
+public struct DefaultsFloatBridge: DefaultsBridge {
+
+    public init() {}
+
+    public func save(key: String, value: Float?, userDefaults: UserDefaults) {
+        userDefaults.set(value, forKey: key)
+    }
+
+    public func get(key: String, userDefaults: UserDefaults) -> Float? {
+        if let float = userDefaults.number(forKey: key)?.floatValue {
+            return float
+        }
+
+        // Fallback for launch arguments
+        if let string = userDefaults.object(forKey: key) as? String,
+            let float = Float(string) {
+            return float
+        }
+
+        return nil
+    }
+
+    public func deserialize(_ object: Any) -> Float? {
+        return nil
+    }
+}
+
 public struct DefaultsBoolBridge: DefaultsBridge {
 
     public init() {}

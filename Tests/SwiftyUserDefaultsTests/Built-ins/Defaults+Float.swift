@@ -22,23 +22,26 @@
 // SOFTWARE.
 //
 
-import XCTest
 import Quick
 
-@testable import SwiftyUserDefaultsTests
+final class DefaultsFloatSpec: QuickSpec, DefaultsSerializableSpec {
 
-QCKMain([
-    DefaultsBoolSpec.self,
-    DefaultsDataSpec.self,
-    DefaultsDateSpec.self,
-    DefaultsDictionarySpec.self,
-    DefaultsDoubleSpec.self,
-    DefaultsFloatSpec.self,
-    DefaultsIntSpec.self,
-    DefaultsStringSpec.self,
-    DefaultsUrlSpec.self,
-    DefaultsBestFroggiesEnumSerializableSpec.self,
-    DefaultsFrogCodableSpec.self,
-    DefaultsFrogCustomSerializableSpec.self,
-    DefaultsFrogSerializableSpec.self
-])
+    typealias Serializable = Float
+
+    var customValue: Float = 2.0
+    var defaultValue: Float = 1.0
+    var keyStore = FrogKeyStore<Serializable>()
+
+    override func spec() {
+        given("Float") {
+            self.testValues()
+            self.testOptionalValues()
+            self.testOptionalValuesWithoutDefaultValue()
+            self.testObserving()
+            self.testPlistRegisteringValues(valueStrings: ["0": 0.0,
+                                                           "1": 1.0,
+                                                           "2": 2.0,
+                                                           "31.0": 31.0])
+        }
+    }
+}

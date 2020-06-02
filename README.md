@@ -127,6 +127,7 @@ Here's a full table of built-in single value defaults:
 | `String`         | `[String]`           |
 | `Int`            | `[Int]`              |
 | `Double`         | `[Double]`           |
+| `Float`         | `[Float]`           |
 | `Bool`           | `[Bool]`             |
 | `Data`           | `[Data]`             |
 | `Date`           | `[Date]`             |
@@ -404,7 +405,7 @@ Defaults.color?.whiteComponent // => 1.0
 
 Do you like to customize your app/script/tests by UserDefaults? Now it's fully supported on our side, statically typed of course.
 
-_Note: for now we support only `Bool`, `Double`, `Int`, `String` values, but if you have any other requests for that feature, please open an issue or PR and we can talk about implementing it in new versions._
+_Note: for now we support only `Bool`, `Double`, `Float`, `Int`, `String` values, but if you have any other requests for that feature, please open an issue or PR and we can talk about implementing it in new versions._
 
 ### You can pass your arguments in your schema:
 <img src="https://i.imgur.com/SDpOBpK.png" alt="Pass launch arguments in Xcode Schema editor." />
