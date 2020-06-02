@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		037280C1C6C68BDB8E3759E6 /* DefaultsKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 706E690EF2E4010781480303 /* DefaultsKey.swift */; };
+		06C976592485F23300A98342 /* Defaults+Float.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06C976572485F22500A98342 /* Defaults+Float.swift */; };
 		0E71124AE86362E623F9C4DA /* Defaults+FrogCustomSerializable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F86AA1AB9F6F553C03DBF0F9 /* Defaults+FrogCustomSerializable.swift */; };
 		171A4CE31F41418FF55DA46D /* TestHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0EE0402DB7DB637D79FEC2B /* TestHelper.swift */; };
 		18B46EAC09475D8404C7DF3A /* DefaultsSerializableSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EFFE22277FA6C163E34F4D2 /* DefaultsSerializableSpec.swift */; };
@@ -51,6 +52,7 @@
 
 /* Begin PBXFileReference section */
 		041FE3F6B58F219CAAE0AD64 /* Defaults+Int.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Defaults+Int.swift"; path = "Tests/SwiftyUserDefaultsTests/Built-ins/Defaults+Int.swift"; sourceTree = "<group>"; };
+		06C976572485F22500A98342 /* Defaults+Float.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Defaults+Float.swift"; path = "Tests/SwiftyUserDefaultsTests/Built-ins/Defaults+Float.swift"; sourceTree = "<group>"; };
 		11FDEA0BD7078D2633741F60 /* Defaults+StringToBool.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Defaults+StringToBool.swift"; path = "Sources/Defaults+StringToBool.swift"; sourceTree = "<group>"; };
 		161E961FF7D84853F6369DEE /* Defaults+FrogSerializable.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Defaults+FrogSerializable.swift"; path = "Tests/SwiftyUserDefaultsTests/External types/Defaults+FrogSerializable.swift"; sourceTree = "<group>"; };
 		1A9683391DA938C5FBDD29A7 /* SwiftyUserDefaults.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftyUserDefaults.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -174,6 +176,7 @@
 				041FE3F6B58F219CAAE0AD64 /* Defaults+Int.swift */,
 				E57735ECA0C2F413E8EBC2E4 /* Defaults+Bool.swift */,
 				8790CE5B53F91DAD51975EDC /* Defaults+Double.swift */,
+				06C976572485F22500A98342 /* Defaults+Float.swift */,
 				3D8980553F1615D4ACB4AA43 /* Defaults+Dictionary.swift */,
 				78703A0F180A4B7C450CD191 /* Defaults+Data.swift */,
 				2F97C9DDE34857798EA6519B /* Defaults+Date.swift */,
@@ -346,6 +349,7 @@
 				9092B7096C074A8FE5B1324B /* UserDefaults+PropertyList.swift in Sources */,
 				0E71124AE86362E623F9C4DA /* Defaults+FrogCustomSerializable.swift in Sources */,
 				8ED3B92CC68C3F2B7448D868 /* Defaults+FrogCodable.swift in Sources */,
+				06C976592485F23300A98342 /* Defaults+Float.swift in Sources */,
 				965E729E5D4814BDFEC42A97 /* Defaults+FrogSerializable.swift in Sources */,
 				30366F181855444010BCC954 /* Defaults+Color.swift in Sources */,
 				F73433D64DE45C8219A51BED /* Defaults+BestFroggiesEnum.swift in Sources */,
