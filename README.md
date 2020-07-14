@@ -329,7 +329,7 @@ extension DefaultsKeys {
 }
 ```
 
-You can declare a `Test` struct:
+You can declare a `Settings` struct:
 ```swift
 struct Settings {
     @SwiftyUserDefault(keyPath: \.userColorScheme)
