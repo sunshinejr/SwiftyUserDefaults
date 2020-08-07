@@ -44,8 +44,9 @@ Define your keys!
 
 ```swift
 extension DefaultsKeys {
-    var username: DefaultsKey<String?> { .init("username") }
-    var launchCount: DefaultsKey<Int> { .init("launchCount", defaultValue: 0) }
+    var username: DefaultsKey<String?> { .init() }
+    var launchCount: DefaultsKey<Int> { .init(defaultValue: 0) }
+    var hotkeyEnabled: DefaultsKey<Bool> { .init("custom_key", defaultValue: true) }
 }
 ```
 
