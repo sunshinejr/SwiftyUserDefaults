@@ -248,8 +248,8 @@ Now, to use these bridges in our type we simply declare it as follows:
 ```swift
 struct FrogCustomSerializable: DefaultsSerializable {
 
-    static var _defaults: DefaultsBridge<FrogCustomSerializable> { DefaultsKeyedArchiverBridge() }
-    static var _defaultsArray: DefaultsBridge<[FrogCustomSerializable]> { DefaultsKeyedArchiverBridge() }
+    static var _defaults: DefaultsKeyedArchiverBridge( { DefaultsKeyedArchiverBridge() }
+    static var _defaultsArray: DefaultsKeyedArchiverBridge { DefaultsKeyedArchiverBridge() }
 
     let name: String
 }
