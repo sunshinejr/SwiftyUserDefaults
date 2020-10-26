@@ -26,7 +26,7 @@ func resolveTargets() -> [Target] {
 let package = Package(
     name: "SwiftyUserDefaults",
     platforms: [
-        .macOS(.v10_11), .iOS(.v8), .tvOS(.v9), .watchOS(.v2)
+        .macOS(.v10_11), .iOS(.v9), .tvOS(.v9), .watchOS(.v2)
     ],
     products: [
         .library(name: "SwiftyUserDefaults", targets: ["SwiftyUserDefaults"]),

@@ -451,7 +451,7 @@ let hasKey = Defaults.hasKey(\.skipLogin)
 
 ### Requirements
 **Swift** version **>= 4.1**<br />
-**iOS** version **>= 8.0**<br />
+**iOS** version **>= 9.0**<br />
 **macOS** version **>= 10.11**<br />
 **tvOS** version **>= 9.0**<br />
 **watchOS** version **>= 2.0**
