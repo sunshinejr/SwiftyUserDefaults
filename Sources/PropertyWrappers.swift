@@ -36,30 +36,46 @@ public struct SwiftyUserDefaultOptions: OptionSet {
 }
 
 @propertyWrapper
-public final class SwiftyUserDefault<T: DefaultsSerializable> where T.T == T {
+public final class SwiftyUserDefault<T: DefaultsSerializable, KeyStore: DefaultsKeyStore> where T.T == T {
 
     public let key: DefaultsKey<T>
     public let options: SwiftyUserDefaultOptions
+    private var customAdapter: DefaultsAdapter<KeyStore>?
 
     public var wrappedValue: T {
         get {
             if options.contains(.cached) {
-                return _value ?? Defaults[key: key]
+                if let value = _value {
+                    return value
+                } else if let customAdapter = customAdapter {
+                    return customAdapter[key: key]
+                } else {
+                    return Defaults[key: key]
+                }
             } else {
-                return Defaults[key: key]
+                if let customAdapter = customAdapter {
+                    return customAdapter[key: key]
+                } else {
+                    return Defaults[key: key]
+                }
             }
         }
         set {
             _value = newValue
-            Defaults[key: key] = newValue
+            if var customAdapter = customAdapter {
+                customAdapter[key: key] = newValue
+            } else {
+                Defaults[key: key] = newValue
+            }
         }
     }
 
     private var _value: T.T?
     private var observation: DefaultsDisposable?
 
-    public init<KeyStore>(keyPath: KeyPath<KeyStore, DefaultsKey<T>>, adapter: DefaultsAdapter<KeyStore>, options: SwiftyUserDefaultOptions = []) {
+    public init(keyPath: KeyPath<KeyStore, DefaultsKey<T>>, adapter: DefaultsAdapter<KeyStore>, options: SwiftyUserDefaultOptions = []) {
         self.key = adapter.keyStore[keyPath: keyPath]
+        self.customAdapter = adapter
         self.options = options
 
         if options.contains(.observed) {
@@ -72,6 +88,7 @@ public final class SwiftyUserDefault<T: DefaultsSerializable> where T.T == T {
     public init(keyPath: KeyPath<DefaultsKeys, DefaultsKey<T>>, options: SwiftyUserDefaultOptions = []) {
         self.key = Defaults.keyStore[keyPath: keyPath]
         self.options = options
+        self.customAdapter = nil
 
         if options.contains(.observed) {
             observation = Defaults.observe(key) { [weak self] update in
