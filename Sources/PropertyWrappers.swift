@@ -40,33 +40,19 @@ public final class SwiftyUserDefault<T: DefaultsSerializable, KeyStore: Defaults
 
     public let key: DefaultsKey<T>
     public let options: SwiftyUserDefaultOptions
-    private var customAdapter: DefaultsAdapter<KeyStore>?
+    private var adapter: DefaultsAdapter<KeyStore>
 
     public var wrappedValue: T {
         get {
             if options.contains(.cached) {
-                if let value = _value {
-                    return value
-                } else if let customAdapter = customAdapter {
-                    return customAdapter[key: key]
-                } else {
-                    return Defaults[key: key]
-                }
+                return _value ?? adapter[key: key]
             } else {
-                if let customAdapter = customAdapter {
-                    return customAdapter[key: key]
-                } else {
-                    return Defaults[key: key]
-                }
+                return adapter[key: key]
             }
         }
         set {
             _value = newValue
-            if var customAdapter = customAdapter {
-                customAdapter[key: key] = newValue
-            } else {
-                Defaults[key: key] = newValue
-            }
+            adapter[key: key] = newValue
         }
     }
 
@@ -75,23 +61,11 @@ public final class SwiftyUserDefault<T: DefaultsSerializable, KeyStore: Defaults
 
     public init(keyPath: KeyPath<KeyStore, DefaultsKey<T>>, adapter: DefaultsAdapter<KeyStore>, options: SwiftyUserDefaultOptions = []) {
         self.key = adapter.keyStore[keyPath: keyPath]
-        self.customAdapter = adapter
+        self.adapter = adapter
         self.options = options
 
         if options.contains(.observed) {
             observation = adapter.observe(key) { [weak self] update in
-                self?._value = update.newValue
-            }
-        }
-    }
-
-    public init(keyPath: KeyPath<DefaultsKeys, DefaultsKey<T>>, options: SwiftyUserDefaultOptions = []) {
-        self.key = Defaults.keyStore[keyPath: keyPath]
-        self.options = options
-        self.customAdapter = nil
-
-        if options.contains(.observed) {
-            observation = Defaults.observe(key) { [weak self] update in
                 self?._value = update.newValue
             }
         }
