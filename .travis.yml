@@ -46,17 +46,17 @@ matrix:
         - TVOS_SDK=appletvsimulator12.2
         - WATCHOS_SIMULATOR='name=Apple Watch Series 4 - 44mm'
         - WATCHOS_SDK=watchsimulator5.2      
-    # - os: linux
-    #   sudo: required
-    #   dist: trusty    
-    #   name: Swift 5.0 compatibility
-    #   env:
-    #     - CACHE_NAME=LINUX_SWIFT5_0
-    #     - SWIFT_VERSION=5.0-dev
-    #   before_install:
-    #     - eval "$(curl -sL https://swiftenv.fuller.li/install.sh)"
-    #   script:
-    #     - swift test
+    - os: linux
+      sudo: required
+      dist: trusty    
+      name: Swift 5.1 compatibility
+      env:
+        - CACHE_NAME=LINUX_SWIFT5_1
+        - SWIFT_VERSION=5.1
+      before_install:
+        - eval "$(curl -sL https://swiftenv.fuller.li/install.sh)"
+      script:
+        - TEST=1 swift test
     - os: osx
       osx_image: xcode10.1
       name: Swift 4.2 compatibility
@@ -71,17 +71,17 @@ matrix:
         - TVOS_SDK=appletvsimulator12.1
         - WATCHOS_SIMULATOR='name=Apple Watch - 42mm'
         - WATCHOS_SDK=watchsimulator5.1
-    # - os: linux
-    #   sudo: required
-    #   dist: trusty    
-    #   name: Swift 4.2 compatibility
-    #   env:
-    #     - CACHE_NAME=LINUX_SWIFT4_2
-    #     - SWIFT_VERSION=4.2
-    #   before_install:
-    #     - eval "$(curl -sL https://swiftenv.fuller.li/install.sh)"
-    #   script:
-    #     - swift test              
+    - os: linux
+      sudo: required
+      dist: trusty    
+      name: Swift 4.2 compatibility
+      env:
+        - CACHE_NAME=LINUX_SWIFT4_2
+        - SWIFT_VERSION=4.2
+      before_install:
+        - eval "$(curl -sL https://swiftenv.fuller.li/install.sh)"
+      script:
+        - TEST=1 swift test              
     - os: osx
       osx_image: xcode10.1
       name: Swift 4.1 compatibility
