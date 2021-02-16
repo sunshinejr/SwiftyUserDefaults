@@ -28,7 +28,7 @@ public protocol DefaultsDisposable {
     func dispose()
 }
 
-#if !os(Linux)
+#if canImport(Darwin)
 
 public final class DefaultsObserver<T: DefaultsSerializable>: NSObject, DefaultsDisposable where T == T.T {
 

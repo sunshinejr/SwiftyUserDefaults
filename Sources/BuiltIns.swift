@@ -47,7 +47,7 @@ extension Data: DefaultsSerializable {
 }
 
 extension URL: DefaultsSerializable {
-    #if os(Linux)
+    #if !canImport(Darwin)
     public static var _defaults: DefaultsKeyedArchiverBridge<URL> { return DefaultsKeyedArchiverBridge() }
     #else
     public static var _defaults: DefaultsUrlBridge { return DefaultsUrlBridge() }

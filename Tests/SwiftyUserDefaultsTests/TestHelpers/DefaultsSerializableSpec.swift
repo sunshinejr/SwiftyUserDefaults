@@ -498,7 +498,7 @@ extension DefaultsSerializableSpec where Serializable.T: Equatable, Serializable
     }
 
     func testObserving() {
-        #if !os(Linux)
+        #if canImport(Darwin)
         given("key-value observing") {
             var defaults: DefaultsAdapter<FrogKeyStore<Serializable>>!
             var observer: DefaultsDisposable?

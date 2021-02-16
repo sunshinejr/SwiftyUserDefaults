@@ -26,7 +26,9 @@
 public struct SwiftyUserDefaultOptions: OptionSet {
 
     public static let cached = SwiftyUserDefaultOptions(rawValue: 1 << 0)
+    #if canImport(Darwin)
     public static let observed = SwiftyUserDefaultOptions(rawValue: 1 << 2)
+    #endif
 
     public let rawValue: Int
 
@@ -62,22 +64,26 @@ public final class SwiftyUserDefault<T: DefaultsSerializable> where T.T == T {
         self.key = adapter.keyStore[keyPath: keyPath]
         self.options = options
 
+        #if canImport(Darwin)
         if options.contains(.observed) {
             observation = adapter.observe(key) { [weak self] update in
                 self?._value = update.newValue
             }
         }
+        #endif
     }
 
     public init(keyPath: KeyPath<DefaultsKeys, DefaultsKey<T>>, options: SwiftyUserDefaultOptions = []) {
         self.key = Defaults.keyStore[keyPath: keyPath]
         self.options = options
 
+        #if canImport(Darwin)
         if options.contains(.observed) {
             observation = Defaults.observe(key) { [weak self] update in
                 self?._value = update.newValue
             }
         }
+        #endif
     }
 
     deinit {

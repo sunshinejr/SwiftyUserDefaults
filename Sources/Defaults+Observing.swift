@@ -24,7 +24,7 @@
 
 import Foundation
 
-#if !os(Linux)
+#if canImport(Darwin)
 
 public extension DefaultsAdapter {
 

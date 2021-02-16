@@ -1,7 +1,7 @@
 # SwiftyUserDefaults
 
 [![Stake to support us](https://badge.devprotocol.xyz/0x5C7db549a025586DEc6667b3c0217e2e97f19033/descriptive)](https://stakes.social/0x5C7db549a025586DEc6667b3c0217e2e97f19033)
-![Platforms](https://img.shields.io/badge/platforms-ios%20%7C%20osx%20%7C%20watchos%20%7C%20tvos-lightgrey.svg)
+![Platforms](https://img.shields.io/badge/platforms-ios%20%7C%20osx%20%7C%20watchos%20%7C%20tvos%20%7C%20linux%20%7C%20windows-lightgrey.svg)
 [![CI Status](https://api.travis-ci.org/sunshinejr/SwiftyUserDefaults.svg?branch=master)](https://travis-ci.org/sunshinejr/SwiftyUserDefaults)
 [![CocoaPods compatible](https://img.shields.io/badge/CocoaPods-compatible-4BC51D.svg?style=flat)](#cocoapods)
 [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](#carthage)
