@@ -1,4 +1,5 @@
 ### Next
+* Added Swift for Linux support
 
 ### 5.1.0 (2020-12-14)
 * Increase min deployment target to iOS 9.0 due to Xcode 12 requirements [@laevandus](https://github.com/laevandus)
