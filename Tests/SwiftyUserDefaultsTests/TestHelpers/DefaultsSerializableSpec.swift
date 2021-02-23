@@ -630,6 +630,43 @@ extension DefaultsSerializableSpec where Serializable.T: Equatable, Serializable
                     expect(update?.newValue).toEventually(beNil())
                 }
                 #endif
+                
+                then("reference itself in the update closure without crash") {
+                    let key = DefaultsKey<Serializable?>("test")
+
+                    var update: DefaultsObserver<Serializable?>.Update?
+                    var newValueReferencedDirectly: Serializable?
+                    observer = defaults.observe(key) { receivedUpdate in
+                        update = receivedUpdate
+                        newValueReferencedDirectly = defaults[key: key]
+                    }
+                    defaults[key: key] = self.customValue
+
+                    expect(update).toEventuallyNot(beNil())
+                    expect(update?.oldValue).toEventually(beNil())
+                    expect(update?.newValue).toEventually(equal(self.customValue))
+                    expect(update?.newValue).toEventually(equal(newValueReferencedDirectly))
+                }
+                
+                then("reference itself in the update closure on custom queue without crash") {
+                    let key = DefaultsKey<Serializable?>("test")
+
+                    var update: DefaultsObserver<Serializable?>.Update?
+                    var newValueReferencedDirectly: Serializable?
+                    observer = defaults.observe(key) { receivedUpdate in
+                        update = receivedUpdate
+                        newValueReferencedDirectly = defaults[key: key]
+                    }
+
+                    DispatchQueue.global(qos: .utility).async {
+                        defaults[key: key] = self.customValue
+                    }
+
+                    expect(update).toEventuallyNot(beNil())
+                    expect(update?.oldValue).toEventually(beNil())
+                    expect(update?.newValue).toEventually(equal(self.customValue))
+                    expect(update?.newValue).toEventually(equal(newValueReferencedDirectly))
+                }
 
                 then("remove observer on dispose") {
                     let key = DefaultsKey<Serializable?>("test")
@@ -776,6 +813,41 @@ extension DefaultsSerializableSpec where Serializable.T: Equatable, Serializable
                     expect(update?.newValue).toEventually(equal(self.defaultValue))
                 }
                 #endif
+                
+                then("reference itself in the update closure without crash") {
+                    let key = DefaultsKey<Serializable?>("test", defaultValue: self.defaultValue)
+
+                    var update: DefaultsObserver<Serializable?>.Update?
+                    var newValueReferencedDirectly: Serializable?
+                    observer = defaults.observe(key) { receivedUpdate in
+                        update = receivedUpdate
+                        newValueReferencedDirectly = defaults[key: key]
+                    }
+                    defaults[key: key] = self.customValue
+
+                    expect(update).toEventuallyNot(beNil())
+                    expect(update?.newValue).toEventually(equal(self.customValue))
+                    expect(update?.newValue).toEventually(equal(newValueReferencedDirectly))
+                }
+                
+                then("reference itself in the update closure on custom queue without crash") {
+                    let key = DefaultsKey<Serializable?>("test", defaultValue: self.defaultValue)
+
+                    var update: DefaultsObserver<Serializable?>.Update?
+                    var newValueReferencedDirectly: Serializable?
+                    observer = defaults.observe(key) { receivedUpdate in
+                        update = receivedUpdate
+                        newValueReferencedDirectly = defaults[key: key]
+                    }
+
+                    DispatchQueue.global(qos: .utility).async {
+                        defaults[key: key] = self.customValue
+                    }
+
+                    expect(update).toEventuallyNot(beNil())
+                    expect(update?.newValue).toEventually(equal(self.customValue))
+                    expect(update?.newValue).toEventually(equal(newValueReferencedDirectly))
+                }
 
                 then("remove observer on dispose") {
                     let key = DefaultsKey<Serializable?>("test", defaultValue: self.defaultValue)
@@ -889,6 +961,41 @@ extension DefaultsSerializableSpec where Serializable.T: Equatable, Serializable
 
                     expect(update?.oldValue).toEventually(equal(self.defaultValue))
                     expect(update?.newValue).toEventually(equal(self.customValue))
+                }
+                
+                then("reference itself in the update closure without crash") {
+                    let key = DefaultsKey<Serializable>("test", defaultValue: self.defaultValue)
+
+                    var update: DefaultsObserver<Serializable>.Update?
+                    var newValueReferencedDirectly: Serializable?
+                    observer = defaults.observe(key) { receivedUpdate in
+                        update = receivedUpdate
+                        newValueReferencedDirectly = defaults[key: key]
+                    }
+                    defaults[key: key] = self.customValue
+
+                    expect(update).toEventuallyNot(beNil())
+                    expect(update?.newValue).toEventually(equal(self.customValue))
+                    expect(update?.newValue).toEventually(equal(newValueReferencedDirectly))
+                }
+                
+                then("reference itself in the update closure on custom queue without crash") {
+                    let key = DefaultsKey<Serializable>("test", defaultValue: self.defaultValue)
+
+                    var update: DefaultsObserver<Serializable>.Update?
+                    var newValueReferencedDirectly: Serializable?
+                    observer = defaults.observe(key) { receivedUpdate in
+                        update = receivedUpdate
+                        newValueReferencedDirectly = defaults[key: key]
+                    }
+
+                    DispatchQueue.global(qos: .utility).async {
+                        defaults[key: key] = self.customValue
+                    }
+
+                    expect(update).toEventuallyNot(beNil())
+                    expect(update?.newValue).toEventually(equal(self.customValue))
+                    expect(update?.newValue).toEventually(equal(newValueReferencedDirectly))
                 }
 
                 then("remove observer on dispose") {
