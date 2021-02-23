@@ -2,6 +2,7 @@
 
 ### 5.2.0 (2021-02-23)
 * DefaultsAdapter's subscript setters are now `nonmutating`. This shouldn't change much on the client side, but it does fix the issue with simultaneous access (#241, #247). [@sunshinejr](https://github.com/sunshinejr)
+* Added `DefaultsProviding` protocol that `DefaultsAdapter` implements. It should help with DI and creating test adapters (#268). [@sunshinejr](https://github.com/sunshinejr)
 
 ### 5.1.0 (2020-12-14)
 * Increase min deployment target to iOS 9.0 due to Xcode 12 requirements [@laevandus](https://github.com/laevandus)
