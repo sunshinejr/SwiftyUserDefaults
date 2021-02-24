@@ -28,18 +28,12 @@ protocol OptionalTypeCheck {
 
 public protocol OptionalType {
     associatedtype Wrapped
-    var wrapped: Wrapped? { get }
-
-    static var empty: Self { get }
+    
+    static var __swifty_empty: Self { get }
 }
 
 extension Optional: OptionalType, OptionalTypeCheck {
-
-    public var wrapped: Wrapped? {
-        return self
-    }
-
-    public static var empty: Optional {
+    public static var __swifty_empty: Optional {
         return nil
     }
 

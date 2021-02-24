@@ -103,7 +103,7 @@ public extension UserDefaults {
             } else if let defaultValue = key.defaultValue {
                 return defaultValue
             } else {
-                return T.T.empty
+                return T.T.__swifty_empty
             }
         }
         set {
