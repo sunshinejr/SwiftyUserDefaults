@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name = 'SwiftyUserDefaults'
-  s.version = '5.2.0'
+  s.version = '5.3.0'
   s.license = 'MIT'
   s.summary = 'Swifty API for UserDefaults'
   s.homepage = 'https://github.com/sunshinejr/SwiftyUserDefaults'
