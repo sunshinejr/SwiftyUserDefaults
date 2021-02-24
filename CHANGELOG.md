@@ -1,5 +1,8 @@
 ### Next
 
+### 5.3.0 (2021-02-24)
+* Renamed `OptionalType.empty` to `OptionalType.__swifty_empty`. This shouldn't be something you rely on tho, we're gonna explore ways to remove the public `OptionalType` in a future releases. [@sunshinejr](https://github.com/sunshinejr)
+
 ### 5.2.0 (2021-02-23)
 * DefaultsAdapter's subscript setters are now `nonmutating`. This shouldn't change much on the client side, but it does fix the issue with simultaneous access (#241, #247). [@sunshinejr](https://github.com/sunshinejr)
 * Added `DefaultsProviding` protocol that `DefaultsAdapter` implements. It should help with DI and creating test adapters (#268). [@sunshinejr](https://github.com/sunshinejr)
