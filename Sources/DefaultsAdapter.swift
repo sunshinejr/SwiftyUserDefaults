@@ -46,9 +46,23 @@ public struct DefaultsAdapter<KeyStore: DefaultsKeyStore> {
     public let defaults: UserDefaults
     public let keyStore: KeyStore
 
+    #if !os(Linux) && !os(watchOS)
+    internal let syncer: DefaultsSyncer
+
+    internal init(defaults: UserDefaults, keyStore: KeyStore, remoteStore: RemoteStore) {
+        self.defaults = defaults
+        self.keyStore = keyStore
+        self.syncer = DefaultsSyncer(defaults: defaults, remoteStore: remoteStore)
+    }
+    #endif
+
     public init(defaults: UserDefaults, keyStore: KeyStore) {
         self.defaults = defaults
         self.keyStore = keyStore
+
+        #if !os(Linux) && !os(watchOS)
+        self.syncer = DefaultsSyncer(defaults: defaults, remoteStore: NSUbiquitousKeyValueStore.default)
+        #endif
     }
 
     @available(*, unavailable)

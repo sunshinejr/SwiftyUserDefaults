@@ -34,6 +34,8 @@ import Foundation
 
 public var Defaults = DefaultsAdapter<DefaultsKeys>(defaults: .standard, keyStore: .init())
 
+// MARK: - UserDefaults
+
 public extension UserDefaults {
 
     /// Returns `true` if `key` exists
@@ -80,3 +82,32 @@ internal extension UserDefaults {
         }
     }
 }
+
+#if !os(Linux) && !os(watchOS)
+
+// MARK: - NSUbiquitousKeyValueStore
+
+public extension NSUbiquitousKeyValueStore {
+
+    /// Returns `true` if `key` exists
+    func hasKey<T>(_ key: DefaultsKey<T>) -> Bool {
+        return object(forKey: key._key) != nil
+    }
+
+    /// Removes value for `key`
+    func remove<T>(_ key: DefaultsKey<T>) {
+        removeObject(forKey: key._key)
+        synchronize()
+    }
+
+    /// Removes all keys and values from iCloud
+    /// Use with caution!
+    func removeAll() {
+        for (key, _) in dictionaryRepresentation {
+            removeObject(forKey: key)
+        }
+        synchronize()
+    }
+}
+
+#endif
