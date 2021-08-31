@@ -1,0 +1,58 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  test:
+    runs-on: macOS-latest
+    env:
+      PROJECT: SwiftyUserDefaults.xcodeproj
+      SCHEME: SwiftyUserDefaults
+    strategy:
+      matrix:
+        env:
+          - sdk: iphonesimulator
+            destination: platform=iOS Simulator,name=iPhone 12 Pro,OS=latest
+
+          - sdk: macosx
+            destination: arch=x86_64
+
+          - sdk: appletvsimulator
+            destination: platform=tvOS Simulator,name=Apple TV,OS=latest
+          
+          - sdk: watchsimulator
+            destination: platform=watchOS Simulator,name=Apple Watch - 42mm,OS=latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: List SDKs and Devices
+      run: xcodebuild -showsdks; instruments -s
+
+    - name: Install Dependency
+      run: gem install cocoapods -v 1.10.1
+
+    - name: Build and Test
+      run: |
+        set -o pipefail && xcodebuild clean build test \
+          -project "$PROJECT" \
+          -scheme "$SCHEME" \
+          -sdk "$SDK" \
+          -destination "$DESTINATION" \
+          -configuration Debug \
+          -enableCodeCoverage YES \
+          CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO | xcpretty -c;
+      env:
+        SDK: ${{ matrix.env.sdk }}
+        DESTINATION: ${{ matrix.env.destination }}
+
+    - name: Pod lint
+      run: pod lib lint
+
+    - name: Integration Test
+      run: |
+        scripts/cocoapods_integration_step.sh
+        scripts/carthage_integration_step.sh
+        scripts/spm_integration_step.sh $SWIFT_VERSION
