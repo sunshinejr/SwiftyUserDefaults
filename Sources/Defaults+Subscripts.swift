@@ -101,6 +101,7 @@ public extension UserDefaults {
                 // swiftlint:disable:next force_cast
                 return _value as! T
             } else if let defaultValue = key.defaultValue {
+                T._defaults.save(key: key._key, value: defaultValue, userDefaults: self)
                 return defaultValue
             } else {
                 return T.T.__swifty_empty
@@ -116,6 +117,7 @@ public extension UserDefaults {
             if let value = T._defaults.get(key: key._key, userDefaults: self) {
                 return value
             } else if let defaultValue = key.defaultValue {
+                T._defaults.save(key: key._key, value: defaultValue, userDefaults: self)
                 return defaultValue
             } else {
                 fatalError("Shouldn't happen, please report!")
