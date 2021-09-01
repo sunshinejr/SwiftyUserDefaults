@@ -34,7 +34,7 @@ public struct DefaultsKey<ValueType: DefaultsSerializable> {
     public let defaultValue: ValueType.T?
     internal var isOptional: Bool
 
-    public init(_ key: String, defaultValue: ValueType.T) {
+    public init(_ key: String = #function, defaultValue: ValueType.T) {
         self._key = key
         self.defaultValue = defaultValue
         self.isOptional = false
@@ -42,7 +42,7 @@ public struct DefaultsKey<ValueType: DefaultsSerializable> {
 
     // Couldn't figure out a way of how to pass a nil/none value from extension, thus this initializer.
     // Used for creating an optional key (without defaultValue)
-    private init(key: String) {
+    private init(key: String = #function) {
         self._key = key
         self.defaultValue = nil
         self.isOptional = true
@@ -56,11 +56,11 @@ public struct DefaultsKey<ValueType: DefaultsSerializable> {
 
 public extension DefaultsKey where ValueType: DefaultsSerializable, ValueType: OptionalType, ValueType.Wrapped: DefaultsSerializable {
 
-    init(_ key: String) {
+    init(_ key: String = #function) {
         self.init(key: key)
     }
 
-    init(_ key: String, defaultValue: ValueType.T) {
+    init(_ key: String = #function, defaultValue: ValueType.T) {
         self._key = key
         self.defaultValue = defaultValue
         self.isOptional = true
