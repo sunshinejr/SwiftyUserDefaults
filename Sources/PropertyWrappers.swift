@@ -80,8 +80,25 @@ public final class SwiftyUserDefault<T: DefaultsSerializable> where T.T == T {
         }
     }
 
+    public init(key: String, defaultValue value: T, options: SwiftyUserDefaultOptions = []) {
+        self.key = DefaultsKey(key, defaultValue: value)
+        self.options = options
+
+        if options.contains(.observed) {
+            observation = Defaults.observe(self.key) { [weak self] update in
+                self?._value = update.newValue
+            }
+        }
+    }
     deinit {
         observation?.dispose()
     }
 }
+extension SwiftyUserDefault where T: OptionalType, T.Wrapped: DefaultsSerializable {
+    public convenience init(key: String, options: SwiftyUserDefaultOptions = []) {
+        self.init(key: key, defaultValue: T.__swifty_empty, options: options)
+    }
+}
+
+
 #endif
