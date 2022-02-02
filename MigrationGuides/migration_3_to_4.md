@@ -38,7 +38,7 @@ Or might try to create some custom inits/factories. If you can't migrate in your
 ### NSCoding, RawRepresentable and Custom Types
 
 If you used custom types with SwiftyUserDefaults, fear no more: you still can use them!
-Now, you don't need your own `subcript` so remove it and add `DefaultsSerializable` protocol to your type!
+Now, you don't need your own `subscript` so remove it and add `DefaultsSerializable` protocol to your type!
 
 Example. Let's say you had a class `Froggy` that conformed to the `NSCoding` protocol and you had your own subscript:
 
