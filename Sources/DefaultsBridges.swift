@@ -240,11 +240,8 @@ public struct DefaultsCodableBridge<T: Codable>: DefaultsBridge {
     }
 
     public func get(key: String, userDefaults: UserDefaults) -> T? {
-        if let data = userDefaults.object(forKey: key) as? T {
-            return data
-        }
         guard let data = userDefaults.data(forKey: key) else {
-            return nil
+            return userDefaults.object(forKey: key) as? T
         }
         return deserialize(data)
     }
