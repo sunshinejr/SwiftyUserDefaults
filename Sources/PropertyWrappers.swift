@@ -44,7 +44,10 @@ public final class SwiftyUserDefault<T: DefaultsSerializable> where T.T == T {
     public var wrappedValue: T {
         get {
             if options.contains(.cached) {
-                return _value ?? Defaults[key: key]
+                if let v = _value { return v }
+                let v = Defaults[key: key]
+                _value = v
+                return v
             } else {
                 return Defaults[key: key]
             }
