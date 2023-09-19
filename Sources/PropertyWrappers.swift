@@ -35,6 +35,33 @@ public struct SwiftyUserDefaultOptions: OptionSet {
     }
 }
 
+
+@propertyWrapper
+public struct SwiftyDefaults<T: DefaultsSerializable> where T.T == T {
+    public let key: DefaultsKey<T>
+    private var _value: T.T
+    public var wrappedValue: T.T {
+        get { _value }
+        set {
+            _value = newValue
+            Defaults[key: key] = newValue
+        }
+    }
+    public init(keyPath: KeyPath<DefaultsKeys, DefaultsKey<T>>) {
+        self.key = Defaults.keyStore[keyPath: keyPath]
+        self._value = Defaults[key: self.key]
+    }
+    public init(key: String, defaultValue value: T) {
+        self.key = DefaultsKey(key, defaultValue: value)
+        self._value = Defaults[key: self.key]
+    }
+}
+extension SwiftyDefaults where T: OptionalType, T.Wrapped: DefaultsSerializable {
+    public init(key: String) {
+        self.init(key: key, defaultValue: T.__swifty_empty)
+    }
+}
+
 @propertyWrapper
 public final class SwiftyUserDefault<T: DefaultsSerializable> where T.T == T {
 

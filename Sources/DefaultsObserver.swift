@@ -51,7 +51,7 @@ public final class DefaultsObserver<T: DefaultsSerializable>: NSObject, Defaults
         private static func deserialize<T: DefaultsSerializable>(_ value: Any?, for key: DefaultsKey<T>) -> T.T? where T.T == T {
             guard let value = value else { return nil }
 
-            let deserialized =  T._defaults.deserialize(value)
+            let deserialized = T._defaults.deserialize(value)
 
             let ret: T.T?
             if key.isOptional, let _deserialized = deserialized, let __deserialized = _deserialized as? OptionalTypeCheck, !__deserialized.isNil {
